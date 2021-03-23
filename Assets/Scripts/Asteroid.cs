@@ -105,17 +105,14 @@ public class Asteroid : MonoBehaviour
     /// <param name="i">The shard being iterated over.</param>
     private void ApplyMaterials(int i)
     {
-        Debug.Log("BREAK");
         MeshRenderer renderer = shards[i].GetComponent<MeshRenderer>();
 
         switch (asteroidType)
         {
             case AsteroidType.Iron:
-                Debug.Log("BREAK1");
                 renderer.materials = new Material[] { renderer.materials[0], ironMaterial };
                 break;
             case AsteroidType.Silver:
-                Debug.Log("BREAK2");
                 renderer.materials = new Material[] { renderer.materials[0], silverMaterial };
                 break;
             case AsteroidType.Gold:
