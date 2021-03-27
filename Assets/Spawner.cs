@@ -8,19 +8,32 @@ public class Spawner : MonoBehaviour
     public GameObject player;
     public float offsetFromPlayer;
 
-    [Header("Collidable Asteroids")]
-    public Bounds asteroidBounds = new Bounds();
-    private Vector3 asteroidBoundsOffset;
+    [Header("General Hazard Settings")]
+    public Bounds hazardBounds = new Bounds();
+    private Vector3 hazardBoundsOffset;
+
+    [Header("Hazard: Asteroids")]
     public List<GameObject> activeAsteroids = new List<GameObject>();
     public float minAsteroidScaleFactor;
     public float maxAsteroidScaleFactor;
-    public int currentAsteroidCap = 1;
+    public int currentAsteroidCap = 0;
 
-    [Header("Collectables")]
-    public Bounds collectableBounds = new Bounds();
-    private Vector3 collectableBoundsOffset;
-    public List<GameObject> activeCrystals = new List<GameObject>();
-    public int currentCrystalCap = 1;
+    [Header("Hazard: Gas Clouds")]
+    public List<GameObject> activeGasClouds = new List<GameObject>();
+    public float minGasCloudScaleFactor;
+    public float maxGasCloudScaleFactor;
+    public int currentGasCloudCap = 0;
+
+    [Header("Hazard: Black Holes")]
+    public List<GameObject> activeBlackHoles = new List<GameObject>();
+    public float minBlackHoleScaleFactor;
+    public float maxBlackHoleScaleFactor;
+    public int currentBlackHoleCap = 0;
+
+    [Header("Collectables: Powerups")]
+    public Bounds powerupBounds = new Bounds();
+    private Vector3 powerupBoundsOffset;
+    public List<GameObject> activePowerups = new List<GameObject>();
 
     [Header("Background Asteroids")]
     public Bounds backgroundAsteroidBounds = new Bounds();
@@ -32,35 +45,55 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        asteroidBoundsOffset = asteroidBounds.center;
-        collectableBoundsOffset = collectableBounds.center;
+        hazardBoundsOffset = hazardBounds.center;
+        powerupBoundsOffset = powerupBounds.center;
         backgroundAsteroidBoundsOffset = backgroundAsteroidBounds.center;
     }
 
     private void Start()
     {
         PopulateBackgroundField();
-        InvokeRepeating("IncreaseAsteroidCap", 2.5f, 2.5f);
-        InvokeRepeating("IncreaseCrystalCap", 5f, 2f);
     }
 
     private void Update()
     {
         CleanUp();
         transform.position = (player.transform.position.z + offsetFromPlayer) * Vector3.forward;
-        asteroidBounds.center = transform.position + asteroidBoundsOffset;
-        collectableBounds.center = transform.position + collectableBoundsOffset;
+        hazardBounds.center = transform.position + hazardBoundsOffset;
+        powerupBounds.center = transform.position + powerupBoundsOffset;
         backgroundAsteroidBounds.center = transform.position + backgroundAsteroidBoundsOffset;
 
         if(activeAsteroids.Count < currentAsteroidCap)
         {
             GameObject asteroid = ObjectPooler.instance.GetPooledAsteroid();
-            Vector3 spawnPoint = GetAsteroidSpawnPoint();
+            Vector3 spawnPoint = GetHazardSpawnPoint();
             float randomScaleFactor = Utility.GenerateRandomFloat(minAsteroidScaleFactor, maxAsteroidScaleFactor);
             activeAsteroids.Add(asteroid);
             asteroid.transform.position = spawnPoint;
             asteroid.transform.localScale = Vector3.one * randomScaleFactor;
             asteroid.SetActive(true);
+        }
+
+        if (activeGasClouds.Count < currentGasCloudCap)
+        {
+            GameObject gasCloud = ObjectPooler.instance.GetPooledGasCloud();
+            Vector3 spawnPoint = GetHazardSpawnPoint();
+            float randomScaleFactor = Utility.GenerateRandomFloat(minGasCloudScaleFactor, maxGasCloudScaleFactor);
+            activeGasClouds.Add(gasCloud);
+            gasCloud.transform.position = spawnPoint;
+            gasCloud.transform.localScale = Vector3.one * randomScaleFactor;
+            gasCloud.SetActive(true);
+        }
+
+        if (activeBlackHoles.Count < currentBlackHoleCap)
+        {
+            GameObject blackHole = ObjectPooler.instance.GetPooledBlackHole();
+            Vector3 spawnPoint = GetHazardSpawnPoint();
+            float randomScaleFactor = Utility.GenerateRandomFloat(minBlackHoleScaleFactor, maxBlackHoleScaleFactor);
+            activeBlackHoles.Add(blackHole);
+            blackHole.transform.position = spawnPoint;
+            blackHole.transform.localScale = Vector3.one * randomScaleFactor;
+            blackHole.SetActive(true);
         }
 
         if (activeBackgroundAsteroids.Count < ObjectPooler.instance.backgroundAsteroidCount)
@@ -73,15 +106,14 @@ public class Spawner : MonoBehaviour
             asteroid.transform.localScale = Vector3.one * randomScaleFactor;
             asteroid.SetActive(true);
         }
-
     }
 
-    private Vector3 GetAsteroidSpawnPoint()
+    private Vector3 GetHazardSpawnPoint()
     {
         Vector3 spawnPoint = new Vector3(
-            Random.Range(asteroidBounds.center.x - asteroidBounds.extents.x, asteroidBounds.center.x + asteroidBounds.extents.x), 
-            Random.Range(asteroidBounds.center.y - asteroidBounds.extents.y, asteroidBounds.center.y + asteroidBounds.extents.y), 
-            Random.Range(asteroidBounds.center.z - asteroidBounds.extents.z, asteroidBounds.center.z + asteroidBounds.extents.z)
+            Random.Range(hazardBounds.center.x - hazardBounds.extents.x, hazardBounds.center.x + hazardBounds.extents.x), 
+            Random.Range(hazardBounds.center.y - hazardBounds.extents.y, hazardBounds.center.y + hazardBounds.extents.y), 
+            Random.Range(hazardBounds.center.z - hazardBounds.extents.z, hazardBounds.center.z + hazardBounds.extents.z)
             );
         return spawnPoint;
     }
@@ -89,9 +121,9 @@ public class Spawner : MonoBehaviour
     private Vector3 GetCollectableSpawnPoint()
     {
         Vector3 spawnPoint = new Vector3(
-            Random.Range(collectableBounds.center.x - collectableBounds.extents.x, collectableBounds.center.x + collectableBounds.extents.x),
-            Random.Range(collectableBounds.center.y - collectableBounds.extents.y, collectableBounds.center.y + collectableBounds.extents.y),
-            Random.Range(collectableBounds.center.z - collectableBounds.extents.z, collectableBounds.center.z + collectableBounds.extents.z)
+            Random.Range(powerupBounds.center.x - powerupBounds.extents.x, powerupBounds.center.x + powerupBounds.extents.x),
+            Random.Range(powerupBounds.center.y - powerupBounds.extents.y, powerupBounds.center.y + powerupBounds.extents.y),
+            Random.Range(powerupBounds.center.z - powerupBounds.extents.z, powerupBounds.center.z + powerupBounds.extents.z)
             );
         return spawnPoint;
     }
@@ -114,36 +146,88 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void IncreaseCrystalCap()
+    private void IncreaseGasCloudCap()
     {
-        if (currentCrystalCap < ObjectPooler.instance.crystalCount)
+        if (currentGasCloudCap < ObjectPooler.instance.gasCloudCount)
         {
-            currentCrystalCap++;
+            currentGasCloudCap++;
+        }
+    }
+
+    private void IncreaseBlackHoleCap()
+    {
+        if (currentBlackHoleCap < ObjectPooler.instance.blackHoleCount)
+        {
+            currentBlackHoleCap++;
         }
     }
 
     private void CleanUp()
     {
-        foreach (GameObject asteroid in activeAsteroids.ToArray())
+        if(activeAsteroids.Count > 0)
         {
-            if (asteroid.transform.position.z < player.transform.position.z - 100f)
+            foreach (GameObject asteroid in activeAsteroids.ToArray())
             {
-                Rigidbody rb = asteroid.GetComponent<Rigidbody>();
-                activeAsteroids.Remove(asteroid);
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                asteroid.SetActive(false);
+                if (asteroid.transform.position.z < player.transform.position.z - 100f)
+                {
+                    Rigidbody rb = asteroid.GetComponent<Rigidbody>();
+                    Asteroid roid = asteroid.GetComponent<Asteroid>();
+                    activeAsteroids.Remove(asteroid);
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    roid.ResetHazard();
+                    asteroid.SetActive(false);
+                }
             }
         }
+        
 
-        foreach (GameObject asteroid in activeBackgroundAsteroids.ToArray())
+        if(activeGasClouds.Count > 0)
         {
-            if (asteroid.transform.position.z < player.transform.position.z - 200f)
+            foreach (GameObject gasCloud in activeGasClouds.ToArray())
             {
-                activeBackgroundAsteroids.Remove(asteroid);
-                asteroid.SetActive(false);
+                if (gasCloud.transform.position.z < player.transform.position.z - 100f)
+                {
+                    Rigidbody rb = gasCloud.GetComponent<Rigidbody>();
+                    // TO DO: Add gas cloud class
+                    activeGasClouds.Remove(gasCloud);
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    // TO DO: Add gas cloud class
+                    gasCloud.SetActive(false);
+                }
             }
         }
+        
+        if(activeBlackHoles.Count > 0)
+        {
+            foreach (GameObject blackHole in activeBlackHoles.ToArray())
+            {
+                if (blackHole.transform.position.z < player.transform.position.z - 100f)
+                {
+                    Rigidbody rb = blackHole.GetComponent<Rigidbody>();
+                    // TO DO: Add black hole class
+                    activeGasClouds.Remove(blackHole);
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    // TO DO: Add black hole class
+                    blackHole.SetActive(false);
+                }
+            }
+        }
+        
+        if(activeBackgroundAsteroids.Count > 0)
+        {
+            foreach (GameObject asteroid in activeBackgroundAsteroids.ToArray())
+            {
+                if (asteroid.transform.position.z < player.transform.position.z - 200f)
+                {
+                    activeBackgroundAsteroids.Remove(asteroid);
+                    asteroid.SetActive(false);
+                }
+            }
+        }
+        
     }
 
     private void PopulateBackgroundField()
@@ -175,9 +259,9 @@ public class Spawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(asteroidBounds.center, asteroidBounds.size);
+        Gizmos.DrawCube(hazardBounds.center, hazardBounds.size);
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(collectableBounds.center, collectableBounds.size);
+        Gizmos.DrawCube(powerupBounds.center, powerupBounds.size);
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(backgroundAsteroidBounds.center, backgroundAsteroidBounds.size);
     }

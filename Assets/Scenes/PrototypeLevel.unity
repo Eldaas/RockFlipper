@@ -295,10 +295,18 @@ MonoBehaviour:
   - {fileID: 4428989989665843642, guid: 450da8a7597987346bc806b07714e2a6, type: 3}
   asteroidsParent: {fileID: 1805814713}
   asteroidCount: 50
-  pooledCrystals: []
-  crystalPrefabs: []
-  crystalsParent: {fileID: 0}
-  crystalCount: 0
+  pooledGasClouds: []
+  gasCloudPrefabs: []
+  gasCloudsParent: {fileID: 0}
+  gasCloudCount: 0
+  pooledBlackHoles: []
+  blackHolePrefabs: []
+  blackHolesParent: {fileID: 0}
+  blackHoleCount: 0
+  pooledPowerups: []
+  powerupPrefabs: []
+  powerupsParent: {fileID: 0}
+  powerupCount: 0
   pooledBackgroundAsteroids: []
   backgroundAsteroidPrefabs: []
   backgroundAsteroidsParent: {fileID: 0}
@@ -826,6 +834,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7316081847577609972, guid: df56503c3d562bd42ab4e51b7afe6c7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d995df7f35a568a48bd09e5b9289036c, type: 2}
+    - target: {fileID: -5689320936839303354, guid: df56503c3d562bd42ab4e51b7afe6c7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d995df7f35a568a48bd09e5b9289036c, type: 2}
     - target: {fileID: -4010980779470094544, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -866,7 +884,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2e453751e3cff974abf5d3e0b5f2741c, type: 2}
+    - target: {fileID: 4281584813226215074, guid: df56503c3d562bd42ab4e51b7afe6c7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e453751e3cff974abf5d3e0b5f2741c, type: 2}
     - target: {fileID: 6170364737530096044, guid: df56503c3d562bd42ab4e51b7afe6c7b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e453751e3cff974abf5d3e0b5f2741c, type: 2}
+    - target: {fileID: 8801670117205185526, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -918,18 +946,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2124795020}
   offsetFromPlayer: 500
-  asteroidBounds:
-    m_Center: {x: 0, y: 0, z: 1000}
-    m_Extent: {x: 348.49, y: 0, z: 0}
+  hazardBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   activeAsteroids: []
   minAsteroidScaleFactor: 0.1
   maxAsteroidScaleFactor: 0.5
   currentAsteroidCap: 1
-  collectableBounds:
-    m_Center: {x: 0, y: 0, z: 465}
-    m_Extent: {x: 30, y: 0, z: 0}
-  activeCrystals: []
-  currentCrystalCap: 1
+  activeGasClouds: []
+  minGasCloudScaleFactor: 0
+  maxGasCloudScaleFactor: 0
+  currentGasCloudCap: 0
+  activeBlackHoles: []
+  minBlackHoleScaleFactor: 0
+  maxBlackHoleScaleFactor: 0
+  currentBlackHoleCap: 0
+  powerupBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  activePowerups: []
   backgroundAsteroidBounds:
     m_Center: {x: 0, y: -3000, z: 16000}
     m_Extent: {x: 8000, y: 2000, z: 0}

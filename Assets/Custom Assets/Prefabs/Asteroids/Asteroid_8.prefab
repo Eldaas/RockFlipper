@@ -622,13 +622,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0561f1c59cf6d0749b6f1990c6086f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainObject: {fileID: 4661910636688841757}
+  childrenObjectsParent: {fileID: 2528434295119618828}
   asteroidType: 0
-  mainAsteroid: {fileID: 4661910636688841757}
-  shardsParent: {fileID: 2528434295119618828}
   ironMaterial: {fileID: 2100000, guid: dfc69a7d5daab7645bb6b3982646faeb, type: 2}
   silverMaterial: {fileID: 2100000, guid: 0a372a36772f36642a5622b594aeae15, type: 2}
   goldMaterial: {fileID: 2100000, guid: 45a8d7a751fb886439181959220a9d2f, type: 2}
-  shards: []
 --- !u!54 &-7024787025961534657
 Rigidbody:
   m_ObjectHideFlags: 0
