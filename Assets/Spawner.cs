@@ -18,18 +18,22 @@ public class Spawner : MonoBehaviour
     public float minAsteroidScaleFactor;
     public float maxAsteroidScaleFactor;
     public int currentAsteroidCap = 0;
+    // Raise asteroid density above 1f to increase spacing between asteroid spawns.
+    public float asteroidDensity = 1f;
 
     [Header("Hazard: Gas Clouds")]
     public List<GameObject> activeGasClouds = new List<GameObject>();
     public float minGasCloudScaleFactor;
     public float maxGasCloudScaleFactor;
     public int currentGasCloudCap = 0;
+    public float gasCloudDensity = 1;
 
     [Header("Hazard: Black Holes")]
     public List<GameObject> activeBlackHoles = new List<GameObject>();
     public float minBlackHoleScaleFactor;
     public float maxBlackHoleScaleFactor;
     public int currentBlackHoleCap = 0;
+    public float blackHoleDensity = 1;
 
     [Header("Collectables: Powerups")]
     public Bounds powerupBounds = new Bounds();
@@ -67,12 +71,32 @@ public class Spawner : MonoBehaviour
         if(activeAsteroids.Count < currentAsteroidCap)
         {
             GameObject asteroid = ObjectPooler.instance.GetPooledAsteroid();
-            Vector3 spawnPoint = GetHazardSpawnPoint();
+            Vector3 spawnPoint;
             float randomScaleFactor = Utility.GenerateRandomFloat(minAsteroidScaleFactor, maxAsteroidScaleFactor);
-            activeAsteroids.Add(asteroid);
-            asteroid.transform.position = spawnPoint;
             asteroid.transform.localScale = Vector3.one * randomScaleFactor;
-            asteroid.SetActive(true);
+            Asteroid roid = asteroid.GetComponent<Asteroid>();
+            Bounds roidBounds = roid.mainObject.GetComponent<MeshRenderer>().bounds;
+
+            bool boundsCheck = false;
+            int maxAttempts = 3;
+            while(!boundsCheck && maxAttempts >= 0)
+            {
+                spawnPoint = GetHazardSpawnPoint();
+                Collider[] list = Physics.OverlapBox(spawnPoint, roidBounds.extents * asteroidDensity);
+                if (list.Length == 0)
+                {
+                    activeAsteroids.Add(asteroid);
+                    asteroid.transform.position = spawnPoint;
+                    asteroid.SetActive(true);
+                    boundsCheck = true;
+                }
+                else
+                {
+                    maxAttempts--;
+                }
+            }
+            
+ 
         }
 
         if (activeGasClouds.Count < currentGasCloudCap)
