@@ -68,8 +68,11 @@ public class Hazard : MonoBehaviour
         {
             for (int i = 0; i < childrenObjects.Count; i++)
             {
-                childrenObjects[i].transform.position = originalPositions[i];
-                childrenObjects[i].transform.rotation = originalRotations[i];
+                Rigidbody rb = childrenObjects[i].GetComponent<Rigidbody>();
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                childrenObjects[i].transform.localPosition = originalPositions[i];
+                childrenObjects[i].transform.localRotation = originalRotations[i];
                 childrenObjects[i].gameObject.SetActive(false);
             }
         }

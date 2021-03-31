@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     [Header("Spawner")]
     public GameObject player;
     public float offsetFromPlayer;
+    public float cleanupDistanceFromPlayer = 200f;
 
     [Header("General Hazard Settings")]
     public Bounds hazardBounds = new Bounds();
@@ -45,7 +46,6 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        hazardBoundsOffset = hazardBounds.center;
         powerupBoundsOffset = powerupBounds.center;
         backgroundAsteroidBoundsOffset = backgroundAsteroidBounds.center;
     }
@@ -53,13 +53,14 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         PopulateBackgroundField();
+        InvokeRepeating("IncreaseAsteroidCap", 1f, 1f);
     }
 
     private void Update()
     {
         CleanUp();
         transform.position = (player.transform.position.z + offsetFromPlayer) * Vector3.forward;
-        hazardBounds.center = transform.position + hazardBoundsOffset;
+        hazardBounds.center = transform.position;
         powerupBounds.center = transform.position + powerupBoundsOffset;
         backgroundAsteroidBounds.center = transform.position + backgroundAsteroidBoundsOffset;
 
@@ -168,7 +169,7 @@ public class Spawner : MonoBehaviour
         {
             foreach (GameObject asteroid in activeAsteroids.ToArray())
             {
-                if (asteroid.transform.position.z < player.transform.position.z - 100f)
+                if (asteroid.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
                 {
                     Rigidbody rb = asteroid.GetComponent<Rigidbody>();
                     Asteroid roid = asteroid.GetComponent<Asteroid>();
@@ -186,7 +187,7 @@ public class Spawner : MonoBehaviour
         {
             foreach (GameObject gasCloud in activeGasClouds.ToArray())
             {
-                if (gasCloud.transform.position.z < player.transform.position.z - 100f)
+                if (gasCloud.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
                 {
                     Rigidbody rb = gasCloud.GetComponent<Rigidbody>();
                     // TO DO: Add gas cloud class
@@ -203,7 +204,7 @@ public class Spawner : MonoBehaviour
         {
             foreach (GameObject blackHole in activeBlackHoles.ToArray())
             {
-                if (blackHole.transform.position.z < player.transform.position.z - 100f)
+                if (blackHole.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
                 {
                     Rigidbody rb = blackHole.GetComponent<Rigidbody>();
                     // TO DO: Add black hole class

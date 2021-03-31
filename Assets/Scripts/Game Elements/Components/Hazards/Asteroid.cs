@@ -11,11 +11,7 @@ public class Asteroid : Hazard
     [SerializeField]
     private AsteroidType asteroidType;
     [SerializeField]
-    private Material ironMaterial;
-    [SerializeField]
-    private Material silverMaterial;
-    [SerializeField]
-    private Material goldMaterial;
+    private AsteroidData data;
 
     #region Public Methods
     /// <summary>
@@ -25,6 +21,8 @@ public class Asteroid : Hazard
     /// <param name="explosionRadius">The radius of the explosion.</param>
     public void ExplodeAsteroid(float force, float explosionRadius)
     {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        //rb.isKinematic = true;
         PopulateChildrenObjects();
         mainObject.SetActive(false);
         for (int i = 0; i < childrenObjects.Count; i++)
@@ -32,7 +30,7 @@ public class Asteroid : Hazard
             CachePositionRotation(i);
             ApplyMaterials(i);
             childrenObjects[i].gameObject.SetActive(true);
-            Rigidbody rb = childrenObjects[i].GetComponent<Rigidbody>();
+            rb = childrenObjects[i].GetComponent<Rigidbody>();
             rb.AddExplosionForce(force, mainObject.transform.position, explosionRadius);
         }
         Debug.Log("Asteroid has exploded");
@@ -43,6 +41,8 @@ public class Asteroid : Hazard
     /// </summary>
     public void CollideWithAsteroid()
     {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        //rb.isKinematic = true;
         PopulateChildrenObjects();
         mainObject.SetActive(false);
         for (int i = 0; i < childrenObjects.Count; i++)
@@ -77,13 +77,13 @@ public class Asteroid : Hazard
         switch (asteroidType)
         {
             case AsteroidType.Iron:
-                renderer.materials = new Material[] { renderer.materials[0], ironMaterial };
+                renderer.materials = new Material[] { renderer.materials[0], data.ironMaterial };
                 break;
             case AsteroidType.Silver:
-                renderer.materials = new Material[] { renderer.materials[0], silverMaterial };
+                renderer.materials = new Material[] { renderer.materials[0], data.silverMaterial };
                 break;
             case AsteroidType.Gold:
-                renderer.materials = new Material[] { renderer.materials[0], goldMaterial };
+                renderer.materials = new Material[] { renderer.materials[0], data.goldMaterial };
                 break;
             default:
                 Debug.Log("Couldn't find the appropriate material for the asteroid.");
@@ -97,12 +97,13 @@ public class Asteroid : Hazard
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        data = HazardManager.instance.asteroidData;
         Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
         if (rb)
         {
             float collisionStrength = Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) * rb.mass;
             Debug.Log(collisionStrength);
-            if (collisionStrength > 1000)
+            if (collisionStrength > data.collisionSensitivity)
             {
                 CollideWithAsteroid();
             }
