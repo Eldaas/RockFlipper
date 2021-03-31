@@ -10,8 +10,7 @@ public class Hazard : MonoBehaviour
     /// <summary>
     /// Assign this field in the Unity Inspector to assign the 'original' game object which will be switched off and replaced by the children objects when interacted with. May be left empty if there are no interactions with child objects.
     /// </summary>
-    [SerializeField]
-    protected GameObject mainObject;
+    public GameObject mainObject;
 
     /// <summary>
     /// Assign this field in the Unity Inspector to assign the parent object which contains any child hazard objects to which physics may be applied. May be left empty if there are no children.
