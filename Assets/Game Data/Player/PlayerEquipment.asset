@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2df78d0e3ebf2ec4c9401ab1e16f26c9, type: 3}
-  m_Name: PlayerHealth
+  m_Script: {fileID: 11500000, guid: 0eb79f433dbfaee409b6191560e4a012, type: 3}
+  m_Name: PlayerEquipment
   m_EditorClassIdentifier: 
-  hull: 100
-  armour: 100
-  shields: 100

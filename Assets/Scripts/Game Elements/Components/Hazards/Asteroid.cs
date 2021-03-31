@@ -97,7 +97,16 @@ public class Asteroid : Hazard
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        CollideWithAsteroid();
+        Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
+        if (rb)
+        {
+            float collisionStrength = Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) * rb.mass;
+            Debug.Log(collisionStrength);
+            if (collisionStrength > 1000)
+            {
+                CollideWithAsteroid();
+            }
+        }
     }
     #endregion
 }

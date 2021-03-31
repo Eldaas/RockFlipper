@@ -294,19 +294,11 @@ MonoBehaviour:
   - {fileID: 8397313556702028846, guid: 39e3481e488cc284f8de02174ab44d14, type: 3}
   - {fileID: 4428989989665843642, guid: 450da8a7597987346bc806b07714e2a6, type: 3}
   asteroidsParent: {fileID: 1805814713}
-  asteroidCount: 50
-  pooledGasClouds: []
-  gasCloudPrefabs: []
-  gasCloudsParent: {fileID: 0}
-  gasCloudCount: 0
-  pooledBlackHoles: []
-  blackHolePrefabs: []
-  blackHolesParent: {fileID: 0}
-  blackHoleCount: 0
-  pooledPowerups: []
-  powerupPrefabs: []
-  powerupsParent: {fileID: 0}
-  powerupCount: 0
+  asteroidCount: 100
+  pooledCrystals: []
+  crystalPrefabs: []
+  crystalsParent: {fileID: 0}
+  crystalCount: 0
   pooledBackgroundAsteroids: []
   backgroundAsteroidPrefabs: []
   backgroundAsteroidsParent: {fileID: 0}
@@ -946,25 +938,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2124795020}
   offsetFromPlayer: 500
-  hazardBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+  asteroidBounds:
+    m_Center: {x: 0, y: 0, z: 1000}
+    m_Extent: {x: 348.49, y: 0, z: 0}
   activeAsteroids: []
   minAsteroidScaleFactor: 0.1
   maxAsteroidScaleFactor: 0.5
-  currentAsteroidCap: 1
-  activeGasClouds: []
-  minGasCloudScaleFactor: 0
-  maxGasCloudScaleFactor: 0
-  currentGasCloudCap: 0
-  activeBlackHoles: []
-  minBlackHoleScaleFactor: 0
-  maxBlackHoleScaleFactor: 0
-  currentBlackHoleCap: 0
-  powerupBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  activePowerups: []
+  currentAsteroidCap: 10
+  collectableBounds:
+    m_Center: {x: 0, y: 0, z: 465}
+    m_Extent: {x: 30, y: 0, z: 0}
+  activeCrystals: []
+  currentCrystalCap: 1
   backgroundAsteroidBounds:
     m_Center: {x: 0, y: -3000, z: 16000}
     m_Extent: {x: 8000, y: 2000, z: 0}
@@ -1389,9 +1374,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2124795021}
+  - component: {fileID: 2124795025}
   - component: {fileID: 2124795023}
   - component: {fileID: 2124795022}
   - component: {fileID: 2124795024}
+  - component: {fileID: 2124795026}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1469,3 +1456,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2124795025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124795020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76457e0b3519d84ea3cba64ac25d398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 11400000, guid: 740a4e5da59dcf746be2e1640b37010d, type: 2}
+  stats: {fileID: 11400000, guid: 4717faf89fd4b204dac498c891eff097, type: 2}
+  equipment: {fileID: 11400000, guid: 4511ea1f5d8b7584d8c8daf09c099eb3, type: 2}
+--- !u!136 &2124795026
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124795020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 7.8766193
+  m_Height: 28.043514
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 1.5752583}
