@@ -295,10 +295,18 @@ MonoBehaviour:
   - {fileID: 4428989989665843642, guid: 450da8a7597987346bc806b07714e2a6, type: 3}
   asteroidsParent: {fileID: 1805814713}
   asteroidCount: 50
-  pooledCrystals: []
-  crystalPrefabs: []
-  crystalsParent: {fileID: 0}
-  crystalCount: 0
+  pooledGasClouds: []
+  gasCloudPrefabs: []
+  gasCloudsParent: {fileID: 0}
+  gasCloudCount: 0
+  pooledBlackHoles: []
+  blackHolePrefabs: []
+  blackHolesParent: {fileID: 0}
+  blackHoleCount: 0
+  pooledPowerups: []
+  powerupPrefabs: []
+  powerupsParent: {fileID: 0}
+  powerupCount: 0
   pooledBackgroundAsteroids: []
   backgroundAsteroidPrefabs: []
   backgroundAsteroidsParent: {fileID: 0}
@@ -938,18 +946,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2124795020}
   offsetFromPlayer: 500
-  asteroidBounds:
-    m_Center: {x: 0, y: 0, z: 1000}
-    m_Extent: {x: 348.49, y: 0, z: 0}
+  hazardBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   activeAsteroids: []
   minAsteroidScaleFactor: 0.1
   maxAsteroidScaleFactor: 0.5
   currentAsteroidCap: 1
-  collectableBounds:
-    m_Center: {x: 0, y: 0, z: 465}
-    m_Extent: {x: 30, y: 0, z: 0}
-  activeCrystals: []
-  currentCrystalCap: 1
+  activeGasClouds: []
+  minGasCloudScaleFactor: 0
+  maxGasCloudScaleFactor: 0
+  currentGasCloudCap: 0
+  activeBlackHoles: []
+  minBlackHoleScaleFactor: 0
+  maxBlackHoleScaleFactor: 0
+  currentBlackHoleCap: 0
+  powerupBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  activePowerups: []
   backgroundAsteroidBounds:
     m_Center: {x: 0, y: -3000, z: 16000}
     m_Extent: {x: 8000, y: 2000, z: 0}
