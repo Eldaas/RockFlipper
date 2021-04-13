@@ -62,7 +62,6 @@ public class Hazard : MonoBehaviour
     /// </summary>
     public virtual void ResetHazard()
     {
-        Debug.Log("Hazard " + gameObject.name + " has been reset.");
         if(childrenObjects.Count > 0)
         {
             for (int i = 0; i < childrenObjects.Count; i++)
@@ -84,7 +83,7 @@ public class Hazard : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider.name + " has collided with " + gameObject.name + ".");
+        //Debug.Log(collision.collider.name + " has collided with " + gameObject.name + ".");
     }
 
     #endregion

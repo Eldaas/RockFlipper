@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 790846416091595870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6102355101729291262}
   - {fileID: 1318374633620949649}
@@ -161,7 +161,7 @@ MonoBehaviour:
   mainObject: {fileID: 4522328255247170669}
   childrenObjectsParent: {fileID: 9040277942818493186}
   asteroidType: 0
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 7e9fd39612e6a084c963584c3d1b911f, type: 2}
 --- !u!54 &-8295937560012732436
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790846416091595870}
   serializedVersion: 2
-  m_Mass: 1000
+  m_Mass: 900
   m_Drag: 0.25
   m_AngularDrag: 0
   m_UseGravity: 0

@@ -10,4 +10,5 @@ public class AsteroidData : ScriptableObject
     public Material silverMaterial;
     public Material goldMaterial;
     public float collisionSensitivity;
+    public float collisionMaxForce;
 }
