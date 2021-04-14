@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerHealth health;
+    [Header("Data Containers")]
     [SerializeField]
     private PlayerStats stats;
     [SerializeField]
     private PlayerEquipment equipment;
 
-    [Header("Exposed Properties")]
-    [SerializeField]
+    [Header("ReadOnly Properties")]
+    [SerializeField, ReadOnly]
     private float currentShields;
-    [SerializeField]
+    [SerializeField, ReadOnly]
     private float currentArmour;
-    [SerializeField]
+    [SerializeField, ReadOnly]
     private float currentHull;
-    [SerializeField]
+    [SerializeField, ReadOnly]
     private float shieldsRechargeRate;
 
     #region Properties
-    public float Shields { get => currentShields; set => currentShields = value; }
-    public float MaxShields { get => health.maxShields; }
-    public float ShieldsRechargeRate { get => shieldsRechargeRate; set => shieldsRechargeRate = value; }
-    public float Armour { get => currentArmour; set => currentArmour = value; }
-    public float MaxArmour { get => health.maxArmour; }
-    public float Hull { get => currentHull; set => currentHull = value; }
-    public float MaxHull { get => health.maxHull; }
+    public float Shields { get => stats.currentShields; set => stats.currentShields = value; }
+    public float MaxShields { get => stats.maxShields; set => stats.maxShields = value; }
+    public float ShieldsRechargeRate { get => stats.currentShieldRegen; set => stats.currentShieldRegen = value; }
+    public float Armour { get => stats.currentArmour; set => stats.currentArmour = value; }
+    public float MaxArmour { get => stats.maxArmour; set => stats.maxArmour = value; }
+    public float Hull { get => stats.currentHull; set => stats.currentHull = value; }
+    public float MaxHull { get => stats.maxHull; set => stats.maxHull = value; }
     #endregion
 
     #region Unity Methods
@@ -39,12 +38,21 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
-        currentShields = health.maxShields;
-        currentArmour = health.maxArmour;
-        currentHull = health.maxHull;
-        shieldsRechargeRate = health.baseShieldRegen;
+        currentShields = stats.maxShields;
+        currentArmour = stats.maxArmour;
+        currentHull = stats.maxHull;
+        shieldsRechargeRate = stats.baseShieldRegen;
         InvokeRepeating("RegenShield", 1f, 1f);
         Debug.Log(Shields);
+    }
+
+    private void Update()
+    {
+        // Sets the ReadOnly values in the inspector for visual feedback
+        currentShields = Shields;
+        currentArmour = Armour;
+        currentHull = Hull;
+        shieldsRechargeRate = ShieldsRechargeRate;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -113,12 +121,31 @@ public class Player : MonoBehaviour
 
         return false;
     }
+
+    /// <summary>
+    /// Increase the maximum shield by X amount.
+    /// </summary>
+    /// <param name="value">The amount to add to the shield, NOT the new shield value.</param>
+    public void IncreaseShieldCapacityByValue(float value)
+    {
+        MaxShields += value;
+    }
+
+    /// <summary>
+    /// Decrease the maximum shield amount by X amount.
+    /// </summary>
+    /// <param name="value">The amount to remove from the shield, NOT the new shield value.</param>
+    public void DecreaseShieldCapacityByValue(float value)
+    {
+        MaxShields -= value;
+    }
+
     #endregion
 
     #region Private Methods
     private void CheckForMissingDataContainers()
     {
-        if (!health || !stats || !equipment)
+        if (!stats || !equipment)
         {
             Debug.LogError("Missing a critical component on the Player object!");
         }

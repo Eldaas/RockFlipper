@@ -378,8 +378,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2124795021}
   - {fileID: 1506802345}
+  - {fileID: 2124795021}
   - {fileID: 1050545609}
   - {fileID: 789375323}
   - {fileID: 1382425568}
@@ -1256,7 +1256,7 @@ Transform:
   m_Children:
   - {fileID: 2140098334}
   m_Father: {fileID: 695886959}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653517484
 GameObject:
@@ -1720,7 +1720,7 @@ Transform:
   - {fileID: 1199276843}
   - {fileID: 2093247349}
   m_Father: {fileID: 695886959}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2124795022
 Rigidbody:
@@ -1789,9 +1789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76457e0b3519d84ea3cba64ac25d398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 11400000, guid: 740a4e5da59dcf746be2e1640b37010d, type: 2}
   stats: {fileID: 11400000, guid: 4717faf89fd4b204dac498c891eff097, type: 2}
   equipment: {fileID: 11400000, guid: 4511ea1f5d8b7584d8c8daf09c099eb3, type: 2}
+  currentShields: 0
+  currentArmour: 0
+  currentHull: 0
+  shieldsRechargeRate: 0
 --- !u!114 &2124795026
 MonoBehaviour:
   m_ObjectHideFlags: 0
