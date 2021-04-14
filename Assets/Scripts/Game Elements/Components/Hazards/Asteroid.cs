@@ -10,8 +10,7 @@ public class Asteroid : Hazard
     [Header("Inspector References")]
     [SerializeField]
     private AsteroidType asteroidType;
-    [SerializeField]
-    private AsteroidData data;
+    public AsteroidData data;
 
     #region Public Methods
     /// <summary>
@@ -97,17 +96,6 @@ public class Asteroid : Hazard
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        data = HazardManager.instance.asteroidData;
-        Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
-        if (rb)
-        {
-            float collisionStrength = Vector3.Dot(collision.contacts[0].normal, collision.relativeVelocity) * rb.mass;
-            Debug.Log(collisionStrength);
-            if (collisionStrength > data.collisionSensitivity)
-            {
-                CollideWithAsteroid();
-            }
-        }
     }
     #endregion
 }

@@ -473,15 +473,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853976363753843291}
-  m_LocalRotation: {x: 0.14480262, y: -0.04891867, z: 0.49093977, w: 0.8576814}
-  m_LocalPosition: {x: -227.6, y: 55.65634, z: 226.4}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 92458149283534331}
   - {fileID: 5776220956185060190}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 17.243, y: 3.4980001, z: 60.104004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3765038014551591309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   mainObject: {fileID: 7720603551063822952}
   childrenObjectsParent: {fileID: 8409399132430777358}
   asteroidType: 0
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 7e9fd39612e6a084c963584c3d1b911f, type: 2}
 --- !u!54 &-3106557224914536912
 Rigidbody:
   m_ObjectHideFlags: 0

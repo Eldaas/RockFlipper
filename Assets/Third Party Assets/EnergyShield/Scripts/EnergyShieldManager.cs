@@ -144,7 +144,7 @@ public class EnergyShieldManager : MonoBehaviour
         print(ese[h].active);
         */
 
-        print("Please Rate and Comment EnergyShield!");
+        //print("Please Rate and Comment EnergyShield!");
     }
 
 	/// <summary>
