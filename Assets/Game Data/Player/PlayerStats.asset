@@ -12,3 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6bcb29eef997143bb3ad1ac0fc19f2, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
+  baseMaxHull: 100
+  currentHull: 0
+  currentMaxHull: 100
+  baseMaxArmour: 100
+  currentArmour: 0
+  currentMaxArmour: 100
+  baseMaxShields: 100
+  currentShields: 0
+  currentMaxShields: 100
+  baseShieldRegen: 10
+  currentShieldRegen: 10
+  baseShieldCooldownTime: 5
+  currentShieldCooldownTime: 5
+  baseSpeedMitigation: 0
+  currentSpeedMitigation: 0
+  baseManeuveringSpeed: 1
+  currentManeuveringSpeed: 1
+  baseHeatSinkCapacity: 100
+  currentHeatSinkLevel: 0
+  currentHeatSinkCapacity: 100
