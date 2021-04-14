@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
         #region Singleton
         GameManager[] list = FindObjectsOfType<GameManager>();
-        if(list.Length > 1)
+        if (list.Length > 1)
         {
             Destroy(this);
             Debug.Log("Multiple instances of the Game Manager component detected. Destroying an instance.");
@@ -42,9 +42,10 @@ public class GameManager : MonoBehaviour
 
         #endregion
 
-        #region Delegates & Listeners
+        #region Events
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        AddEvents();
 
         #endregion
 
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         #region State Machine
 
-        if(bypassIntroMenu)
+        if (bypassIntroMenu)
         {
             gameSM.Initialize(introState);
         }
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
         {
             gameSM.ChangeState(introState);
         }
-        else if(buildID == 2)
+        else if (buildID == 2)
         {
             gameSM.ChangeState(levelOneState);
         }
@@ -97,4 +98,23 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region Events
+    // Add all of your events in here so we've got a good idea of what events exist in the game
+    private void AddEvents()
+    {
+        EventManager.AddEvent("asteroidCollision");
+        EventManager.AddEvent("takeHit");
+        EventManager.AddEvent("shieldsRecharged");
+        EventManager.AddEvent("shieldsHit");
+        EventManager.AddEvent("shieldsDestroyed");
+        EventManager.AddEvent("shieldsOnline");
+        EventManager.AddEvent("armourHit");
+        EventManager.AddEvent("armourDestroyed");
+        EventManager.AddEvent("hullHit");
+        EventManager.AddEvent("healthLow");
+        EventManager.AddEvent("playerDeath");
+        EventManager.AddEvent("powerupCollected");
+        EventManager.AddEvent("shieldOvercharge");
+    }
+    #endregion
 }

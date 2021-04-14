@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2df78d0e3ebf2ec4c9401ab1e16f26c9, type: 3}
-  m_Name: PlayerHealth
+  m_Script: {fileID: 11500000, guid: 0375848255ee57c44a80504021a159e7, type: 3}
+  m_Name: Shield Overcharge
   m_EditorClassIdentifier: 
-  maxHull: 100
-  maxArmour: 100
-  maxShields: 100
-  baseShieldRegen: 10
+  prefab: {fileID: 0}
+  baseDuration: 30
+  spawnChance: 0

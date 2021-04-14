@@ -5,40 +5,110 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Player Data/Player Stats Container")]
 public class PlayerStats : ScriptableObject
 {
-    // Current hull represents the player's current (live) hull value
-    public float currentHull;
+    // "Base" values are used to set initial values via the inspector, which are then applied at runtime.
+    // ReadOnly fields aren't intended to be altered in the inspector at runtime due to being dynamically calculated
 
-    // Max hull represents the maximum capacity of the player's hull health value
-    public float maxHull;
+    /// <summary>
+    /// Base max hull represents the starting amount the hull should have, before modifiers are taken into account
+    /// </summary>
+    public float baseMaxHull;
 
-    // Current armour represents the player's current (live) armour value
-    public float currentArmour;
+    /// <summary>
+    /// Current hull represents the player's current (live) hull value
+    /// </summary>
+    [ReadOnly] public float currentHull;
 
-    // Max armour represents the maximum capacity of the player's armour health value
-    public float maxArmour;
+    /// <summary>
+    /// Current max hull represents the current maximum capacity of the player's hull health value, taking modifiers into account
+    /// </summary>
+    [ReadOnly] public float currentMaxHull;
 
-    // Current shields represents the player's current (live) shields value
-    public float currentShields;
+    /// <summary>
+    /// Base max armour represents the starting amount the armour should have, before modifiers are taken into account
+    /// </summary>
+    public float baseMaxArmour;
 
-    // Max shields represents the maximum capacity of the player's shields health value
-    public float maxShields;
+    /// <summary>
+    /// Current armour represents the player's current (live) armour value
+    /// </summary>
+    [ReadOnly] public float currentArmour;
 
-    // Current shield regen is the current (live) rate at which the player's shield regenerates per second
-    public float currentShieldRegen;
+    /// <summary>
+    /// Current max armour represents the current maximum capacity of the player's armour health value, taking modifiers into account
+    /// </summary>
+    [ReadOnly] public float currentMaxArmour;
 
-    // Base shield regen is how much the player's shield will regenerate per second, before level modifiers are applied
+    /// <summary>
+    /// Base max shields represents the starting amount the shield should have, before modifiers are taken into account
+    /// </summary>
+    public float baseMaxShields;
+
+    /// <summary>
+    /// Current shields represents the player's current (live) shields value
+    /// </summary>
+    [ReadOnly] public float currentShields;
+
+    /// <summary>
+    /// Current max shields represents the current maximum capacity of the player's shields health value, taking modifiers into account
+    /// </summary>
+    [ReadOnly] public float currentMaxShields;
+
+    /// <summary>
+    /// Base shield regen is how much the player's shield will regenerate per second before modifiers are applied
+    /// </summary>
     public float baseShieldRegen;
 
-    // Speed mitigation slows the player down
-    public float speedMitigation;
+    /// <summary>
+    /// Current shield regen is the current (live) rate at which the player's shield regenerates per second, with modifiers taken into account
+    /// </summary>
+    [ReadOnly] public float currentShieldRegen;
 
-    // Maneuvering speed pertains to how fast the player can move left and right to avoid collisions
-    public float maneuveringSpeed;
+    /// <summary>
+    /// Base shield cooldown time is the amount of seconds between the shield being destroyed and the time at which it begins regenerating, without taking modifiers into account
+    /// </summary>
+    public float baseShieldCooldownTime;
 
-    // Heating sink capacity is the maximum value that the heat sink can reach
-    public float heatSinkCapacity;
+    /// <summary>
+    /// Current shield cooldown time is the current amount of seconds between the shield being destroyed and the time at which it begins regenerating, taking modifiers into account
+    /// </summary>
+    [ReadOnly] public float currentShieldCooldownTime;
 
-    
+    /// <summary>
+    /// Base speed mitigation is the value by which the player's 'increasing speed' during a level is lowered, without modifiers being taken into account
+    /// </summary>
+    public float baseSpeedMitigation;
+
+    /// <summary>
+    /// Current speed mitigation is the value by which the player's 'increasing speed' during a level is lowered, with modifiers taken into account
+    /// </summary>
+    [ReadOnly] public float currentSpeedMitigation;
+
+    /// <summary>
+    /// Base maneuvering speed pertains to how fast the player can move left and right to avoid collisions, without modifiers taken into account
+    /// </summary>
+    public float baseManeuveringSpeed;
+
+    /// <summary>
+    /// Current maneuvering speed pertains to how fast the player can currently move left and right to avoid collisions, with modifiers taken into account
+    /// </summary>
+    [ReadOnly] public float currentManeuveringSpeed;
+
+    /// <summary>
+    /// The base heat sink capacity is the unmodified capacity the player starts with
+    /// </summary>
+    public float baseHeatSinkCapacity;
+
+    /// <summary>
+    /// This represents a normalised value (0 - 1) to represent the current % saturation of the heat sink capacity
+    /// </summary>
+    [ReadOnly] public float currentHeatSinkLevel;
+
+    /// <summary>
+    /// The current heat sink capacity is the current maximum value that the heat sink can reach, with modifiers taken into account
+    /// </summary>
+    [ReadOnly] public float currentHeatSinkCapacity;
+
+
 
 
 

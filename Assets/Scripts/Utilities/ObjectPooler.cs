@@ -33,7 +33,9 @@ public class ObjectPooler : MonoBehaviour
 
     [Header("Collectable: Powerups")]
     [SerializeField]
-    private GameObject[] powerupPrefabs;
+    private GameObject genericPrefab;
+    [SerializeField]
+    private List<Powerup> powerupProfiles;
     [SerializeField]
     private GameObject powerupsParent;
     public int powerupCount;
@@ -107,6 +109,13 @@ public class ObjectPooler : MonoBehaviour
             go.transform.parent = backgroundAsteroidsParent.transform;
             go.SetActive(false);
             pooledBackgroundAsteroids.Add(go);
+        }
+
+        pooledPowerups = new List<GameObject>();
+        for (int i = 0; i < powerupCount; i++)
+        {
+            // TO DO: Math to assign powerup profile based upon % spawn chance
+            
         }
     }
 
