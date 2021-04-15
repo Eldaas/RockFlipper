@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   baseMaxHull: 100
-  currentHull: 0
+  currentHull: 50
   currentMaxHull: 100
   baseMaxArmour: 100
-  currentArmour: 0
+  currentArmour: 100
   currentMaxArmour: 100
   baseMaxShields: 100
-  currentShields: 0
+  currentShields: 100
   currentMaxShields: 100
-  baseShieldRegen: 10
-  currentShieldRegen: 10
+  baseShieldRegen: 5
+  currentShieldRegen: 5
   baseShieldCooldownTime: 5
   currentShieldCooldownTime: 5
   baseSpeedMitigation: 0
   currentSpeedMitigation: 0
-  baseManeuveringSpeed: 1
-  currentManeuveringSpeed: 1
+  baseManeuveringSpeed: 100
+  currentManeuveringSpeed: 100
   baseHeatSinkCapacity: 100
   currentHeatSinkLevel: 0
   currentHeatSinkCapacity: 100

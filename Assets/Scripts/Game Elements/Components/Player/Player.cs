@@ -6,8 +6,7 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [Header("Data Containers")]
-    [SerializeField]
-    private PlayerStats stats;
+    public PlayerStats stats;
     [SerializeField]
     private PlayerEquipment equipment;
 
@@ -51,6 +50,7 @@ public class Player : MonoBehaviour
         // Initialise stat values (currently from base levels until modifiers fully implemented)
         stats.currentMaxHull = stats.baseMaxHull;
         stats.currentHull = stats.currentMaxHull;
+        
 
         stats.currentMaxArmour = stats.baseMaxArmour;
         stats.currentArmour = stats.currentMaxArmour;
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         Rigidbody rb = collision.collider.GetComponentInParent<Rigidbody>();
         if (rb.CompareTag("Asteroid"))
         {
-            EventManager.TriggerEvent("asteroidCollision");
+            EventManager.TriggerEvent("AsteroidCollision");
             
             if (rb)
             {
@@ -111,9 +111,11 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Powerup"))
         {
-            EventManager.TriggerEvent("powerupCollected");
             PowerupMono mono = other.GetComponent<PowerupMono>();
-            mono.powerup.ExecutePowerup();
+            Powerup thisPowerup = mono.powerup;
+            IEnumerator coroutine = PowerupCoroutine(thisPowerup);
+            StartCoroutine(coroutine);
+
             other.gameObject.SetActive(false);
         }
 
@@ -127,7 +129,7 @@ public class Player : MonoBehaviour
     /// <returns>True if the damage destroys the player, false if the damage does not.</returns>
     public bool TakeDamage(float value)
     {
-        EventManager.TriggerEvent("takeHit");
+        EventManager.TriggerEvent("TakeHit");
         float damage = value;
 
         if(Shields > 0f)
@@ -139,11 +141,11 @@ public class Player : MonoBehaviour
                 Shields = 0f;
                 shieldDestroyedAt = Time.time;
                 shieldObject.SetActive(false);
-                EventManager.TriggerEvent("shieldsDestroyed");
+                EventManager.TriggerEvent("ShieldsDestroyed");
             }
             else
             {
-                EventManager.TriggerEvent("shieldsHit");
+                EventManager.TriggerEvent("ShieldsHit");
                 damage = 0f;
                 return false;
             }
@@ -156,12 +158,12 @@ public class Player : MonoBehaviour
             {
                 damage = Mathf.Abs(Armour);
                 Armour = 0f;
-                EventManager.TriggerEvent("armourDestroyed");
+                EventManager.TriggerEvent("ArmourDestroyed");
             }
             else
             {
                 damage = 0f;
-                EventManager.TriggerEvent("armourHit");
+                EventManager.TriggerEvent("ArmourHit");
                 return false;
             }
         }
@@ -172,17 +174,17 @@ public class Player : MonoBehaviour
             if (Hull < 0f)
             {
                 Hull = 0f;
-                EventManager.TriggerEvent("playerDeath");
+                EventManager.TriggerEvent("PlayerDeath");
                 return true;
             }
             else
             {
-                EventManager.TriggerEvent("hullHit");
+                EventManager.TriggerEvent("HullHit");
             }
             
             if (Hull / MaxHull <= 0.5f)
             {
-                EventManager.TriggerEvent("lowHealth");
+                EventManager.TriggerEvent("LowHealth");
             }
         }
 
@@ -232,7 +234,7 @@ public class Player : MonoBehaviour
             if(!shieldObject.activeInHierarchy)
             {
                 shieldObject.SetActive(true);
-                EventManager.TriggerEvent("shieldsOnline");
+                EventManager.TriggerEvent("ShieldsOnline");
             }
             
             // Check if shield requires recharging
@@ -244,10 +246,25 @@ public class Player : MonoBehaviour
             // Check if shield has been recharged beyond its capacity
             if (Shields > MaxShields)
             {
-                EventManager.TriggerEvent("shieldsRecharged");
+                EventManager.TriggerEvent("ShieldsRecharged");
                 Shields = MaxShields;
             }
         }
+    }
+
+    private IEnumerator PowerupCoroutine(Powerup powerup)
+    {
+        Debug.Log("Coroutine started.");
+
+        float endTime = Time.time + powerup.baseDuration;
+        powerup.ExecutePowerup(this);
+
+        while(Time.time < endTime)
+        {
+            yield return null;
+        }
+
+        powerup.EndPowerup(this);
     }
     #endregion
 

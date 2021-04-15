@@ -1,0 +1,22 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Powerup Type/#SCRIPTNAME#")]
+public class #SCRIPTNAME# : Powerup, IPowerup
+{
+	// Define custom fields here
+	[SerializeField]
+    private float percentage;
+
+	// Implement 'on execute' functionality within this function
+    public override void ExecutePowerup(Player player)
+    {
+        EventManager.TriggerEvent("#SCRIPTNAME#");
+        
+    }
+	
+	// Set stats back to normal values
+	public override void EndPowerup(Player player)
+    {
+        
+    }
+}

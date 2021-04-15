@@ -6,8 +6,9 @@ public class SceneController : MonoBehaviour
 {
     [HideInInspector]
     public static SceneController instance;
-    public LevelData data;
+    public LevelData levelData;
     public LevelModifier levelMods;
+    public LevelPowerups levelPowerups;
 
     private void Awake()
     {
@@ -23,5 +24,25 @@ public class SceneController : MonoBehaviour
             instance = this;
         }
         #endregion
+
+        if(MissingDataContainers())
+        {
+            Debug.LogError("SceneController requires assignment of levelData, levelMods and levelPowerups.");
+        }
+
     }
+
+    #region Private Methods
+    private bool MissingDataContainers()
+    {
+        if(levelData == null || levelMods == null || levelPowerups == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    #endregion
 }
