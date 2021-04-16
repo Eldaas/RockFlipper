@@ -102,19 +102,22 @@ public class GameManager : MonoBehaviour
     // Add all of your events in here so we've got a good idea of what events exist in the game
     private void AddEvents()
     {
-        EventManager.AddEvent("asteroidCollision");
-        EventManager.AddEvent("takeHit");
-        EventManager.AddEvent("shieldsRecharged");
-        EventManager.AddEvent("shieldsHit");
-        EventManager.AddEvent("shieldsDestroyed");
-        EventManager.AddEvent("shieldsOnline");
-        EventManager.AddEvent("armourHit");
-        EventManager.AddEvent("armourDestroyed");
-        EventManager.AddEvent("hullHit");
-        EventManager.AddEvent("healthLow");
-        EventManager.AddEvent("playerDeath");
-        EventManager.AddEvent("powerupCollected");
-        EventManager.AddEvent("shieldOvercharge");
+        EventManager.AddEvent("AsteroidCollision");
+        EventManager.AddEvent("TakeHit");
+        EventManager.AddEvent("ShieldsRecharged");
+        EventManager.AddEvent("ShieldsHit");
+        EventManager.AddEvent("ShieldsDestroyed");
+        EventManager.AddEvent("ShieldsOnline");
+        EventManager.AddEvent("ArmourHit");
+        EventManager.AddEvent("ArmourDestroyed");
+        EventManager.AddEvent("HullHit");
+        EventManager.AddEvent("HealthLow");
+        EventManager.AddEvent("PlayerDeath");
+        EventManager.AddEvent("PowerupCollected");
+        EventManager.AddEvent("ShieldOvercharge");
+        EventManager.AddEvent("ManeuveringBoost");
+        EventManager.AddEvent("HullRepair");
+        EventManager.AddEvent("ArmourRepair");
     }
     #endregion
 }

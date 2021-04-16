@@ -7,5 +7,5 @@ public interface IPowerup
     float EffectDuration { get; set; }
     GameObject Prefab { get; set; }
 
-    void ExecutePowerup();
+    void ExecutePowerup(Player player);
 }

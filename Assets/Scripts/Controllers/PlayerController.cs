@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [Header("Core Components")]
-    Rigidbody rb;
-    Animator anim;
+    private Player player;
+    private Rigidbody rb;
+    private Animator anim;
 
     [Header("Horizontal Movement")]
     public Joystick joystick;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        player = GetComponent<Player>();
     }
 
     private void Start()
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        horizontalSpeed = player.stats.currentManeuveringSpeed;
+
         //transform.position += currentVelocity * Vector3.forward * Time.deltaTime;
         IncreaseVelocity();
         anim.SetFloat("Roll", joystick.Horizontal);

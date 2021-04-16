@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0375848255ee57c44a80504021a159e7, type: 3}
-  m_Name: Shield Overcharge
+  m_Script: {fileID: 11500000, guid: 1708337f3bd14884fa37b7c62f434ea3, type: 3}
+  m_Name: Maneuvering Boost
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1086816176436677925, guid: 1dbc1f6790dab24428703e7b225abcfa, type: 3}
+  prefab: {fileID: 499129874202468616, guid: 7cbd5dd7b4086174a95aa7e04712b2d6, type: 3}
   baseDuration: 30
-  shieldRegenPercentage: 300
-  shieldCooldownPercentage: 50
-  shieldCapacityPercentage: 300
+  percentage: 300
