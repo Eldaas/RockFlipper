@@ -47,6 +47,7 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField]
     private GameObject backgroundAsteroidsParent;
     public int backgroundAsteroidCount;
+    public int backgroundAsteroidPrespawnCount;
     private List<GameObject> pooledBackgroundAsteroids = new List<GameObject>();
 
     private void Awake()

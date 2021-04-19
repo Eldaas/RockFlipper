@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     public float maxAsteroidScaleFactor;
     public int currentAsteroidCap = 0;
     // Raise asteroid density above 1f to increase spacing between asteroid spawns.
-    public float asteroidDensity = 1f;
+    public float asteroidDensity;
 
     [Header("Hazard: Gas Clouds")]
     public List<GameObject> activeGasClouds = new List<GameObject>();
@@ -245,7 +245,7 @@ public class Spawner : MonoBehaviour
         {
             foreach (GameObject asteroid in activeBackgroundAsteroids.ToArray())
             {
-                if (asteroid.transform.position.z < player.transform.position.z - 200f)
+                if (asteroid.transform.position.z < player.transform.position.z - 1000f)
                 {
                     activeBackgroundAsteroids.Remove(asteroid);
                     asteroid.SetActive(false);
@@ -260,13 +260,17 @@ public class Spawner : MonoBehaviour
         Vector3 previousCenter = backgroundAsteroidBounds.center;
         Vector3 previousExtents = backgroundAsteroidBounds.extents;
 
+        // Moves the spawner box to halfway between its current position and z0
         Vector3 newCenter = new Vector3(previousCenter.x, previousCenter.y, previousCenter.z / 2);
         backgroundAsteroidBounds.center = newCenter;
-        Vector3 newExtents = new Vector3(previousExtents.x, previousExtents.y, previousCenter.z / 2);
+
+        // Sets the extents of the box to 1.5x so it ends up going just beyond the player (meaning background asteroids spawn slightly behind the player too)
+        Vector3 newExtents = new Vector3(previousExtents.x, previousExtents.y, previousCenter.z / 1.5f);
         backgroundAsteroidBounds.extents = newExtents;
 
         // Refactor this later - not DRY code
-        for (int i = 0; i < ObjectPooler.instance.backgroundAsteroidCount; i++)
+        // Sets the counter to -50 so there are still some asteroids in the pool (otherwise leaves a giant gap in asteroid coverage)
+        for (int i = 0; i < ObjectPooler.instance.backgroundAsteroidCount - 50; i++)
         {
             GameObject asteroid = ObjectPooler.instance.GetPooledBackgroundAsteroid();
             Vector3 spawnPoint = GetBackgroundSpawnPoint();
@@ -289,6 +293,15 @@ public class Spawner : MonoBehaviour
         Gizmos.DrawCube(powerupBounds.center, powerupBounds.size);
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(backgroundAsteroidBounds.center, backgroundAsteroidBounds.size);
+        Gizmos.color = Color.blue;
+        foreach (GameObject asteroid in activeAsteroids)
+        {
+            Asteroid roid = asteroid.GetComponent<Asteroid>();
+            Bounds roidBounds = roid.mainObject.GetComponent<MeshRenderer>().bounds;
+            Gizmos.DrawCube(roidBounds.center, roidBounds.size * asteroidDensity);
+        }
+
+
     }
 
 
