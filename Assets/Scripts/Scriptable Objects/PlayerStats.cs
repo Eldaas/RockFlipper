@@ -74,14 +74,24 @@ public class PlayerStats : ScriptableObject
     [ReadOnly] public float currentShieldCooldownTime;
 
     /// <summary>
-    /// Base speed mitigation is the value by which the player's 'increasing speed' during a level is lowered, without modifiers being taken into account
+    /// Base forward thrust is the starting thrust at which the player moves forward in the game level, without modifiers taken into account. Thrust is the physics force applied to the player object
     /// </summary>
-    public float baseSpeedMitigation;
+    public float baseForwardThrust;
 
     /// <summary>
-    /// Current speed mitigation is the value by which the player's 'increasing speed' during a level is lowered, with modifiers taken into account
+    /// Current forward thrust is the thrust at which the player is currently moving forward in the game level. Thrust is the physics force applied to the player object
     /// </summary>
-    [ReadOnly] public float currentSpeedMitigation;
+    public float currentForwardThrust;
+
+    /// <summary>
+    /// This is the base value for the player's maximum velocity, before modifiers are taken into account.
+    /// </summary>
+    public float baseMaximumVelocity;
+
+    /// <summary>
+    /// This is the current value for the player's maximum velocity, with modifiers taken into account
+    /// </summary>
+    public float currentMaximumVelocity;
 
     /// <summary>
     /// Base maneuvering speed pertains to how fast the player can move left and right to avoid collisions, without modifiers taken into account

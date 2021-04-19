@@ -19,10 +19,14 @@ public class Player : MonoBehaviour
     private float currentHull;
     [SerializeField, ReadOnly]
     private float shieldsRechargeRate;
+    [SerializeField, ReadOnly]
+    private float currentVelocity;
 
     [Header("Components/Objects")]
     [SerializeField]
     private GameObject shieldObject;
+    [HideInInspector]
+    private Rigidbody rb;
 
     [Header("Misc Data")]
     private float shieldDestroyedAt;
@@ -35,11 +39,13 @@ public class Player : MonoBehaviour
     public float MaxArmour { get => stats.currentMaxArmour; set => stats.currentMaxArmour = value; }
     public float Hull { get => stats.currentHull; set => stats.currentHull = value; }
     public float MaxHull { get => stats.currentMaxHull; set => stats.currentMaxHull = value; }
+    public float Velocity { get => rb.velocity.magnitude; }
     #endregion
 
     #region Unity Methods
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         CheckForMissingDataContainers();
     }
     
@@ -61,7 +67,8 @@ public class Player : MonoBehaviour
         stats.currentShieldRegen = stats.baseShieldRegen;
         stats.currentShieldCooldownTime = stats.baseShieldCooldownTime;
 
-        stats.currentSpeedMitigation = stats.baseSpeedMitigation;
+        stats.currentForwardThrust = stats.baseForwardThrust;
+        stats.currentMaximumVelocity = stats.baseMaximumVelocity;
         stats.currentManeuveringSpeed = stats.baseManeuveringSpeed;
 
         stats.currentHeatSinkCapacity = stats.baseHeatSinkCapacity;
@@ -77,6 +84,7 @@ public class Player : MonoBehaviour
         currentArmour = Armour;
         currentHull = Hull;
         shieldsRechargeRate = ShieldsRechargeRate;
+        currentVelocity = Velocity;
     }
 
     private void OnCollisionEnter(Collision collision)

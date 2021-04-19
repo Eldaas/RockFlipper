@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelPowerups : ScriptableObject
 {
     [HideInInspector]
-    public List<IPowerup> runtimeList;
+    public List<IPowerup> runtimeList = new List<IPowerup>();
 
     [Header("Powerup One")]
     public Powerup p1;
