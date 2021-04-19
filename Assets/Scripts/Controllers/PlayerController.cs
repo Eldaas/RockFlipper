@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         player = GetComponent<Player>();
+
     }
 
     private void Start()
@@ -39,8 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         horizontalSpeed = player.stats.currentManeuveringSpeed;
 
-        //transform.position += currentVelocity * Vector3.forward * Time.deltaTime;
-        IncreaseVelocity();
+        HandleVelocity();
         anim.SetFloat("Roll", joystick.Horizontal);
 
         if (joystick.Horizontal < Mathf.Epsilon || joystick.Horizontal > Mathf.Epsilon)
@@ -65,16 +65,22 @@ public class PlayerController : MonoBehaviour
          
     }
 
-    private void IncreaseVelocity()
+    private void HandleVelocity()
     {
-        if(rb.velocity.magnitude < maximumVelocity)
+        // Speed up
+        if(rb.velocity.magnitude < player.stats.currentMaximumVelocity)
         {
-            rb.AddForce(Vector3.forward * thrustValue);
+            rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
+        }
+        // Slow down
+        else if(rb.velocity.magnitude > player.stats.currentMaximumVelocity)
+        {
+            rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
         }
     }
 
     private void RaiseMaximumVelocity()
     {
-        maximumVelocity++;
+        player.stats.currentMaximumVelocity++;
     }
 }

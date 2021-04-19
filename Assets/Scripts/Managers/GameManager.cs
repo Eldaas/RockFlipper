@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ManeuveringBoost");
         EventManager.AddEvent("HullRepair");
         EventManager.AddEvent("ArmourRepair");
+        EventManager.AddEvent("SpeedMitigation");
     }
     #endregion
 }

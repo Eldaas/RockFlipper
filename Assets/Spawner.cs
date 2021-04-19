@@ -68,7 +68,7 @@ public class Spawner : MonoBehaviour
         powerupBounds.center = transform.position + powerupBoundsOffset;
         backgroundAsteroidBounds.center = transform.position + backgroundAsteroidBoundsOffset;
 
-        if(activeAsteroids.Count < currentAsteroidCap)
+        if(ObjectPooler.instance.asteroidCount > 0 && activeAsteroids.Count < currentAsteroidCap)
         {
             GameObject asteroid = ObjectPooler.instance.GetPooledAsteroid();
             Vector3 spawnPoint;
