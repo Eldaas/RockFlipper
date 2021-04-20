@@ -94,6 +94,11 @@ public class PlayerStats : ScriptableObject
     public float currentMaximumVelocity;
 
     /// <summary>
+    /// This caps the velocity to an amount that the player absolutely cannot go beyond.
+    /// </summary>
+    public float velocityCap;
+
+    /// <summary>
     /// Base maneuvering speed pertains to how fast the player can move left and right to avoid collisions, without modifiers taken into account
     /// </summary>
     public float baseManeuveringSpeed;
