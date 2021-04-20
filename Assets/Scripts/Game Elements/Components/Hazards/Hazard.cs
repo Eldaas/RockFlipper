@@ -86,5 +86,10 @@ public class Hazard : MonoBehaviour
         //Debug.Log(collision.collider.name + " has collided with " + gameObject.name + ".");
     }
 
+    protected virtual void OnParticleCollision(GameObject collider)
+    {
+        //Debug.Log("A projectile has hit an asteroid.");
+    }
+
     #endregion
 }

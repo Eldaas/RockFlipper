@@ -132,6 +132,7 @@ public class ObjectPooler : MonoBehaviour
         for (int i = 0; i < projectileCount; i++)
         {
             GameObject go = Instantiate(projectiles[0]);
+            go.name = go.name + " " + i;
             go.transform.parent = projectilesParent.transform;
             go.SetActive(false);
             pooledProjectiles.Add(go);

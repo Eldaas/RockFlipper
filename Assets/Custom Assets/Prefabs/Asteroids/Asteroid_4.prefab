@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5071296636823748299}
   m_Layer: 0
   m_Name: Icosphere_cell.004
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 3227922842414306760}
   m_Layer: 0
   m_Name: Icosphere_cell.003
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 8460054254568618885}
   m_Layer: 0
   m_Name: Icosphere_cell.006
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 8838931259442239723}
   m_Layer: 0
   m_Name: Icosphere_cell
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 6084180048213027372}
   m_Layer: 0
   m_Name: Icosphere_cell.010
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 2055066482475509113}
   m_Layer: 0
   m_Name: Icosphere_cell.013
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -731,7 +731,7 @@ Rigidbody:
   m_GameObject: {fileID: 1671047785205848773}
   serializedVersion: 2
   m_Mass: 75
-  m_Drag: 0.25
+  m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 2459294179049067764}
   m_Layer: 0
   m_Name: Icosphere_cell.009
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1004,7 +1004,7 @@ GameObject:
   - component: {fileID: 3494883641927699524}
   m_Layer: 0
   m_Name: Icosphere_cell.001
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 8047591445888177888}
   m_Layer: 0
   m_Name: Icosphere_cell.005
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1228,7 +1228,7 @@ GameObject:
   - component: {fileID: 8083971352383832205}
   m_Layer: 0
   m_Name: Icosphere_cell.008
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1340,7 +1340,7 @@ GameObject:
   - component: {fileID: 7593452459785732893}
   m_Layer: 0
   m_Name: Icosphere_cell.007
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1452,7 +1452,7 @@ GameObject:
   - component: {fileID: 6635406938359651859}
   m_Layer: 0
   m_Name: Icosphere_cell.014
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1564,7 +1564,7 @@ GameObject:
   - component: {fileID: 1194543901856852427}
   m_Layer: 0
   m_Name: Icosphere_cell.011
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1676,7 +1676,7 @@ GameObject:
   - component: {fileID: 2649421080881691665}
   m_Layer: 0
   m_Name: Icosphere_cell.012
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 8350999093612943929}
   m_Layer: 0
   m_Name: Icosphere_cell.002
-  m_TagString: Untagged
+  m_TagString: AsteroidShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -97,10 +97,14 @@ public class Asteroid : Hazard
     {
         base.OnCollisionEnter(collision);
         Debug.Log(collision.collider.name);
+    }
 
-        if(collision.collider.CompareTag("Projectile"))
+    protected override void OnParticleCollision(GameObject collider)
+    {
+        base.OnParticleCollision(collider);
+        if (collider.CompareTag("Projectile"))
         {
-            Debug.Log("Projectile collided with asteroid.");
+            ExplodeAsteroid(10000f, 1f);
         }
     }
     #endregion

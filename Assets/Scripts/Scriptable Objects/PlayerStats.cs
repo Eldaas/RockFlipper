@@ -81,7 +81,7 @@ public class PlayerStats : ScriptableObject
     /// <summary>
     /// Current forward thrust is the thrust at which the player is currently moving forward in the game level. Thrust is the physics force applied to the player object
     /// </summary>
-    public float currentForwardThrust;
+    [ReadOnly] public float currentForwardThrust;
 
     /// <summary>
     /// This is the base value for the player's maximum velocity, before modifiers are taken into account.
@@ -91,7 +91,7 @@ public class PlayerStats : ScriptableObject
     /// <summary>
     /// This is the current value for the player's maximum velocity, with modifiers taken into account
     /// </summary>
-    public float currentMaximumVelocity;
+    [ReadOnly] public float currentMaximumVelocity;
 
     /// <summary>
     /// This caps the velocity to an amount that the player absolutely cannot go beyond.
@@ -122,6 +122,16 @@ public class PlayerStats : ScriptableObject
     /// The current heat sink capacity is the current maximum value that the heat sink can reach, with modifiers taken into account
     /// </summary>
     [ReadOnly] public float currentHeatSinkCapacity;
+
+    /// <summary>
+    /// Base projectile speed represents the base value (without modifiers applied) at which the player's cannon projectile will travel at
+    /// </summary>
+    public float baseProjectileSpeed;
+
+    /// <summary>
+    /// Current projectile speed represents the current base value (with modifiers applied) at which the player's cannon projectiles will travel at
+    /// </summary>
+    [ReadOnly] public float currentProjectileSpeed;
 
 
 

@@ -65,17 +65,37 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Shoot"))
         {
-            GameObject projectile = ObjectPooler.instance.GetPooledProjectile();
-            if(projectile)
+            GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
+            if(parentGo)
             {
-                ParticleSystem particles = projectile.GetComponent<ParticleSystem>();
-                if(particles)
+                Debug.Log(parentGo.name);
+                // Get parent particle system and set the location
+                Transform parentObject = parentGo.GetComponentInParent<Transform>();
+                parentGo.transform.position = parentObject.position;
+                ParticleSystem parentParticles = parentGo.GetComponent<ParticleSystem>();
+
+                // Get all child transforms
+                Transform[] childParticles = transform.GetComponentsInChildren<Transform>(true);
+
+                // Get the actual damage-causing projectile particle system
+                for (int i = 0; i < childParticles.Length; i++)
                 {
-                    Transform parentObject = projectile.GetComponentInParent<Transform>();
-                    projectile.transform.position = parentObject.position;
-                    projectile.SetActive(true);
-                    IEnumerator coroutine = ReturnParticleToPool(projectile, particles.main.startLifetimeMultiplier);
-                    StartCoroutine(coroutine);
+                    if (childParticles[i].gameObject.CompareTag("Projectile"))
+                    {
+                        ParticleSystem childProjectile = childParticles[i].GetComponent<ParticleSystem>();
+
+                        // Apply the player transform's current velocity so it maintains relative velocity
+                        var main = childProjectile.main;
+                        float newSpeed = player.stats.currentProjectileSpeed + rb.velocity.magnitude;
+                        //Debug.Log(newSpeed);
+                        main.startSpeed = new ParticleSystem.MinMaxCurve(newSpeed, newSpeed);
+
+                        // Set the projectile active and begin the coroutine to return it to the pool when it expires
+                        parentGo.SetActive(true);
+                        IEnumerator coroutine = ReturnParticleToPool(parentGo, parentParticles.main.startLifetimeMultiplier);
+                        StartCoroutine(coroutine);
+                        break;
+                    }
                 }
             }
         }
@@ -105,9 +125,9 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private IEnumerator ReturnParticleToPool(GameObject particle, float lifetime)
+    private IEnumerator ReturnParticleToPool(GameObject particleParent, float lifetime)
     {
-        Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
+        //Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
         float count = Time.time + lifetime;
 
         while(Time.time < count)
@@ -115,6 +135,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        particle.SetActive(false);
+        particleParent.SetActive(false);   
     }
 }

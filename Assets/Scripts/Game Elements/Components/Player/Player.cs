@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
         stats.currentHeatSinkCapacity = stats.baseHeatSinkCapacity;
         stats.currentHeatSinkLevel = 0f;
 
+        stats.currentProjectileSpeed = stats.baseProjectileSpeed;
+
         InvokeRepeating("RegenShield", 1f, 1f);
     }
 
