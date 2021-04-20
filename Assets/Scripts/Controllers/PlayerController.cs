@@ -62,6 +62,23 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
             }
         }
+
+        if(Input.GetButtonDown("Shoot"))
+        {
+            GameObject projectile = ObjectPooler.instance.GetPooledProjectile();
+            if(projectile)
+            {
+                ParticleSystem particles = projectile.GetComponent<ParticleSystem>();
+                if(particles)
+                {
+                    Transform parentObject = projectile.GetComponentInParent<Transform>();
+                    projectile.transform.position = parentObject.position;
+                    projectile.SetActive(true);
+                    IEnumerator coroutine = ReturnParticleToPool(projectile, particles.main.startLifetimeMultiplier);
+                    StartCoroutine(coroutine);
+                }
+            }
+        }
          
     }
 
@@ -82,5 +99,18 @@ public class PlayerController : MonoBehaviour
     private void RaiseMaximumVelocity()
     {
         player.stats.currentMaximumVelocity++;
+    }
+
+    private IEnumerator ReturnParticleToPool(GameObject particle, float lifetime)
+    {
+        Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
+        float count = Time.time + lifetime;
+
+        while(Time.time < count)
+        {
+            yield return null;
+        }
+
+        particle.SetActive(false);
     }
 }

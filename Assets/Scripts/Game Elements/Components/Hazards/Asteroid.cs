@@ -96,6 +96,12 @@ public class Asteroid : Hazard
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        Debug.Log(collision.collider.name);
+
+        if(collision.collider.CompareTag("Projectile"))
+        {
+            Debug.Log("Projectile collided with asteroid.");
+        }
     }
     #endregion
 }

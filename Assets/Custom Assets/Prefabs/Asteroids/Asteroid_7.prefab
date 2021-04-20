@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 8313183377953902019}
   - component: {fileID: 1121066348966104696}
   - component: {fileID: 4928455426838736076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

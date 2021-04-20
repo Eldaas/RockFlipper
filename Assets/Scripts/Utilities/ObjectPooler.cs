@@ -50,6 +50,15 @@ public class ObjectPooler : MonoBehaviour
     public int backgroundAsteroidPrespawnCount;
     private List<GameObject> pooledBackgroundAsteroids = new List<GameObject>();
 
+    [Header("Projectiles")]
+    [SerializeField]
+    private GameObject[] projectiles;
+    [SerializeField]
+    private GameObject projectilesParent;
+    [SerializeField]
+    private int projectileCount;
+    private List<GameObject> pooledProjectiles = new List<GameObject>();
+
     private void Awake()
     {
         #region Singleton
@@ -118,6 +127,15 @@ public class ObjectPooler : MonoBehaviour
             // TO DO: Math to assign powerup profile based upon % spawn chance
             
         }
+
+        pooledProjectiles = new List<GameObject>();
+        for (int i = 0; i < projectileCount; i++)
+        {
+            GameObject go = Instantiate(projectiles[0]);
+            go.transform.parent = projectilesParent.transform;
+            go.SetActive(false);
+            pooledProjectiles.Add(go);
+        }
     }
 
     /// <summary>
@@ -175,6 +193,22 @@ public class ObjectPooler : MonoBehaviour
             if (!pooledBackgroundAsteroids[i].activeInHierarchy)
             {
                 return pooledBackgroundAsteroids[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive projectile in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledProjectile()
+    {
+        for (int i = 0; i < pooledProjectiles.Count; i++)
+        {
+            if(!pooledProjectiles[i].activeInHierarchy)
+            {
+                return pooledProjectiles[i];
             }
         }
         return null;
