@@ -81,6 +81,10 @@ public class PlayerController : MonoBehaviour
 
     private void RaiseMaximumVelocity()
     {
-        player.stats.currentMaximumVelocity++;
+        if(player.stats.currentMaximumVelocity < player.stats.velocityCap)
+        {
+            player.stats.currentMaximumVelocity++;
+        }
+        
     }
 }
