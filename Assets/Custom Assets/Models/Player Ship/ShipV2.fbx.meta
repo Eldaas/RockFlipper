@@ -8,29 +8,29 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Black
-    second: {fileID: 2100000, guid: bde22ead7863a6942899174ffa8261ae, type: 2}
+    second: {fileID: 2100000, guid: 14912cf0ad1acdf4987da8237d786f30, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Engine
-    second: {fileID: 2100000, guid: 4243ee1f9c5edb941af2d1b2f6791bda, type: 2}
+    second: {fileID: 2100000, guid: 9090a2106f4d8fb4180210f3d4a81642, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glass
-    second: {fileID: 2100000, guid: 8165e055fbb6ebe418566e74ae795199, type: 2}
+    second: {fileID: 2100000, guid: 14912cf0ad1acdf4987da8237d786f30, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal
-    second: {fileID: 2100000, guid: d8d3d5bb54c4fd848b5a35b1e4a01ba3, type: 2}
+    second: {fileID: 2100000, guid: d2e722351502ff243b9f36bbffb0338a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Pipe
-    second: {fileID: 2100000, guid: e68816eb134be6349822686dbc5dba62, type: 2}
+    second: {fileID: 2100000, guid: d995df7f35a568a48bd09e5b9289036c, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
