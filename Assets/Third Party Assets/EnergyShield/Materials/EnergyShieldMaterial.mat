@@ -27,9 +27,9 @@ Material:
     - _CullOff: 0
     - _CutOff: 0
     - _Distort: 0
-    - _FadePower00: 0
-    - _FadePower01: 0
-    - _FadePower02: 0
+    - _FadePower00: 0.99992776
+    - _FadePower01: 0.9999322
+    - _FadePower02: 0.99993706
     - _FadePower03: 0
     - _FadePower04: 0
     - _FadePower05: 0
@@ -41,9 +41,9 @@ Material:
     - _FresnelWidth: 0
     - _IntersectionThreshold: 0.25
     - _NormalIncrease: 0
-    - _Radius00: 0
-    - _Radius01: 0
-    - _Radius02: 0
+    - _Radius00: 6.9956627
+    - _Radius01: 6.8671713
+    - _Radius02: 6.738427
     - _Radius03: 0
     - _Radius04: 0
     - _Radius05: 0
@@ -53,9 +53,9 @@ Material:
     - _Radius09: 0
     - _ScrollSpeedU: 0
     - _ScrollSpeedV: 0
-    - _inThickness00: 0
-    - _inThickness01: 0
-    - _inThickness02: 0
+    - _inThickness00: 4.116386
+    - _inThickness01: 4.064702
+    - _inThickness02: 4.0021744
     - _inThickness03: 0
     - _inThickness04: 0
     - _inThickness05: 0
@@ -63,9 +63,9 @@ Material:
     - _inThickness07: 0
     - _inThickness08: 0
     - _inThickness09: 0
-    - _outThickness00: 0
-    - _outThickness01: 0
-    - _outThickness02: 0
+    - _outThickness00: 1.0140926
+    - _outThickness01: 1.0127214
+    - _outThickness02: 1.0116698
     - _outThickness03: 0
     - _outThickness04: 0
     - _outThickness05: 0
@@ -74,9 +74,9 @@ Material:
     - _outThickness08: 0
     - _outThickness09: 0
     m_Colors:
-    - _CollisionPoint00: {r: 0, g: 0, b: 0, a: 0}
-    - _CollisionPoint01: {r: 0, g: 0, b: 0, a: 0}
-    - _CollisionPoint02: {r: 0, g: 0, b: 0, a: 0}
+    - _CollisionPoint00: {r: -30.211742, g: -1.5081564, b: 2874.4338, a: 0}
+    - _CollisionPoint01: {r: -30.72313, g: -1.2146752, b: 2873.715, a: 0}
+    - _CollisionPoint02: {r: -31.619965, g: -1.1037911, b: 2871.8735, a: 0}
     - _CollisionPoint03: {r: 0, g: 0, b: 0, a: 0}
     - _CollisionPoint04: {r: 0, g: 0, b: 0, a: 0}
     - _CollisionPoint05: {r: 0, g: 0, b: 0, a: 0}
@@ -84,9 +84,9 @@ Material:
     - _CollisionPoint07: {r: 0, g: 0, b: 0, a: 0}
     - _CollisionPoint08: {r: 0, g: 0, b: 0, a: 0}
     - _CollisionPoint09: {r: 0, g: 0, b: 0, a: 0}
-    - _Color00: {r: 0, g: 0, b: 0, a: 0}
-    - _Color01: {r: 0, g: 0, b: 0, a: 0}
-    - _Color02: {r: 0, g: 0, b: 0, a: 0}
+    - _Color00: {r: 0, g: 1, b: 0.8974787, a: 1}
+    - _Color01: {r: 0, g: 1, b: 0.8974612, a: 1}
+    - _Color02: {r: 0, g: 1, b: 0.89744365, a: 1}
     - _Color03: {r: 0, g: 0, b: 0, a: 0}
     - _Color04: {r: 0, g: 0, b: 0, a: 0}
     - _Color05: {r: 0, g: 0, b: 0, a: 0}
