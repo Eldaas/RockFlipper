@@ -11,4 +11,9 @@ public class AsteroidData : ScriptableObject
     public Material goldMaterial;
     public float collisionSensitivity;
     public float collisionMaxForce;
+
+    /// <summary>
+    /// Base health is to be set for all asteroids, and then this is multiplied by the scale the asteroid has at runtime.
+    /// </summary>
+    public float baseHealth;
 }

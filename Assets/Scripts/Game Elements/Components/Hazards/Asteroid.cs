@@ -95,16 +95,31 @@ public class Asteroid : Hazard
     #region Unity Methods
     protected override void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
-        Debug.Log(collision.collider.name);
+        /*base.OnCollisionEnter(collision);
+        Debug.Log(collision.collider.name);*/
     }
 
     protected override void OnParticleCollision(GameObject collider)
     {
         base.OnParticleCollision(collider);
+
         if (collider.CompareTag("Projectile"))
         {
-            ExplodeAsteroid(10000f, 1f);
+            collider.SetActive(false);
+            List<ParticleCollisionEvent> events = new List<ParticleCollisionEvent>();
+            ParticleSystem thisSystem = collider.GetComponent<ParticleSystem>();
+            thisSystem.GetCollisionEvents(gameObject, events);
+
+            GameObject hitFx = ObjectPooler.instance.GetPooledHitFx();
+
+            if (hitFx)
+            {
+                hitFx.transform.position = events[0].intersection;
+                Debug.Log(events[0].intersection);
+                hitFx.gameObject.SetActive(true);
+            }
+
+            ExplodeAsteroid(120000f * transform.localScale.magnitude, 1000f);
         }
     }
     #endregion

@@ -59,6 +59,15 @@ public class ObjectPooler : MonoBehaviour
     private int projectileCount;
     private List<GameObject> pooledProjectiles = new List<GameObject>();
 
+    [Header("Projectile Hit FX")]
+    [SerializeField]
+    private GameObject[] particleHitFx;
+    [SerializeField]
+    private GameObject particleHitFxParent;
+    [SerializeField]
+    private int particleHitFxCount;
+    private List<GameObject> pooledParticleHitFx = new List<GameObject>();
+
     private void Awake()
     {
         #region Singleton
@@ -85,7 +94,7 @@ public class ObjectPooler : MonoBehaviour
     /// </summary>
     public void InstantiatePools()
     {
-        pooledAsteroids = new List<GameObject>();
+        //pooledAsteroids = new List<GameObject>();
         for (int i = 0; i < asteroidCount; i++)
         {
             GameObject go = Instantiate(asteroidPrefabs[Utility.GenerateRandomInt(0, asteroidPrefabs.Length)]);
@@ -94,7 +103,7 @@ public class ObjectPooler : MonoBehaviour
             pooledAsteroids.Add(go);
         }
 
-        pooledGasClouds = new List<GameObject>();
+        //pooledGasClouds = new List<GameObject>();
         for (int i = 0; i < gasCloudCount; i++)
         {
             GameObject go = Instantiate(gasCloudPrefabs[Utility.GenerateRandomInt(0, gasCloudPrefabs.Length)]);
@@ -103,7 +112,7 @@ public class ObjectPooler : MonoBehaviour
             pooledGasClouds.Add(go);
         }
 
-        pooledBlackHoles = new List<GameObject>();
+        //pooledBlackHoles = new List<GameObject>();
         for (int i = 0; i < blackHoleCount; i++)
         {
             GameObject go = Instantiate(blackHolePrefabs[Utility.GenerateRandomInt(0, blackHolePrefabs.Length)]);
@@ -112,7 +121,7 @@ public class ObjectPooler : MonoBehaviour
             pooledBlackHoles.Add(go);
         }
 
-        pooledBackgroundAsteroids = new List<GameObject>();
+        //pooledBackgroundAsteroids = new List<GameObject>();
         for (int i = 0; i < backgroundAsteroidCount; i++)
         {
             GameObject go = Instantiate(backgroundAsteroidPrefabs[Utility.GenerateRandomInt(0, backgroundAsteroidPrefabs.Length)]);
@@ -121,14 +130,14 @@ public class ObjectPooler : MonoBehaviour
             pooledBackgroundAsteroids.Add(go);
         }
 
-        pooledPowerups = new List<GameObject>();
+        //pooledPowerups = new List<GameObject>();
         for (int i = 0; i < powerupCount; i++)
         {
             // TO DO: Math to assign powerup profile based upon % spawn chance
             
         }
 
-        pooledProjectiles = new List<GameObject>();
+        //pooledProjectiles = new List<GameObject>();
         for (int i = 0; i < projectileCount; i++)
         {
             GameObject go = Instantiate(projectiles[0]);
@@ -136,6 +145,16 @@ public class ObjectPooler : MonoBehaviour
             go.transform.parent = projectilesParent.transform;
             go.SetActive(false);
             pooledProjectiles.Add(go);
+        }
+
+        //pooledParticleHitFx = new List<GameObject>();
+        for (int i = 0; i < particleHitFxCount; i++)
+        {
+            GameObject go = Instantiate(particleHitFx[0]);
+            go.name = go.name + " " + i;
+            go.transform.parent = particleHitFxParent.transform;
+            go.SetActive(false);
+            pooledParticleHitFx.Add(go);
         }
     }
 
@@ -213,5 +232,34 @@ public class ObjectPooler : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive particle hit FX in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledHitFx()
+    {
+        for (int i = 0; i < pooledParticleHitFx.Count; i++)
+        {
+            if (!pooledParticleHitFx[i].activeInHierarchy)
+            {
+                return pooledParticleHitFx[i];
+            }
+        }
+        return null;
+    }
+
+    public IEnumerator ReturnParticleToPool(GameObject particleParent, float lifetime)
+    {
+        //Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
+        float count = Time.time + lifetime;
+
+        while (Time.time < count)
+        {
+            yield return null;
+        }
+
+        particleParent.SetActive(false);
     }
 }
