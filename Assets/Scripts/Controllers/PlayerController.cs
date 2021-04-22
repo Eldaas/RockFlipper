@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Shoot"))
         {
-            Debug.Log("Space Pressed!");
             GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
             if(parentGo)
             {

@@ -94,13 +94,22 @@ public class ObjectPooler : MonoBehaviour
     /// </summary>
     public void InstantiatePools()
     {
-        //pooledAsteroids = new List<GameObject>();
         for (int i = 0; i < asteroidCount; i++)
         {
             GameObject go = Instantiate(asteroidPrefabs[Utility.GenerateRandomInt(0, asteroidPrefabs.Length)]);
             go.transform.parent = asteroidsParent.transform;
             go.SetActive(false);
             pooledAsteroids.Add(go);
+
+            Asteroid asteroid = go.GetComponent<Asteroid>();
+            ApplyAsteroidMaterial(asteroid);
+            asteroid.PopulateChildrenObjects();
+
+            for (int j = 0; j < asteroid.childrenObjects.Count; j++)
+            {
+                ApplyShardMaterials(asteroid, j);
+                asteroid.CachePositionRotation(j);
+            }
         }
 
         //pooledGasClouds = new List<GameObject>();
@@ -156,6 +165,7 @@ public class ObjectPooler : MonoBehaviour
             go.SetActive(false);
             pooledParticleHitFx.Add(go);
         }
+
     }
 
     /// <summary>
@@ -261,5 +271,64 @@ public class ObjectPooler : MonoBehaviour
         }
 
         particleParent.SetActive(false);
+    }
+
+    private void ApplyAsteroidMaterial(Asteroid asteroid)
+    {
+        MeshRenderer renderer = asteroid.mainObject.GetComponent<MeshRenderer>();
+        Material[] mats = renderer.materials;
+
+        switch (asteroid.asteroidType)
+        {
+            case AsteroidType.Iron:
+                //renderer.materials = new Material[] { renderer.materials[0], asteroid.data.ironRockMaterial };
+                mats[0] = asteroid.data.ironRockMaterial;
+                break;
+            case AsteroidType.Silver:
+                //renderer.materials = new Material[] { renderer.materials[0], asteroid.data.silverRockMaterial };
+                mats[0] = asteroid.data.silverRockMaterial;
+                break;
+            case AsteroidType.Gold:
+                //renderer.materials = new Material[] { renderer.materials[0], asteroid.data.goldRockMaterial };
+                mats[0] = asteroid.data.goldRockMaterial;
+                break;
+            default:
+                Debug.Log("Couldn't find the appropriate material for the asteroid.");
+                break;
+        }
+
+        renderer.materials = mats;
+    }
+
+    /// <summary>
+    /// Applies materials to the input shard depending upon what type the asteroid is set to.
+    /// </summary>
+    /// <param name="i">The shard being iterated over.</param>
+    private void ApplyShardMaterials(Asteroid asteroid, int i)
+    {
+        MeshRenderer renderer = asteroid.childrenObjects[i].GetComponent<MeshRenderer>();
+        Material[] mats = renderer.materials;
+
+        switch (asteroid.asteroidType)
+        {
+            case AsteroidType.Iron:
+                mats[0] = asteroid.data.ironMaterial;
+                mats[1] = asteroid.data.ironRockMaterial;
+                break;
+            case AsteroidType.Silver:
+                mats[0] = asteroid.data.silverMaterial;
+                mats[1] = asteroid.data.silverRockMaterial;
+                break;
+            case AsteroidType.Gold:
+                mats[0] = asteroid.data.goldMaterial;
+                mats[1] = asteroid.data.goldRockMaterial;
+                break;
+            default:
+                Debug.Log("Couldn't find the appropriate material for the asteroid.");
+                break;
+        }
+
+        renderer.materials = mats;
+
     }
 }

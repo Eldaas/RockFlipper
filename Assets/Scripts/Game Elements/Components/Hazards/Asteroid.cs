@@ -8,9 +8,11 @@ using UnityEngine;
 public class Asteroid : Hazard
 {
     [Header("Inspector References")]
-    [SerializeField]
-    private AsteroidType asteroidType;
+    public AsteroidType asteroidType;
     public AsteroidData data;
+    [SerializeField]
+    private GameObject explosionParticles;
+    
 
     #region Public Methods
     /// <summary>
@@ -24,15 +26,17 @@ public class Asteroid : Hazard
         //rb.isKinematic = true;
         PopulateChildrenObjects();
         mainObject.SetActive(false);
+
+        explosionParticles.SetActive(true);
+
         for (int i = 0; i < childrenObjects.Count; i++)
         {
-            CachePositionRotation(i);
-            ApplyMaterials(i);
             childrenObjects[i].gameObject.SetActive(true);
             rb = childrenObjects[i].GetComponent<Rigidbody>();
             rb.AddExplosionForce(force, mainObject.transform.position, explosionRadius);
+
         }
-        Debug.Log("Asteroid has exploded");
+        //Debug.Log("Asteroid has exploded");
     }
 
     /// <summary>
@@ -42,12 +46,10 @@ public class Asteroid : Hazard
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         //rb.isKinematic = true;
-        PopulateChildrenObjects();
+        
         mainObject.SetActive(false);
         for (int i = 0; i < childrenObjects.Count; i++)
         {
-            ApplyMaterials(i);
-            CachePositionRotation(i);
             childrenObjects[i].gameObject.SetActive(true);
         }
     }
@@ -59,37 +61,15 @@ public class Asteroid : Hazard
     {
         base.ResetHazard();
         mainObject.SetActive(true);
+        explosionParticles.SetActive(false);
+
     }
 
     #endregion
 
     #region Private Methods
 
-    /// <summary>
-    /// Applies materials to the input shard depending upon what type the asteroid is set to.
-    /// </summary>
-    /// <param name="i">The shard being iterated over.</param>
-    private void ApplyMaterials(int i)
-    {
-        MeshRenderer renderer = childrenObjects[i].GetComponent<MeshRenderer>();
-
-        switch (asteroidType)
-        {
-            case AsteroidType.Iron:
-                renderer.materials = new Material[] { renderer.materials[0], data.ironMaterial };
-                break;
-            case AsteroidType.Silver:
-                renderer.materials = new Material[] { renderer.materials[0], data.silverMaterial };
-                break;
-            case AsteroidType.Gold:
-                renderer.materials = new Material[] { renderer.materials[0], data.goldMaterial };
-                break;
-            default:
-                Debug.Log("Couldn't find the appropriate material for the asteroid.");
-                break;
-        }
-
-    }
+    
     #endregion
 
     #region Unity Methods
@@ -115,7 +95,6 @@ public class Asteroid : Hazard
             if (hitFx)
             {
                 hitFx.transform.position = events[0].intersection;
-                Debug.Log(events[0].intersection);
                 hitFx.gameObject.SetActive(true);
             }
 
@@ -125,4 +104,4 @@ public class Asteroid : Hazard
     #endregion
 }
 
-enum AsteroidType { Iron, Silver, Gold }
+public enum AsteroidType { Iron, Silver, Gold }

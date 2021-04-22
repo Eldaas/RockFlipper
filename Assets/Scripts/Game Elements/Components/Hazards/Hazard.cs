@@ -21,7 +21,7 @@ public class Hazard : MonoBehaviour
     /// <summary>
     /// Use childrenObjects to store anything like asteroid shards, child objects of gas pockets, etc.
     /// </summary>
-    protected List<Transform> childrenObjects = new List<Transform>();
+    public List<Transform> childrenObjects = new List<Transform>();
 
     /// <summary>
     /// Use originalPositions to store the position of a childrenObject before physics is called on that object.
@@ -41,7 +41,7 @@ public class Hazard : MonoBehaviour
     /// Gets all of the childrenObjects from the parent game object and puts them in a list.
     /// </summary>
     /// 
-    protected void PopulateChildrenObjects()
+    public void PopulateChildrenObjects()
     {
         childrenObjects = new List<Transform>(childrenObjectsParent.GetComponentsInChildren<Transform>(true));
         childrenObjects.Remove(childrenObjectsParent.transform);
@@ -51,7 +51,7 @@ public class Hazard : MonoBehaviour
     /// Stores the original position and rotation of the input childObject so that the childObject can be reset when returned to the pool.
     /// </summary>
     /// <param name="i">The childObject being iterated over.</param>
-    protected void CachePositionRotation(int i)
+    public void CachePositionRotation(int i)
     {
         originalPositions.Add(childrenObjects[i].transform.localPosition);
         originalRotations.Add(childrenObjects[i].transform.localRotation);
