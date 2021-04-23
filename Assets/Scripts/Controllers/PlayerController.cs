@@ -16,12 +16,6 @@ public class PlayerController : MonoBehaviour
     public float maxX;
     private float horizontalMove = 0f;
 
-    [Header("Forwards Movement")]
-    public float currentVelocity;
-    public float maximumVelocity;
-    public float initialThrustValue;
-    public float thrustValue;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,7 +26,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        rb.AddForce(Vector3.forward * initialThrustValue);
         InvokeRepeating("RaiseMaximumVelocity", 1f, 1f);
     }
 
@@ -62,6 +55,41 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
             }
         }
+
+        if(Input.GetButtonDown("Shoot"))
+        {
+            GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
+            if(parentGo)
+            {
+                // Get parent particle system and set the location
+                Transform parentObject = parentGo.GetComponentInParent<Transform>();
+                parentGo.transform.position = parentObject.position;
+
+                // Get the children particle systems
+                ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
+
+                // Find the particle system responsible for the projectile
+                for (int i = 0; i < children.Length; i++)
+                {
+                    if (children[i].CompareTag("Projectile"))
+                    {
+                        ParticleSystem projectileParticle = children[i];
+
+                        /* FOR DEBUG PURPOSES
+                        int randomInt = Utility.GenerateRandomInt(0, 1000);
+                        string projectileName = "Projectile " + randomInt.ToString();
+                        projectileParticle.gameObject.name = projectileName;
+                        Debug.Log("Projectile particle " + projectileParticle.gameObject.name + " is currently active?: " + projectileParticle.gameObject.activeSelf);
+                        */
+
+                        parentGo.SetActive(true);
+                        IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
+                        StartCoroutine(coroutine);
+                        break;
+                    }
+                }
+            }
+        }
          
     }
 
@@ -87,4 +115,5 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+
 }

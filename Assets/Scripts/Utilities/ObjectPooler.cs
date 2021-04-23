@@ -50,6 +50,33 @@ public class ObjectPooler : MonoBehaviour
     public int backgroundAsteroidPrespawnCount;
     private List<GameObject> pooledBackgroundAsteroids = new List<GameObject>();
 
+    [Header("Projectiles")]
+    [SerializeField]
+    private GameObject[] projectiles;
+    [SerializeField]
+    private GameObject projectilesParent;
+    [SerializeField]
+    private int projectileCount;
+    private List<GameObject> pooledProjectiles = new List<GameObject>();
+
+    [Header("Projectile Hit FX")]
+    [SerializeField]
+    private GameObject[] particleHitFx;
+    [SerializeField]
+    private GameObject particleHitFxParent;
+    [SerializeField]
+    private int particleHitFxCount;
+    private List<GameObject> pooledParticleHitFx = new List<GameObject>();
+
+    [Header("Resource Particle FX")]
+    [SerializeField]
+    private GameObject asteroidChunks;
+    [SerializeField]
+    private GameObject asteroidChunksParent;
+    [SerializeField]
+    private int asteroidChunksCount;
+    private List<GameObject> pooledAsteroidChunks = new List<GameObject>();
+
     private void Awake()
     {
         #region Singleton
@@ -76,16 +103,20 @@ public class ObjectPooler : MonoBehaviour
     /// </summary>
     public void InstantiatePools()
     {
-        pooledAsteroids = new List<GameObject>();
         for (int i = 0; i < asteroidCount; i++)
         {
             GameObject go = Instantiate(asteroidPrefabs[Utility.GenerateRandomInt(0, asteroidPrefabs.Length)]);
             go.transform.parent = asteroidsParent.transform;
+            go.name = go.name + " " + i;
             go.SetActive(false);
             pooledAsteroids.Add(go);
+
+            Asteroid asteroid = go.GetComponent<Asteroid>();
+            ApplyAsteroidMaterial(asteroid);
+            asteroid.SetAsteroidHealth();
         }
 
-        pooledGasClouds = new List<GameObject>();
+        //pooledGasClouds = new List<GameObject>();
         for (int i = 0; i < gasCloudCount; i++)
         {
             GameObject go = Instantiate(gasCloudPrefabs[Utility.GenerateRandomInt(0, gasCloudPrefabs.Length)]);
@@ -94,7 +125,7 @@ public class ObjectPooler : MonoBehaviour
             pooledGasClouds.Add(go);
         }
 
-        pooledBlackHoles = new List<GameObject>();
+        //pooledBlackHoles = new List<GameObject>();
         for (int i = 0; i < blackHoleCount; i++)
         {
             GameObject go = Instantiate(blackHolePrefabs[Utility.GenerateRandomInt(0, blackHolePrefabs.Length)]);
@@ -103,7 +134,7 @@ public class ObjectPooler : MonoBehaviour
             pooledBlackHoles.Add(go);
         }
 
-        pooledBackgroundAsteroids = new List<GameObject>();
+        //pooledBackgroundAsteroids = new List<GameObject>();
         for (int i = 0; i < backgroundAsteroidCount; i++)
         {
             GameObject go = Instantiate(backgroundAsteroidPrefabs[Utility.GenerateRandomInt(0, backgroundAsteroidPrefabs.Length)]);
@@ -112,12 +143,42 @@ public class ObjectPooler : MonoBehaviour
             pooledBackgroundAsteroids.Add(go);
         }
 
-        pooledPowerups = new List<GameObject>();
+        //pooledPowerups = new List<GameObject>();
         for (int i = 0; i < powerupCount; i++)
         {
             // TO DO: Math to assign powerup profile based upon % spawn chance
             
         }
+
+        //pooledProjectiles = new List<GameObject>();
+        for (int i = 0; i < projectileCount; i++)
+        {
+            GameObject go = Instantiate(projectiles[0]);
+            go.name = go.name + " " + i;
+            go.transform.parent = projectilesParent.transform;
+            go.SetActive(false);
+            pooledProjectiles.Add(go);
+        }
+
+        //pooledParticleHitFx = new List<GameObject>();
+        for (int i = 0; i < particleHitFxCount; i++)
+        {
+            GameObject go = Instantiate(particleHitFx[0]);
+            go.name = go.name + " " + i;
+            go.transform.parent = particleHitFxParent.transform;
+            go.SetActive(false);
+            pooledParticleHitFx.Add(go);
+        }
+
+        for (int i = 0; i < asteroidChunksCount; i++)
+        {
+            GameObject go = Instantiate(asteroidChunks);
+            go.name = go.name + " " + i;
+            go.transform.parent = asteroidChunksParent.transform;
+            go.SetActive(false);
+            pooledAsteroidChunks.Add(go);
+        }
+
     }
 
     /// <summary>
@@ -178,5 +239,131 @@ public class ObjectPooler : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive projectile in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledProjectile()
+    {
+        for (int i = 0; i < pooledProjectiles.Count; i++)
+        {
+            if(!pooledProjectiles[i].activeInHierarchy)
+            {
+                return pooledProjectiles[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive particle hit FX in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledHitFx()
+    {
+        for (int i = 0; i < pooledParticleHitFx.Count; i++)
+        {
+            if (!pooledParticleHitFx[i].activeInHierarchy)
+            {
+                return pooledParticleHitFx[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive asteroid chunks particle in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledAsteroidChunk()
+    {
+        for (int i = 0; i < pooledAsteroidChunks.Count; i++)
+        {
+            if (!pooledAsteroidChunks[i].activeInHierarchy)
+            {
+                return pooledAsteroidChunks[i];
+            }
+        }
+        return null;
+    }
+
+    public IEnumerator ReturnParticleToPool(GameObject particleParent, float lifetime)
+    {
+        //Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
+        float count = Time.time + lifetime;
+
+        while (Time.time < count)
+        {
+            yield return null;
+        }
+
+        Transform[] particleChildren = particleParent.GetComponentsInChildren<Transform>(true);
+        foreach(Transform child in particleChildren)
+        {
+            child.gameObject.SetActive(true);
+        }
+
+        particleParent.SetActive(false);
+    }
+
+    private void ApplyAsteroidMaterial(Asteroid asteroid)
+    {
+        MeshRenderer renderer = asteroid.mainObject.GetComponent<MeshRenderer>();
+        Material[] mats = renderer.materials;
+
+        switch (asteroid.asteroidType)
+        {
+            case AsteroidType.Iron:
+                //renderer.materials = new Material[] { renderer.materials[0], asteroid.data.ironRockMaterial };
+                mats[0] = asteroid.data.ironRockMaterial;
+                break;
+            case AsteroidType.Silver:
+                //renderer.materials = new Material[] { renderer.materials[0], asteroid.data.silverRockMaterial };
+                mats[0] = asteroid.data.silverRockMaterial;
+                break;
+            case AsteroidType.Gold:
+                //renderer.materials = new Material[] { renderer.materials[0], asteroid.data.goldRockMaterial };
+                mats[0] = asteroid.data.goldRockMaterial;
+                break;
+            default:
+                Debug.Log("Couldn't find the appropriate material for the asteroid.");
+                break;
+        }
+
+        renderer.materials = mats;
+    }
+
+    /// <summary>
+    /// Applies materials to the input shard depending upon what type the asteroid is set to.
+    /// </summary>
+    /// <param name="i">The shard being iterated over.</param>
+    private void ApplyShardMaterials(Asteroid asteroid, int i)
+    {
+        MeshRenderer renderer = asteroid.childrenObjects[i].GetComponent<MeshRenderer>();
+        Material[] mats = renderer.materials;
+
+        switch (asteroid.asteroidType)
+        {
+            case AsteroidType.Iron:
+                mats[0] = asteroid.data.ironMaterial;
+                mats[1] = asteroid.data.ironRockMaterial;
+                break;
+            case AsteroidType.Silver:
+                mats[0] = asteroid.data.silverMaterial;
+                mats[1] = asteroid.data.silverRockMaterial;
+                break;
+            case AsteroidType.Gold:
+                mats[0] = asteroid.data.goldMaterial;
+                mats[1] = asteroid.data.goldRockMaterial;
+                break;
+            default:
+                Debug.Log("Couldn't find the appropriate material for the asteroid.");
+                break;
+        }
+
+        renderer.materials = mats;
+
     }
 }

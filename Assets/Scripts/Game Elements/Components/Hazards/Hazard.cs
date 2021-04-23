@@ -21,7 +21,7 @@ public class Hazard : MonoBehaviour
     /// <summary>
     /// Use childrenObjects to store anything like asteroid shards, child objects of gas pockets, etc.
     /// </summary>
-    protected List<Transform> childrenObjects = new List<Transform>();
+    public List<Transform> childrenObjects = new List<Transform>();
 
     /// <summary>
     /// Use originalPositions to store the position of a childrenObject before physics is called on that object.
@@ -37,11 +37,11 @@ public class Hazard : MonoBehaviour
 
     #region Methods
 
-    /// <summary>
+/*    /// <summary>
     /// Gets all of the childrenObjects from the parent game object and puts them in a list.
     /// </summary>
     /// 
-    protected void PopulateChildrenObjects()
+    public void PopulateChildrenObjects()
     {
         childrenObjects = new List<Transform>(childrenObjectsParent.GetComponentsInChildren<Transform>(true));
         childrenObjects.Remove(childrenObjectsParent.transform);
@@ -51,30 +51,19 @@ public class Hazard : MonoBehaviour
     /// Stores the original position and rotation of the input childObject so that the childObject can be reset when returned to the pool.
     /// </summary>
     /// <param name="i">The childObject being iterated over.</param>
-    protected void CachePositionRotation(int i)
+    public void CachePositionRotation(int i)
     {
         originalPositions.Add(childrenObjects[i].transform.localPosition);
         originalRotations.Add(childrenObjects[i].transform.localRotation);
-    }
+    }*/
 
     /// <summary>
     /// Use this to reset the hazard object (ie, return all children to their initial positions) when it exits the game view and is returned to the pool.
     /// </summary>
     public virtual void ResetHazard()
     {
-        if(childrenObjects.Count > 0)
-        {
-            for (int i = 0; i < childrenObjects.Count; i++)
-            {
-                Rigidbody rb = childrenObjects[i].GetComponent<Rigidbody>();
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                childrenObjects[i].transform.localPosition = originalPositions[i];
-                childrenObjects[i].transform.localRotation = originalRotations[i];
-                childrenObjects[i].gameObject.SetActive(false);
-            }
-        }
         
+
     }
 
     #endregion
@@ -84,6 +73,11 @@ public class Hazard : MonoBehaviour
     protected virtual void OnCollisionEnter(Collision collision)
     {
         //Debug.Log(collision.collider.name + " has collided with " + gameObject.name + ".");
+    }
+
+    protected virtual void OnParticleCollision(GameObject collider)
+    {
+        //Debug.Log("A projectile has hit an asteroid.");
     }
 
     #endregion

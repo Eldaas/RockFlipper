@@ -9,6 +9,7 @@ public class SceneController : MonoBehaviour
     public LevelData levelData;
     public LevelModifier levelMods;
     public LevelPowerups levelPowerups;
+    public Player player;
 
     private void Awake()
     {

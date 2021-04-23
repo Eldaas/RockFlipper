@@ -81,7 +81,7 @@ public class PlayerStats : ScriptableObject
     /// <summary>
     /// Current forward thrust is the thrust at which the player is currently moving forward in the game level. Thrust is the physics force applied to the player object
     /// </summary>
-    public float currentForwardThrust;
+    [ReadOnly] public float currentForwardThrust;
 
     /// <summary>
     /// This is the base value for the player's maximum velocity, before modifiers are taken into account.
@@ -91,7 +91,7 @@ public class PlayerStats : ScriptableObject
     /// <summary>
     /// This is the current value for the player's maximum velocity, with modifiers taken into account
     /// </summary>
-    public float currentMaximumVelocity;
+    [ReadOnly] public float currentMaximumVelocity;
 
     /// <summary>
     /// This caps the velocity to an amount that the player absolutely cannot go beyond.
@@ -123,8 +123,33 @@ public class PlayerStats : ScriptableObject
     /// </summary>
     [ReadOnly] public float currentHeatSinkCapacity;
 
+    /// <summary>
+    /// Base projectile speed represents the base value (without modifiers applied) at which the player's cannon projectile will travel at
+    /// </summary>
+    public float baseProjectileSpeed;
 
+    /// <summary>
+    /// Current projectile speed represents the current base value (with modifiers applied) at which the player's cannon projectiles will travel at
+    /// </summary>
+    [ReadOnly] public float currentProjectileSpeed;
 
+    /// <summary>
+    /// Base projectile damage represents the starting amount of damage (without modifiers applied) that the player deals to asteroids.
+    /// </summary>
+    public float baseProjectileDamage;
 
+    /// <summary>
+    /// Current projectile damage represents the amount of damage (with modifiers applied) that the damage deals to asteroids.
+    /// </summary>
+    [ReadOnly] public float currentProjectileDamage;
 
+    /// <summary>
+    /// Base collection range is the distance from which resource chunks will be pulled toward the player ship (without modifiers)
+    /// </summary>
+    public float baseCollectionRange;
+
+    /// <summary>
+    /// Current collection range is the distance from which resource chunks will be pulled toward the player ship (with modifiers)
+    /// </summary>
+    [ReadOnly] public float currentCollectionRange;
 }
