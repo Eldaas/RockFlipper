@@ -62,19 +62,8 @@ public class Hazard : MonoBehaviour
     /// </summary>
     public virtual void ResetHazard()
     {
-        /*if(childrenObjects.Count > 0)
-        {
-            for (int i = 0; i < childrenObjects.Count; i++)
-            {
-                Rigidbody rb = childrenObjects[i].GetComponent<Rigidbody>();
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                childrenObjects[i].transform.localPosition = originalPositions[i];
-                childrenObjects[i].transform.localRotation = originalRotations[i];
-                childrenObjects[i].gameObject.SetActive(false);
-            }
-        }*/
         
+
     }
 
     #endregion

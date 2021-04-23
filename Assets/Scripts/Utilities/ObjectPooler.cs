@@ -107,18 +107,13 @@ public class ObjectPooler : MonoBehaviour
         {
             GameObject go = Instantiate(asteroidPrefabs[Utility.GenerateRandomInt(0, asteroidPrefabs.Length)]);
             go.transform.parent = asteroidsParent.transform;
+            go.name = go.name + " " + i;
             go.SetActive(false);
             pooledAsteroids.Add(go);
 
             Asteroid asteroid = go.GetComponent<Asteroid>();
             ApplyAsteroidMaterial(asteroid);
-            //asteroid.PopulateChildrenObjects();
-
-            /*for (int j = 0; j < asteroid.childrenObjects.Count; j++)
-            {
-                ApplyShardMaterials(asteroid, j);
-                asteroid.CachePositionRotation(j);
-            }*/
+            asteroid.SetAsteroidHealth();
         }
 
         //pooledGasClouds = new List<GameObject>();

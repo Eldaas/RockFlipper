@@ -20,4 +20,5 @@ MonoBehaviour:
   goldMaterial: {fileID: 2100000, guid: 45a8d7a751fb886439181959220a9d2f, type: 2}
   collisionSensitivity: 1000
   collisionMaxForce: 10000000
-  baseHealth: 0
+  baseHealth: 100
+  currentHealth: 0

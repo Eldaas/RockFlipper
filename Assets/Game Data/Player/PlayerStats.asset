@@ -28,7 +28,7 @@ MonoBehaviour:
   baseForwardThrust: 50000
   currentForwardThrust: 50000
   baseMaximumVelocity: 50
-  currentMaximumVelocity: 99
+  currentMaximumVelocity: 67
   velocityCap: 150
   baseManeuveringSpeed: 100
   currentManeuveringSpeed: 100
@@ -37,3 +37,7 @@ MonoBehaviour:
   currentHeatSinkCapacity: 100
   baseProjectileSpeed: 200
   currentProjectileSpeed: 200
+  baseProjectileDamage: 50
+  currentProjectileDamage: 50
+  baseCollectionRange: 50
+  currentCollectionRange: 50

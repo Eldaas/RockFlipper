@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 118025590}
   - component: {fileID: 118025591}
   m_Layer: 10
-  m_Name: Particle System Force Field
+  m_Name: Resource Vacuum Force Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,10 +231,10 @@ Transform:
   m_GameObject: {fileID: 118025589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.054449394, y: 0.06753498, z: 0.056215353}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 809082985}
-  m_RootOrder: 0
+  m_Father: {fileID: 2124795021}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!330 &118025591
 ParticleSystemForceField:
@@ -247,7 +247,7 @@ ParticleSystemForceField:
   m_Parameters:
     m_Shape: 0
     m_StartRange: 0
-    m_EndRange: 100
+    m_EndRange: 50
     m_Length: 1
     m_GravityFocus: 0
     m_RotationRandomness: {x: 0, y: 0}
@@ -1184,7 +1184,7 @@ GameObject:
   - component: {fileID: 809082987}
   - component: {fileID: 809082986}
   m_Layer: 10
-  m_Name: ResourceCollector
+  m_Name: Resource Collector Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1200,10 +1200,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 18.365677, y: 14.807141, z: 17.788734}
-  m_Children:
-  - {fileID: 118025590}
+  m_Children: []
   m_Father: {fileID: 2124795021}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &809082986
 SphereCollider:
@@ -1506,7 +1505,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}
@@ -1683,7 +1682,7 @@ MonoBehaviour:
   minAsteroidScaleFactor: 0.2
   maxAsteroidScaleFactor: 0.5
   currentAsteroidCap: 1
-  asteroidDensity: 2.5
+  asteroidDensity: 10
   activeGasClouds: []
   minGasCloudScaleFactor: 0
   maxGasCloudScaleFactor: 0
@@ -2365,6 +2364,7 @@ GameObject:
   - component: {fileID: 2124795022}
   - component: {fileID: 2124795024}
   - component: {fileID: 2124795026}
+  - component: {fileID: 2124795027}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2384,6 +2384,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2093247349}
+  - {fileID: 118025590}
   - {fileID: 809082985}
   - {fileID: 1199276843}
   m_Father: {fileID: 695886959}
@@ -2419,12 +2420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 69071898}
   horizontalSpeed: 100
-  minX: -125
-  maxX: 125
-  currentVelocity: 100
-  maximumVelocity: 100
-  initialThrustValue: 0
-  thrustValue: 50000
+  minX: -110
+  maxX: 110
 --- !u!95 &2124795024
 Animator:
   serializedVersion: 3
@@ -2478,7 +2475,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionTags:
   - Asteroid
-  - AsteroidShard
   presets:
   - radiusOverTime:
       serializedVersion: 2
@@ -3140,6 +3136,18 @@ MonoBehaviour:
     time: 0
     preset: 0
     active: 0
+--- !u!114 &2124795027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124795020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750433b40fe195843be67a0480f66929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2127130207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3262,6 +3270,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 697bf78b02b32e342afdb5274a0b6be2, type: 2}
   levelMods: {fileID: 11400000, guid: 8d1adcc141f2a4a418bc9b75c683000f, type: 2}
   levelPowerups: {fileID: 11400000, guid: 0fbb492a666096c418cf543481ee944a, type: 2}
+  player: {fileID: 2124795025}
 --- !u!114 &451592016484824087
 MonoBehaviour:
   m_ObjectHideFlags: 0

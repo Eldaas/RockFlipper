@@ -133,8 +133,23 @@ public class PlayerStats : ScriptableObject
     /// </summary>
     [ReadOnly] public float currentProjectileSpeed;
 
+    /// <summary>
+    /// Base projectile damage represents the starting amount of damage (without modifiers applied) that the player deals to asteroids.
+    /// </summary>
+    public float baseProjectileDamage;
 
+    /// <summary>
+    /// Current projectile damage represents the amount of damage (with modifiers applied) that the damage deals to asteroids.
+    /// </summary>
+    [ReadOnly] public float currentProjectileDamage;
 
+    /// <summary>
+    /// Base collection range is the distance from which resource chunks will be pulled toward the player ship (without modifiers)
+    /// </summary>
+    public float baseCollectionRange;
 
-
+    /// <summary>
+    /// Current collection range is the distance from which resource chunks will be pulled toward the player ship (with modifiers)
+    /// </summary>
+    [ReadOnly] public float currentCollectionRange;
 }

@@ -51,7 +51,11 @@ MonoBehaviour:
   childrenObjects: []
   asteroidType: 0
   data: {fileID: 11400000, guid: 7e9fd39612e6a084c963584c3d1b911f, type: 2}
+  healthMultiplier: 0.25
   explosionParticles: {fileID: 532685254838037714}
+  currentHealth: 0
+  dropYieldMin: 2
+  dropYieldMax: 5
 --- !u!54 &7283013964530020845
 Rigidbody:
   m_ObjectHideFlags: 0
