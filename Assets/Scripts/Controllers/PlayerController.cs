@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
             GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
             if(parentGo)
             {
+                Debug.Log(parentGo.name);
                 // Get parent particle system and set the location
                 Transform parentObject = parentGo.GetComponentInParent<Transform>();
                 parentGo.transform.position = parentObject.position;
@@ -81,10 +82,16 @@ public class PlayerController : MonoBehaviour
                     if (children[i].CompareTag("Projectile"))
                     {
                         ParticleSystem projectileParticle = children[i];
-                        projectileParticle.gameObject.SetActive(true);
+                        
+                        int randomInt = Utility.GenerateRandomInt(0, 1000);
+                        string projectileName = "Projectile " + randomInt.ToString();
+                        projectileParticle.gameObject.name = projectileName;
+                        Debug.Log("Projectile particle " + projectileParticle.gameObject.name + " is currently active?: " + projectileParticle.gameObject.activeSelf);
+                        
                         parentGo.SetActive(true);
                         IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
                         StartCoroutine(coroutine);
+                        break;
                     }
                 }
             }

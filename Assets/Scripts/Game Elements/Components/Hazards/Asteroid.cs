@@ -24,18 +24,17 @@ public class Asteroid : Hazard
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         //rb.isKinematic = true;
-        PopulateChildrenObjects();
+        //PopulateChildrenObjects();
         mainObject.SetActive(false);
-
         explosionParticles.SetActive(true);
 
-        for (int i = 0; i < childrenObjects.Count; i++)
+        /*for (int i = 0; i < childrenObjects.Count; i++)
         {
             childrenObjects[i].gameObject.SetActive(true);
             rb = childrenObjects[i].GetComponent<Rigidbody>();
             rb.AddExplosionForce(force, mainObject.transform.position, explosionRadius);
 
-        }
+        }*/
         //Debug.Log("Asteroid has exploded");
     }
 
@@ -44,14 +43,14 @@ public class Asteroid : Hazard
     /// </summary>
     public void CollideWithAsteroid()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
+        //Rigidbody rb = GetComponent<Rigidbody>();
         //rb.isKinematic = true;
         
-        mainObject.SetActive(false);
-        for (int i = 0; i < childrenObjects.Count; i++)
+        //mainObject.SetActive(false);
+/*        for (int i = 0; i < childrenObjects.Count; i++)
         {
             childrenObjects[i].gameObject.SetActive(true);
-        }
+        }*/
     }
 
     /// <summary>
@@ -85,10 +84,10 @@ public class Asteroid : Hazard
 
         if (collider.CompareTag("Projectile"))
         {
-            collider.SetActive(false);
+            collider.gameObject.SetActive(false);
             List<ParticleCollisionEvent> events = new List<ParticleCollisionEvent>();
-            ParticleSystem thisSystem = collider.GetComponent<ParticleSystem>();
-            thisSystem.GetCollisionEvents(gameObject, events);
+            ParticleSystem projectileParticles = collider.GetComponent<ParticleSystem>();
+            projectileParticles.GetCollisionEvents(gameObject, events);
 
             GameObject hitFx = ObjectPooler.instance.GetPooledHitFx();
 
@@ -98,7 +97,43 @@ public class Asteroid : Hazard
                 hitFx.gameObject.SetActive(true);
             }
 
+            GameObject asteroidChunks = ObjectPooler.instance.GetPooledAsteroidChunk();
+
+            if(asteroidChunks)
+            {
+                ParticleSystemRenderer asteroidChunksParticles = asteroidChunks.GetComponent<ParticleSystemRenderer>();
+                Material[] mats = asteroidChunksParticles.materials;
+
+                switch (asteroidType)
+                {
+                    case AsteroidType.Iron:
+                        mats[0] = data.ironMaterial;
+                        break;
+                    case AsteroidType.Silver:
+                        mats[0] = data.silverMaterial;
+                        break;
+                    case AsteroidType.Gold:
+                        mats[0] = data.goldMaterial;
+                        break;
+                    default:
+                        Debug.Log("Couldn't find the appropriate material for the asteroid.");
+                        break;
+                }
+
+                asteroidChunksParticles.materials = mats;
+                asteroidChunks.transform.position = transform.position;
+                asteroidChunks.SetActive(true);
+                ParticleSystem asteroidChunkParticles = asteroidChunks.GetComponent<ParticleSystem>();
+                IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(asteroidChunks, asteroidChunkParticles.main.startLifetime.constant);
+                ObjectPooler.instance.StartCoroutine(coroutine);
+            }
+
+            
+
             ExplodeAsteroid(120000f * transform.localScale.magnitude, 1000f);
+            
+
+            
         }
     }
     #endregion

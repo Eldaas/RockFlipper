@@ -68,6 +68,15 @@ public class ObjectPooler : MonoBehaviour
     private int particleHitFxCount;
     private List<GameObject> pooledParticleHitFx = new List<GameObject>();
 
+    [Header("Resource Particle FX")]
+    [SerializeField]
+    private GameObject asteroidChunks;
+    [SerializeField]
+    private GameObject asteroidChunksParent;
+    [SerializeField]
+    private int asteroidChunksCount;
+    private List<GameObject> pooledAsteroidChunks = new List<GameObject>();
+
     private void Awake()
     {
         #region Singleton
@@ -103,13 +112,13 @@ public class ObjectPooler : MonoBehaviour
 
             Asteroid asteroid = go.GetComponent<Asteroid>();
             ApplyAsteroidMaterial(asteroid);
-            asteroid.PopulateChildrenObjects();
+            //asteroid.PopulateChildrenObjects();
 
-            for (int j = 0; j < asteroid.childrenObjects.Count; j++)
+            /*for (int j = 0; j < asteroid.childrenObjects.Count; j++)
             {
                 ApplyShardMaterials(asteroid, j);
                 asteroid.CachePositionRotation(j);
-            }
+            }*/
         }
 
         //pooledGasClouds = new List<GameObject>();
@@ -164,6 +173,15 @@ public class ObjectPooler : MonoBehaviour
             go.transform.parent = particleHitFxParent.transform;
             go.SetActive(false);
             pooledParticleHitFx.Add(go);
+        }
+
+        for (int i = 0; i < asteroidChunksCount; i++)
+        {
+            GameObject go = Instantiate(asteroidChunks);
+            go.name = go.name + " " + i;
+            go.transform.parent = asteroidChunksParent.transform;
+            go.SetActive(false);
+            pooledAsteroidChunks.Add(go);
         }
 
     }
@@ -260,6 +278,22 @@ public class ObjectPooler : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Returns the first inactive asteroid chunks particle in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledAsteroidChunk()
+    {
+        for (int i = 0; i < pooledAsteroidChunks.Count; i++)
+        {
+            if (!pooledAsteroidChunks[i].activeInHierarchy)
+            {
+                return pooledAsteroidChunks[i];
+            }
+        }
+        return null;
+    }
+
     public IEnumerator ReturnParticleToPool(GameObject particleParent, float lifetime)
     {
         //Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
@@ -268,6 +302,12 @@ public class ObjectPooler : MonoBehaviour
         while (Time.time < count)
         {
             yield return null;
+        }
+
+        Transform[] particleChildren = particleParent.GetComponentsInChildren<Transform>(true);
+        foreach(Transform child in particleChildren)
+        {
+            child.gameObject.SetActive(true);
         }
 
         particleParent.SetActive(false);

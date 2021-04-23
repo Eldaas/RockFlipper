@@ -37,7 +37,7 @@ public class Hazard : MonoBehaviour
 
     #region Methods
 
-    /// <summary>
+/*    /// <summary>
     /// Gets all of the childrenObjects from the parent game object and puts them in a list.
     /// </summary>
     /// 
@@ -55,14 +55,14 @@ public class Hazard : MonoBehaviour
     {
         originalPositions.Add(childrenObjects[i].transform.localPosition);
         originalRotations.Add(childrenObjects[i].transform.localRotation);
-    }
+    }*/
 
     /// <summary>
     /// Use this to reset the hazard object (ie, return all children to their initial positions) when it exits the game view and is returned to the pool.
     /// </summary>
     public virtual void ResetHazard()
     {
-        if(childrenObjects.Count > 0)
+        /*if(childrenObjects.Count > 0)
         {
             for (int i = 0; i < childrenObjects.Count; i++)
             {
@@ -73,7 +73,7 @@ public class Hazard : MonoBehaviour
                 childrenObjects[i].transform.localRotation = originalRotations[i];
                 childrenObjects[i].gameObject.SetActive(false);
             }
-        }
+        }*/
         
     }
 
