@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
 
-    public bool bypassIntroMenu = false;
+    [HideInInspector]
+    public GameStates startingState = GameStates.IntroMenu;
 
     private GameStateMachine gameSM;
     private GameLoadState loadState;
@@ -46,42 +46,67 @@ public class GameManager : MonoBehaviour
         AddEvents();
 
         #endregion
-
     }
 
     private void Start()
     {
         #region State Machine
 
-        if (bypassIntroMenu)
-        {
-            gameSM.Initialize(introState);
-        }
-        else
-        {
-            gameSM.Initialize(levelOneState);
-        }
+        InitialiseGameState();
 
         #endregion
     }
+
+    #region State Machine
+
+    /// <summary>
+    /// In case the game commences from a scene which is not the intro menu, this method relies on the CheckForManagers script in the starting scene to tell this GameManager script what state it should start with. This method interprets and initialises that state.
+    /// </summary>
+    private void InitialiseGameState()
+    {
+        switch(startingState)
+        {
+            case GameStates.IntroMenu:
+                gameSM.Initialise(introState);
+                break;
+            case GameStates.Hangar:
+                //gameSM.Initialise(hangarState);
+                break;
+            case GameStates.LevelOne:
+                gameSM.Initialise(levelOneState);
+                break;
+            default:
+                gameSM.Initialise(introState);
+                break;
+        }
+    }
+
+    #endregion
 
     #region Level Loading Methods
 
     /// <summary>
     /// Game state machine interface which can be called from other scripts. Triggers a change of state relative to the scene called.
     /// </summary>
-    /// <param name="buildID">The build ID of the scene as displayed in Unity build settings window.</param>
-    public void LoadLevel(int buildID)
+    /// <param name="state">The relevant GameStates enum index pertaining to the level to be loaded.</param>
+    public void LoadLevel(GameStates state)
     {
         UIManager.instance.loadScreen.SetActive(true);
 
-        if (buildID == 1)
+        switch (state)
         {
-            gameSM.ChangeState(introState);
-        }
-        else if (buildID == 2)
-        {
-            gameSM.ChangeState(levelOneState);
+            case GameStates.IntroMenu:
+                gameSM.ChangeState(introState);
+                break;
+            case GameStates.Hangar:
+                //gameSM.Initialise(hangarState);
+                break;
+            case GameStates.LevelOne:
+                gameSM.ChangeState(levelOneState);
+                break;
+            default:
+                gameSM.ChangeState(introState);
+                break;
         }
     }
 
@@ -91,7 +116,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        //UIManager.instance.loadScreen.SetActive(false);
+        UIManager.instance.loadScreen.SetActive(false);
     }
 
     #endregion
@@ -102,7 +127,8 @@ public class GameManager : MonoBehaviour
     {
         // Global level events
         EventManager.AddEvent("AsteroidCollision");
-        EventManager.AddEvent("AsteroidExplosion");
+        EventManager.AddEvent("LargeAsteroidExplosion");
+        EventManager.AddEvent("MediumAsteroidExplosion");
         EventManager.AddEvent("TakeHit");
         EventManager.AddEvent("ShieldsRecharged");
         EventManager.AddEvent("ShieldsHit");
@@ -132,3 +158,5 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 }
+
+public enum GameStates { None, IntroMenu, Hangar, LevelOne, LevelTwo, LevelThree }
