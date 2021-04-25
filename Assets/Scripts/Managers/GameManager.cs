@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     private GameIntroMenuState introState;
     private GameLevelOneState levelOneState;
 
-    public ScoreRecord record;
-
     private void Awake()
     {
 
@@ -99,10 +97,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Events
-    // Add all of your events in here so we've got a good idea of what events exist in the game
+    // Create all game events here. This pushes them to the EventManager dictionary, where other scripts/classes can trigger the events and/or register listeners.
     private void AddEvents()
     {
+        // Global level events
         EventManager.AddEvent("AsteroidCollision");
+        EventManager.AddEvent("AsteroidExplosion");
         EventManager.AddEvent("TakeHit");
         EventManager.AddEvent("ShieldsRecharged");
         EventManager.AddEvent("ShieldsHit");
@@ -119,6 +119,16 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("HullRepair");
         EventManager.AddEvent("ArmourRepair");
         EventManager.AddEvent("SpeedMitigation");
+        EventManager.AddEvent("ResourceCollected");
+        EventManager.AddEvent("ProjectileHit");
+        EventManager.AddEvent("ProjectileShot");
+        EventManager.AddEvent("SpaceSceneLoaded");
+
+        // Scene-specific events
+        EventManager.AddEvent("IntroMenuSceneLoaded");
+        EventManager.AddEvent("HangarSceneLoaded");
+        EventManager.AddEvent("EndLevelSceneLoaded");
+        EventManager.AddEvent("AsteroidFieldSceneLoaded");
     }
     #endregion
 }

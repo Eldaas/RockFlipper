@@ -23,26 +23,15 @@ public class Asteroid : Hazard
 
     #region Public Methods
     /// <summary>
-    /// Disables the main asteroid, activates all childrenObjects and adds an explosion force.
+    /// Disables the asteroid visual game object and sets active explosion particle effect.
     /// </summary>
     /// <param name="force">The kinetic force to apply to the childrenObjects.</param>
     /// <param name="explosionRadius">The radius of the explosion.</param>
     public void ExplodeAsteroid(float force, float explosionRadius)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        //rb.isKinematic = true;
-        //PopulateChildrenObjects();
         mainObject.SetActive(false);
         explosionParticles.SetActive(true);
-
-        /*for (int i = 0; i < childrenObjects.Count; i++)
-        {
-            childrenObjects[i].gameObject.SetActive(true);
-            rb = childrenObjects[i].GetComponent<Rigidbody>();
-            rb.AddExplosionForce(force, mainObject.transform.position, explosionRadius);
-
-        }*/
-        //Debug.Log("Asteroid has exploded");
+        EventManager.TriggerEvent("AsteroidExplosion");
     }
 
     /// <summary>
@@ -106,6 +95,7 @@ public class Asteroid : Hazard
         // Check if the collision is actually a defined projectile
         if (collider.CompareTag("Projectile"))
         {
+            EventManager.TriggerEvent("ProjectileHit");
             // Get the particle events so we can get the intersect location
             collider.gameObject.SetActive(false);
             List<ParticleCollisionEvent> events = new List<ParticleCollisionEvent>();
