@@ -9,11 +9,9 @@ public class ResourceCollector : MonoBehaviour
         ParticleSystem ps = other.GetComponent<ParticleSystem>();
         List<ParticleCollisionEvent> events = new List<ParticleCollisionEvent>();
         ps.GetCollisionEvents(other, events);
-
         int numEvents = events.Count;
-
-        Debug.Log("Player collected " + numEvents + " particles!");
-
-        
+        SceneController.instance.resourcesCollected += numEvents;
+        EventManager.TriggerEvent("ResourceCollected");
+        Debug.Log("Particle collected");
     }
 }

@@ -43,6 +43,7 @@ public class EventManager : MonoBehaviour
         {
             thisEvent = new UnityEvent();
             instance.eventDictionary.Add(eventName, thisEvent);
+            //Debug.Log("Event with name " + eventName + " has been added to the dictionary.");
         }
     }
 

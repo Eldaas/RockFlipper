@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    [HideInInspector]
     public static SceneController instance;
+
     public LevelData levelData;
     public LevelModifier levelMods;
     public LevelPowerups levelPowerups;
     public Player player;
+    public int resourcesCollected;
+
 
     private void Awake()
     {
@@ -26,11 +28,22 @@ public class SceneController : MonoBehaviour
         }
         #endregion
 
-        if(MissingDataContainers())
+        if (MissingDataContainers())
         {
             Debug.LogError("SceneController requires assignment of levelData, levelMods and levelPowerups.");
         }
 
+    }
+
+    private void Start()
+    {
+        EventManager.TriggerEvent("SpaceSceneLoaded");
+
+        if (levelData.levelName == "Asteroid Field")
+        {
+            EventManager.TriggerEvent("AsteroidFieldSceneLoaded");
+            Debug.Log("Asteroid field scene loaded.");
+        }
     }
 
     #region Private Methods

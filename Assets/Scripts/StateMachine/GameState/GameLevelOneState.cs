@@ -8,7 +8,6 @@ public class GameLevelOneState : GameState
     public override void Enter()
     {
         base.Enter();
-        GameManager.instance.record = new ScoreRecord();
         //SceneManager.sceneLoaded += OnSceneLoaded;
         //SceneManager.LoadScene(2);
     }

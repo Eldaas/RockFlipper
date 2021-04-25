@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
                         parentGo.SetActive(true);
                         IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
                         StartCoroutine(coroutine);
+                        EventManager.TriggerEvent("ProjectileShot");
                         break;
                     }
                 }
