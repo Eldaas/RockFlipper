@@ -9,21 +9,21 @@ public class CheckForManagers : MonoBehaviour
 
     private void Awake()
     {
-        Transform[] children = GetComponentsInChildren<Transform>();
+        // Looks for game objects with the Managers tag
+        GameObject[] children = GameObject.FindGameObjectsWithTag("Managers");
         bool managersFound = false;
 
-        for (int i = 0; i < children.Length; i++)
+        // If managers exist in the scene, nothing else needs to happen
+        if(children.Length > 0)
         {
-            if(children[i].CompareTag("Managers"))
-            {
-                managersFound = true;
-                break;
-            }
+            managersFound = true;
         }
 
+        // If managers are not found, they need to be instantiated and the new GameManager needs to execute the state relevant to this particular scene.
         if(!managersFound)
         {
-            GameObject managers = Instantiate(managersPrefab, transform);
+            Debug.Log("Managers not found. Creating new Persistent Managers object.");
+            GameObject managers = Instantiate(managersPrefab);
 
             Transform[] newManagers = managers.GetComponentsInChildren<Transform>();
 

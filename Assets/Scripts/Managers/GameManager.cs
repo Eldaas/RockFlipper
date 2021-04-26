@@ -10,51 +10,60 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameStates startingState = GameStates.IntroMenu;
 
+    private bool alreadyLoaded = false;
+
     private GameStateMachine gameSM;
-    private GameLoadState loadState;
     private GameIntroMenuState introState;
     private GameLevelOneState levelOneState;
 
     private void Awake()
     {
-
-        #region Singleton
-        GameManager[] list = FindObjectsOfType<GameManager>();
-        if (list.Length > 1)
-        {
-            Destroy(this);
-            Debug.Log("Multiple instances of the Game Manager component detected. Destroying an instance.");
-        }
-        else
+        if(!alreadyLoaded)
         {
             instance = this;
+
+            /* Singleton may not be necessary any more with alreadyLoaded check
+            #region Singleton
+            GameManager[] list = FindObjectsOfType<GameManager>();
+            if (list.Length > 1)
+            {
+                Destroy(this);
+                Debug.Log("Multiple instances of the Game Manager component detected. Destroying an instance.");
+            }
+            else
+            {
+                instance = this;
+            }
+            #endregion
+            */
+
+            #region State Machine
+
+            gameSM = new GameStateMachine();
+            introState = new GameIntroMenuState(this, gameSM);
+            levelOneState = new GameLevelOneState(this, gameSM);
+
+            #endregion
+
+            #region Events
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            AddEvents();
+
+            #endregion
         }
-        #endregion
-
-        #region State Machine
-
-        gameSM = new GameStateMachine();
-        loadState = new GameLoadState(this, gameSM);
-        introState = new GameIntroMenuState(this, gameSM);
-        levelOneState = new GameLevelOneState(this, gameSM);
-
-        #endregion
-
-        #region Events
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        AddEvents();
-
-        #endregion
     }
 
     private void Start()
     {
-        #region State Machine
+        if(!alreadyLoaded)
+        {
+            #region State Machine
 
-        InitialiseGameState();
+            InitialiseGameState();
 
-        #endregion
+            #endregion
+        }
     }
 
     #region State Machine
@@ -79,6 +88,8 @@ public class GameManager : MonoBehaviour
                 gameSM.Initialise(introState);
                 break;
         }
+
+        alreadyLoaded = true;
     }
 
     #endregion
@@ -86,7 +97,7 @@ public class GameManager : MonoBehaviour
     #region Level Loading Methods
 
     /// <summary>
-    /// Game state machine interface which can be called from other scripts. Triggers a change of state relative to the scene called.
+    /// Game state machine method which can be called from other scripts. Triggers a change of state relative to the scene called.
     /// </summary>
     /// <param name="state">The relevant GameStates enum index pertaining to the level to be loaded.</param>
     public void LoadLevel(GameStates state)
@@ -151,10 +162,13 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("SpaceSceneLoaded");
 
         // Scene-specific events
-        EventManager.AddEvent("IntroMenuSceneLoaded");
+        EventManager.AddEvent("IntroSceneLoaded");
         EventManager.AddEvent("HangarSceneLoaded");
         EventManager.AddEvent("EndLevelSceneLoaded");
         EventManager.AddEvent("AsteroidFieldSceneLoaded");
+
+        // UI Events
+        EventManager.AddEvent("UIButtonOptionSelected");
     }
     #endregion
 }

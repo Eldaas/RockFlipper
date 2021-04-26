@@ -132,7 +132,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1000
   m_TargetDisplay: 0
 --- !u!114 &871695432
 MonoBehaviour:
@@ -236,13 +236,16 @@ MonoBehaviour:
     type: 3}
   mediumAsteroidExplosion: {fileID: 8300000, guid: ed09eebeda20fdf4795fc9bca06f9944,
     type: 3}
+  uiMouseOver: {fileID: 8300000, guid: 1ab231a274c307f47a80ef32076a1f8c, type: 3}
+  uiSelect: {fileID: 8300000, guid: a9bc057975e25d74c871f788def3be64, type: 3}
   asteroidFieldMusicTracks:
   - {fileID: 8300000, guid: 9ee07ba3d0e238f4195c599cd18eb18c, type: 3}
   endLevelMusicTracks:
   - {fileID: 8300000, guid: 0720cf10138cb9a4099e388df20c6ea0, type: 3}
   hangarMusicTracks:
   - {fileID: 8300000, guid: 94d79737103fd944690135013ede179c, type: 3}
-  introMenuMusicTracks: []
+  introMenuMusicTracks:
+  - {fileID: 8300000, guid: cdc9b3770d194ef4facaf1496b0e4cbd, type: 3}
   ambientMixer: {fileID: -2320407891033103090, guid: 37289a99829fb6846992cf31eea7a221,
     type: 2}
 --- !u!1 &2261875414548594812
@@ -810,7 +813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2261875415385475842}
-  - component: {fileID: 4201950203679698861}
+  - component: {fileID: 4563860592774008310}
   m_Layer: 0
   m_Name: Persistent Managers
   m_TagString: Managers
@@ -836,7 +839,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4201950203679698861
+--- !u!114 &4563860592774008310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1191,4 +1194,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb46f8ff96ea9cf4698d7e3548cde2b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadScreen: {fileID: 0}
+  loadScreen: {fileID: 529961019}
