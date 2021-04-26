@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     public GameObject loadScreen;
+
 
     private void Awake()
     {
@@ -22,4 +24,7 @@ public class UIManager : MonoBehaviour
         }
         #endregion
     }
+
+
+
 }

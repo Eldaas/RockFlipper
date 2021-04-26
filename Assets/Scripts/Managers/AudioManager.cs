@@ -33,7 +33,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip spaceAmbience;
     public AudioClip largeAsteroidExplosion;
     public AudioClip mediumAsteroidExplosion;
-    public AudioClip uiMouseOver;
     public AudioClip uiSelect;
 
     [Header("Music Track Clips")]
@@ -93,7 +92,6 @@ public class AudioManager : MonoBehaviour
 
     private void PlayOneShot(AudioSource mixerGroup, AudioClip clip)
     {
-        Debug.Log("PlayOneShot called");
         mixerGroup.PlayOneShot(clip);
     }
 
@@ -129,6 +127,7 @@ public class AudioManager : MonoBehaviour
 
         uiButtonOptionSelectDelegate = PlayUiButtonOptionSelect;
         EventManager.StartListening("UIButtonOptionSelected", uiButtonOptionSelectDelegate);
+
     }
 
     private void PlayMusicTrack(AudioClip track)
@@ -213,7 +212,6 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     private void PlayIntroMenuMusic()
     {
-        Debug.Log("Called");
         AudioClip clip = SelectRandomClip(introMenuMusicTracks);
         PlayMusicTrack(clip);
     }
@@ -222,10 +220,6 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void PlayUiClick()
-    {
-        PlayOneShot(uiSounds, uiMouseOver);
-    }
 
     public void PlayUiButtonOptionSelect()
     {
