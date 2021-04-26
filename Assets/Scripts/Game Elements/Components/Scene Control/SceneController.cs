@@ -6,13 +6,13 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController instance;
 
+    public bool testingMode;
     public LevelData levelData;
     public LevelModifier levelMods;
     public LevelPowerups levelPowerups;
     public Player player;
     public int resourcesCollected;
-
-
+    
     private void Awake()
     {
         #region Singleton

@@ -9,6 +9,8 @@ TagManager:
   - Projectile
   - AsteroidShard
   - FxTemporaire
+  - Managers
+  - Core
   layers:
   - Default
   - TransparentFX

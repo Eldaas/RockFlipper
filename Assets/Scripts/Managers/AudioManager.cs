@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip spaceAmbience;
     public AudioClip largeAsteroidExplosion;
     public AudioClip mediumAsteroidExplosion;
+    public AudioClip uiSelect;
 
     [Header("Music Track Clips")]
     public AudioClip[] asteroidFieldMusicTracks;
@@ -54,6 +55,7 @@ public class AudioManager : MonoBehaviour
     private UnityAction endLevelSceneLoadedDelegate;
     private UnityAction hangarSceneLoadedDelegate;
     private UnityAction introMenuSceneLoadedDelegate;
+    private UnityAction uiButtonOptionSelectDelegate;
     
 
     #endregion
@@ -73,11 +75,13 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
         #endregion
+
+        RegisterEventListeners();
     }
 
     private void Start()
     {
-        RegisterEventListeners();
+        
     }
 
     #endregion
@@ -88,7 +92,6 @@ public class AudioManager : MonoBehaviour
 
     private void PlayOneShot(AudioSource mixerGroup, AudioClip clip)
     {
-        Debug.Log("PlayOneShot called");
         mixerGroup.PlayOneShot(clip);
     }
 
@@ -118,7 +121,13 @@ public class AudioManager : MonoBehaviour
 
         asteroidFieldSceneLoadedDelegate = PlayAsteroidFieldMusic;
         EventManager.StartListening("AsteroidFieldSceneLoaded", asteroidFieldSceneLoadedDelegate);
-        
+
+        introMenuSceneLoadedDelegate = PlayIntroMenuMusic;
+        EventManager.StartListening("IntroSceneLoaded", introMenuSceneLoadedDelegate);
+
+        uiButtonOptionSelectDelegate = PlayUiButtonOptionSelect;
+        EventManager.StartListening("UIButtonOptionSelected", uiButtonOptionSelectDelegate);
+
     }
 
     private void PlayMusicTrack(AudioClip track)
@@ -197,13 +206,26 @@ public class AudioManager : MonoBehaviour
         AudioClip clip = SelectRandomClip(asteroidFieldMusicTracks);
         PlayMusicTrack(clip);
     }
+
+    /// <summary>
+    /// Selects a random track from the inspector-assigned list and plays as background music for the intro menu scene.
+    /// </summary>
+    private void PlayIntroMenuMusic()
+    {
+        AudioClip clip = SelectRandomClip(introMenuMusicTracks);
+        PlayMusicTrack(clip);
+    }
     #endregion
 
     #endregion
 
     #region Public Methods
 
-    
+    public void PlayUiButtonOptionSelect()
+    {
+        PlayOneShot(uiSounds, uiSelect);
+    }
+
 
     #endregion
 }
