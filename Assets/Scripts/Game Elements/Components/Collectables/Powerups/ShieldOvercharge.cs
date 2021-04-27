@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Powerup Type/Shield Overcharge")]
 public class ShieldOvercharge : Powerup, IPowerup
 {
+    [Header("Unique Fields")]
     public float shieldRegenPercentage;
     public float shieldCooldownPercentage;
     public float shieldCapacityPercentage;
@@ -15,7 +16,7 @@ public class ShieldOvercharge : Powerup, IPowerup
 
     public override void ExecutePowerup(Player player)
     {
-        EventManager.TriggerEvent("shieldOvercharge");
+        EventManager.TriggerEvent("ShieldOvercharge");
 
         baseStats[0] = player.stats.baseShieldRegen;
         baseStats[1] = player.stats.baseShieldCooldownTime;

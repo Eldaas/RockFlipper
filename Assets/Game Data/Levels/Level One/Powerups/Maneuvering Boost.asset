@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 499129874202468616, guid: 7cbd5dd7b4086174a95aa7e04712b2d6, type: 3}
   baseDuration: 30
-  percentage: 300
+  chanceToSpawn: 30
+  percentage: 150

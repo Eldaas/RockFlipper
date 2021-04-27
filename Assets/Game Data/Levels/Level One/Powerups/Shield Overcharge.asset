@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0375848255ee57c44a80504021a159e7, type: 3}
   m_Name: Shield Overcharge
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1086816176436677925, guid: 1dbc1f6790dab24428703e7b225abcfa, type: 3}
+  prefab: {fileID: 2169875249470262192, guid: 823a04043e34f6b4981e953d20e4ee91, type: 3}
   baseDuration: 30
-  shieldRegenPercentage: 300
+  chanceToSpawn: 50
+  shieldRegenPercentage: 150
   shieldCooldownPercentage: 50
-  shieldCapacityPercentage: 300
+  shieldCapacityPercentage: 150

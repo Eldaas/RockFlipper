@@ -402,10 +402,6 @@ MonoBehaviour:
   blackHolesParent: {fileID: 0}
   blackHoleCount: 0
   pooledBlackHoles: []
-  genericPrefab: {fileID: 1086816176436677925, guid: 1dbc1f6790dab24428703e7b225abcfa,
-    type: 3}
-  powerupProfiles:
-  - {fileID: 11400000, guid: f61fbfe596751c84ba7659d83d7e422c, type: 2}
   powerupsParent: {fileID: 2101467028}
   powerupCount: 5
   backgroundAsteroidPrefabs:
@@ -729,7 +725,7 @@ MonoBehaviour:
   offsetFromPlayer: 700
   cleanupDistanceFromPlayer: 200
   hazardBounds:
-    m_Center: {x: 0, y: 1, z: 500}
+    m_Center: {x: 0, y: 0, z: 500}
     m_Extent: {x: 150, y: 0, z: 400}
   activeAsteroids: []
   minAsteroidScaleFactor: 0.2
@@ -747,9 +743,12 @@ MonoBehaviour:
   currentBlackHoleCap: 0
   blackHoleDensity: 1
   powerupBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: 0, z: 500}
+    m_Extent: {x: 0, y: 0, z: 5}
   activePowerups: []
+  minPowerupFrequency: 5
+  maxPowerupFrequency: 10
+  timeUntilNextPowerup: 0
   backgroundAsteroidBounds:
     m_Center: {x: 0, y: -2000, z: 6000}
     m_Extent: {x: 1000, y: 2000, z: 0}

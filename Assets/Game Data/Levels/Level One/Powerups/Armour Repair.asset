@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676f1bc4cbc102f42a2ae636fa6f6e65, type: 3}
   m_Name: Armour Repair
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6056395264261530955, guid: dae369f72027f304293efdb5f09780df, type: 3}
   baseDuration: 0
+  chanceToSpawn: 50
   value: 50
