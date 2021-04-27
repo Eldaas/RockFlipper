@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Asteroid
   - Powerup
+  - Projectile
+  - AsteroidShard
+  - FxTemporaire
+  - Managers
+  - Core
   layers:
   - Default
   - TransparentFX
@@ -16,8 +21,8 @@ TagManager:
   - 
   - 
   - BackgroundFX
-  - 
-  - 
+  - Destructible
+  - ResourceCollection
   - 
   - 
   - 

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75c25b0b4d2f9b41a8c21c15531b464, type: 3}
   m_Name: LevelOneData
   m_EditorClassIdentifier: 
-  levelName: Asteroids Galore
+  levelName: Asteroid Field
+  levelDescription: 

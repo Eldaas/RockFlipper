@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameIntroMenuState : GameState
 {
@@ -7,8 +8,15 @@ public class GameIntroMenuState : GameState
     public override void Enter()
     {
         base.Enter();
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(1);
+        Debug.Log("Entering intro menu scene");
+        EventManager.TriggerEvent("IntroSceneLoaded");
+
+        if (SceneManager.GetActiveScene().name != "IntroScene")
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene("IntroScene");   
+        }
+        
     }
 
     public override void LogicUpdate()
@@ -29,6 +37,8 @@ public class GameIntroMenuState : GameState
 
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        
 
     }
 

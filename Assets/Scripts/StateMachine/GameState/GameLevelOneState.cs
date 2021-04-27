@@ -8,9 +8,8 @@ public class GameLevelOneState : GameState
     public override void Enter()
     {
         base.Enter();
-        GameManager.instance.record = new ScoreRecord();
-        //SceneManager.sceneLoaded += OnSceneLoaded;
-        //SceneManager.LoadScene(2);
+        SceneManager.LoadScene("PrototypeLevel");
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public override void LogicUpdate()
@@ -34,7 +33,7 @@ public class GameLevelOneState : GameState
 
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     
