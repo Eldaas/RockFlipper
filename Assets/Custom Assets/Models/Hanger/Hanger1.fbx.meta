@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: df56503c3d562bd42ab4e51b7afe6c7b
+guid: b837ed1d27974274ab9f2af9dfab334f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,28 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Black
-    second: {fileID: 2100000, guid: 14912cf0ad1acdf4987da8237d786f30, type: 2}
+      name: Hanger light
+    second: {fileID: 2100000, guid: c281f88bf6f7291429152a1d46ac088e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Engine
-    second: {fileID: 2100000, guid: 9090a2106f4d8fb4180210f3d4a81642, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Glass
-    second: {fileID: 2100000, guid: 14912cf0ad1acdf4987da8237d786f30, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: fe98e926615c33b429f4742262e02d1a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal
-    second: {fileID: 2100000, guid: d2e722351502ff243b9f36bbffb0338a, type: 2}
+    second: {fileID: 2100000, guid: bc89835d3c88bd6449ffac1556edb59f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Pipe
-    second: {fileID: 2100000, guid: d995df7f35a568a48bd09e5b9289036c, type: 2}
+      name: go
+    second: {fileID: 2100000, guid: 40424fcb2d5649c4cb1743b40e6bad05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: soft light
+    second: {fileID: 2100000, guid: 919e9d87581254f4b804ca53b7f08d8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stop
+    second: {fileID: 2100000, guid: c2a6ff6c1a619ee4f9907d311fba5456, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -67,10 +72,10 @@ ModelImporter:
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 0
-    importLights: 0
+    importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
