@@ -32,10 +32,8 @@ public class ObjectPooler : MonoBehaviour
     public List<GameObject> pooledBlackHoles = new List<GameObject>();
 
     [Header("Collectable: Powerups")]
-    [SerializeField]
-    private GameObject genericPrefab;
-    [SerializeField]
-    private List<Powerup> powerupProfiles;
+    // Powerup prefabs are assigned through the LevelPowerups profile, as they are scene specific.
+    // LevelPowerups profile is assigned via the scene controller. 
     [SerializeField]
     private GameObject powerupsParent;
     public int powerupCount;
@@ -144,10 +142,39 @@ public class ObjectPooler : MonoBehaviour
         }
 
         //pooledPowerups = new List<GameObject>();
+        SceneController.instance.levelPowerups.GenerateRuntimeList();
+        List<IPowerup> levelPowerups = SceneController.instance.levelPowerups.runtimeList;
+        List<IPowerup> hits = new List<IPowerup>();
+
         for (int i = 0; i < powerupCount; i++)
         {
-            // TO DO: Math to assign powerup profile based upon % spawn chance
-            
+            bool generated = false;
+
+            while (!generated)
+            {
+                if (GeneratePowerup(levelPowerups, hits)) 
+                {
+                    generated = true;
+                }
+            }
+
+            while (hits.Count > 1)
+            {
+                IPowerup[] array = hits.ToArray();
+
+                foreach (IPowerup powerup in array)
+                {
+                    int randomInt = Utility.GenerateRandomInt(0, 100);
+                    if (randomInt < 50 && hits.Count > 1) // Have to check hits.Count again - not an error
+                    {
+                        hits.Remove(powerup);
+                    }
+                }
+            }
+
+            GameObject instantiatedPowerup = Instantiate(hits[0].Prefab, powerupsParent.transform);
+            pooledPowerups.Add(instantiatedPowerup);
+            instantiatedPowerup.SetActive(false);
         }
 
         //pooledProjectiles = new List<GameObject>();
@@ -289,6 +316,25 @@ public class ObjectPooler : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Returns a RANDOM inactive powerup in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledPowerup()
+    {
+        if(pooledPowerups.Count > 0)
+        {
+            int randomIndex = Utility.GenerateRandomInt(0, pooledPowerups.Count - 1);
+
+            if (!pooledPowerups[randomIndex].activeInHierarchy)
+            {
+                return pooledPowerups[randomIndex];
+            }
+        }
+        
+        return null;
+    }
+
     public IEnumerator ReturnParticleToPool(GameObject particleParent, float lifetime)
     {
         //Debug.Log("Particle being returned to pool in " + lifetime + " seconds.");
@@ -308,6 +354,7 @@ public class ObjectPooler : MonoBehaviour
         particleParent.SetActive(false);
     }
 
+    #region Private Methods
     private void ApplyAsteroidMaterial(Asteroid asteroid)
     {
         MeshRenderer renderer = asteroid.mainObject.GetComponent<MeshRenderer>();
@@ -366,4 +413,31 @@ public class ObjectPooler : MonoBehaviour
         renderer.materials = mats;
 
     }
+
+
+    private bool GeneratePowerup(List<IPowerup> levelPowerups, List<IPowerup> hits)
+    {
+        bool generated = false;
+        
+        foreach (IPowerup powerup in levelPowerups)
+        {
+            float randomInt = Utility.GenerateRandomInt(0, 100);
+            if (powerup.ChanceToSpawn != 0f && randomInt <= powerup.ChanceToSpawn)
+            {
+                hits.Add(powerup);
+                generated = true;
+            }
+        }
+
+        if(generated)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    #endregion
 }

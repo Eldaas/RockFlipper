@@ -13,20 +13,11 @@ MonoBehaviour:
   m_Name: LevelOnePowerups
   m_EditorClassIdentifier: 
   p1: {fileID: 11400000, guid: f61fbfe596751c84ba7659d83d7e422c, type: 2}
-  p1NumberToSpawn: 10
-  p2: {fileID: 0}
-  p2NumberToSpawn: 0
-  p3: {fileID: 0}
-  p3NumberToSpawn: 0
-  p4: {fileID: 0}
-  p4NumberToSpawn: 0
-  p5: {fileID: 0}
-  p5NumberToSpawn: 0
+  p2: {fileID: 11400000, guid: 51230564568b3a64f81f8430282cecc3, type: 2}
+  p3: {fileID: 11400000, guid: 856ecac5a2f86f143b16ab7213228125, type: 2}
+  p4: {fileID: 11400000, guid: 926d24030f5d53c4eb6fa76dbed3c5a9, type: 2}
+  p5: {fileID: 11400000, guid: d4ec73b2d1fbedc41bc37c4f13118d79, type: 2}
   p6: {fileID: 0}
-  p6NumberToSpawn: 0
   p7: {fileID: 0}
-  p7NumberToSpawn: 0
   p8: {fileID: 0}
-  p8NumberToSpawn: 0
   p9: {fileID: 0}
-  p9NumberToSpawn: 0

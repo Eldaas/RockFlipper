@@ -31,7 +31,8 @@ public class Asteroid : Hazard
     {
         mainObject.SetActive(false);
         explosionParticles.SetActive(true);
-        EventManager.TriggerEvent("AsteroidExplosion");
+        // TO DO: differentiate between large and medium explosions, play different sound for each
+        EventManager.TriggerEvent("LargeAsteroidExplosion");
     }
 
     /// <summary>

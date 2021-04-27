@@ -3,7 +3,7 @@
 [CreateAssetMenu(menuName = "Powerup Type/ManeuveringBoost")]
 public class ManeuveringBoost : Powerup, IPowerup
 {
-	// Define custom fields here
+	[Header("Unique Fields")]
     public float percentage;
     private float difference;
 

@@ -3,7 +3,7 @@
 [CreateAssetMenu(menuName = "Powerup Type/HullRepair")]
 public class HullRepair : Powerup, IPowerup
 {
-	// Define custom fields here
+	[Header("Unique Fields")]
 	[SerializeField]
     private float value;
 

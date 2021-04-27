@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd28eaaf2de3864280120ec0c861292, type: 3}
   m_Name: Hull Repair
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6056395264261530955, guid: 7fdd7e679a670864f84e05853f1ff910, type: 3}
   baseDuration: 0
+  chanceToSpawn: 50
   value: 50

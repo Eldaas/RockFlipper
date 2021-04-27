@@ -3,9 +3,10 @@
 [CreateAssetMenu(menuName = "Powerup Type/ArmourRepair")]
 public class ArmourRepair : Powerup, IPowerup
 {
-	// Define custom fields here
+	[Header("Unique Fields")]
 	[SerializeField]
     private float value;
+    
 
 	// Implement 'on execute' functionality within this function
     public override void ExecutePowerup(Player player)
