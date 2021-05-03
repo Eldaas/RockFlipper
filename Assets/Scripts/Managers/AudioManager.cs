@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip largeAsteroidExplosion;
     public AudioClip mediumAsteroidExplosion;
     public AudioClip uiSelect;
+    public AudioClip uiSuccess;
 
     [Header("Music Track Clips")]
     public AudioClip[] asteroidFieldMusicTracks;
@@ -56,6 +57,7 @@ public class AudioManager : MonoBehaviour
     private UnityAction hangarSceneLoadedDelegate;
     private UnityAction introMenuSceneLoadedDelegate;
     private UnityAction uiButtonOptionSelectDelegate;
+    private UnityAction uiSuccessDelegate;
     
 
     #endregion
@@ -128,6 +130,8 @@ public class AudioManager : MonoBehaviour
         uiButtonOptionSelectDelegate = PlayUiButtonOptionSelect;
         EventManager.StartListening("UIButtonOptionSelected", uiButtonOptionSelectDelegate);
 
+        uiSuccessDelegate = PlayUiSuccess;
+        EventManager.StartListening("UISuccess", uiSuccessDelegate);
     }
 
     private void PlayMusicTrack(AudioClip track)
@@ -214,6 +218,14 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip clip = SelectRandomClip(introMenuMusicTracks);
         PlayMusicTrack(clip);
+    }
+
+    /// <summary>
+    /// Plays the UI success sound - for example, when you successfully load a profile
+    /// </summary>
+    private void PlayUiSuccess()
+    {
+        PlayOneShot(uiSounds, uiSuccess);
     }
     #endregion
 

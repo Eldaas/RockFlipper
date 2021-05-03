@@ -169,6 +169,9 @@ public class GameManager : MonoBehaviour
 
         // UI Events
         EventManager.AddEvent("UIButtonOptionSelected");
+        EventManager.AddEvent("UISuccess");
+        EventManager.AddEvent("LoadProfiles");
+        EventManager.AddEvent("UpdateProfileSelection");
     }
     #endregion
 }
