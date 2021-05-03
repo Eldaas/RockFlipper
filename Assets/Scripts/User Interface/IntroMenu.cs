@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using TMPro;
 
 public class IntroMenu : UIController
@@ -41,6 +41,8 @@ public class IntroMenu : UIController
     [SerializeField]
     private TextMeshProUGUI reputationText;
 
+    [Header("Events")]
+    private UnityAction updateProfileSelection;
 
     private void Awake()
     {
@@ -62,6 +64,10 @@ public class IntroMenu : UIController
         newProfileButton.onClick.AddListener(NewProfile);
         inputConfirmButton.onClick.AddListener(ConfirmProfileInput);
         returnToMenuButton.onClick.AddListener(ReturnToMenu);
+        profileSelectDropdown.onValueChanged.AddListener(SelectProfileOption);
+
+        updateProfileSelection = UpdateProfileSelection;
+        EventManager.StartListening("UpdateProfileSelection", updateProfileSelection);
     }
 
     #region Private Methods
@@ -74,6 +80,7 @@ public class IntroMenu : UIController
 
             visitHangarButton.interactable = false;
             highScoresButton.interactable = false;
+            profileSelectDropdown.captionText.text = "Select a profile";
         }
         else 
         {
@@ -103,8 +110,33 @@ public class IntroMenu : UIController
     private void ProfileWindow()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("LoadProfiles");
+
         introMenuCanvas.gameObject.SetActive(false);
         profileScreenCanvas.gameObject.SetActive(true);
+    }
+
+    private void UpdateProfileSelection()
+    {
+        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
+
+        foreach (string profileName in ProfileManager.instance.fileNames)
+        {
+            TMP_Dropdown.OptionData thisOption = new TMP_Dropdown.OptionData();
+            thisOption.text = profileName;
+            options.Add(thisOption);
+        }
+
+        profileSelectDropdown.ClearOptions();
+        profileSelectDropdown.AddOptions(options);
+    }
+
+    private void SelectProfileOption(int thisOption)
+    {
+        TMP_Dropdown.OptionData option = profileSelectDropdown.options[thisOption];
+        string optionName = option.text;
+
+        ProfileManager.instance.LoadProfile(optionName);
     }
 
     private void HighScores()
@@ -130,13 +162,22 @@ public class IntroMenu : UIController
         EventManager.TriggerEvent("UIButtonOptionSelected");
         string name = newProfileInput.text;
         Debug.Log("The player has entered " + name);
-        newProfileInput.DeactivateInputField(true);
-        newProfileInput.gameObject.SetActive(false);
-        newProfileButton.gameObject.SetActive(true);
+        if(ProfileManager.instance.CreateNewProfile(name))
+        {
+            newProfileInput.DeactivateInputField(true);
+            newProfileInput.gameObject.SetActive(false);
+            newProfileButton.gameObject.SetActive(true);
+        }
 
-
-        ProfileManager.instance.CreateNewProfile(name);
-        // TO DO: Trigger the creation of a new profile JSON file, set as active
+        for (int i = 0; i < profileSelectDropdown.options.Count; i++)
+        {
+            if (profileSelectDropdown.options[i].text == name)
+            {
+                profileSelectDropdown.value = profileSelectDropdown.options.IndexOf(profileSelectDropdown.options[i]);
+                break;
+            }
+        }
+        
     }
 
     private void ReturnToMenu()
