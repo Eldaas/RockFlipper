@@ -2,38 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Level Data/Level Powerup Profile")]
+[CreateAssetMenu(menuName = "Level Data/Level GameObject Profile")]
 public class LevelPowerups : ScriptableObject
 {
     [HideInInspector]
-    public List<IPowerup> runtimeList = new List<IPowerup>();
+    public List<GameObject> runtimeList = new List<GameObject>();
 
-    [Header("Powerup One")]
-    public Powerup p1;
+    [Header("GameObject One")]
+    public GameObject p1;
 
-    [Header("Powerup Two")]
-    public Powerup p2;
+    [Header("GameObject Two")]
+    public GameObject p2;
 
-    [Header("Powerup Three")]
-    public Powerup p3;
+    [Header("GameObject Three")]
+    public GameObject p3;
 
-    [Header("Powerup Four")]
-    public Powerup p4;
+    [Header("GameObject Four")]
+    public GameObject p4;
 
-    [Header("Powerup Five")]
-    public Powerup p5;
+    [Header("GameObject Five")]
+    public GameObject p5;
 
-    [Header("Powerup Six")]
-    public Powerup p6;
+    [Header("GameObject Six")]
+    public GameObject p6;
 
-    [Header("Powerup Seven")]
-    public Powerup p7;
+    [Header("GameObject Seven")]
+    public GameObject p7;
 
-    [Header("Powerup Eight")]
-    public Powerup p8;
+    [Header("GameObject Eight")]
+    public GameObject p8;
 
-    [Header("Powerup Nine")]
-    public Powerup p9;
+    [Header("GameObject Nine")]
+    public GameObject p9;
 
     public void GenerateRuntimeList()
     {

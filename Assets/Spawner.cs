@@ -140,7 +140,7 @@ public class Spawner : MonoBehaviour
 
         if(activePowerups.Count < ObjectPooler.instance.powerupCount && Time.time > timeUntilNextPowerup)
         {
-            Debug.Log("Attempting to spawn powerup.");
+            //Debug.Log("Attempting to spawn powerup.");
             GameObject powerup = ObjectPooler.instance.GetPooledPowerup();
             if(powerup != null)
             {
@@ -174,7 +174,7 @@ public class Spawner : MonoBehaviour
             Random.Range(powerupBounds.center.y - powerupBounds.extents.y, powerupBounds.center.y + powerupBounds.extents.y),
             Random.Range(powerupBounds.center.z - powerupBounds.extents.z, powerupBounds.center.z + powerupBounds.extents.z)
             );
-        Debug.Log("Powerup spawn point: " + spawnPoint);
+        //Debug.Log("Powerup spawn point: " + spawnPoint);
         return spawnPoint;
     }
 
@@ -282,7 +282,7 @@ public class Spawner : MonoBehaviour
         {
             foreach(GameObject powerup in activePowerups.ToArray())
             {
-                if(powerup.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
+                if(powerup.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer && !powerup.GetComponent<IPowerup>().IsActive)
                 {
                     activePowerups.Remove(powerup);
                     powerup.SetActive(false);
@@ -325,7 +325,7 @@ public class Spawner : MonoBehaviour
     private float GetNextSpawnTime()
     {
         float nextSpawnTime = Time.time + Utility.GenerateRandomFloat(minPowerupFrequency, maxPowerupFrequency);
-        Debug.Log("Next powerup spawn time is: " + nextSpawnTime);
+        //Debug.Log("Next powerup spawn time is: " + nextSpawnTime);
         return nextSpawnTime;
     }
 

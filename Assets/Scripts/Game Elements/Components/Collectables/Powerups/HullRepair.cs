@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Powerup Type/HullRepair")]
 public class HullRepair : Powerup, IPowerup
 {
 	[Header("Unique Fields")]
@@ -11,17 +10,21 @@ public class HullRepair : Powerup, IPowerup
     public override void ExecutePowerup(Player player)
     {
         EventManager.TriggerEvent("HullRepair");
+        base.ExecutePowerup(player);
+        Debug.Log("Player collected a hull powerup.");
+
         player.stats.currentHull += value;
 
         if(player.stats.currentHull > player.stats.currentMaxHull)
         {
             player.stats.currentHull = player.stats.currentMaxHull;
         }
+
     }
-	
-	// Set stats back to normal values
-	public override void EndPowerup(Player player)
+
+    // Set stats back to normal values
+    public override void EndPowerup(Player player)
     {
-        
+        base.EndPowerup(player);
     }
 }

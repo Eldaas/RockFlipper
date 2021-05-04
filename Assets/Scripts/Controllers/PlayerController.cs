@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class PlayerController : MonoBehaviour
 {
     [Header("Core Components")]
@@ -10,12 +11,13 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     [Header("Horizontal Movement")]
+    private float input;
     public Joystick joystick;
     public float horizontalSpeed;
     public float minX;
     public float maxX;
     private float horizontalMove = 0f;
-
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,29 +36,23 @@ public class PlayerController : MonoBehaviour
         horizontalSpeed = player.stats.currentManeuveringSpeed;
 
         HandleVelocity();
-        anim.SetFloat("Roll", joystick.Horizontal);
 
-        if (joystick.Horizontal < Mathf.Epsilon || joystick.Horizontal > Mathf.Epsilon)
-        {
-            if(transform.position.x >= minX && transform.position.x <= maxX)
-            {
-                
-                horizontalMove = joystick.Horizontal * horizontalSpeed * Time.deltaTime;
-                transform.position += Vector3.right * horizontalMove;
-            } 
 
-            if(transform.position.x < minX)
-            {
-                transform.position = new Vector3(minX, transform.position.y, transform.position.z);
-            }
+#if UNITY_ANDROID
 
-            if (transform.position.x > maxX)
-            {
-                transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
-            }
-        }
+        input = joystick.Horizontal;
 
-        if(Input.GetButtonDown("Shoot"))
+#endif
+
+#if UNITY_STANDALONE_WIN
+
+        input = Input.GetAxis("Horizontal");
+
+#endif
+        HandleHorizontal(input);
+        anim.SetFloat("Roll", input);
+
+        if (Input.GetButtonDown("Shoot"))
         {
             GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
             if(parentGo)
@@ -91,7 +87,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-         
     }
 
     private void HandleVelocity()
@@ -105,6 +100,26 @@ public class PlayerController : MonoBehaviour
         else if(rb.velocity.magnitude > player.stats.currentMaximumVelocity)
         {
             rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
+        }
+    }
+
+    private void HandleHorizontal(float axis)
+    {
+        if (transform.position.x >= minX && transform.position.x <= maxX)
+        {
+
+            horizontalMove = axis * horizontalSpeed * Time.deltaTime;
+            transform.position += Vector3.right * horizontalMove;
+        }
+
+        if (transform.position.x < minX)
+        {
+            transform.position = new Vector3(minX, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x > maxX)
+        {
+            transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
         }
     }
 

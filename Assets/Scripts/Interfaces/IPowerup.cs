@@ -5,8 +5,10 @@ using UnityEngine;
 public interface IPowerup
 {
     float EffectDuration { get; set; }
-    GameObject Prefab { get; set; }
     float ChanceToSpawn { get; }
+    bool IsActive { get; }
 
     void ExecutePowerup(Player player);
+
+    void EndPowerup(Player player);
 }
