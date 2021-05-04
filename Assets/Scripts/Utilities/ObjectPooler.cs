@@ -143,8 +143,8 @@ public class ObjectPooler : MonoBehaviour
 
         //pooledPowerups = new List<GameObject>();
         SceneController.instance.levelPowerups.GenerateRuntimeList();
-        List<IPowerup> levelPowerups = SceneController.instance.levelPowerups.runtimeList;
-        List<IPowerup> hits = new List<IPowerup>();
+        List<GameObject> levelPowerups = SceneController.instance.levelPowerups.runtimeList;
+        List<GameObject> hits = new List<GameObject>();
 
         for (int i = 0; i < powerupCount; i++)
         {
@@ -160,9 +160,9 @@ public class ObjectPooler : MonoBehaviour
 
             while (hits.Count > 1)
             {
-                IPowerup[] array = hits.ToArray();
+                GameObject[] array = hits.ToArray();
 
-                foreach (IPowerup powerup in array)
+                foreach (GameObject powerup in array)
                 {
                     int randomInt = Utility.GenerateRandomInt(0, 100);
                     if (randomInt < 50 && hits.Count > 1) // Have to check hits.Count again - not an error
@@ -172,7 +172,7 @@ public class ObjectPooler : MonoBehaviour
                 }
             }
 
-            GameObject instantiatedPowerup = Instantiate(hits[0].Prefab, powerupsParent.transform);
+            GameObject instantiatedPowerup = Instantiate(hits[0], powerupsParent.transform);
             pooledPowerups.Add(instantiatedPowerup);
             instantiatedPowerup.SetActive(false);
         }
@@ -415,14 +415,15 @@ public class ObjectPooler : MonoBehaviour
     }
 
 
-    private bool GeneratePowerup(List<IPowerup> levelPowerups, List<IPowerup> hits)
+    private bool GeneratePowerup(List<GameObject> levelPowerups, List<GameObject> hits)
     {
         bool generated = false;
         
-        foreach (IPowerup powerup in levelPowerups)
+        foreach (GameObject powerup in levelPowerups)
         {
+            IPowerup thisPowerup = powerup.GetComponent<IPowerup>();
             float randomInt = Utility.GenerateRandomInt(0, 100);
-            if (powerup.ChanceToSpawn != 0f && randomInt <= powerup.ChanceToSpawn)
+            if (thisPowerup.ChanceToSpawn != 0f && randomInt <= thisPowerup.ChanceToSpawn)
             {
                 hits.Add(powerup);
                 generated = true;

@@ -640,6 +640,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidData: {fileID: 11400000, guid: 7e9fd39612e6a084c963584c3d1b911f, type: 2}
+--- !u!1 &1055645917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7539312131535729061, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+    type: 3}
+  m_PrefabInstance: {fileID: 2349310938834635075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1147684913 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2349310939977073010, guid: 2fddc4c8b71f41e46bc96011ac645d13,
@@ -755,6 +761,12 @@ MonoBehaviour:
   activeBackgroundAsteroids: []
   minBackgroundScaleFactor: 1
   maxBackgroundScaleFactor: 1.5
+--- !u!1 &1420865004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 498689986292496399, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+    type: 3}
+  m_PrefabInstance: {fileID: 2349310938834635075}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1435849772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1747,6 +1759,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 695886959}
     m_Modifications:
+    - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: joystick
@@ -1812,6 +1829,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: healHullFx
+      value: 
+      objectReference: {fileID: 1753491271562446640, guid: 5fee70bc3b141ed4188a625cc4fa911e,
+        type: 3}
+    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: healArmourFx
+      value: 
+      objectReference: {fileID: 5123891127911671129, guid: 9ffdba3aed7ed424492621825939ad16,
+        type: 3}
+    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: activeEnginesFx
+      value: 
+      objectReference: {fileID: 1055645917}
+    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: healShieldAuraFx
+      value: 
+      objectReference: {fileID: 2719622899003654772, guid: e30efacdbc715344aae279887093d0d3,
+        type: 3}
+    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: inactiveEnginesFx
+      value: 
+      objectReference: {fileID: 1420865004}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fddc4c8b71f41e46bc96011ac645d13, type: 3}
 --- !u!4 &2850315218118366504
