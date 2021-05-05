@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     public float horizontalSpeed;
     public float minX;
     public float maxX;
-    private float horizontalMove = 0f;
+    public float horizontalMove = 0f;
+    public float horizontalDrag = 0f;
+    public float maxHorizontalVelocity;
+    public float forceMultiplier;
     
     private void Awake()
     {
@@ -79,6 +82,9 @@ public class PlayerController : MonoBehaviour
                         */
 
                         parentGo.SetActive(true);
+                        ParticleSystem.MainModule main = projectileParticle.main;
+                        main.startSpeed = 300 + rb.velocity.z;
+
                         IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
                         StartCoroutine(coroutine);
                         EventManager.TriggerEvent("ProjectileShot");
@@ -92,12 +98,12 @@ public class PlayerController : MonoBehaviour
     private void HandleVelocity()
     {
         // Speed up
-        if(rb.velocity.magnitude < player.stats.currentMaximumVelocity)
+        if(rb.velocity.z < player.stats.currentMaximumVelocity)
         {
             rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
         }
         // Slow down
-        else if(rb.velocity.magnitude > player.stats.currentMaximumVelocity)
+        else if(rb.velocity.z > player.stats.currentMaximumVelocity)
         {
             rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
         }
@@ -105,22 +111,47 @@ public class PlayerController : MonoBehaviour
 
     private void HandleHorizontal(float axis)
     {
+        horizontalMove = axis * forceMultiplier;
+        Vector3 direction = Vector3.zero;
+
         if (transform.position.x >= minX && transform.position.x <= maxX)
         {
+            direction = horizontalMove * Vector3.right;
 
-            horizontalMove = axis * horizontalSpeed * Time.deltaTime;
-            transform.position += Vector3.right * horizontalMove;
+            if (horizontalMove < 0f && rb.velocity.x > -maxHorizontalVelocity)
+            {
+                rb.AddForce(direction, ForceMode.Impulse);
+            }
+            
+            if (horizontalMove > 0f && rb.velocity.x < maxHorizontalVelocity)
+            {
+                rb.AddForce(direction, ForceMode.Impulse);
+            }
         }
 
         if (transform.position.x < minX)
         {
             transform.position = new Vector3(minX, transform.position.y, transform.position.z);
+            rb.velocity = new Vector3(0f, 0f, rb.velocity.z);
         }
-
-        if (transform.position.x > maxX)
+        else if(transform.position.x > maxX)
         {
             transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
+            rb.velocity = new Vector3(0f, 0f, rb.velocity.z);
         }
+
+        // Add drag
+        if (rb.velocity.x < 0f)
+        {
+            Debug.Log("Velocity is less than zero");
+            rb.velocity = new Vector3(rb.velocity.x + horizontalDrag * Time.deltaTime, 0f, rb.velocity.z);
+        }
+        else if (rb.velocity.x > 0f)
+        {
+            Debug.Log("Velocity is greater than zero");
+            rb.velocity = new Vector3(rb.velocity.x - horizontalDrag * Time.deltaTime, 0f, rb.velocity.z);
+        }
+
     }
 
     private void RaiseMaximumVelocity()

@@ -60,7 +60,12 @@ public class Asteroid : Hazard
         {
             currentHealth = data.baseHealth;
         }
-        
+    }
+
+    public void MultiplyAsteroidMass()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.mass *= 40;
     }
 
     /// <summary>

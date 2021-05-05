@@ -112,6 +112,7 @@ public class ObjectPooler : MonoBehaviour
             Asteroid asteroid = go.GetComponent<Asteroid>();
             ApplyAsteroidMaterial(asteroid);
             asteroid.SetAsteroidHealth();
+            asteroid.MultiplyAsteroidMass();
         }
 
         //pooledGasClouds = new List<GameObject>();

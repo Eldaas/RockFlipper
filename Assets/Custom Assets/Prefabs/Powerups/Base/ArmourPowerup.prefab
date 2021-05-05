@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7733160280928503641}
   - component: {fileID: 8626822248758798520}
   - component: {fileID: -4551242743148123931}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ArmourPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -122,10 +122,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8883703168703204450}
     m_Modifications:
+    - target: {fileID: 776489167736633906, guid: 4658cc616401ffd45970e68b5c184573,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 776819731286122122, guid: 4658cc616401ffd45970e68b5c184573,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 776826793688906342, guid: 4658cc616401ffd45970e68b5c184573,
         type: 3}
       propertyPath: m_Name
       value: HealthArmourFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 776826793688906342, guid: 4658cc616401ffd45970e68b5c184573,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 780230154260433642, guid: 4658cc616401ffd45970e68b5c184573,
         type: 3}
