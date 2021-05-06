@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class BlackHoleHazard : MonoBehaviour
+public class BlackHoleHazard : Hazard
 {
-    [SerializeField] public float GRAVITY_PULL = .78f;
-    public static float m_GravityRadius = 1f;
+    [SerializeField] 
+    public float gravityPull = .78f;
+    public float gravityRadius = 1f;
+
     void Awake()
     {
-        m_GravityRadius = GetComponent<SphereCollider>().radius;
+        gravityRadius = GetComponent<SphereCollider>().radius;
     }
+
     /// <summary>
     /// Attract objects towards an area when they come within the bounds of a collider.
     /// This function is on the physics timer so it won't necessarily run every frame.
@@ -20,8 +23,8 @@ public class BlackHoleHazard : MonoBehaviour
     {
         if (other.attachedRigidbody)
         {
-            float gravityIntensity = Vector3.Distance(transform.position, other.transform.position) / m_GravityRadius;
-            other.attachedRigidbody.AddForce((transform.position - other.transform.position) * gravityIntensity * other.attachedRigidbody.mass * GRAVITY_PULL * Time.smoothDeltaTime);
+            float gravityIntensity = Vector3.Distance(transform.position, other.transform.position) / gravityRadius;
+            other.attachedRigidbody.AddForce((transform.position - other.transform.position) * gravityIntensity * other.attachedRigidbody.mass * gravityPull * Time.smoothDeltaTime);
             Debug.DrawRay(other.transform.position, transform.position - other.transform.position);
         }
     }

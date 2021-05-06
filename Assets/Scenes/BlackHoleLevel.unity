@@ -794,8 +794,8 @@ MonoBehaviour:
   currentGasCloudCap: 0
   gasCloudDensity: 1
   activeBlackHoles: []
-  minBlackHoleScaleFactor: 1
-  maxBlackHoleScaleFactor: 1
+  minBlackHoleScaleFactor: 10
+  maxBlackHoleScaleFactor: 10
   currentBlackHoleCap: 1
   blackHoleDensity: 1
   powerupBounds:
@@ -1730,7 +1730,7 @@ PrefabInstance:
     - target: {fileID: 1513998050280720734, guid: ac41994f412a5244daf0e6ef93c88a28,
         type: 3}
       propertyPath: startingState
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1513998050280720735, guid: ac41994f412a5244daf0e6ef93c88a28,
         type: 3}
