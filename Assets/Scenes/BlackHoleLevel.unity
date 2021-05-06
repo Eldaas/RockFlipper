@@ -1921,7 +1921,7 @@ Camera:
   m_Depth: 3
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1575
+    m_Bits: 32311
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2003,6 +2003,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 695886959}
     m_Modifications:
+    - target: {fileID: 1854004310507416766, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854004310507416766, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.influenceMask.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854004310507416769, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344879991963761604, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310939595998722, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310939595998722, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.influenceMask.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310939595998722, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.multiplierCurve.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310939595998845, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: m_Enabled
@@ -2126,6 +2166,21 @@ PrefabInstance:
       propertyPath: inactiveEnginesFx
       value: 
       objectReference: {fileID: 1420865004}
+    - target: {fileID: 8113096032779697515, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113096032779697515, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.influenceMask.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113096032911482819, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fddc4c8b71f41e46bc96011ac645d13, type: 3}
 --- !u!4 &2850315218118366504
