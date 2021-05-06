@@ -25,7 +25,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e99825a650a1c45b0f092b813e7a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GRAVITY_PULL: 0.78
+  mainObject: {fileID: 0}
+  childrenObjectsParent: {fileID: 0}
+  childrenObjects: []
+  gravityPull: 10
+  gravityRadius: 1
 --- !u!1001 &4948305142335274635
 PrefabInstance:
   m_ObjectHideFlags: 0

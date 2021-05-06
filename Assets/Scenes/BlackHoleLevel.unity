@@ -402,7 +402,7 @@ MonoBehaviour:
   blackHolePrefabs:
   - {fileID: 532005393312118943, guid: ac0dd8733a673654d90bee47167a46f5, type: 3}
   blackHolesParent: {fileID: 1590076394}
-  blackHoleCount: 20
+  blackHoleCount: 100
   pooledBlackHoles: []
   powerupsParent: {fileID: 2101467028}
   powerupCount: 5
@@ -796,7 +796,7 @@ MonoBehaviour:
   activeBlackHoles: []
   minBlackHoleScaleFactor: 10
   maxBlackHoleScaleFactor: 10
-  currentBlackHoleCap: 1
+  currentBlackHoleCap: 8
   blackHoleDensity: 1
   powerupBounds:
     m_Center: {x: 0, y: 0, z: 500}
