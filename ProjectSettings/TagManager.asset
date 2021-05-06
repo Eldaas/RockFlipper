@@ -23,9 +23,9 @@ TagManager:
   - BackgroundFX
   - Destructible
   - ResourceCollection
-  - 
-  - 
-  - 
+  - Player
+  - Powerup
+  - Shield
   - 
   - 
   - 

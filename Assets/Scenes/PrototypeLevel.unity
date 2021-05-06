@@ -394,7 +394,7 @@ MonoBehaviour:
   - {fileID: 8397313556702028846, guid: 39e3481e488cc284f8de02174ab44d14, type: 3}
   - {fileID: 4428989989665843642, guid: 450da8a7597987346bc806b07714e2a6, type: 3}
   asteroidsParent: {fileID: 1805814713}
-  asteroidCount: 200
+  asteroidCount: 0
   gasCloudPrefabs: []
   gasCloudsParent: {fileID: 0}
   gasCloudCount: 0
@@ -1677,7 +1677,7 @@ Camera:
   m_Depth: 3
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1575
+    m_Bits: 15911
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1761,8 +1761,30 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 3874d10ccae1e8f44882c39bdc6c4391,
+        type: 2}
+    - target: {fileID: 2349310940658917941, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 288e4ca209d15e545911cda88ebddf61,
+        type: 2}
+    - target: {fileID: 2349310940658917943, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
@@ -1772,7 +1794,7 @@ PrefabInstance:
     - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: horizontalDrag
-      value: 45
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
@@ -1854,6 +1876,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2349310940686075343, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: healHullFx
@@ -1882,6 +1909,11 @@ PrefabInstance:
       propertyPath: inactiveEnginesFx
       value: 
       objectReference: {fileID: 1420865004}
+    - target: {fileID: 6362493756983924674, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fddc4c8b71f41e46bc96011ac645d13, type: 3}
 --- !u!4 &2850315218118366504
