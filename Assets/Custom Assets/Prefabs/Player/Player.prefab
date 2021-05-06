@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 2349310940658917947}
   - component: {fileID: 2349310940658917940}
   - component: {fileID: 2349310940658917941}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 2349310940686075347}
   - component: {fileID: 2349310940686075345}
   - component: {fileID: 2349310940686075344}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -840,16 +840,6 @@ MonoBehaviour:
   vfxParent: {fileID: 2344879991963761604}
   activeEnginesFx: {fileID: 7539312131535729061}
   inactiveEnginesFx: {fileID: 498689986292496399}
-  healHullFx: {fileID: 1753491271562446640, guid: 5fee70bc3b141ed4188a625cc4fa911e,
-    type: 3}
-  healArmourFx: {fileID: 5123891127911671129, guid: 9ffdba3aed7ed424492621825939ad16,
-    type: 3}
-  healShieldAuraFx: {fileID: 2719622899003654772, guid: e30efacdbc715344aae279887093d0d3,
-    type: 3}
-  speedMitigationFx: {fileID: 0}
-  maneuveringBoostFx: {fileID: 0}
-  spreadshotFx: {fileID: 0}
-  heatSinkFx: {fileID: 0}
 --- !u!114 &2349310940686075340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,6 +856,10 @@ MonoBehaviour:
   horizontalSpeed: 50
   minX: -110
   maxX: 110
+  horizontalMove: 0
+  horizontalDrag: 0
+  maxHorizontalVelocity: 0
+  forceMultiplier: 0
 --- !u!54 &2349310940686075341
 Rigidbody:
   m_ObjectHideFlags: 0

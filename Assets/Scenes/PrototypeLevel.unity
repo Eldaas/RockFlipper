@@ -1769,6 +1769,31 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 69071898}
+    - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: horizontalDrag
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: forceMultiplier
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: maxHorizontalVelocity
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310940686075341, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Mass
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349310940686075341, guid: 2fddc4c8b71f41e46bc96011ac645d13,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075342, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: m_RootOrder

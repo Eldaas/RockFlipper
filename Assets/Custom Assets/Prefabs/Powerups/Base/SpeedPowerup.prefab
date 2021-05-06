@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7733160280928503641}
   - component: {fileID: 8626822248758798520}
   - component: {fileID: -7737160104356408364}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpeedPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -177,10 +177,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5984514553915935502, guid: 637ed8074da3ea941b4c1227c2bc2712,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984582628246780230, guid: 637ed8074da3ea941b4c1227c2bc2712,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5984622219982600034, guid: 637ed8074da3ea941b4c1227c2bc2712,
         type: 3}
       propertyPath: m_Name
       value: SpeedPowerupFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984622219982600034, guid: 637ed8074da3ea941b4c1227c2bc2712,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 637ed8074da3ea941b4c1227c2bc2712, type: 3}

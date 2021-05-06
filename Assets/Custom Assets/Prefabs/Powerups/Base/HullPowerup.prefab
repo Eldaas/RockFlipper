@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7733160280928503641}
   - component: {fileID: 8626822248758798520}
   - component: {fileID: -1110722918416269063}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HullPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -122,10 +122,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8883703168703204450}
     m_Modifications:
+    - target: {fileID: 3666180581548909597, guid: 5bd77bf77f41002438dc330a97fcdec6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3666370736074531913, guid: 5bd77bf77f41002438dc330a97fcdec6,
         type: 3}
       propertyPath: m_Name
       value: HealthHullFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666370736074531913, guid: 5bd77bf77f41002438dc330a97fcdec6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666377006055669925, guid: 5bd77bf77f41002438dc330a97fcdec6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3672025966193202373, guid: 5bd77bf77f41002438dc330a97fcdec6,
         type: 3}

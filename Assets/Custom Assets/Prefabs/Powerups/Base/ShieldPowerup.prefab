@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7733160280928503641}
   - component: {fileID: 8626822248758798520}
   - component: {fileID: -5644022283112225451}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldPowerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
@@ -179,10 +179,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1518544340759226725, guid: 408e2414fd02daa48832c245c775740c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518700087865347549, guid: 408e2414fd02daa48832c245c775740c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 1518706047535442225, guid: 408e2414fd02daa48832c245c775740c,
         type: 3}
       propertyPath: m_Name
       value: HealthShieldFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518706047535442225, guid: 408e2414fd02daa48832c245c775740c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 408e2414fd02daa48832c245c775740c, type: 3}
