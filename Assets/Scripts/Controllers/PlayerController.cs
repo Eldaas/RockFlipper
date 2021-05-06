@@ -140,16 +140,16 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(0f, 0f, rb.velocity.z);
         }
 
-        // Add drag
+        // Calculate and apply horizontal drag
+        float dragLerp = Mathf.Abs(rb.velocity.x) / maxHorizontalVelocity;
+
         if (rb.velocity.x < 0f)
         {
-            Debug.Log("Velocity is less than zero");
-            rb.velocity = new Vector3(rb.velocity.x + horizontalDrag * Time.deltaTime, 0f, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x + (horizontalDrag * dragLerp) * Time.deltaTime, 0f, rb.velocity.z);
         }
         else if (rb.velocity.x > 0f)
         {
-            Debug.Log("Velocity is greater than zero");
-            rb.velocity = new Vector3(rb.velocity.x - horizontalDrag * Time.deltaTime, 0f, rb.velocity.z);
+            rb.velocity = new Vector3(rb.velocity.x - (horizontalDrag * dragLerp) * Time.deltaTime, 0f, rb.velocity.z);
         }
 
     }
@@ -161,6 +161,11 @@ public class PlayerController : MonoBehaviour
             player.stats.currentMaximumVelocity++;
         }
         
+    }
+
+    public void AddExternalForce(Vector3 direction, float forceValue)
+    {
+
     }
 
 }

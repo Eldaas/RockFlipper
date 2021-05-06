@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
             
             if (Hull / MaxHull <= 0.5f)
             {
-                EventManager.TriggerEvent("LowHealth");
+                EventManager.TriggerEvent("HealthLow");
             }
         }
 

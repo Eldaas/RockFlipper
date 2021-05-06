@@ -115,7 +115,6 @@ public class ObjectPooler : MonoBehaviour
             asteroid.MultiplyAsteroidMass();
         }
 
-        //pooledGasClouds = new List<GameObject>();
         for (int i = 0; i < gasCloudCount; i++)
         {
             GameObject go = Instantiate(gasCloudPrefabs[Utility.GenerateRandomInt(0, gasCloudPrefabs.Length)]);
@@ -124,7 +123,6 @@ public class ObjectPooler : MonoBehaviour
             pooledGasClouds.Add(go);
         }
 
-        //pooledBlackHoles = new List<GameObject>();
         for (int i = 0; i < blackHoleCount; i++)
         {
             GameObject go = Instantiate(blackHolePrefabs[Utility.GenerateRandomInt(0, blackHolePrefabs.Length)]);
@@ -133,7 +131,6 @@ public class ObjectPooler : MonoBehaviour
             pooledBlackHoles.Add(go);
         }
 
-        //pooledBackgroundAsteroids = new List<GameObject>();
         for (int i = 0; i < backgroundAsteroidCount; i++)
         {
             GameObject go = Instantiate(backgroundAsteroidPrefabs[Utility.GenerateRandomInt(0, backgroundAsteroidPrefabs.Length)]);
@@ -142,7 +139,6 @@ public class ObjectPooler : MonoBehaviour
             pooledBackgroundAsteroids.Add(go);
         }
 
-        //pooledPowerups = new List<GameObject>();
         SceneController.instance.levelPowerups.GenerateRuntimeList();
         List<GameObject> levelPowerups = SceneController.instance.levelPowerups.runtimeList;
         List<GameObject> hits = new List<GameObject>();
@@ -178,7 +174,6 @@ public class ObjectPooler : MonoBehaviour
             instantiatedPowerup.SetActive(false);
         }
 
-        //pooledProjectiles = new List<GameObject>();
         for (int i = 0; i < projectileCount; i++)
         {
             GameObject go = Instantiate(projectiles[0]);
@@ -188,7 +183,6 @@ public class ObjectPooler : MonoBehaviour
             pooledProjectiles.Add(go);
         }
 
-        //pooledParticleHitFx = new List<GameObject>();
         for (int i = 0; i < particleHitFxCount; i++)
         {
             GameObject go = Instantiate(particleHitFx[0]);
