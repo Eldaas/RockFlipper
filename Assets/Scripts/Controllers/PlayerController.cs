@@ -160,12 +160,16 @@ public class PlayerController : MonoBehaviour
         {
             player.stats.currentMaximumVelocity++;
         }
-        
     }
 
     public void AddExternalForce(Vector3 direction, float forceValue)
     {
+        rb.AddForce(direction * forceValue);
+    }
 
+    public void AddExternalForce(Vector3 direction, float forceValue, ForceMode forceMode)
+    {
+        rb.AddForce(direction * forceValue, forceMode);
     }
 
 }
