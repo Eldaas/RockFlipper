@@ -10,6 +10,7 @@ public class NebulaLevelState : GameState
         base.Enter();
         SceneManager.LoadScene("NebulaLevel");
         SceneManager.sceneLoaded += OnSceneLoaded;
+        GameManager.instance.levelRecord = new LevelRecord();
     }
 
     public override void LogicUpdate()

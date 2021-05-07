@@ -10,6 +10,7 @@ public class BlackHoleLevelState : GameState
         base.Enter();
         SceneManager.LoadScene("BlackHoleLevel");
         SceneManager.sceneLoaded += OnSceneLoaded;
+        GameManager.instance.levelRecord = new LevelRecord();
     }
 
     public override void LogicUpdate()

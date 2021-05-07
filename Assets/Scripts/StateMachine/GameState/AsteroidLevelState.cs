@@ -2,7 +2,6 @@
 
 public class AsteroidLevelState : GameState
 {
-
     public AsteroidLevelState(GameManager manager, GameStateMachine stateMachine) : base(manager, stateMachine) { }
 
     public override void Enter()
@@ -10,6 +9,7 @@ public class AsteroidLevelState : GameState
         base.Enter();
         SceneManager.LoadScene("PrototypeLevel");
         SceneManager.sceneLoaded += OnSceneLoaded;
+        GameManager.instance.levelRecord = new LevelRecord();
     }
 
     public override void LogicUpdate()
