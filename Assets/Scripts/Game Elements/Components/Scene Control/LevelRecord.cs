@@ -1,7 +1,7 @@
 ﻿public class LevelRecord
 {
-    float ironCollected;
-    float silverCollected;
-    float goldCollected;
-    float timeInLevel;
+    public int ironCollected;
+    public int silverCollected;
+    public int goldCollected;
+    public int timeInLevel;
 }

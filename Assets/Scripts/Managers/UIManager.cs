@@ -12,11 +12,11 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         #region Singleton
-        AudioManager[] list = FindObjectsOfType<AudioManager>();
+        UIManager[] list = FindObjectsOfType<UIManager>();
         if (list.Length > 1)
         {
             Destroy(this);
-            Debug.Log("Multiple instances of the Audio Manager component detected. Destroying an instance.");
+            Debug.Log("Multiple instances of the UIManager component detected. Destroying an instance.");
         }
         else
         {

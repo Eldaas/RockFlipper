@@ -11,6 +11,9 @@ TagManager:
   - FxTemporaire
   - Managers
   - Core
+  - Iron
+  - Silver
+  - Gold
   layers:
   - Default
   - TransparentFX
@@ -27,7 +30,7 @@ TagManager:
   - Powerup
   - Shield
   - BlackHole
-  - 
+  - ResourceTallying
   - 
   - 
   - 

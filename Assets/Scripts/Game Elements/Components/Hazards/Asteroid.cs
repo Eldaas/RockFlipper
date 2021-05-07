@@ -148,12 +148,15 @@ public class Asteroid : Hazard
                     {
                         case AsteroidType.Iron:
                             mats[0] = data.ironMaterial;
+                            asteroidChunksRenderer.tag = "Iron";
                             break;
                         case AsteroidType.Silver:
                             mats[0] = data.silverMaterial;
+                            asteroidChunksRenderer.tag = "Silver";
                             break;
                         case AsteroidType.Gold:
                             mats[0] = data.goldMaterial;
+                            asteroidChunksRenderer.tag = "Gold";
                             break;
                         default:
                             Debug.Log("Couldn't find the appropriate material for the asteroid.");
