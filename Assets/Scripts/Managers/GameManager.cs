@@ -19,14 +19,10 @@ public class GameManager : MonoBehaviour
     #region State Machine & Level States
     private GameStateMachine gameSM;
     private GameIntroMenuState introState;
-<<<<<<< Updated upstream
-    private GameLevelOneState levelOneState;
-=======
     private AsteroidLevelState asteroidLevelState;
     private NebulaLevelState nebulaLevelState;
     private BlackHoleLevelState blackHoleLevelState;
     #endregion
->>>>>>> Stashed changes
 
     #endregion
 
@@ -87,10 +83,6 @@ public class GameManager : MonoBehaviour
             case GameStates.Hangar:
                 //gameSM.Initialise(hangarState);
                 break;
-<<<<<<< Updated upstream
-            case GameStates.LevelOne:
-                gameSM.Initialise(levelOneState);
-=======
             case GameStates.AsteroidField:
                 gameSM.ChangeState(asteroidLevelState);
                 break;
@@ -99,7 +91,6 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.BlackHoles:
                 gameSM.ChangeState(blackHoleLevelState);
->>>>>>> Stashed changes
                 break;
             default:
                 gameSM.ChangeState(introState);
@@ -132,10 +123,6 @@ public class GameManager : MonoBehaviour
             case GameStates.Hangar:
                 //gameSM.Initialise(hangarState);
                 break;
-<<<<<<< Updated upstream
-            case GameStates.LevelOne:
-                gameSM.ChangeState(levelOneState);
-=======
             case GameStates.AsteroidField:
                 gameSM.Initialise(asteroidLevelState);
                 break;
@@ -144,7 +131,6 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.BlackHoles:
                 gameSM.Initialise(blackHoleLevelState);
->>>>>>> Stashed changes
                 break;
             default:
                 gameSM.Initialise(introState);
@@ -201,8 +187,4 @@ public class GameManager : MonoBehaviour
     #endregion
 }
 
-<<<<<<< Updated upstream
-public enum GameStates { None, IntroMenu, Hangar, LevelOne, LevelTwo, LevelThree }
-=======
 public enum GameStates { None, IntroMenu, EndLevelState, Hangar, AsteroidField, Nebula, BlackHoles }
->>>>>>> Stashed changes
