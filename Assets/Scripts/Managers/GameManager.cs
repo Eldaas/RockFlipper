@@ -84,16 +84,9 @@ public class GameManager : MonoBehaviour
                 gameSM.ChangeState(introState);
                 break;
             case GameStates.Hangar:
-                //gameSM.Initialise(hangarState);
+                //gameSM.ChangeState(hangarState);
                 break;
             case GameStates.AsteroidField:
-                gameSM.Initialise(asteroidLevelState);
-                break;
-            case GameStates.Nebula:
-                gameSM.Initialise(nebulaLevelState);
-                break;
-            case GameStates.BlackHoles:
-                gameSM.Initialise(blackHoleLevelState);
                 gameSM.ChangeState(asteroidLevelState);
                 break;
             case GameStates.Nebula:
@@ -134,20 +127,14 @@ public class GameManager : MonoBehaviour
                 //gameSM.Initialise(hangarState);
                 break;
             case GameStates.AsteroidField:
-                gameSM.ChangeState(asteroidLevelState);
-                break;
-            case GameStates.Nebula:
-                gameSM.ChangeState(nebulaLevelState);
-                break;
-            case GameStates.BlackHoles:
-                gameSM.ChangeState(blackHoleLevelState);
                 gameSM.Initialise(asteroidLevelState);
                 break;
             case GameStates.Nebula:
                 gameSM.Initialise(nebulaLevelState);
                 break;
             case GameStates.BlackHoles:
-                gameSM.Initialise(blackHoleLevelState);
+                gameSM.ChangeState(blackHoleLevelState);
+                gameSM.Initialise(asteroidLevelState);
                 break;
             default:
                 gameSM.Initialise(introState);
