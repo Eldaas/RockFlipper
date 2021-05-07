@@ -1,14 +1,13 @@
 ﻿using UnityEngine.SceneManagement;
 
-public class BlackHoleLevelState : GameState
+public class GameLevelOneState : GameState
 {
-
-    public BlackHoleLevelState(GameManager manager, GameStateMachine stateMachine) : base(manager, stateMachine) { }
+    public AsteroidLevelState(GameManager manager, GameStateMachine stateMachine) : base(manager, stateMachine) { }
 
     public override void Enter()
     {
         base.Enter();
-        SceneManager.LoadScene("BlackHoleLevel");
+        SceneManager.LoadScene("PrototypeLevel");
         SceneManager.sceneLoaded += OnSceneLoaded;
         GameManager.instance.levelRecord = new LevelRecord();
     }
