@@ -1,9 +1,9 @@
 ﻿using UnityEngine.SceneManagement;
 
-public class GameLevelOneState : GameState
+public class AsteroidLevelState : GameState
 {
 
-    public GameLevelOneState(GameManager manager, GameStateMachine stateMachine) : base(manager, stateMachine) { }
+    public AsteroidLevelState(GameManager manager, GameStateMachine stateMachine) : base(manager, stateMachine) { }
 
     public override void Enter()
     {

@@ -108,40 +108,54 @@ public class Spawner : MonoBehaviour
         if (activeGasClouds.Count < currentGasCloudCap)
         {
             GameObject gasCloud = ObjectPooler.instance.GetPooledGasCloud();
-            Vector3 spawnPoint = GetHazardSpawnPoint();
-            float randomScaleFactor = Utility.GenerateRandomFloat(minGasCloudScaleFactor, maxGasCloudScaleFactor);
-            activeGasClouds.Add(gasCloud);
-            gasCloud.transform.position = spawnPoint;
-            gasCloud.transform.localScale = Vector3.one * randomScaleFactor;
-            gasCloud.SetActive(true);
+
+            if(gasCloud != null)
+            {
+                Vector3 spawnPoint = GetHazardSpawnPoint();
+                float randomScaleFactor = Utility.GenerateRandomFloat(minGasCloudScaleFactor, maxGasCloudScaleFactor);
+                activeGasClouds.Add(gasCloud);
+                gasCloud.transform.position = spawnPoint;
+                gasCloud.transform.localScale = Vector3.one * randomScaleFactor;
+                gasCloud.SetActive(true);
+            }
+            
         }
 
         if (activeBlackHoles.Count < currentBlackHoleCap)
         {
             GameObject blackHole = ObjectPooler.instance.GetPooledBlackHole();
-            Vector3 spawnPoint = GetHazardSpawnPoint();
-            float randomScaleFactor = Utility.GenerateRandomFloat(minBlackHoleScaleFactor, maxBlackHoleScaleFactor);
-            activeBlackHoles.Add(blackHole);
-            blackHole.transform.position = spawnPoint;
-            blackHole.transform.localScale = Vector3.one * randomScaleFactor;
-            blackHole.SetActive(true);
+
+            if (blackHole != null)
+            {
+                Vector3 spawnPoint = GetHazardSpawnPoint();
+                float randomScaleFactor = Utility.GenerateRandomFloat(minBlackHoleScaleFactor, maxBlackHoleScaleFactor);
+                activeBlackHoles.Add(blackHole);
+                blackHole.transform.position = spawnPoint;
+                blackHole.transform.localScale = Vector3.one * randomScaleFactor;
+                blackHole.SetActive(true);
+            }
         }
 
         if (activeBackgroundAsteroids.Count < ObjectPooler.instance.backgroundAsteroidCount)
         {
             GameObject asteroid = ObjectPooler.instance.GetPooledBackgroundAsteroid();
-            Vector3 spawnPoint = GetBackgroundSpawnPoint();
-            float randomScaleFactor = Utility.GenerateRandomFloat(minBackgroundScaleFactor, maxBackgroundScaleFactor);
-            activeBackgroundAsteroids.Add(asteroid);
-            asteroid.transform.position = spawnPoint;
-            asteroid.transform.localScale = Vector3.one * randomScaleFactor;
-            asteroid.SetActive(true);
+            
+            if(asteroid != null)
+            {
+                Vector3 spawnPoint = GetBackgroundSpawnPoint();
+                float randomScaleFactor = Utility.GenerateRandomFloat(minBackgroundScaleFactor, maxBackgroundScaleFactor);
+                activeBackgroundAsteroids.Add(asteroid);
+                asteroid.transform.position = spawnPoint;
+                asteroid.transform.localScale = Vector3.one * randomScaleFactor;
+                asteroid.SetActive(true);
+
+            }
         }
 
         if(activePowerups.Count < ObjectPooler.instance.powerupCount && Time.time > timeUntilNextPowerup)
         {
-            //Debug.Log("Attempting to spawn powerup.");
             GameObject powerup = ObjectPooler.instance.GetPooledPowerup();
+            
             if(powerup != null)
             {
                 Vector3 spawnPoint = GetPowerupSpawnPoint();
@@ -257,7 +271,7 @@ public class Spawner : MonoBehaviour
                 {
                     Rigidbody rb = blackHole.GetComponent<Rigidbody>();
                     // TO DO: Add black hole class
-                    activeGasClouds.Remove(blackHole);
+                    activeBlackHoles.Remove(blackHole);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                     // TO DO: Add black hole class
