@@ -12,4 +12,10 @@ public static class CreateFromTemplate
     {
         ProjectWindowUtil.CreateScriptAssetFromTemplateFile($"{path}/NewPowerupType.cs.txt", "NewPowerupType.cs");
     }
+
+    [MenuItem(itemName: "Assets/Create/Script Templates/New Game State", isValidateFunction: false, priority: 52)]
+    public static void NewGameState()
+    {
+        ProjectWindowUtil.CreateScriptAssetFromTemplateFile($"{path}/NewState.cs.txt", "NewState.cs");
+    }
 }

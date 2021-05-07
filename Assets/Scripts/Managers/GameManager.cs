@@ -7,37 +7,37 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    #region Temporary/Runtime Data
+    public LevelRecord levelRecord;
+    #endregion
+
+    #region Game State Definitions
     [HideInInspector]
     public GameStates startingState = GameStates.IntroMenu;
-
     private bool alreadyLoaded = false;
 
+    #region State Machine & Level States
     private GameStateMachine gameSM;
     private GameIntroMenuState introState;
+<<<<<<< Updated upstream
     private GameLevelOneState levelOneState;
+=======
+    private AsteroidLevelState asteroidLevelState;
+    private NebulaLevelState nebulaLevelState;
+    private BlackHoleLevelState blackHoleLevelState;
+    #endregion
+>>>>>>> Stashed changes
 
+    #endregion
+
+    #region Unity Methods
     private void Awake()
     {
         if(!alreadyLoaded)
         {
             instance = this;
 
-            /* Singleton may not be necessary any more with alreadyLoaded check
-            #region Singleton
-            GameManager[] list = FindObjectsOfType<GameManager>();
-            if (list.Length > 1)
-            {
-                Destroy(this);
-                Debug.Log("Multiple instances of the Game Manager component detected. Destroying an instance.");
-            }
-            else
-            {
-                instance = this;
-            }
-            #endregion
-            */
-
-            #region State Machine
+            #region Instantiate State Machine & Level States
 
             gameSM = new GameStateMachine();
             introState = new GameIntroMenuState(this, gameSM);
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
             #endregion
 
-            #region Events
+            #region Create Events
 
             SceneManager.sceneLoaded += OnSceneLoaded;
             AddEvents();
@@ -58,43 +58,18 @@ public class GameManager : MonoBehaviour
     {
         if(!alreadyLoaded)
         {
-            #region State Machine
+            #region Initialise State Machine
 
             InitialiseGameState();
 
             #endregion
         }
     }
-
-    #region State Machine
-
-    /// <summary>
-    /// In case the game commences from a scene which is not the intro menu, this method relies on the CheckForManagers script in the starting scene to tell this GameManager script what state it should start with. This method interprets and initialises that state.
-    /// </summary>
-    private void InitialiseGameState()
-    {
-        switch(startingState)
-        {
-            case GameStates.IntroMenu:
-                gameSM.Initialise(introState);
-                break;
-            case GameStates.Hangar:
-                //gameSM.Initialise(hangarState);
-                break;
-            case GameStates.LevelOne:
-                gameSM.Initialise(levelOneState);
-                break;
-            default:
-                gameSM.Initialise(introState);
-                break;
-        }
-
-        alreadyLoaded = true;
-    }
-
     #endregion
 
-    #region Level Loading Methods
+    #region State Machine Methods
+
+    #region Level Loading
 
     /// <summary>
     /// Game state machine method which can be called from other scripts. Triggers a change of state relative to the scene called.
@@ -112,8 +87,19 @@ public class GameManager : MonoBehaviour
             case GameStates.Hangar:
                 //gameSM.Initialise(hangarState);
                 break;
+<<<<<<< Updated upstream
             case GameStates.LevelOne:
-                gameSM.ChangeState(levelOneState);
+                gameSM.Initialise(levelOneState);
+=======
+            case GameStates.AsteroidField:
+                gameSM.ChangeState(asteroidLevelState);
+                break;
+            case GameStates.Nebula:
+                gameSM.ChangeState(nebulaLevelState);
+                break;
+            case GameStates.BlackHoles:
+                gameSM.ChangeState(blackHoleLevelState);
+>>>>>>> Stashed changes
                 break;
             default:
                 gameSM.ChangeState(introState);
@@ -132,7 +118,46 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region Events
+    #region Private Methods
+    /// <summary>
+    /// In case the game commences from a scene which is not the intro menu, this method relies on the CheckForManagers script in the starting scene to tell this GameManager script what state it should start with. This method interprets and initialises that state.
+    /// </summary>
+    private void InitialiseGameState()
+    {
+        switch (startingState)
+        {
+            case GameStates.IntroMenu:
+                gameSM.Initialise(introState);
+                break;
+            case GameStates.Hangar:
+                //gameSM.Initialise(hangarState);
+                break;
+<<<<<<< Updated upstream
+            case GameStates.LevelOne:
+                gameSM.ChangeState(levelOneState);
+=======
+            case GameStates.AsteroidField:
+                gameSM.Initialise(asteroidLevelState);
+                break;
+            case GameStates.Nebula:
+                gameSM.Initialise(nebulaLevelState);
+                break;
+            case GameStates.BlackHoles:
+                gameSM.Initialise(blackHoleLevelState);
+>>>>>>> Stashed changes
+                break;
+            default:
+                gameSM.Initialise(introState);
+                break;
+        }
+
+        alreadyLoaded = true;
+    }
+    #endregion
+
+    #endregion
+
+    #region Event Methods
     // Create all game events here. This pushes them to the EventManager dictionary, where other scripts/classes can trigger the events and/or register listeners.
     private void AddEvents()
     {
@@ -176,4 +201,8 @@ public class GameManager : MonoBehaviour
     #endregion
 }
 
+<<<<<<< Updated upstream
 public enum GameStates { None, IntroMenu, Hangar, LevelOne, LevelTwo, LevelThree }
+=======
+public enum GameStates { None, IntroMenu, EndLevelState, Hangar, AsteroidField, Nebula, BlackHoles }
+>>>>>>> Stashed changes
