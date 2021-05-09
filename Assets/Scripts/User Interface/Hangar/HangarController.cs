@@ -6,10 +6,10 @@ public class HangarController : MonoBehaviour
 {
     public static HangarController instance;
 
+    public bool testingMode = false;
     public GameObject endLevelScreen;
     public GameObject hangarScreen;
-    public Tallying tallying;
-    public bool isTallying = false;
+    
 
     private void Awake()
     {
@@ -29,17 +29,26 @@ public class HangarController : MonoBehaviour
 
     private void Start()
     {
+        if (testingMode)
+        {
+            Debug.Log("Testing mode is active.");
+            GameManager.instance.levelRecord = new LevelRecord();
+            GameManager.instance.levelRecord.ironCollected = 100;
+            GameManager.instance.levelRecord.silverCollected = 100;
+            GameManager.instance.levelRecord.goldCollected = 100;
+
+        }
+
         RegisterListeners();
+        ActivateUI();
     }
 
     public void ActivateUI()
     {
         if(GameManager.instance.levelRecord != null)
         {
-            isTallying = true;
             hangarScreen.SetActive(false);
             endLevelScreen.SetActive(true);
-            tallying.StartSequence();
         }
         else
         {
@@ -53,4 +62,9 @@ public class HangarController : MonoBehaviour
 
     }
     #endregion
+
+    private void TestingMode()
+    {
+
+    }
 }

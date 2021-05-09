@@ -66,7 +66,7 @@ public class ObjectPooler : MonoBehaviour
     private int particleHitFxCount;
     private List<GameObject> pooledParticleHitFx = new List<GameObject>();
 
-    [Header("Resource Particle FX")]
+    [Header("Resource Particle FX [DEPRECATED]")] 
     [SerializeField]
     private GameObject asteroidChunks;
     [SerializeField]
@@ -74,6 +74,26 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField]
     private int asteroidChunksCount;
     private List<GameObject> pooledAsteroidChunks = new List<GameObject>();
+
+    [Header("Resource Collectables")]
+    [SerializeField]
+    private GameObject ironPrefab;
+    [SerializeField]
+    private GameObject silverPrefab;
+    [SerializeField]
+    private GameObject goldPrefab;
+    [SerializeField]
+    private GameObject ironParent;
+    [SerializeField]
+    private GameObject silverParent;
+    [SerializeField]
+    private GameObject goldParent;
+    [SerializeField]
+    private int resourcesCount;
+    private List<GameObject> pooledIron = new List<GameObject>();
+    private List<GameObject> pooledSilver = new List<GameObject>();
+    private List<GameObject> pooledGold = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -192,13 +212,28 @@ public class ObjectPooler : MonoBehaviour
             pooledParticleHitFx.Add(go);
         }
 
-        for (int i = 0; i < asteroidChunksCount; i++)
+        for (int i = 0; i < resourcesCount; i++)
         {
-            GameObject go = Instantiate(asteroidChunks);
+            GameObject go = Instantiate(ironPrefab);
             go.name = go.name + " " + i;
-            go.transform.parent = asteroidChunksParent.transform;
+            go.transform.parent = ironParent.transform;
+            go.tag = "Iron";
             go.SetActive(false);
-            pooledAsteroidChunks.Add(go);
+            pooledIron.Add(go);
+
+            go = Instantiate(silverPrefab);
+            go.name = go.name + " " + i;
+            go.transform.parent = silverParent.transform;
+            go.tag = "Silver";
+            go.SetActive(false);
+            pooledSilver.Add(go);
+
+            go = Instantiate(goldPrefab);
+            go.name = go.name + " " + i;
+            go.transform.parent = goldParent.transform;
+            go.tag = "Gold";
+            go.SetActive(false);
+            pooledGold.Add(go);
         }
 
     }
@@ -296,16 +331,48 @@ public class ObjectPooler : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns the first inactive asteroid chunks particle in the hierarchy.
+    /// Returns the first inactive iron collectable in the hierarchy.
     /// </summary>
     /// <returns></returns>
-    public GameObject GetPooledAsteroidChunk()
+    public GameObject GetPooledIron()
     {
-        for (int i = 0; i < pooledAsteroidChunks.Count; i++)
+        for (int i = 0; i < pooledIron.Count; i++)
         {
-            if (!pooledAsteroidChunks[i].activeInHierarchy)
+            if (!pooledIron[i].activeInHierarchy)
             {
-                return pooledAsteroidChunks[i];
+                return pooledIron[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive silver collectable in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledSilver()
+    {
+        for (int i = 0; i < pooledSilver.Count; i++)
+        {
+            if (!pooledSilver[i].activeInHierarchy)
+            {
+                return pooledSilver[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive gold collectable in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledGold()
+    {
+        for (int i = 0; i < pooledGold.Count; i++)
+        {
+            if (!pooledGold[i].activeInHierarchy)
+            {
+                return pooledGold[i];
             }
         }
         return null;

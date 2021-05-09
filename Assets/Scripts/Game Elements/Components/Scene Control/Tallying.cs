@@ -9,9 +9,7 @@ public class Tallying : MonoBehaviour
     [SerializeField]
     private int maxToDrop;
     [SerializeField]
-    private float deltaTime;
     private float timeBetweenDrops;
-    private float timeSinceLastDrop;
 
     [SerializeField]
     private ParticleSystem ironParticles;
@@ -27,12 +25,12 @@ public class Tallying : MonoBehaviour
 
     private void Start()
     {
-        deltaTime = Time.time;
+        
     }
 
     private void Update()
     {
-        deltaTime += Time.deltaTime;
+        
     }
 
     public void StartSequence()
@@ -40,42 +38,34 @@ public class Tallying : MonoBehaviour
         ironCollected = GameManager.instance.levelRecord.ironCollected;
         silverCollected = GameManager.instance.levelRecord.silverCollected;
         goldCollected = GameManager.instance.levelRecord.goldCollected;
-        
 
+        StartCoroutine(DropResources());
     }
 
     private IEnumerator DropResources()
     {
-        while(ironCollected > 0)
+        int randomInt = Utility.GenerateRandomInt(minToDrop, maxToDrop);
+
+        while (ironCollected > 0)
         {
-            if(Time.time > deltaTime + timeBetweenDrops)
-            {
-                int randomInt = Utility.GenerateRandomInt(minToDrop, maxToDrop);
-                ParticleSystem.Burst burst = ironParticles.emission.GetBurst(0);
-                burst.count = randomInt;
-                ironParticles.emission.SetBurst(0, burst);
-            }
-            
-
-
-            yield return null;
+            ironParticles.Emit(randomInt);
+            ironCollected -= randomInt;
+            yield return new WaitForSeconds(timeBetweenDrops);
         }
 
-        while(silverCollected > 0)
+        while (silverCollected > 0)
         {
-            yield return null;
+            silverParticles.Emit(randomInt);
+            silverCollected -= randomInt;
+            yield return new WaitForSeconds(timeBetweenDrops);
         }
 
-        while(goldCollected > 0)
+        while (goldCollected > 0)
         {
-            yield return null;
+            goldParticles.Emit(randomInt);
+            goldCollected -= randomInt;
+            yield return new WaitForSeconds(timeBetweenDrops);
         }
-    }
-
-    private void SetBurstTime(ParticleSystem particles, float repeatRate)
-    {
-        ParticleSystem.Burst burst = particles.emission.GetBurst(0);
-
     }
 
 }

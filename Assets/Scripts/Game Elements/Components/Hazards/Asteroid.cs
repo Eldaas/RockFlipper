@@ -20,6 +20,9 @@ public class Asteroid : Hazard
     [SerializeField]
     private int dropYieldMax;
     
+    delegate GameObject GetPooledObject();
+    GetPooledObject getPooledObject;
+    
 
     #region Public Methods
     /// <summary>
@@ -83,11 +86,50 @@ public class Asteroid : Hazard
     #endregion
 
     #region Private Methods
+    private void SpawnCollectables()
+    {
+        int numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
+        
+        for (int i = 0; i < numToSpawn; i++)
+        {
+            GameObject go = getPooledObject();
 
-    
+            if(go != null)
+            {
+                go.transform.position = transform.position + Utility.GenerateRandomOffset(new Vector3(-0.5f, 0f, -0.5f), new Vector3(0.5f, 0f, 0.5f));
+                go.SetActive(true);
+
+                Rigidbody rb = go.GetComponent<Rigidbody>();
+                rb.AddExplosionForce(1200f * transform.localScale.magnitude, transform.position, 1000f);
+            }
+        }
+    }
+
+    private void AssignDelegate()
+    {
+        if (asteroidType == AsteroidType.Iron)
+        {
+            getPooledObject = ObjectPooler.instance.GetPooledIron;
+        }
+        else if (asteroidType == AsteroidType.Silver)
+        {
+            getPooledObject = ObjectPooler.instance.GetPooledSilver;
+        }
+        else if (asteroidType == AsteroidType.Gold)
+        {
+            getPooledObject = ObjectPooler.instance.GetPooledGold;
+        }
+    }
+
     #endregion
 
     #region Unity Methods
+
+    private void Awake()
+    {
+        AssignDelegate();
+    }
+
     protected override void OnCollisionEnter(Collision collision)
     {
         /*base.OnCollisionEnter(collision);
@@ -125,52 +167,7 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                // Get a pooled resource particles prefab
-                GameObject asteroidChunks = ObjectPooler.instance.GetPooledAsteroidChunk();
-                if (asteroidChunks)
-                {
-                    // Set the number of particles to spawn (this equals the number of resource units dropped)
-                    ParticleSystem asteroidChunksParticles = asteroidChunks.GetComponent<ParticleSystem>();
-
-                    ParticleSystem.Burst burst = asteroidChunksParticles.emission.GetBurst(0);
-                    burst.minCount = (short)dropYieldMin;
-                    burst.maxCount = (short)dropYieldMax;
-                    asteroidChunksParticles.emission.SetBurst(0, burst);
-
-                    //burst.count = new ParticleSystem.MinMaxCurve(dropYieldMin, dropYieldMax);
-                    //Debug.Log(burst.count);
-
-                    // Set the material on the particles to match the type of asteroid, set its position, set active and start reset coroutine
-                    ParticleSystemRenderer asteroidChunksRenderer = asteroidChunks.GetComponent<ParticleSystemRenderer>();
-                    Material[] mats = asteroidChunksRenderer.materials;
-
-                    switch (asteroidType)
-                    {
-                        case AsteroidType.Iron:
-                            mats[0] = data.ironMaterial;
-                            asteroidChunksRenderer.tag = "Iron";
-                            break;
-                        case AsteroidType.Silver:
-                            mats[0] = data.silverMaterial;
-                            asteroidChunksRenderer.tag = "Silver";
-                            break;
-                        case AsteroidType.Gold:
-                            mats[0] = data.goldMaterial;
-                            asteroidChunksRenderer.tag = "Gold";
-                            break;
-                        default:
-                            Debug.Log("Couldn't find the appropriate material for the asteroid.");
-                            break;
-                    }
-
-                    asteroidChunksRenderer.materials = mats;
-                    asteroidChunks.transform.position = transform.position;
-                    asteroidChunks.SetActive(true);
-                    ParticleSystem asteroidChunkParticles = asteroidChunks.GetComponent<ParticleSystem>();
-                    IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(asteroidChunks, asteroidChunkParticles.main.startLifetime.constant);
-                    ObjectPooler.instance.StartCoroutine(coroutine);
-                }
-
+                SpawnCollectables();
                 ExplodeAsteroid(120000f * transform.localScale.magnitude, 1000f);
             }
 

@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
 
             gameSM = new GameStateMachine();
             introState = new GameIntroMenuState(this, gameSM);
+            hangarState = new HangarState(this, gameSM);
             asteroidLevelState = new AsteroidLevelState(this, gameSM);
             nebulaLevelState = new NebulaLevelState(this, gameSM);
             blackHoleLevelState = new BlackHoleLevelState(this, gameSM);
@@ -108,7 +109,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        UIManager.instance.loadScreen.SetActive(false);
+        UIManager.instance.StartCoroutine("DeactivateLoadScreen");
     }
 
     #endregion
@@ -175,11 +176,11 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ProjectileHit");
         EventManager.AddEvent("ProjectileShot");
         EventManager.AddEvent("SpaceSceneLoaded");
+        EventManager.AddEvent("ReturningToBase");
 
         // Scene-specific events
         EventManager.AddEvent("IntroSceneLoaded");
         EventManager.AddEvent("HangarSceneLoaded");
-        EventManager.AddEvent("EndLevelSceneLoaded");
         EventManager.AddEvent("AsteroidFieldSceneLoaded");
 
         // UI Events

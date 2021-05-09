@@ -35,10 +35,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip mediumAsteroidExplosion;
     public AudioClip uiSelect;
     public AudioClip uiSuccess;
+    public AudioClip returningToBase;
 
     [Header("Music Track Clips")]
     public AudioClip[] asteroidFieldMusicTracks;
-    public AudioClip[] endLevelMusicTracks;
     public AudioClip[] hangarMusicTracks;
     public AudioClip[] introMenuMusicTracks;
 
@@ -53,11 +53,11 @@ public class AudioManager : MonoBehaviour
     private UnityAction mediumAsteroidExplosionDelegate;
     private UnityAction spaceSceneLoadedDelegate;
     private UnityAction asteroidFieldSceneLoadedDelegate;
-    private UnityAction endLevelSceneLoadedDelegate;
     private UnityAction hangarSceneLoadedDelegate;
     private UnityAction introMenuSceneLoadedDelegate;
     private UnityAction uiButtonOptionSelectDelegate;
     private UnityAction uiSuccessDelegate;
+    private UnityAction returningToBaseDelegate;
     
 
     #endregion
@@ -127,11 +127,17 @@ public class AudioManager : MonoBehaviour
         introMenuSceneLoadedDelegate = PlayIntroMenuMusic;
         EventManager.StartListening("IntroSceneLoaded", introMenuSceneLoadedDelegate);
 
+        hangarSceneLoadedDelegate = PlayHangarSceneMusic;
+        EventManager.StartListening("HangarSceneLoaded", hangarSceneLoadedDelegate);
+
         uiButtonOptionSelectDelegate = PlayUiButtonOptionSelect;
         EventManager.StartListening("UIButtonOptionSelected", uiButtonOptionSelectDelegate);
 
         uiSuccessDelegate = PlayUiSuccess;
         EventManager.StartListening("UISuccess", uiSuccessDelegate);
+
+        returningToBaseDelegate = PlayReturningToBase;
+        EventManager.StartListening("ReturningToBase", returningToBaseDelegate);
     }
 
     private void PlayMusicTrack(AudioClip track)
@@ -157,7 +163,11 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     private void PlayResourceCollect()
     {
-        PlayOneShot(collectionPops, resourceCollect);
+        if(!collectionPops.isPlaying)
+        {
+            PlayOneShot(collectionPops, resourceCollect);
+        }
+        
     }
 
     /// <summary>
@@ -221,11 +231,28 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Selects a random track from the inspector-assigned list and plays as background music for the hangar scene.
+    /// </summary>
+    private void PlayHangarSceneMusic()
+    {
+        AudioClip clip = SelectRandomClip(hangarMusicTracks);
+        PlayMusicTrack(clip);
+    }
+
+    /// <summary>
     /// Plays the UI success sound - for example, when you successfully load a profile
     /// </summary>
     private void PlayUiSuccess()
     {
         PlayOneShot(uiSounds, uiSuccess);
+    }
+
+    /// <summary>
+    /// Plays an audio clip when the 'returning to base' event is triggered.
+    /// </summary>
+    private void PlayReturningToBase()
+    {
+        PlayOneShot(shipSounds, returningToBase);
     }
     #endregion
 
