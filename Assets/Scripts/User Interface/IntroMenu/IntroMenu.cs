@@ -101,9 +101,7 @@ public class IntroMenu : UIController
     private void VisitHangar()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
-
-        // Temporarily routes to level one
-        GameManager.instance.LoadLevel(GameStates.AsteroidField);
+        GameManager.instance.LoadLevel(GameStates.Hangar);
         
     }
 

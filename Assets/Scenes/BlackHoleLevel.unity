@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944aa4200b880a542883c7a1916225dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
   asteroidPrefabs:
   - {fileID: 9136241691538090517, guid: c03eda8c0bda4394ba2194ba0277f625, type: 3}
   - {fileID: 101637789934826660, guid: 6fab4e7ad1c668543938ccc0e4aac413, type: 3}
@@ -428,6 +429,13 @@ MonoBehaviour:
     type: 3}
   asteroidChunksParent: {fileID: 316212507}
   asteroidChunksCount: 100
+  ironPrefab: {fileID: 0}
+  silverPrefab: {fileID: 0}
+  goldPrefab: {fileID: 0}
+  ironParent: {fileID: 0}
+  silverParent: {fileID: 0}
+  goldParent: {fileID: 0}
+  resourcesCount: 0
 --- !u!222 &466368810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -811,6 +819,9 @@ MonoBehaviour:
   activeBackgroundAsteroids: []
   minBackgroundScaleFactor: 1
   maxBackgroundScaleFactor: 1.5
+  activeIron: []
+  activeSilver: []
+  activeGold: []
 --- !u!1 &1420865004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 498689986292496399, guid: 2fddc4c8b71f41e46bc96011ac645d13,
@@ -1289,6 +1300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetFromPlayer: {x: 0, y: 263.979, z: -433}
+  following: 1
 --- !u!81 &1924625037
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1730,7 +1742,7 @@ PrefabInstance:
     - target: {fileID: 1513998050280720734, guid: ac41994f412a5244daf0e6ef93c88a28,
         type: 3}
       propertyPath: startingState
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1513998050280720735, guid: ac41994f412a5244daf0e6ef93c88a28,
         type: 3}
@@ -1890,6 +1902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetFromPlayer: {x: 0, y: 263.979, z: -433}
+  following: 1
 --- !u!20 &1930152486028216238
 Camera:
   m_ObjectHideFlags: 0
@@ -2286,6 +2299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetFromPlayer: {x: 0, y: 750, z: 40}
+  following: 1
 --- !u!1 &5095452373757286006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,6 +2399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetFromPlayer: {x: 0, y: 750, z: 40}
+  following: 1
 --- !u!1 &9029402821037411072
 GameObject:
   m_ObjectHideFlags: 0

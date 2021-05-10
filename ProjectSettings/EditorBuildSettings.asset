@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroScene.unity
     guid: fe553d98139ac9d4c8c64a9ad36e4e06
   - enabled: 1
+    path: Assets/Scenes/HangarScene.unity
+    guid: 8c01e80dce2a2704f84dab188c50d142
+  - enabled: 1
     path: Assets/Scenes/PrototypeLevel.unity
     guid: 50fec48662712c94ebb87dfb65225d2c
   - enabled: 1

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     #region State Machine & Level States
     private GameStateMachine gameSM;
     private GameIntroMenuState introState;
+    private HangarState hangarState;
     private AsteroidLevelState asteroidLevelState;
     private NebulaLevelState nebulaLevelState;
     private BlackHoleLevelState blackHoleLevelState;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
 
             gameSM = new GameStateMachine();
             introState = new GameIntroMenuState(this, gameSM);
+            hangarState = new HangarState(this, gameSM);
             asteroidLevelState = new AsteroidLevelState(this, gameSM);
             nebulaLevelState = new NebulaLevelState(this, gameSM);
             blackHoleLevelState = new BlackHoleLevelState(this, gameSM);
@@ -77,6 +79,8 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(GameStates state)
     {
         UIManager.instance.loadScreen.SetActive(true);
+        ProfileManager.instance.SaveProfile();
+        Debug.Log("Current state: " + gameSM.CurrentState + ", now loading: " + state.ToString());
 
         switch (state)
         {
@@ -84,7 +88,7 @@ public class GameManager : MonoBehaviour
                 gameSM.ChangeState(introState);
                 break;
             case GameStates.Hangar:
-                //gameSM.ChangeState(hangarState);
+                gameSM.ChangeState(hangarState);
                 break;
             case GameStates.AsteroidField:
                 gameSM.ChangeState(asteroidLevelState);
@@ -107,7 +111,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        UIManager.instance.loadScreen.SetActive(false);
+        UIManager.instance.StartCoroutine("DeactivateLoadScreen");
     }
 
     #endregion
@@ -124,7 +128,7 @@ public class GameManager : MonoBehaviour
                 gameSM.Initialise(introState);
                 break;
             case GameStates.Hangar:
-                //gameSM.Initialise(hangarState);
+                gameSM.Initialise(hangarState);
                 break;
             case GameStates.AsteroidField:
                 gameSM.Initialise(asteroidLevelState);
@@ -133,7 +137,6 @@ public class GameManager : MonoBehaviour
                 gameSM.Initialise(nebulaLevelState);
                 break;
             case GameStates.BlackHoles:
-                gameSM.ChangeState(blackHoleLevelState);
                 gameSM.Initialise(asteroidLevelState);
                 break;
             default:
@@ -175,20 +178,26 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ProjectileHit");
         EventManager.AddEvent("ProjectileShot");
         EventManager.AddEvent("SpaceSceneLoaded");
+        EventManager.AddEvent("ReturningToBase");
 
-        // Scene-specific events
+        // Scene load events
         EventManager.AddEvent("IntroSceneLoaded");
         EventManager.AddEvent("HangarSceneLoaded");
-        EventManager.AddEvent("EndLevelSceneLoaded");
         EventManager.AddEvent("AsteroidFieldSceneLoaded");
+        EventManager.AddEvent("NebulaSceneLoaded");
+        EventManager.AddEvent("BlackHoleSceneLoaded");
 
-        // UI Events
+        // Global UI Events
         EventManager.AddEvent("UIButtonOptionSelected");
         EventManager.AddEvent("UISuccess");
         EventManager.AddEvent("LoadProfiles");
         EventManager.AddEvent("UpdateProfileSelection");
+
+        // Hangar Scene Events
+        EventManager.AddEvent("SellResources");
+        EventManager.AddEvent("UpdateBalance");
     }
     #endregion
 }
 
-public enum GameStates { None, IntroMenu, EndLevelState, Hangar, AsteroidField, Nebula, BlackHoles }
+public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles }

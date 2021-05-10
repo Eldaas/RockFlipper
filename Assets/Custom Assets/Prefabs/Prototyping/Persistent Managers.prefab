@@ -58,8 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -236,12 +236,11 @@ MonoBehaviour:
     type: 3}
   mediumAsteroidExplosion: {fileID: 8300000, guid: ed09eebeda20fdf4795fc9bca06f9944,
     type: 3}
-  uiMouseOver: {fileID: 8300000, guid: 1ab231a274c307f47a80ef32076a1f8c, type: 3}
   uiSelect: {fileID: 8300000, guid: a9bc057975e25d74c871f788def3be64, type: 3}
+  uiSuccess: {fileID: 0}
+  returningToBase: {fileID: 0}
   asteroidFieldMusicTracks:
   - {fileID: 8300000, guid: 9ee07ba3d0e238f4195c599cd18eb18c, type: 3}
-  endLevelMusicTracks:
-  - {fileID: 8300000, guid: 0720cf10138cb9a4099e388df20c6ea0, type: 3}
   hangarMusicTracks:
   - {fileID: 8300000, guid: 94d79737103fd944690135013ede179c, type: 3}
   introMenuMusicTracks:
@@ -1208,7 +1207,7 @@ GameObject:
   - component: {fileID: 7258296971294507556}
   m_Layer: 0
   m_Name: ProfileManager
-  m_TagString: Untagged
+  m_TagString: ProfileManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1243,3 +1242,4 @@ MonoBehaviour:
     profileName: 
     balance: 0
     reputation: 0
+  fileNames: []

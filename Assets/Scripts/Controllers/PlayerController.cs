@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [ExecuteInEditMode]
 public class PlayerController : MonoBehaviour
@@ -20,17 +21,24 @@ public class PlayerController : MonoBehaviour
     public float horizontalDrag = 0f;
     public float maxHorizontalVelocity;
     public float forceMultiplier;
-    
+
+    [Header("Misc")]
+    public bool locked = false;
+
+    [Header("Events")]
+    private UnityAction returningToBaseDelegate;
+
+    #region Unity Methods
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         player = GetComponent<Player>();
-
     }
 
     private void Start()
     {
+        RegisterListeners();
         InvokeRepeating("RaiseMaximumVelocity", 1f, 1f);
     }
 
@@ -40,7 +48,8 @@ public class PlayerController : MonoBehaviour
 
         HandleVelocity();
 
-
+        if(!locked)
+        {
 #if UNITY_ANDROID
 
         input = joystick.Horizontal;
@@ -49,52 +58,85 @@ public class PlayerController : MonoBehaviour
 
 #if UNITY_STANDALONE_WIN
 
-        input = Input.GetAxis("Horizontal");
+            input = Input.GetAxis("Horizontal");
 
 #endif
-        HandleHorizontal(input);
-        anim.SetFloat("Roll", input);
+            HandleHorizontal(input);
+            anim.SetFloat("Roll", input);
 
-        if (Input.GetButtonDown("Shoot"))
-        {
-            GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
-            if(parentGo)
+            if (Input.GetButtonDown("Shoot"))
             {
-                // Get parent particle system and set the location
-                Transform parentObject = parentGo.GetComponentInParent<Transform>();
-                parentGo.transform.position = parentObject.position;
-
-                // Get the children particle systems
-                ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
-
-                // Find the particle system responsible for the projectile
-                for (int i = 0; i < children.Length; i++)
+                GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
+                if (parentGo)
                 {
-                    if (children[i].CompareTag("Projectile"))
+                    // Get parent particle system and set the location
+                    Transform parentObject = parentGo.GetComponentInParent<Transform>();
+                    parentGo.transform.position = parentObject.position;
+
+                    // Get the children particle systems
+                    ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
+
+                    // Find the particle system responsible for the projectile
+                    for (int i = 0; i < children.Length; i++)
                     {
-                        ParticleSystem projectileParticle = children[i];
+                        if (children[i].CompareTag("Projectile"))
+                        {
+                            ParticleSystem projectileParticle = children[i];
 
-                        /* FOR DEBUG PURPOSES
-                        int randomInt = Utility.GenerateRandomInt(0, 1000);
-                        string projectileName = "Projectile " + randomInt.ToString();
-                        projectileParticle.gameObject.name = projectileName;
-                        Debug.Log("Projectile particle " + projectileParticle.gameObject.name + " is currently active?: " + projectileParticle.gameObject.activeSelf);
-                        */
+                            /* FOR DEBUG PURPOSES
+                            int randomInt = Utility.GenerateRandomInt(0, 1000);
+                            string projectileName = "Projectile " + randomInt.ToString();
+                            projectileParticle.gameObject.name = projectileName;
+                            Debug.Log("Projectile particle " + projectileParticle.gameObject.name + " is currently active?: " + projectileParticle.gameObject.activeSelf);
+                            */
 
-                        parentGo.SetActive(true);
-                        ParticleSystem.MainModule main = projectileParticle.main;
-                        main.startSpeed = 300 + rb.velocity.z;
+                            parentGo.SetActive(true);
+                            ParticleSystem.MainModule main = projectileParticle.main;
+                            main.startSpeed = 300 + rb.velocity.z;
 
-                        IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
-                        StartCoroutine(coroutine);
-                        EventManager.TriggerEvent("ProjectileShot");
-                        break;
+                            IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
+                            StartCoroutine(coroutine);
+                            EventManager.TriggerEvent("ProjectileShot");
+                            break;
+                        }
                     }
                 }
             }
         }
+
+    }
+    #endregion
+
+    #region Public Methods
+    public void AddExternalForce(Vector3 direction, float forceValue)
+    {
+        rb.AddForce(direction * forceValue);
     }
 
+    public void AddExternalForce(Vector3 direction, float forceValue, ForceMode forceMode)
+    {
+        rb.AddForce(direction * forceValue, forceMode);
+    }
+    #endregion
+
+    #region Private Methods
+    private void RegisterListeners()
+    {
+        returningToBaseDelegate = LockInput;
+        EventManager.StartListening("ReturningToBase", returningToBaseDelegate);
+    }
+
+    /// <summary>
+    /// Locks player input.
+    /// </summary>
+    private void LockInput()
+    {
+        locked = true;
+    }
+
+    /// <summary>
+    /// Manages the player's velocity.
+    /// </summary>
     private void HandleVelocity()
     {
         // Speed up
@@ -109,6 +151,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manages the player's horizontal movement.
+    /// </summary>
+    /// <param name="axis"></param>
     private void HandleHorizontal(float axis)
     {
         horizontalMove = axis * forceMultiplier;
@@ -154,6 +200,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Continually ramps up the player's maximum velocity, so they gain speed and the level becomes more challenging.
+    /// </summary>
     private void RaiseMaximumVelocity()
     {
         if(player.stats.currentMaximumVelocity < player.stats.velocityCap)
@@ -162,14 +211,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AddExternalForce(Vector3 direction, float forceValue)
-    {
-        rb.AddForce(direction * forceValue);
-    }
-
-    public void AddExternalForce(Vector3 direction, float forceValue, ForceMode forceMode)
-    {
-        rb.AddForce(direction * forceValue, forceMode);
-    }
+    #endregion
 
 }

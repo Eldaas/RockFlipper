@@ -6,6 +6,6 @@ using UnityEngine;
 public class PlayerProfile
 {
     public string profileName;
-    public int balance;
+    public float balance;
     public float reputation;
 }
