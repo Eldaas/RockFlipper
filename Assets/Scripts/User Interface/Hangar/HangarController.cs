@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HangarController : MonoBehaviour
 {
     public static HangarController instance;
 
-    public bool testingMode = false;
-    public GameObject endLevelScreen;
-    public GameObject hangarScreen;
-    
+    [SerializeField]
+    private HangarUI hangarUi;
+
+    [Header("Game Data")]
+    public ResourceValues resources;
 
     private void Awake()
     {
@@ -29,17 +31,8 @@ public class HangarController : MonoBehaviour
 
     private void Start()
     {
-        if (testingMode)
-        {
-            Debug.Log("Testing mode is active.");
-            GameManager.instance.levelRecord = new LevelRecord();
-            GameManager.instance.levelRecord.ironCollected = 100;
-            GameManager.instance.levelRecord.silverCollected = 100;
-            GameManager.instance.levelRecord.goldCollected = 100;
-
-        }
-
         RegisterListeners();
+        hangarUi.RegisterListeners();
         ActivateUI();
     }
 
@@ -47,19 +40,43 @@ public class HangarController : MonoBehaviour
     {
         if(GameManager.instance.levelRecord != null)
         {
-            hangarScreen.SetActive(false);
-            endLevelScreen.SetActive(true);
+            CalculateResources();
+            hangarUi.SetScreen(HangarUIScreen.EndLevel, true);
+            hangarUi.SetScreen(HangarUIScreen.Main, false);
+            SellResources();
         }
         else
         {
-            hangarScreen.SetActive(true);
+            EventManager.TriggerEvent("UpdateBalance");
+            Debug.Log("Event triggered.");
+            hangarUi.SetScreen(HangarUIScreen.Main, true);
         }
     }
 
     #region Private Methods
     private void RegisterListeners()
     {
+    }
 
+    private void CalculateResources()
+    {
+        LevelRecord record = GameManager.instance.levelRecord;
+
+        record.ironTotalValue = record.ironCollected * resources.ironValue;
+        record.silverTotalValue = record.silverCollected * resources.silverValue;
+        record.goldTotalValue = record.goldCollected * resources.goldValue;
+    }
+
+    private void SellResources()
+    {
+        Debug.Log("Sell Resources called");
+        LevelRecord record = GameManager.instance.levelRecord;
+
+        float total = record.ironTotalValue + record.silverTotalValue + record.goldTotalValue;
+        ProfileManager.instance.currentProfile.balance += total;
+        ProfileManager.instance.SaveProfile();
+        GameManager.instance.levelRecord = null;
+        EventManager.TriggerEvent("UpdateBalance");
     }
     #endregion
 

@@ -50,6 +50,11 @@ public class Spawner : MonoBehaviour
     public float minBackgroundScaleFactor;
     public float maxBackgroundScaleFactor;
 
+    [Header("Collectables: Resources")]
+    public List<GameObject> activeIron = new List<GameObject>();
+    public List<GameObject> activeSilver = new List<GameObject>();
+    public List<GameObject> activeGold = new List<GameObject>();
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -303,7 +308,43 @@ public class Spawner : MonoBehaviour
                 }
             }
         }
-        
+
+        if(activeIron.Count > 0)
+        {
+            foreach (GameObject iron in activeIron.ToArray())
+            {
+                if (iron.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
+                {
+                    activeIron.Remove(iron);
+                    iron.SetActive(false);
+                }
+            }
+        }
+
+        if (activeSilver.Count > 0)
+        {
+            foreach (GameObject silver in activeSilver.ToArray())
+            {
+                if (silver.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
+                {
+                    activeSilver.Remove(silver);
+                    silver.SetActive(false);
+                }
+            }
+        }
+
+        if (activeGold.Count > 0)
+        {
+            foreach (GameObject gold in activeGold.ToArray())
+            {
+                if (gold.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
+                {
+                    activeGold.Remove(gold);
+                    gold.SetActive(false);
+                }
+            }
+        }
+
     }
 
     private void PopulateBackgroundField()

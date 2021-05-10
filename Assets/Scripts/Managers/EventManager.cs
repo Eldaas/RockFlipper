@@ -20,7 +20,7 @@ public class EventManager : MonoBehaviour
 
                 if (!eventManager)
                 {
-                    Debug.LogError("Please add an event manager to the scene!");
+                    Debug.LogError("Please add an event manager to the scene! If this appears in the console with a NullReferenceException when the game has stopped, please ignore.");
                 }
                 else
                 {

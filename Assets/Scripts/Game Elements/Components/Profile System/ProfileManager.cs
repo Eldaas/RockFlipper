@@ -8,7 +8,7 @@ public class ProfileManager : MonoBehaviour
 {
     public static ProfileManager instance;
 
-    public PlayerProfile currentProfile = null;
+    public PlayerProfile currentProfile;
 
     private string dataPath;
     private FileInfo[] files;
@@ -45,6 +45,7 @@ public class ProfileManager : MonoBehaviour
     #region Public Methods
     public bool CreateNewProfile(string name)
     {
+        Debug.Log("Attempting to create a new profile with name " + name);
         // TO DO: Add validation to ensure no illegal characters entered
         if(File.Exists(dataPath + name + ".json"))
         {
@@ -62,6 +63,7 @@ public class ProfileManager : MonoBehaviour
             SaveProfile();
             EventManager.TriggerEvent("LoadProfiles");
             EventManager.TriggerEvent("UpdateProfileSelection");
+            Debug.Log("Successfully created a profile with name " + name);
             return true;
         }
         
@@ -90,26 +92,28 @@ public class ProfileManager : MonoBehaviour
         EventManager.TriggerEvent("UpdateProfileSelection");
     }
 
-    public void LoadProfile(string name)
+    public bool LoadProfile(string name)
     {
         Debug.Log("LoadProfile called with name " + name);
         if(currentProfile.profileName != string.Empty)
         {
-            Debug.Log("Current profile is not null.");
             SaveProfile();
         }
 
         bool found = false;
 
-        foreach(FileInfo file in files)
+        if(files != null)
         {
-            if(file.Name == name + ".json")
+            foreach (FileInfo file in files)
             {
-                found = true;
-                break;
+                if (file.Name == name + ".json")
+                {
+                    found = true;
+                    break;
+                }
             }
         }
-
+        
         if(found)
         {
             string fileContents = File.ReadAllText(dataPath + name + ".json");
@@ -118,10 +122,12 @@ public class ProfileManager : MonoBehaviour
             EventManager.TriggerEvent("UISuccess");
 
             Debug.Log("Successfully loaded player profile named " + name);
+            return true;
         }
         else
         {
-            Debug.LogError("Could not load profile, as the passed name did not match any file names.");
+            Debug.Log("Could not load profile, as the passed name did not match any file names.");
+            return false;
         }
     }
 

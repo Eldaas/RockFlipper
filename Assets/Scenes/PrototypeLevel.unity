@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944aa4200b880a542883c7a1916225dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 1382425569}
   asteroidPrefabs:
   - {fileID: 9136241691538090517, guid: c03eda8c0bda4394ba2194ba0277f625, type: 3}
   - {fileID: 101637789934826660, guid: 6fab4e7ad1c668543938ccc0e4aac413, type: 3}
@@ -890,6 +891,9 @@ MonoBehaviour:
   activeBackgroundAsteroids: []
   minBackgroundScaleFactor: 1
   maxBackgroundScaleFactor: 1.5
+  activeIron: []
+  activeSilver: []
+  activeGold: []
 --- !u!1 &1420865004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 498689986292496399, guid: 2fddc4c8b71f41e46bc96011ac645d13,

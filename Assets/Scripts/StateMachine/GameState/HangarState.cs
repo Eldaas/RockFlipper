@@ -32,7 +32,6 @@ public class HangarState : GameState
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         EventManager.TriggerEvent("HangarSceneLoaded");
-        HangarController.instance.ActivateUI();
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

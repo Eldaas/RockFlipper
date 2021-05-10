@@ -6,6 +6,8 @@ public class ObjectPooler : MonoBehaviour
 {
 
     public static ObjectPooler instance;
+    [SerializeField]
+    private Spawner spawner;
 
     [Header("Hazard: Asteroids")]
     [SerializeField]
@@ -340,6 +342,7 @@ public class ObjectPooler : MonoBehaviour
         {
             if (!pooledIron[i].activeInHierarchy)
             {
+                spawner.activeIron.Add(pooledIron[i]);
                 return pooledIron[i];
             }
         }
@@ -356,6 +359,7 @@ public class ObjectPooler : MonoBehaviour
         {
             if (!pooledSilver[i].activeInHierarchy)
             {
+                spawner.activeSilver.Add(pooledSilver[i]);
                 return pooledSilver[i];
             }
         }
@@ -372,6 +376,7 @@ public class ObjectPooler : MonoBehaviour
         {
             if (!pooledGold[i].activeInHierarchy)
             {
+                spawner.activeGold.Add(pooledGold[i]);
                 return pooledGold[i];
             }
         }

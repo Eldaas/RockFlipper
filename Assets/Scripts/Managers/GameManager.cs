@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(GameStates state)
     {
         UIManager.instance.loadScreen.SetActive(true);
+        ProfileManager.instance.SaveProfile();
+        Debug.Log("Current state: " + gameSM.CurrentState + ", now loading: " + state.ToString());
 
         switch (state)
         {
@@ -178,16 +180,22 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("SpaceSceneLoaded");
         EventManager.AddEvent("ReturningToBase");
 
-        // Scene-specific events
+        // Scene load events
         EventManager.AddEvent("IntroSceneLoaded");
         EventManager.AddEvent("HangarSceneLoaded");
         EventManager.AddEvent("AsteroidFieldSceneLoaded");
+        EventManager.AddEvent("NebulaSceneLoaded");
+        EventManager.AddEvent("BlackHoleSceneLoaded");
 
-        // UI Events
+        // Global UI Events
         EventManager.AddEvent("UIButtonOptionSelected");
         EventManager.AddEvent("UISuccess");
         EventManager.AddEvent("LoadProfiles");
         EventManager.AddEvent("UpdateProfileSelection");
+
+        // Hangar Scene Events
+        EventManager.AddEvent("SellResources");
+        EventManager.AddEvent("UpdateBalance");
     }
     #endregion
 }

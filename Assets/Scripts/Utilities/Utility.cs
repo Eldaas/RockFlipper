@@ -33,6 +33,7 @@ public static class Utility
 
     public static void QuitGame()
     {
+        ProfileManager.instance.SaveProfile();
         Application.Quit();
     }
 

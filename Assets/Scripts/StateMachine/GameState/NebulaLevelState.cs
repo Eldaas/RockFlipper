@@ -16,8 +16,6 @@ public class NebulaLevelState : GameState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
-        
     }
 
     public override void PhysicsUpdate()
