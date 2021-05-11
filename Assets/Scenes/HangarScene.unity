@@ -3102,6 +3102,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numToGenerate: 0
   refreshEveryXSeconds: 0
+  equipmentProfiles: []
+  strengthRarityCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  numEffectsCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &421616260
 GameObject:
   m_ObjectHideFlags: 0
