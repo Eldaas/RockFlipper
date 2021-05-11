@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
         // Hangar Scene Events
         EventManager.AddEvent("SellResources");
         EventManager.AddEvent("UpdateBalance");
+        EventManager.AddEvent("GenerateShopItems");
     }
     #endregion
 }
