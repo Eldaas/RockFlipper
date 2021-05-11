@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     [Header("Horizontal Movement")]
     private float input;
     public Joystick joystick;
-    public float horizontalSpeed;
     public float minX;
     public float maxX;
     public float horizontalMove = 0f;
@@ -44,8 +43,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        horizontalSpeed = player.stats.currentManeuveringSpeed;
-
         HandleVelocity();
 
         if(!locked)
@@ -140,12 +137,12 @@ public class PlayerController : MonoBehaviour
     private void HandleVelocity()
     {
         // Speed up
-        if(rb.velocity.z < player.stats.currentMaximumVelocity)
+        if(rb.velocity.z < player.stats.CurrentMaximumVelocity)
         {
-            rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
+            rb.AddForce(Vector3.forward * player.stats.CurrentForwardThrust);
         }
         // Slow down
-        else if(rb.velocity.z > player.stats.currentMaximumVelocity)
+        else if(rb.velocity.z > player.stats.CurrentMaximumVelocity)
         {
             rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
         }
@@ -157,24 +154,25 @@ public class PlayerController : MonoBehaviour
     /// <param name="axis"></param>
     private void HandleHorizontal(float axis)
     {
-        horizontalMove = axis * forceMultiplier;
+        horizontalMove = axis * forceMultiplier * player.stats.CurrentManeuveringSpeed;
         Vector3 direction = Vector3.zero;
 
         if (transform.position.x >= minX && transform.position.x <= maxX)
         {
             direction = horizontalMove * Vector3.right;
 
-            if (horizontalMove < 0f && rb.velocity.x > -maxHorizontalVelocity)
+            if (horizontalMove < 0f && rb.velocity.x > -maxHorizontalVelocity * player.stats.CurrentManeuveringSpeed)
             {
                 rb.AddForce(direction, ForceMode.Impulse);
             }
             
-            if (horizontalMove > 0f && rb.velocity.x < maxHorizontalVelocity)
+            if (horizontalMove > 0f && rb.velocity.x < maxHorizontalVelocity * player.stats.CurrentManeuveringSpeed)
             {
                 rb.AddForce(direction, ForceMode.Impulse);
             }
         }
 
+        // Keep player inside the play area
         if (transform.position.x < minX)
         {
             transform.position = new Vector3(minX, transform.position.y, transform.position.z);
@@ -205,9 +203,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void RaiseMaximumVelocity()
     {
-        if(player.stats.currentMaximumVelocity < player.stats.velocityCap)
+        if(player.stats.CurrentMaximumVelocity < player.stats.hardVelocityCap)
         {
-            player.stats.currentMaximumVelocity++;
+            player.stats.maximumVelocityIncrementor++;
         }
     }
 

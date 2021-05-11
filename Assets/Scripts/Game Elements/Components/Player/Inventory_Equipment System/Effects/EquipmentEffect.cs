@@ -7,14 +7,16 @@ using UnityEngine;
 /// </summary>
 public class EquipmentEffect
 {
-    public EquipmentEffect(EquipmentEffectProfile inputProfile, int inputEffectStrength)
+    public EquipmentEffect(EquipmentEffectProfile inputProfile, float inputEffectStrength, float rarity)
     {
         profile = inputProfile;
         effectStrength = inputEffectStrength;
+        effectRarity = rarity;
     }
 
     public EquipmentEffectProfile profile;
-    public int effectStrength;
+    public float effectStrength;
+    public float effectRarity;
 
     #region Effect Implementation
     /// <summary>
@@ -24,47 +26,42 @@ public class EquipmentEffect
     {
         PlayerStats stats = EquipmentManager.instance.stats;
         EffectType effectType = profile.effectType;
+        Debug.Log("Applying effect type " + effectType.ToString() + " with strength " + effectStrength);
 
         switch(effectType)
         {
             case EffectType.ArmourCap:
-                stats.baseMaxArmour += effectStrength;
-                break;
-            case EffectType.ArmourRegen:
-                // NOT IMPLEMENTED IN PLAYER STATS
+                stats.maxArmourEquipment += effectStrength;
                 break;
             case EffectType.CollectorRadius:
-                stats.baseCollectionRange += effectStrength;
+                stats.collectionRangeEquipment += effectStrength;
                 break;
             case EffectType.EngineThrust:
-                stats.baseForwardThrust += effectStrength;
+                stats.forwardThrustEquipment = (stats.baseForwardThrust + stats.forwardThrustEquipment) * ((100 - effectStrength) / 100);
                 break;
             case EffectType.EngineVelocityCap:
-                stats.baseMaximumVelocity += effectStrength;
+                stats.maximumVelocityEquipment += effectStrength;
                 break;
             case EffectType.HullCap:
-                stats.baseMaxHull += effectStrength;
-                break;
-            case EffectType.HullRegen:
-                // NOT IMPLEMENTED IN PLAYER STATS
+                stats.maxHullEquipment += effectStrength;
                 break;
             case EffectType.Luck:
-                // NOT IMPLEMENTED IN PLAYER STATS
+                stats.luckEquipment += effectStrength;
                 break;
             case EffectType.ManeuveringSpeed:
-                stats.baseManeuveringSpeed += effectStrength;
+                stats.maneuveringSpeedEquipment += effectStrength;
                 break;
             case EffectType.ProfitBoost:
-                // NOT IMPLEMENTED IN PLAYER STATS
+                stats.profitBoostEquipment += effectStrength;
                 break;
             case EffectType.ShieldCap:
-                stats.baseMaxShields += effectStrength;
+                stats.maxShieldsEquipment += effectStrength;
                 break;
             case EffectType.ShieldCooldown:
-                stats.baseShieldCooldownTime += effectStrength;
+                stats.shieldCooldownTimeEquipment += effectStrength;
                 break;
             case EffectType.ShieldRegen:
-                stats.baseShieldRegen += effectStrength;
+                stats.shieldRegenEquipment += effectStrength;
                 break;
         }
 

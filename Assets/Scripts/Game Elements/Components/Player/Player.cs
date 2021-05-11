@@ -10,18 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerEquipment equipment;
 
-    [Header("ReadOnly Properties")]
-    [SerializeField, ReadOnly]
-    private float currentShields;
-    [SerializeField, ReadOnly]
-    private float currentArmour;
-    [SerializeField, ReadOnly]
-    private float currentHull;
-    [SerializeField, ReadOnly]
-    private float shieldsRechargeRate;
-    [SerializeField, ReadOnly]
-    private float currentVelocity;
-
     [Header("Components/Objects")]
     private Rigidbody rb;
     [SerializeField]
@@ -37,12 +25,12 @@ public class Player : MonoBehaviour
 
     #region Properties
     public float Shields { get => stats.currentShields; set => stats.currentShields = value; }
-    public float MaxShields { get => stats.currentMaxShields; set => stats.currentMaxShields = value; }
-    public float ShieldsRechargeRate { get => stats.currentShieldRegen; set => stats.currentShieldRegen = value; }
+    public float MaxShields { get => stats.CurrentMaxShields; }
+    public float ShieldsRechargeRate { get => stats.CurrentShieldRegen; }
     public float Armour { get => stats.currentArmour; set => stats.currentArmour = value; }
-    public float MaxArmour { get => stats.currentMaxArmour; set => stats.currentMaxArmour = value; }
+    public float MaxArmour { get => stats.CurrentMaxArmour; }
     public float Hull { get => stats.currentHull; set => stats.currentHull = value; }
-    public float MaxHull { get => stats.currentMaxHull; set => stats.currentMaxHull = value; }
+    public float MaxHull { get => stats.CurrentMaxHull; }
     public float Velocity { get => rb.velocity.magnitude; }
     #endregion
 
@@ -51,49 +39,17 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         CheckForMissingDataContainers();
+        stats.ResetPowerupStats();
     }
     
     private void Start()
     {
-        // TO DO: Add max stat modifiers from level modifiers and equipment modifiers
-
-        // Initialise stat values (currently from base levels until modifiers fully implemented)
-        stats.currentMaxHull = stats.baseMaxHull;
-        stats.currentHull = stats.currentMaxHull;
-        
-
-        stats.currentMaxArmour = stats.baseMaxArmour;
-        stats.currentArmour = stats.currentMaxArmour;
-
-        stats.currentMaxShields = stats.baseMaxShields;
-        stats.currentShields = stats.currentMaxShields;
-
-        stats.currentShieldRegen = stats.baseShieldRegen;
-        stats.currentShieldCooldownTime = stats.baseShieldCooldownTime;
-
-        stats.currentForwardThrust = stats.baseForwardThrust;
-        stats.currentMaximumVelocity = stats.baseMaximumVelocity;
-        stats.currentManeuveringSpeed = stats.baseManeuveringSpeed;
-
-        stats.currentHeatSinkCapacity = stats.baseHeatSinkCapacity;
-        stats.currentHeatSinkLevel = 0f;
-
-        stats.currentProjectileSpeed = stats.baseProjectileSpeed;
-        stats.currentProjectileDamage = stats.baseProjectileDamage;
-
-        stats.currentCollectionRange = stats.baseCollectionRange;
-
         InvokeRepeating("RegenShield", 1f, 1f);
     }
 
     private void Update()
     {
-        // Sets the ReadOnly values in the inspector for visual feedback
-        currentShields = Shields;
-        currentArmour = Armour;
-        currentHull = Hull;
-        shieldsRechargeRate = ShieldsRechargeRate;
-        currentVelocity = Velocity;
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -205,24 +161,6 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Increase the maximum shield by X amount.
-    /// </summary>
-    /// <param name="value">The amount to add to the shield, NOT the new shield value.</param>
-    public void IncreaseShieldCapacityByValue(float value)
-    {
-        MaxShields += value;
-    }
-
-    /// <summary>
-    /// Decrease the maximum shield amount by X amount.
-    /// </summary>
-    /// <param name="value">The amount to remove from the shield, NOT the new shield value.</param>
-    public void DecreaseShieldCapacityByValue(float value)
-    {
-        MaxShields -= value;
-    }
-
     #endregion
 
     #region Private Methods
@@ -242,7 +180,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void RegenShield()
     {
-        if(Time.time > shieldDestroyedAt + stats.currentShieldCooldownTime)
+        if(Time.time > shieldDestroyedAt + stats.CurrentShieldCooldownTime)
         {
             // Reactivate shield if it's supposed to be active
             if(!shieldObject.activeInHierarchy)

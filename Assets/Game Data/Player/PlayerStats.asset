@@ -13,31 +13,50 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   baseMaxHull: 100
-  currentHull: 100
-  currentMaxHull: 100
+  maxHullEquipment: 0
+  maxHullPowerup: 0
+  currentHull: 0
   baseMaxArmour: 100
-  currentArmour: 100
-  currentMaxArmour: 100
-  baseMaxShields: 100
-  currentShields: 100
-  currentMaxShields: 100
-  baseShieldRegen: 5
-  currentShieldRegen: 5
-  baseShieldCooldownTime: 5
-  currentShieldCooldownTime: 5
-  baseForwardThrust: 50000
-  currentForwardThrust: 50000
-  baseMaximumVelocity: 75
-  currentMaximumVelocity: 103
-  velocityCap: 150
-  baseManeuveringSpeed: 50
-  currentManeuveringSpeed: 25
-  baseHeatSinkCapacity: 100
-  currentHeatSinkLevel: 0
-  currentHeatSinkCapacity: 100
+  maxArmourEquipment: 0
+  maxArmourPowerup: 0
+  currentArmour: 0
+  baseMaxShields: 1474.919
+  maxShieldsEquipment: 144.02533
+  maxShieldsPowerup: 0
+  currentShields: 14
+  baseShieldRegen: 28.570923
+  shieldRegenEquipment: 3.1573062
+  shieldRegenPowerup: 0
+  baseShieldCooldownTime: 10
+  shieldCooldownTimeEquipment: 0
+  shieldCooldownTimePowerup: 0
+  baseForwardThrust: 100000
+  forwardThrustEquipment: 0
+  forwardThrustPowerup: 0
+  hardVelocityCap: 150
+  baseMaximumVelocity: 100
+  maximumVelocityEquipment: 0
+  maximumVelocityPowerup: 0
+  maximumVelocityIncrementor: 50
+  baseManeuveringSpeed: 1
+  maneuveringSpeedEquipment: 0
+  maneuveringSpeedPowerup: 0
+  baseBatteryCapacity: 100
+  batteryCapacityEquipment: 0
+  batteryCapacityPowerup: 0
+  currentBatteryLevel: 0
   baseProjectileSpeed: 200
-  currentProjectileSpeed: 200
+  projectileSpeedEquipment: 0
+  projectileSpeedPowerup: 0
   baseProjectileDamage: 50
-  currentProjectileDamage: 50
+  projectileDamageEquipment: 0
+  projectileDamagePowerup: 0
   baseCollectionRange: 50
-  currentCollectionRange: 50
+  collectionRangeEquipment: 0
+  collectionRangePowerup: 0
+  baseLuck: 0
+  luckEquipment: 0
+  luckPowerup: 0
+  baseProfitBoost: 0
+  profitBoostEquipment: 0
+  profitBoostPowerup: 0

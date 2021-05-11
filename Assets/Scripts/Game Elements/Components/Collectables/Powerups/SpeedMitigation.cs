@@ -2,10 +2,10 @@
 
 public class SpeedMitigation : Powerup, IPowerup
 {
-	// Define custom fields here
-	[SerializeField]
-    private float thrustReductionPercentage;
+    // ThrustReductionPercentage is out of 100. If you want to decrease by 10%, input 10 in the inspector field.
+	[SerializeField] private float thrustReductionPercentage;
     private float differenceThrust;
+    private float differenceVelocity;
 
 	// Implement 'on execute' functionality within this function
     public override void ExecutePowerup(Player player)
@@ -14,16 +14,23 @@ public class SpeedMitigation : Powerup, IPowerup
         base.ExecutePowerup(player);
         Debug.Log("Player collected a speed reduction powerup.");
 
-        float baseThrust = player.stats.baseForwardThrust;
-        float baseVelocity = player.stats.baseMaximumVelocity;
+        float thrust = player.stats.baseForwardThrust + player.stats.forwardThrustEquipment;
+        float maxVelocity = player.stats.baseMaximumVelocity + player.stats.maximumVelocityEquipment;
 
-        float thrustReduction = baseThrust * (thrustReductionPercentage / 100); // Returns a positive value
-        differenceThrust = baseThrust - thrustReduction; 
+        float thrustReduction = thrust * (thrustReductionPercentage / 100); // Returns a positive value
+        differenceThrust = thrust - thrustReduction;
+
+        float velocityReduction = maxVelocity * (thrustReductionPercentage / 100);
+        differenceVelocity = maxVelocity - velocityReduction;
 
         // Reduce forward thrust by the reduction percentage (temporary effect)
-        player.stats.currentForwardThrust -= differenceThrust;
-        // Reset maximum velocity back to base value (permanent effect)
-        player.stats.currentMaximumVelocity = player.stats.baseMaximumVelocity;
+        player.stats.forwardThrustPowerup -= differenceThrust;
+
+        // Reduce maximum velocity by reduction percentage (temporary effect)
+        player.stats.maximumVelocityPowerup -= differenceVelocity;
+
+        // Reset velocity incrementor back to base value, so it starts counting from 0 again (permanent effect)
+        player.stats.maximumVelocityIncrementor = 0f;
 
         player.activeEnginesFx.SetActive(false);
         player.inactiveEnginesFx.SetActive(true);
@@ -33,7 +40,8 @@ public class SpeedMitigation : Powerup, IPowerup
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
-        player.stats.currentForwardThrust += differenceThrust;
+        player.stats.forwardThrustPowerup += differenceThrust;
+        player.stats.maximumVelocityPowerup += differenceVelocity;
         player.activeEnginesFx.SetActive(true);
         player.inactiveEnginesFx.SetActive(false);
     }

@@ -13,16 +13,16 @@ public class ManeuveringBoost : Powerup, IPowerup
         base.ExecutePowerup(player);
         Debug.Log("Player collected a maneuvering boost powerup.");
 
-        float baseSpeed = player.stats.baseManeuveringSpeed;
-        float newSpeed = baseSpeed * (percentage / 100);
-        difference = newSpeed - baseSpeed;
+        float speed = player.stats.baseManeuveringSpeed + player.stats.maneuveringSpeedEquipment;
+        float newSpeed = speed * (percentage / 100);
+        difference = newSpeed - speed;
 
-        player.stats.currentManeuveringSpeed += difference;
+        player.stats.maneuveringSpeedPowerup += difference;
     }
 
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
-        player.stats.currentManeuveringSpeed -= difference;
+        player.stats.maneuveringSpeedPowerup -= difference;
     }
 }

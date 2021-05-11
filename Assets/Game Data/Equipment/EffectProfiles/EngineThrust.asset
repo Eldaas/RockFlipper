@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626ef5919968653439403dc6b3477993, type: 3}
-  m_Name: ShieldRegen
+  m_Name: EngineThrust
   m_EditorClassIdentifier: 
-  effectType: 2
-  minStrength: 1
-  maxStrength: 10
+  effectType: 7
+  minStrength: 10
+  maxStrength: 30
   chanceOfBeingAdded: 25
-  description: Shield regeneration is improved.
-  unitOfMeasurement: 1
+  description: Improves thrust control, making your ship accelerate slower after
+    a collision. This can give you that crucial time to wreck even the largest of
+    asteroids.
+  unitOfMeasurement: 2

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // This is the runtime object representing an equipment item. Values are generated from the configurable scriptable object files. These items are serialized to JSON.
+[System.Serializable]
 public class Equipment : IEquippable
 {
     // TO DO: Create variables for each of the playerStats types that it may modify
@@ -22,6 +23,11 @@ public class Equipment : IEquippable
     public virtual void Equip()
     {
         // Common (all equipment types) equip logic here
+
+        foreach(EquipmentEffect effect in effects)
+        {
+            effect.ApplyEffect();
+        }
     }
     #endregion
 }

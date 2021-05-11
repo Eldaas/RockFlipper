@@ -15,9 +15,9 @@ public class HullRepair : Powerup, IPowerup
 
         player.stats.currentHull += value;
 
-        if(player.stats.currentHull > player.stats.currentMaxHull)
+        if(player.stats.currentHull > player.stats.CurrentMaxHull)
         {
-            player.stats.currentHull = player.stats.currentMaxHull;
+            player.stats.currentHull = player.stats.CurrentMaxHull;
         }
 
     }

@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626ef5919968653439403dc6b3477993, type: 3}
-  m_Name: ShieldRegen
+  m_Name: ShieldCooldown
   m_EditorClassIdentifier: 
-  effectType: 2
+  effectType: 3
   minStrength: 1
   maxStrength: 10
   chanceOfBeingAdded: 25
-  description: Shield regeneration is improved.
-  unitOfMeasurement: 1
+  description: Reduces the time delay between when your shield is destroyed and when
+    it begins regenerating again.
+  unitOfMeasurement: 4

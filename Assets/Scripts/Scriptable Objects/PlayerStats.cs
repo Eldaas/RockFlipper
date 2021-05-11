@@ -39,9 +39,9 @@ public class PlayerStats : ScriptableObject
 
     public float baseMaxShields;
     [ReadOnly] public float maxShieldsEquipment;
-    [ReadOnly] public float maxShieldsPowerups;
+    [ReadOnly] public float maxShieldsPowerup;
     [ReadOnly] public float currentShields;
-    public float CurrentMaxShields { get => baseMaxShields + maxShieldsEquipment + maxShieldsPowerups; }
+    public float CurrentMaxShields { get => baseMaxShields + maxShieldsEquipment + maxShieldsPowerup; }
 
     #endregion
 
@@ -72,14 +72,15 @@ public class PlayerStats : ScriptableObject
 
     public float baseForwardThrust;
     [ReadOnly] public float forwardThrustEquipment;
-    [ReadOnly] public float forwardThrustPowerups;
-    public float CurrentForwardThrust { get => baseForwardThrust + forwardThrustEquipment + forwardThrustPowerups; }
+    [ReadOnly] public float forwardThrustPowerup;
+    public float CurrentForwardThrust { get => baseForwardThrust * forwardThrustEquipment * forwardThrustPowerup; }
 
     public float hardVelocityCap;
     public float baseMaximumVelocity;
     [ReadOnly] public float maximumVelocityEquipment;
     [ReadOnly] public float maximumVelocityPowerup;
-    public float CurrentMaximumVelocity { get => baseMaximumVelocity + maximumVelocityEquipment + maximumVelocityPowerup; }
+    [ReadOnly] public float maximumVelocityIncrementor;
+    public float CurrentMaximumVelocity { get => baseMaximumVelocity + maximumVelocityEquipment + maximumVelocityPowerup + maximumVelocityIncrementor; }
     
     public float baseManeuveringSpeed;
     [ReadOnly] public float maneuveringSpeedEquipment;
@@ -110,14 +111,43 @@ public class PlayerStats : ScriptableObject
     #endregion
 
 
-    #region Collection
+    #region Collection Stats
 
     public float baseCollectionRange;
-    [ReadOnly] public float baseCollectionRangeEquipment;
-    [ReadOnly] public float baseCOllectionRangePowerup;
-    public float CurrentCollectionRange { get => baseCollectionRange + baseCollectionRangeEquipment + baseCOllectionRangePowerup; }
+    [ReadOnly] public float collectionRangeEquipment;
+    [ReadOnly] public float collectionRangePowerup;
+    public float CurrentCollectionRange { get => baseCollectionRange + collectionRangeEquipment + collectionRangePowerup; }
 
     #endregion
 
+    #region Miscellaneous Stats
+    public float baseLuck;
+    [ReadOnly] public float luckEquipment;
+    [ReadOnly] public float luckPowerup;
+
+    public float baseProfitBoost;
+    [ReadOnly] public float profitBoostEquipment;
+    [ReadOnly] public float profitBoostPowerup;
+    #endregion
+
+    #region Public Methods
+    public void ResetPowerupStats()
+    {
+        maxHullPowerup = 0f;
+        maxArmourPowerup = 0f;
+        maxShieldsPowerup = 0f;
+        shieldRegenPowerup = 0f;
+        shieldCooldownTimePowerup = 0f;
+        forwardThrustPowerup = 0f;
+        maximumVelocityPowerup = 0f;
+        maneuveringSpeedPowerup = 0f;
+        batteryCapacityPowerup = 0f;
+        projectileSpeedPowerup = 0f;
+        projectileDamagePowerup = 0f;
+        collectionRangePowerup = 0f;
+        luckPowerup = 0f;
+        profitBoostPowerup = 0f;
+    }
+    #endregion
 
 }

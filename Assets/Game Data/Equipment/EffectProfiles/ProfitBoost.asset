@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ProfitBoost
   m_EditorClassIdentifier: 
   effectType: 12
-  minStrength: 0
-  maxStrength: 0
+  minStrength: 1
+  maxStrength: 50
   chanceOfBeingAdded: 5
+  description: Make more from every sale! This effect grants you better prices when
+    you sell your ore at the end of each trip. This is a super rare effect.
+  unitOfMeasurement: 2
