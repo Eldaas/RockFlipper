@@ -27,11 +27,11 @@ MonoBehaviour:
   currentShieldCooldownTime: 5
   baseForwardThrust: 50000
   currentForwardThrust: 50000
-  baseMaximumVelocity: 50
-  currentMaximumVelocity: 67
+  baseMaximumVelocity: 75
+  currentMaximumVelocity: 103
   velocityCap: 150
-  baseManeuveringSpeed: 100
-  currentManeuveringSpeed: 100
+  baseManeuveringSpeed: 50
+  currentManeuveringSpeed: 25
   baseHeatSinkCapacity: 100
   currentHeatSinkLevel: 0
   currentHeatSinkCapacity: 100

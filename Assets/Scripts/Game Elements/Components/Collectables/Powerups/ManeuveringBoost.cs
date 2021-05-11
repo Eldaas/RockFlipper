@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Powerup Type/ManeuveringBoost")]
 public class ManeuveringBoost : Powerup, IPowerup
 {
-	// Define custom fields here
+	[Header("Unique Fields")]
     public float percentage;
     private float difference;
 
@@ -11,6 +10,9 @@ public class ManeuveringBoost : Powerup, IPowerup
     public override void ExecutePowerup(Player player)
     {
         EventManager.TriggerEvent("ManeuveringBoost");
+        base.ExecutePowerup(player);
+        Debug.Log("Player collected a maneuvering boost powerup.");
+
         float baseSpeed = player.stats.baseManeuveringSpeed;
         float newSpeed = baseSpeed * (percentage / 100);
         difference = newSpeed - baseSpeed;
@@ -20,6 +22,7 @@ public class ManeuveringBoost : Powerup, IPowerup
 
     public override void EndPowerup(Player player)
     {
+        base.EndPowerup(player);
         player.stats.currentManeuveringSpeed -= difference;
     }
 }

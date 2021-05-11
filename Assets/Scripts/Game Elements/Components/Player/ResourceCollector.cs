@@ -10,8 +10,26 @@ public class ResourceCollector : MonoBehaviour
         List<ParticleCollisionEvent> events = new List<ParticleCollisionEvent>();
         ps.GetCollisionEvents(other, events);
         int numEvents = events.Count;
-        SceneController.instance.resourcesCollected += numEvents;
+        string psTag = ps.tag;
+
+        switch(psTag)
+        {
+            case "Iron":
+                GameManager.instance.levelRecord.ironCollected += numEvents;
+                Debug.Log("Iron collected");
+                break;
+            case "Silver":
+                GameManager.instance.levelRecord.silverCollected += numEvents;
+                break;
+            case "Gold":
+                GameManager.instance.levelRecord.goldCollected += numEvents;
+                break;
+            default:
+                Debug.LogError("ResourceCollector => No tags matched.");
+                break;
+        }
+
+        other.SetActive(false);
         EventManager.TriggerEvent("ResourceCollected");
-        Debug.Log("Particle collected");
     }
 }

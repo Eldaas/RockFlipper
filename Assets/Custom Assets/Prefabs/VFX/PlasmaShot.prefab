@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1923526610019734, guid: 359f5b6f28e085941a89ec70fa67ef0d, type: 3}
       propertyPath: m_Name
-      value: TestPlasma
+      value: PlasmaShot
       objectReference: {fileID: 0}
     - target: {fileID: 4977486018297876, guid: 359f5b6f28e085941a89ec70fa67ef0d, type: 3}
       propertyPath: m_RootOrder
@@ -394,7 +394,7 @@ PrefabInstance:
     - target: {fileID: 198920213253613272, guid: 359f5b6f28e085941a89ec70fa67ef0d,
         type: 3}
       propertyPath: InheritVelocityModule.m_Mode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198920213253613272, guid: 359f5b6f28e085941a89ec70fa67ef0d,
         type: 3}
@@ -404,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 198920213253613272, guid: 359f5b6f28e085941a89ec70fa67ef0d,
         type: 3}
       propertyPath: InheritVelocityModule.enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198920213253613272, guid: 359f5b6f28e085941a89ec70fa67ef0d,
         type: 3}
@@ -440,6 +440,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InheritVelocityModule.m_Curve.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198920213253613272, guid: 359f5b6f28e085941a89ec70fa67ef0d,
+        type: 3}
+      propertyPath: InheritVelocityModule.m_Curve.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 198920213253613272, guid: 359f5b6f28e085941a89ec70fa67ef0d,
         type: 3}

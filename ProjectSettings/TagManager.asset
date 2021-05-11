@@ -11,6 +11,10 @@ TagManager:
   - FxTemporaire
   - Managers
   - Core
+  - Iron
+  - Silver
+  - Gold
+  - ProfileManager
   layers:
   - Default
   - TransparentFX
@@ -23,11 +27,11 @@ TagManager:
   - BackgroundFX
   - Destructible
   - ResourceCollection
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Powerup
+  - Shield
+  - BlackHole
+  - ResourceTallying
   - 
   - 
   - 

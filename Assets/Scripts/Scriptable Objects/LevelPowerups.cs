@@ -2,67 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Level Data/Level Powerup Profile")]
+[CreateAssetMenu(menuName = "Level Data/Level GameObject Profile")]
 public class LevelPowerups : ScriptableObject
 {
     [HideInInspector]
-    public List<IPowerup> runtimeList = new List<IPowerup>();
+    public List<GameObject> runtimeList = new List<GameObject>();
 
-    [Header("Powerup One")]
-    public Powerup p1;
-    public int p1NumberToSpawn;
+    [Header("GameObject One")]
+    public GameObject p1;
 
-    [Header("Powerup Two")]
-    public Powerup p2;
-    public int p2NumberToSpawn;
+    [Header("GameObject Two")]
+    public GameObject p2;
 
-    [Header("Powerup Three")]
-    public Powerup p3;
-    public int p3NumberToSpawn;
+    [Header("GameObject Three")]
+    public GameObject p3;
 
-    [Header("Powerup Four")]
-    public Powerup p4;
-    public int p4NumberToSpawn;
+    [Header("GameObject Four")]
+    public GameObject p4;
 
-    [Header("Powerup Five")]
-    public Powerup p5;
-    public int p5NumberToSpawn;
+    [Header("GameObject Five")]
+    public GameObject p5;
 
-    [Header("Powerup Six")]
-    public Powerup p6;
-    public int p6NumberToSpawn;
+    [Header("GameObject Six")]
+    public GameObject p6;
 
-    [Header("Powerup Seven")]
-    public Powerup p7;
-    public int p7NumberToSpawn;
+    [Header("GameObject Seven")]
+    public GameObject p7;
 
-    [Header("Powerup Eight")]
-    public Powerup p8;
-    public int p8NumberToSpawn;
+    [Header("GameObject Eight")]
+    public GameObject p8;
 
-    [Header("Powerup Nine")]
-    public Powerup p9;
-    public int p9NumberToSpawn;
+    [Header("GameObject Nine")]
+    public GameObject p9;
 
-    private void Awake()
+    public void GenerateRuntimeList()
     {
-        if (p1 != null) { runtimeList.Add(p1 as IPowerup); }
-        if (p2 != null) { runtimeList.Add(p2 as IPowerup); }
-        if (p3 != null) { runtimeList.Add(p3 as IPowerup); }
-        if (p4 != null) { runtimeList.Add(p4 as IPowerup); }
-        if (p5 != null) { runtimeList.Add(p5 as IPowerup); }
-        if (p6 != null) { runtimeList.Add(p6 as IPowerup); }
-        if (p7 != null) { runtimeList.Add(p7 as IPowerup); }
-        if (p8 != null) { runtimeList.Add(p8 as IPowerup); }
-        if (p9 != null) { runtimeList.Add(p9 as IPowerup); }
-
-        runtimeList.Add(p2 as IPowerup);
-        runtimeList.Add(p3 as IPowerup);
-        runtimeList.Add(p4 as IPowerup);
-        runtimeList.Add(p5 as IPowerup);
-        runtimeList.Add(p6 as IPowerup);
-        runtimeList.Add(p7 as IPowerup);
-        runtimeList.Add(p8 as IPowerup);
-        runtimeList.Add(p9 as IPowerup);
+        if (p1 != null) { runtimeList.Add(p1); }
+        if (p2 != null) { runtimeList.Add(p2); }
+        if (p3 != null) { runtimeList.Add(p3); }
+        if (p4 != null) { runtimeList.Add(p4); }
+        if (p5 != null) { runtimeList.Add(p5); }
+        if (p6 != null) { runtimeList.Add(p6); }
+        if (p7 != null) { runtimeList.Add(p7); }
+        if (p8 != null) { runtimeList.Add(p8); }
+        if (p9 != null) { runtimeList.Add(p9); }
     }
 }

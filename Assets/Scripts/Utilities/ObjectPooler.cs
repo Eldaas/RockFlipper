@@ -6,6 +6,8 @@ public class ObjectPooler : MonoBehaviour
 {
 
     public static ObjectPooler instance;
+    [SerializeField]
+    private Spawner spawner;
 
     [Header("Hazard: Asteroids")]
     [SerializeField]
@@ -32,10 +34,8 @@ public class ObjectPooler : MonoBehaviour
     public List<GameObject> pooledBlackHoles = new List<GameObject>();
 
     [Header("Collectable: Powerups")]
-    [SerializeField]
-    private GameObject genericPrefab;
-    [SerializeField]
-    private List<Powerup> powerupProfiles;
+    // Powerup prefabs are assigned through the LevelPowerups profile, as they are scene specific.
+    // LevelPowerups profile is assigned via the scene controller. 
     [SerializeField]
     private GameObject powerupsParent;
     public int powerupCount;
@@ -68,7 +68,7 @@ public class ObjectPooler : MonoBehaviour
     private int particleHitFxCount;
     private List<GameObject> pooledParticleHitFx = new List<GameObject>();
 
-    [Header("Resource Particle FX")]
+    [Header("Resource Particle FX [DEPRECATED]")] 
     [SerializeField]
     private GameObject asteroidChunks;
     [SerializeField]
@@ -76,6 +76,26 @@ public class ObjectPooler : MonoBehaviour
     [SerializeField]
     private int asteroidChunksCount;
     private List<GameObject> pooledAsteroidChunks = new List<GameObject>();
+
+    [Header("Resource Collectables")]
+    [SerializeField]
+    private GameObject ironPrefab;
+    [SerializeField]
+    private GameObject silverPrefab;
+    [SerializeField]
+    private GameObject goldPrefab;
+    [SerializeField]
+    private GameObject ironParent;
+    [SerializeField]
+    private GameObject silverParent;
+    [SerializeField]
+    private GameObject goldParent;
+    [SerializeField]
+    private int resourcesCount;
+    private List<GameObject> pooledIron = new List<GameObject>();
+    private List<GameObject> pooledSilver = new List<GameObject>();
+    private List<GameObject> pooledGold = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -114,9 +134,9 @@ public class ObjectPooler : MonoBehaviour
             Asteroid asteroid = go.GetComponent<Asteroid>();
             ApplyAsteroidMaterial(asteroid);
             asteroid.SetAsteroidHealth();
+            asteroid.MultiplyAsteroidMass();
         }
 
-        //pooledGasClouds = new List<GameObject>();
         for (int i = 0; i < gasCloudCount; i++)
         {
             GameObject go = Instantiate(gasCloudPrefabs[Utility.GenerateRandomInt(0, gasCloudPrefabs.Length)]);
@@ -125,7 +145,6 @@ public class ObjectPooler : MonoBehaviour
             pooledGasClouds.Add(go);
         }
 
-        //pooledBlackHoles = new List<GameObject>();
         for (int i = 0; i < blackHoleCount; i++)
         {
             GameObject go = Instantiate(blackHolePrefabs[Utility.GenerateRandomInt(0, blackHolePrefabs.Length)]);
@@ -134,7 +153,6 @@ public class ObjectPooler : MonoBehaviour
             pooledBlackHoles.Add(go);
         }
 
-        //pooledBackgroundAsteroids = new List<GameObject>();
         for (int i = 0; i < backgroundAsteroidCount; i++)
         {
             GameObject go = Instantiate(backgroundAsteroidPrefabs[Utility.GenerateRandomInt(0, backgroundAsteroidPrefabs.Length)]);
@@ -143,14 +161,41 @@ public class ObjectPooler : MonoBehaviour
             pooledBackgroundAsteroids.Add(go);
         }
 
-        //pooledPowerups = new List<GameObject>();
+        SceneController.instance.levelPowerups.GenerateRuntimeList();
+        List<GameObject> levelPowerups = SceneController.instance.levelPowerups.runtimeList;
+        List<GameObject> hits = new List<GameObject>();
+
         for (int i = 0; i < powerupCount; i++)
         {
-            // TO DO: Math to assign powerup profile based upon % spawn chance
-            
+            bool generated = false;
+
+            while (!generated)
+            {
+                if (GeneratePowerup(levelPowerups, hits)) 
+                {
+                    generated = true;
+                }
+            }
+
+            while (hits.Count > 1)
+            {
+                GameObject[] array = hits.ToArray();
+
+                foreach (GameObject powerup in array)
+                {
+                    int randomInt = Utility.GenerateRandomInt(0, 100);
+                    if (randomInt < 50 && hits.Count > 1) // Have to check hits.Count again - not an error
+                    {
+                        hits.Remove(powerup);
+                    }
+                }
+            }
+
+            GameObject instantiatedPowerup = Instantiate(hits[0], powerupsParent.transform);
+            pooledPowerups.Add(instantiatedPowerup);
+            instantiatedPowerup.SetActive(false);
         }
 
-        //pooledProjectiles = new List<GameObject>();
         for (int i = 0; i < projectileCount; i++)
         {
             GameObject go = Instantiate(projectiles[0]);
@@ -160,7 +205,6 @@ public class ObjectPooler : MonoBehaviour
             pooledProjectiles.Add(go);
         }
 
-        //pooledParticleHitFx = new List<GameObject>();
         for (int i = 0; i < particleHitFxCount; i++)
         {
             GameObject go = Instantiate(particleHitFx[0]);
@@ -170,13 +214,28 @@ public class ObjectPooler : MonoBehaviour
             pooledParticleHitFx.Add(go);
         }
 
-        for (int i = 0; i < asteroidChunksCount; i++)
+        for (int i = 0; i < resourcesCount; i++)
         {
-            GameObject go = Instantiate(asteroidChunks);
+            GameObject go = Instantiate(ironPrefab);
             go.name = go.name + " " + i;
-            go.transform.parent = asteroidChunksParent.transform;
+            go.transform.parent = ironParent.transform;
+            go.tag = "Iron";
             go.SetActive(false);
-            pooledAsteroidChunks.Add(go);
+            pooledIron.Add(go);
+
+            go = Instantiate(silverPrefab);
+            go.name = go.name + " " + i;
+            go.transform.parent = silverParent.transform;
+            go.tag = "Silver";
+            go.SetActive(false);
+            pooledSilver.Add(go);
+
+            go = Instantiate(goldPrefab);
+            go.name = go.name + " " + i;
+            go.transform.parent = goldParent.transform;
+            go.tag = "Gold";
+            go.SetActive(false);
+            pooledGold.Add(go);
         }
 
     }
@@ -274,18 +333,72 @@ public class ObjectPooler : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns the first inactive asteroid chunks particle in the hierarchy.
+    /// Returns the first inactive iron collectable in the hierarchy.
     /// </summary>
     /// <returns></returns>
-    public GameObject GetPooledAsteroidChunk()
+    public GameObject GetPooledIron()
     {
-        for (int i = 0; i < pooledAsteroidChunks.Count; i++)
+        for (int i = 0; i < pooledIron.Count; i++)
         {
-            if (!pooledAsteroidChunks[i].activeInHierarchy)
+            if (!pooledIron[i].activeInHierarchy)
             {
-                return pooledAsteroidChunks[i];
+                spawner.activeIron.Add(pooledIron[i]);
+                return pooledIron[i];
             }
         }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive silver collectable in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledSilver()
+    {
+        for (int i = 0; i < pooledSilver.Count; i++)
+        {
+            if (!pooledSilver[i].activeInHierarchy)
+            {
+                spawner.activeSilver.Add(pooledSilver[i]);
+                return pooledSilver[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns the first inactive gold collectable in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledGold()
+    {
+        for (int i = 0; i < pooledGold.Count; i++)
+        {
+            if (!pooledGold[i].activeInHierarchy)
+            {
+                spawner.activeGold.Add(pooledGold[i]);
+                return pooledGold[i];
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Returns a RANDOM inactive powerup in the hierarchy.
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetPooledPowerup()
+    {
+        if(pooledPowerups.Count > 0)
+        {
+            int randomIndex = Utility.GenerateRandomInt(0, pooledPowerups.Count - 1);
+
+            if (!pooledPowerups[randomIndex].activeInHierarchy)
+            {
+                return pooledPowerups[randomIndex];
+            }
+        }
+        
         return null;
     }
 
@@ -308,6 +421,7 @@ public class ObjectPooler : MonoBehaviour
         particleParent.SetActive(false);
     }
 
+    #region Private Methods
     private void ApplyAsteroidMaterial(Asteroid asteroid)
     {
         MeshRenderer renderer = asteroid.mainObject.GetComponent<MeshRenderer>();
@@ -366,4 +480,32 @@ public class ObjectPooler : MonoBehaviour
         renderer.materials = mats;
 
     }
+
+
+    private bool GeneratePowerup(List<GameObject> levelPowerups, List<GameObject> hits)
+    {
+        bool generated = false;
+        
+        foreach (GameObject powerup in levelPowerups)
+        {
+            IPowerup thisPowerup = powerup.GetComponent<IPowerup>();
+            float randomInt = Utility.GenerateRandomInt(0, 100);
+            if (thisPowerup.ChanceToSpawn != 0f && randomInt <= thisPowerup.ChanceToSpawn)
+            {
+                hits.Add(powerup);
+                generated = true;
+            }
+        }
+
+        if(generated)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    #endregion
 }

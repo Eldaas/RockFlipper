@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Powerup Type/Shield Overcharge")]
 public class ShieldOvercharge : Powerup, IPowerup
 {
+    [Header("Unique Fields")]
     public float shieldRegenPercentage;
     public float shieldCooldownPercentage;
     public float shieldCapacityPercentage;
@@ -15,7 +15,9 @@ public class ShieldOvercharge : Powerup, IPowerup
 
     public override void ExecutePowerup(Player player)
     {
-        EventManager.TriggerEvent("shieldOvercharge");
+        EventManager.TriggerEvent("ShieldOvercharge");
+        base.ExecutePowerup(player);
+        Debug.Log("Player collected a shield powerup.");
 
         baseStats[0] = player.stats.baseShieldRegen;
         baseStats[1] = player.stats.baseShieldCooldownTime;
@@ -36,6 +38,7 @@ public class ShieldOvercharge : Powerup, IPowerup
 
     public override void EndPowerup(Player player)
     {
+        base.EndPowerup(player);
         player.stats.currentShieldRegen -= difference[0];
         player.stats.currentShieldCooldownTime -= difference[1];
         player.stats.currentMaxShields -= difference[2];

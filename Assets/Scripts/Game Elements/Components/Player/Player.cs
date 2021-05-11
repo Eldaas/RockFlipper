@@ -23,10 +23,14 @@ public class Player : MonoBehaviour
     private float currentVelocity;
 
     [Header("Components/Objects")]
+    private Rigidbody rb;
     [SerializeField]
     private GameObject shieldObject;
-    [HideInInspector]
-    private Rigidbody rb;
+
+    [Header("VFX")]
+    public GameObject vfxParent;
+    public GameObject activeEnginesFx;
+    public GameObject inactiveEnginesFx;
 
     [Header("Misc Data")]
     private float shieldDestroyedAt;
@@ -94,9 +98,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Rigidbody rb = collision.collider.GetComponentInParent<Rigidbody>();
-        if (rb.CompareTag("Asteroid"))
+        if (collision.gameObject.CompareTag("Asteroid"))
         {
+            Rigidbody rb = collision.collider.GetComponentInParent<Rigidbody>();
             EventManager.TriggerEvent("AsteroidCollision");
             
             if (rb)
@@ -122,14 +126,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Powerup"))
+        if (other.gameObject.CompareTag("Powerup"))
         {
-            PowerupMono mono = other.GetComponent<PowerupMono>();
-            Powerup thisPowerup = mono.powerup;
+            IPowerup thisPowerup = other.GetComponent<IPowerup>();
             IEnumerator coroutine = PowerupCoroutine(thisPowerup);
             StartCoroutine(coroutine);
-
-            other.gameObject.SetActive(false);
         }
 
     }
@@ -197,7 +198,7 @@ public class Player : MonoBehaviour
             
             if (Hull / MaxHull <= 0.5f)
             {
-                EventManager.TriggerEvent("LowHealth");
+                EventManager.TriggerEvent("HealthLow");
             }
         }
 
@@ -265,11 +266,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator PowerupCoroutine(Powerup powerup)
+    private IEnumerator PowerupCoroutine(IPowerup powerup)
     {
-        Debug.Log("Coroutine started.");
+        //Debug.Log("Coroutine started.");
 
-        float endTime = Time.time + powerup.baseDuration;
+        float endTime = Time.time + powerup.EffectDuration;
+        //Debug.Log("Effect duration is: " + powerup.EffectDuration);
         powerup.ExecutePowerup(this);
 
         while(Time.time < endTime)
