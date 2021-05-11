@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626ef5919968653439403dc6b3477993, type: 3}
   m_Name: ProfitBoost
   m_EditorClassIdentifier: 
-  effectType: 0
+  effectType: 12
   minStrength: 0
   maxStrength: 0
+  chanceOfBeingAdded: 5

@@ -6,151 +6,118 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject
 {
     // "Base" values are used to set initial values via the inspector, which are then applied at runtime.
-    // "Current" values are generally autocalculated values incorporating both equipment and powerup modifiers.
-    // ReadOnly fields aren't intended to be altered in the inspector due to being dynamically calculated.
+    // "Equipment" values are what the player's current equipment provides.
+    // "Powerup" values are what the player's current active powerup effects provide.
+    // "Current" values are the player's stat values incorporating both equipment and powerup modifiers.
+    // "ReadOnly" fields aren't intended to be altered in the inspector due to being dynamically calculated.
 
-    /// <summary>
-    /// Base max hull represents the inspector-set starting amount the hull should have
-    /// </summary>
+    #region Hull Stats
+
     public float baseMaxHull;
-
-    /// <summary>
-    /// Current hull represents the player's current (live) hull value
-    /// </summary>
+    [ReadOnly] public float maxHullEquipment;
+    [ReadOnly] public float maxHullPowerup;
     [ReadOnly] public float currentHull;
+    public float CurrentMaxHull { get => baseMaxHull + maxHullEquipment + maxHullPowerup; }
 
-    /// <summary>
-    /// Current max hull represents the current maximum capacity of the player's hull health value
-    /// </summary>
-    [ReadOnly] public float currentMaxHull;
+    #endregion
 
-    /// <summary>
-    /// Base max armour represents the inspector-set starting amount the armour should have
-    /// </summary>
+
+    #region Armour Stats
+
     public float baseMaxArmour;
-
-    /// <summary>
-    /// Current armour represents the player's current (live) armour value
-    /// </summary>
+    [ReadOnly] public float maxArmourEquipment;
+    [ReadOnly] public float maxArmourPowerup;
     [ReadOnly] public float currentArmour;
+    public float CurrentMaxArmour { get => baseMaxArmour + maxArmourEquipment + maxArmourPowerup; }
 
-    /// <summary>
-    /// Current max armour represents the current maximum capacity of the player's armour health value
-    /// </summary>
-    [ReadOnly] public float currentMaxArmour;
+    #endregion
 
-    /// <summary>
-    /// Base max shields represents the inspector-set starting amount the shield should have
-    /// </summary>
+
+    #region Shield Stats
+
+    #region Shield Cap
+
     public float baseMaxShields;
-
-    /// <summary>
-    /// Current shields represents the player's current (live) shields value
-    /// </summary>
+    [ReadOnly] public float maxShieldsEquipment;
+    [ReadOnly] public float maxShieldsPowerups;
     [ReadOnly] public float currentShields;
+    public float CurrentMaxShields { get => baseMaxShields + maxShieldsEquipment + maxShieldsPowerups; }
 
-    /// <summary>
-    /// Current max shields represents the current maximum capacity of the player's shields health value
-    /// </summary>
-    [ReadOnly] public float currentMaxShields;
+    #endregion
 
-    /// <summary>
-    /// Base shield regen is the inspector-set value for how much the player's shield will regenerate per second
-    /// </summary>
+
+    #region Shield Regen
+
     public float baseShieldRegen;
+    [ReadOnly] public float shieldRegenEquipment;
+    [ReadOnly] public float shieldRegenPowerup;
+    public float CurrentShieldRegen { get => baseShieldRegen + shieldRegenEquipment + shieldRegenPowerup; }
+    
+    #endregion
 
-    /// <summary>
-    /// Current shield regen is the current (live) rate at which the player's shield regenerates per second
-    /// </summary>
-    [ReadOnly] public float currentShieldRegen;
 
-    /// <summary>
-    /// Base shield cooldown time is the inspector-set number of seconds between the shield being destroyed and the time at which it begins regenerating
-    /// </summary>
+    #region Shield Cooldown
+
     public float baseShieldCooldownTime;
+    [ReadOnly] public float shieldCooldownTimeEquipment;
+    [ReadOnly] public float shieldCooldownTimePowerup;
+    public float CurrentShieldCooldownTime { get => baseShieldCooldownTime + shieldCooldownTimeEquipment + shieldCooldownTimePowerup; }
 
-    /// <summary>
-    /// Current shield cooldown time is the current amount of seconds between the shield being destroyed and the time at which it begins regenerating
-    /// </summary>
-    [ReadOnly] public float currentShieldCooldownTime;
+    #endregion
 
-    /// <summary>
-    /// Base forward thrust is the inspector-set starting thrust at which the player moves forward in the game level. Thrust is the physics force applied to the player object.
-    /// </summary>
+    #endregion
+
+
+    #region Movement Stats
+
     public float baseForwardThrust;
+    [ReadOnly] public float forwardThrustEquipment;
+    [ReadOnly] public float forwardThrustPowerups;
+    public float CurrentForwardThrust { get => baseForwardThrust + forwardThrustEquipment + forwardThrustPowerups; }
 
-    /// <summary>
-    /// Current forward thrust is the thrust at which the player is currently moving forward in the game level. Thrust is the physics force applied to the player object
-    /// </summary>
-    [ReadOnly] public float currentForwardThrust;
-
-    /// <summary>
-    /// This is the inspector-set base value for the player's maximum velocity
-    /// </summary>
+    public float hardVelocityCap;
     public float baseMaximumVelocity;
-
-    /// <summary>
-    /// This is the current value for the player's maximum velocity
-    /// </summary>
-    [ReadOnly] public float currentMaximumVelocity;
-
-    /// <summary>
-    /// This caps the velocity to an amount that the player absolutely cannot go beyond (otherwise they will keep on accelerating ad infinitum).
-    /// </summary>
-    public float velocityCap;
-
-    /// <summary>
-    /// Base maneuvering speed is the inspector-set value for how fast the player can move horizontally (left and right).
-    /// </summary>
+    [ReadOnly] public float maximumVelocityEquipment;
+    [ReadOnly] public float maximumVelocityPowerup;
+    public float CurrentMaximumVelocity { get => baseMaximumVelocity + maximumVelocityEquipment + maximumVelocityPowerup; }
+    
     public float baseManeuveringSpeed;
+    [ReadOnly] public float maneuveringSpeedEquipment;
+    [ReadOnly] public float maneuveringSpeedPowerup;
+    public float CurrentManeuveringSpeed { get => baseManeuveringSpeed + maneuveringSpeedEquipment + maneuveringSpeedPowerup; }
 
-    /// <summary>
-    /// Current maneuvering speed is the current (live) value for how fast the player can move horizontally (left and right).
-    /// </summary>
-    [ReadOnly] public float currentManeuveringSpeed;
+    public float baseBatteryCapacity;
+    [ReadOnly] public float batteryCapacityEquipment;
+    [ReadOnly] public float batteryCapacityPowerup;
+    [ReadOnly] public float currentBatteryLevel;
+    public float CurrentBatteryCapacity { get => baseBatteryCapacity + batteryCapacityEquipment + batteryCapacityPowerup; }
 
-    /// <summary>
-    /// The base heat sink capacity is the inspector-set value for how many 'points of health' the heat sink has.
-    /// </summary>
-    public float baseHeatSinkCapacity;
+    #endregion
 
-    /// <summary>
-    /// This is a normalised value (0 - 1) to represent the current % saturation of the heat sink capacity.
-    /// </summary>
-    [ReadOnly] public float currentHeatSinkLevel;
 
-    /// <summary>
-    /// The current heat sink capacity is the current maximum 'points of health' value that the heat sink can reach.
-    /// </summary>
-    [ReadOnly] public float currentHeatSinkCapacity;
+    #region Projectiles
 
-    /// <summary>
-    /// Base projectile speed represents the base value (without modifiers applied) at which the player's cannon projectile will travel at.
-    /// </summary>
     public float baseProjectileSpeed;
+    [ReadOnly] public float projectileSpeedEquipment;
+    [ReadOnly] public float projectileSpeedPowerup;
+    public float CurrentProjectileSpeed { get => baseProjectileSpeed + projectileSpeedEquipment + projectileSpeedPowerup; }
 
-    /// <summary>
-    /// Current projectile speed represents the current (live) value at which the player's cannon projectiles will travel at.
-    /// </summary>
-    [ReadOnly] public float currentProjectileSpeed;
-
-    /// <summary>
-    /// Base projectile damage represents the inspector-set starting amount of damage that the player deals to asteroids.
-    /// </summary>
     public float baseProjectileDamage;
+    [ReadOnly] public float projectileDamageEquipment;
+    [ReadOnly] public float projectileDamagePowerup;
+    public float CurrentProjectileDamage { get => baseProjectileDamage + projectileDamageEquipment + projectileDamagePowerup; }
 
-    /// <summary>
-    /// Current projectile damage represents the current amount of damage that the player deals to asteroids.
-    /// </summary>
-    [ReadOnly] public float currentProjectileDamage;
+    #endregion
 
-    /// <summary>
-    /// Base collection range is the inspector-set distance from which resource chunks will be pulled toward the player ship.
-    /// </summary>
+
+    #region Collection
+
     public float baseCollectionRange;
+    [ReadOnly] public float baseCollectionRangeEquipment;
+    [ReadOnly] public float baseCOllectionRangePowerup;
+    public float CurrentCollectionRange { get => baseCollectionRange + baseCollectionRangeEquipment + baseCOllectionRangePowerup; }
 
-    /// <summary>
-    /// Current collection range is the current (live) distance from which resource chunks will be pulled toward the player ship.
-    /// </summary>
-    [ReadOnly] public float currentCollectionRange;
+    #endregion
+
+
 }

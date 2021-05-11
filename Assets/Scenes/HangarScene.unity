@@ -3100,16 +3100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59a5c29ad22b1145929a4a59d4b820c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numToGenerate: 0
+  stats: {fileID: 11400000, guid: 4717faf89fd4b204dac498c891eff097, type: 2}
+  numToGenerate: 50
   refreshEveryXSeconds: 0
   equipmentProfiles: []
   strengthRarityCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  numEffectsCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
