@@ -102,7 +102,6 @@ public class IntroMenu : UIController
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
         GameManager.instance.LoadLevel(GameStates.Hangar);
-        
     }
 
     private void ProfileWindow()
