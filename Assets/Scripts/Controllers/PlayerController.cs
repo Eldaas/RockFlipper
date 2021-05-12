@@ -137,12 +137,12 @@ public class PlayerController : MonoBehaviour
     private void HandleVelocity()
     {
         // Speed up
-        if(rb.velocity.z < player.stats.CurrentMaximumVelocity)
+        if(rb.velocity.z < player.stats.currentMaximumVelocity)
         {
-            rb.AddForce(Vector3.forward * player.stats.CurrentForwardThrust);
+            rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
         }
         // Slow down
-        else if(rb.velocity.z > player.stats.CurrentMaximumVelocity)
+        else if(rb.velocity.z > player.stats.currentMaximumVelocity)
         {
             rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
         }
@@ -154,19 +154,19 @@ public class PlayerController : MonoBehaviour
     /// <param name="axis"></param>
     private void HandleHorizontal(float axis)
     {
-        horizontalMove = axis * forceMultiplier * player.stats.CurrentManeuveringSpeed;
+        horizontalMove = axis * forceMultiplier * player.stats.currentManeuveringSpeed;
         Vector3 direction = Vector3.zero;
 
         if (transform.position.x >= minX && transform.position.x <= maxX)
         {
             direction = horizontalMove * Vector3.right;
 
-            if (horizontalMove < 0f && rb.velocity.x > -maxHorizontalVelocity * player.stats.CurrentManeuveringSpeed)
+            if (horizontalMove < 0f && rb.velocity.x > -maxHorizontalVelocity * player.stats.currentManeuveringSpeed)
             {
                 rb.AddForce(direction, ForceMode.Impulse);
             }
             
-            if (horizontalMove > 0f && rb.velocity.x < maxHorizontalVelocity * player.stats.CurrentManeuveringSpeed)
+            if (horizontalMove > 0f && rb.velocity.x < maxHorizontalVelocity * player.stats.currentManeuveringSpeed)
             {
                 rb.AddForce(direction, ForceMode.Impulse);
             }
@@ -203,11 +203,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void RaiseMaximumVelocity()
     {
-        if(player.stats.CurrentMaximumVelocity < player.stats.hardVelocityCap)
+        if(player.stats.currentMaximumVelocity < player.stats.hardVelocityCap)
         {
             player.stats.maximumVelocityIncrementor++;
         }
     }
+
+
+    
 
     #endregion
 

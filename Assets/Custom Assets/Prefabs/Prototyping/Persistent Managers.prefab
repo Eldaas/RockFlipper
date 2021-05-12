@@ -48,6 +48,11 @@ MonoBehaviour:
   refreshEveryXSeconds: 0
   equipmentProfiles:
   - {fileID: 11400000, guid: eebf61621c924254bba6a0c09fd16cef, type: 2}
+  - {fileID: 11400000, guid: aaef12db3ff379d4aaf1a191c5ec87f9, type: 2}
+  - {fileID: 11400000, guid: c7213ecaa88c9344ab676aa7e6de5aec, type: 2}
+  - {fileID: 11400000, guid: ad89360b2b23aac4cbd5ee41f57770de, type: 2}
+  - {fileID: 11400000, guid: 87f5256589a32fb4fbd4d82fe5c1654e, type: 2}
+  - {fileID: 11400000, guid: 51cd9ac4167bba7489a667d598e2c8a1, type: 2}
   strengthRarityCurve:
     serializedVersion: 2
     m_Curve:
@@ -61,13 +66,40 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
+      time: 0.15910438
+      value: 0.21351704
+      inSlope: 0.07295243
+      outSlope: 0.08182301
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5074265
+      value: 0.2420178
+      inSlope: 0.08402268
+      outSlope: 0.22586669
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 1
+      outWeight: 0.5121418
+    - serializedVersion: 3
+      time: 0.9191155
+      value: 0.5141921
+      inSlope: 3.2460241
+      outSlope: 6.1397324
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.14913128
+      outWeight: 0.98724335
+    - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 6.0061917
+      outSlope: 10.146672
+      tangentMode: 69
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.10343791
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

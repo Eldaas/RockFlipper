@@ -162,7 +162,7 @@ public class Asteroid : Hazard
             }
 
             // Deal damage to the asteroid health
-            currentHealth -= SceneController.instance.player.stats.CurrentProjectileDamage;
+            currentHealth -= SceneController.instance.player.stats.currentProjectileDamage;
 
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)

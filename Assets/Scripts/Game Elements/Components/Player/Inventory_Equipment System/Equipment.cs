@@ -6,9 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class Equipment : IEquippable
 {
-    // TO DO: Create variables for each of the playerStats types that it may modify
-    // (Or create a new PlayerStats object and use that?)
-
     public EquipmentProfile equipmentProfile;
     public string name;
     public List<EquipmentEffect> effects = new List<EquipmentEffect>();    
@@ -32,4 +29,4 @@ public class Equipment : IEquippable
     #endregion
 }
 
-public enum EquipmentType { None, Shield, Armour, Hull, Engine, Maneuvering, Collector }
+public enum EquipmentType { None, Shield, Armour, Hull, Engine, Maneuvering, Weapon }

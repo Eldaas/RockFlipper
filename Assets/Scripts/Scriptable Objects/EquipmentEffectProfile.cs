@@ -20,6 +20,6 @@ public class EquipmentEffectProfile : ScriptableObject
 
 }
 
-public enum EffectType { None, ShieldCap, ShieldRegen, ShieldCooldown, ArmourCap, HullCap, EngineVelocityCap, EngineThrust, ManeuveringSpeed, ProjectileDamage, ProjectileSpeed, CollectorRadius, ProfitBoost, Luck }
+public enum EffectType { None, ShieldCap, ShieldRegen, ShieldCooldown, ArmourCap, HullCap, EngineVelocityCap, EngineThrust, ManeuveringSpeed, ProjectileDamage, ProjectileSpeed, CollectorRadius, ProfitBoost, Luck, BatteryCapacity, BatteryRecharge }
 
 public enum Measurement { None, Points, Percent, Milliseconds, Seconds, Minutes, Multiplier, Metres }

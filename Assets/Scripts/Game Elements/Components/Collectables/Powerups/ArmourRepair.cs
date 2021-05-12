@@ -15,9 +15,9 @@ public class ArmourRepair : Powerup, IPowerup
 
         player.stats.currentArmour += value;
 
-        if (player.stats.currentArmour > player.stats.CurrentMaxArmour)
+        if (player.stats.currentArmour > player.stats.currentMaxArmour)
         {
-            player.stats.currentArmour = player.stats.CurrentMaxArmour;
+            player.stats.currentArmour = player.stats.currentMaxArmour;
         }
 
         

@@ -15,48 +15,65 @@ MonoBehaviour:
   baseMaxHull: 100
   maxHullEquipment: 0
   maxHullPowerup: 0
-  currentHull: 0
+  currentHull: 100
+  currentMaxHull: 100
   baseMaxArmour: 100
   maxArmourEquipment: 0
   maxArmourPowerup: 0
-  currentArmour: 0
-  baseMaxShields: 1474.919
-  maxShieldsEquipment: 144.02533
+  currentArmour: 100
+  currentMaxArmour: 100
+  baseMaxShields: 100
+  maxShieldsEquipment: 463.30176
   maxShieldsPowerup: 0
-  currentShields: 14
-  baseShieldRegen: 28.570923
-  shieldRegenEquipment: 3.1573062
+  currentShields: 563.30176
+  currentMaxShields: 563.30176
+  baseShieldRegen: 1
+  shieldRegenEquipment: 2.8234344
   shieldRegenPowerup: 0
+  currentShieldRegen: 3.8234344
   baseShieldCooldownTime: 10
   shieldCooldownTimeEquipment: 0
   shieldCooldownTimePowerup: 0
+  currentShieldCooldownTime: 10
   baseForwardThrust: 100000
   forwardThrustEquipment: 0
   forwardThrustPowerup: 0
+  currentForwardThrust: 100000
   hardVelocityCap: 150
   baseMaximumVelocity: 100
   maximumVelocityEquipment: 0
   maximumVelocityPowerup: 0
-  maximumVelocityIncrementor: 50
+  maximumVelocityIncrementor: 1
+  currentMaximumVelocity: 101
   baseManeuveringSpeed: 1
   maneuveringSpeedEquipment: 0
   maneuveringSpeedPowerup: 0
+  currentManeuveringSpeed: 1
   baseBatteryCapacity: 100
   batteryCapacityEquipment: 0
   batteryCapacityPowerup: 0
   currentBatteryLevel: 0
+  currentBatteryCapacity: 100
+  baseBatteryRecharge: 0
+  batteryRechargeEquipment: 0
+  batteryRechargePowerup: 0
+  currentBatteryRecharge: 0
   baseProjectileSpeed: 200
   projectileSpeedEquipment: 0
   projectileSpeedPowerup: 0
+  currentProjectileSpeed: 200
   baseProjectileDamage: 50
   projectileDamageEquipment: 0
   projectileDamagePowerup: 0
+  currentProjectileDamage: 50
   baseCollectionRange: 50
   collectionRangeEquipment: 0
   collectionRangePowerup: 0
+  currentCollectionRange: 50
   baseLuck: 0
   luckEquipment: 0
   luckPowerup: 0
+  currentLuck: 0
   baseProfitBoost: 0
   profitBoostEquipment: 0
-  profitBoostPowerup: 0
+  currentProfitBoost: 0

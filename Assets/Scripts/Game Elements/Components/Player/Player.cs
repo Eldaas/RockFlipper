@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -24,13 +25,6 @@ public class Player : MonoBehaviour
     private float shieldDestroyedAt;
 
     #region Properties
-    public float Shields { get => stats.currentShields; set => stats.currentShields = value; }
-    public float MaxShields { get => stats.CurrentMaxShields; }
-    public float ShieldsRechargeRate { get => stats.CurrentShieldRegen; }
-    public float Armour { get => stats.currentArmour; set => stats.currentArmour = value; }
-    public float MaxArmour { get => stats.CurrentMaxArmour; }
-    public float Hull { get => stats.currentHull; set => stats.currentHull = value; }
-    public float MaxHull { get => stats.CurrentMaxHull; }
     public float Velocity { get => rb.velocity.magnitude; }
     #endregion
 
@@ -39,17 +33,17 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         CheckForMissingDataContainers();
-        stats.ResetPowerupStats();
     }
     
     private void Start()
     {
         InvokeRepeating("RegenShield", 1f, 1f);
+        InvokeRepeating("UpdateStats", 0.5f, 0.1f);
     }
 
     private void Update()
     {
-        
+        /*stats.UpdateStats();*/
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -102,13 +96,13 @@ public class Player : MonoBehaviour
         EventManager.TriggerEvent("TakeHit");
         float damage = value;
 
-        if(Shields > 0f)
+        if(stats.currentShields > 0f)
         {
-            Shields -= damage;
-            if (Shields < 0f)
+            stats.currentShields -= damage;
+            if (stats.currentShields < 0f)
             {
-                damage = Mathf.Abs(Shields);
-                Shields = 0f;
+                damage = Mathf.Abs(stats.currentShields);
+                stats.currentShields = 0f;
                 shieldDestroyedAt = Time.time;
                 shieldObject.SetActive(false);
                 EventManager.TriggerEvent("ShieldsDestroyed");
@@ -121,13 +115,13 @@ public class Player : MonoBehaviour
             }
         }
         
-        if(Armour > 0f)
+        if(stats.currentArmour > 0f)
         {
-            Armour -= damage;
-            if (Armour < 0f)
+            stats.currentArmour -= damage;
+            if (stats.currentArmour < 0f)
             {
-                damage = Mathf.Abs(Armour);
-                Armour = 0f;
+                damage = Mathf.Abs(stats.currentArmour);
+                stats.currentArmour = 0f;
                 EventManager.TriggerEvent("ArmourDestroyed");
             }
             else
@@ -138,12 +132,12 @@ public class Player : MonoBehaviour
             }
         }
         
-        if(Hull > 0f)
+        if(stats.currentHull > 0f)
         {
-            Hull -= damage;
-            if (Hull < 0f)
+            stats.currentHull -= damage;
+            if (stats.currentHull < 0f)
             {
-                Hull = 0f;
+                stats.currentHull = 0f;
                 EventManager.TriggerEvent("PlayerDeath");
                 return true;
             }
@@ -152,7 +146,7 @@ public class Player : MonoBehaviour
                 EventManager.TriggerEvent("HullHit");
             }
             
-            if (Hull / MaxHull <= 0.5f)
+            if (stats.currentHull / stats.currentMaxHull <= 0.5f)
             {
                 EventManager.TriggerEvent("HealthLow");
             }
@@ -180,7 +174,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void RegenShield()
     {
-        if(Time.time > shieldDestroyedAt + stats.CurrentShieldCooldownTime)
+        if(Time.time > shieldDestroyedAt + stats.currentShieldCooldownTime)
         {
             // Reactivate shield if it's supposed to be active
             if(!shieldObject.activeInHierarchy)
@@ -190,16 +184,16 @@ public class Player : MonoBehaviour
             }
             
             // Check if shield requires recharging
-            if (Shields < MaxShields)
+            if (stats.currentShields < stats.currentMaxShields)
             {
-                Shields += ShieldsRechargeRate;
+                stats.currentShields += stats.currentShieldRegen;
             }
 
             // Check if shield has been recharged beyond its capacity
-            if (Shields > MaxShields)
+            if (stats.currentShields > stats.currentMaxShields)
             {
                 EventManager.TriggerEvent("ShieldsRecharged");
-                Shields = MaxShields;
+                stats.currentShields = stats.currentMaxShields;
             }
         }
     }
@@ -218,6 +212,11 @@ public class Player : MonoBehaviour
         }
 
         powerup.EndPowerup(this);
+    }
+
+    private void UpdateStats()
+    {
+        stats.UpdateStats();
     }
     #endregion
 

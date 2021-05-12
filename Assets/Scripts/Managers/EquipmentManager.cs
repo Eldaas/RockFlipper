@@ -44,9 +44,6 @@ public class EquipmentManager : MonoBehaviour
             instance = this;
         }
         #endregion
-
-        
-        
     }
 
     private void Start()
@@ -59,6 +56,20 @@ public class EquipmentManager : MonoBehaviour
     #endregion
 
     #region Public Methods
+    public void EquipPlayer()
+    {
+        Debug.Log("Equipping player.");
+        stats.ResetStats();
+        playerEquipment.Add(shopEquipment[0]);
+
+        foreach (Equipment equipment in playerEquipment)
+        {
+            equipment.Equip();
+        }
+
+        stats.SetInitialStats();
+
+    }
     #endregion
 
     #region Private Methods
@@ -92,7 +103,7 @@ public class EquipmentManager : MonoBehaviour
             foreach (EquipmentEffectProfile effectProfile in newModule.equipmentProfile.possibleSecondaryEffects)
             {
                 float randomFloat = Utility.GenerateRandomFloat(0, 100);
-                if (effectProfile.chanceOfBeingAdded <= randomFloat)
+                if (effectProfile.chanceOfBeingAdded >= randomFloat)
                 {
                     GenerateNewEffect(effectProfile, newModule);
                 }
@@ -118,21 +129,10 @@ public class EquipmentManager : MonoBehaviour
         
         // Create the new effect object by applying the profile and strength.
         EquipmentEffect newEffect = new EquipmentEffect(effectProfile, strength, rarityValue);
-        Debug.Log($"Generating new effect named {effectProfile.name} with strength {strength} at {rarityValue * 100}% rarity.");
+        //Debug.Log($"Generating new effect named {effectProfile.name} with strength {strength} at {rarityValue * 100}% rarity.");
         
         // Add the effect to the list of effects for the equipment module.
         newModule.effects.Add(newEffect);
-    }
-
-    private void EquipPlayer()
-    {
-        playerEquipment.Add(shopEquipment[0]);
-
-        foreach(Equipment equipment in playerEquipment)
-        {
-            equipment.Equip();
-        }
-        
     }
 
     private void ClearShopEquipment()

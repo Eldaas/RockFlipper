@@ -15,7 +15,7 @@ MonoBehaviour:
   effectType: 13
   minStrength: 1
   maxStrength: 50
-  chanceOfBeingAdded: 5
+  chanceOfBeingAdded: 1
   description: Luck improves your chances of finding an asteroid containing rare
     resources. Asteroids may also drop more! This is a super rare effect.
   unitOfMeasurement: 2

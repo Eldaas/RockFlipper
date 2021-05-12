@@ -13,34 +13,46 @@ public class ShieldOvercharge : Powerup, IPowerup
     private float[] newStats = new float[3];
     private float[] difference = new float[3];
 
+    private float currentRegen;
+    private float currentCooldown;
+    private float currentMax;
+
+    private float newRegen;
+    private float newCooldown;
+    private float newMax;
+
+    private float diffRegen;
+    private float diffCooldown;
+    private float diffMax;
+
     public override void ExecutePowerup(Player player)
     {
         EventManager.TriggerEvent("ShieldOvercharge");
         base.ExecutePowerup(player);
         Debug.Log("Player collected a shield powerup.");
 
-        stats[0] = player.stats.baseShieldRegen + player.stats.shieldRegenEquipment;
-        stats[1] = player.stats.baseShieldCooldownTime + player.stats.shieldCooldownTimeEquipment;
-        stats[2] = player.stats.baseMaxShields + player.stats.maxShieldsEquipment;
+        currentRegen = player.stats.currentShieldRegen;
+        currentCooldown = player.stats.currentShieldCooldownTime;
+        currentMax = player.stats.currentMaxShields;
 
-        newStats[0] = stats[0] * (shieldRegenPercentage / 100);
-        newStats[1] = stats[1] * (shieldCooldownPercentage / 100);
-        newStats[2] = stats[2] * (shieldCapacityPercentage / 100);
+        newRegen = currentRegen * (1 + (shieldRegenPercentage / 100));
+        newCooldown = currentCooldown * (1 - (shieldCooldownPercentage / 100));
+        newMax = currentMax * (shieldCapacityPercentage / 100);
 
-        difference[0] = newStats[0] - stats[0];
-        difference[1] = newStats[1] - stats[1];
-        difference[2] = newStats[2] - stats[2];
+        diffRegen = newRegen - currentRegen;
+        diffCooldown = newCooldown - currentCooldown;
+        diffMax = newMax - currentMax;
 
-        player.stats.shieldRegenPowerup += difference[0];
-        player.stats.shieldCooldownTimePowerup += difference[1];
-        player.stats.maxShieldsPowerup += difference[2];
+        player.stats.shieldRegenPowerup += diffRegen;
+        player.stats.shieldCooldownTimePowerup += diffCooldown;
+        player.stats.maxShieldsPowerup += diffMax;
     }
 
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
-        player.stats.shieldRegenPowerup -= difference[0];
-        player.stats.shieldCooldownTimePowerup -= difference[1];
-        player.stats.maxShieldsPowerup -= difference[2];
+        player.stats.shieldRegenPowerup -= diffRegen;
+        player.stats.shieldCooldownTimePowerup -= diffCooldown;
+        player.stats.maxShieldsPowerup -= diffMax;
     }
 }

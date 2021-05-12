@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626ef5919968653439403dc6b3477993, type: 3}
-  m_Name: ManeuveringSpeed
+  m_Name: BatteryCap
   m_EditorClassIdentifier: 
-  effectType: 8
+  effectType: 14
   minStrength: 10
-  maxStrength: 150
+  maxStrength: 200
   chanceOfBeingAdded: 25
-  description: Boosts horizontal maneuvering speed.
+  description: Boosts your ship's battery capacity so you can smash out more shots
+    before needing to recharge.
   unitOfMeasurement: 2

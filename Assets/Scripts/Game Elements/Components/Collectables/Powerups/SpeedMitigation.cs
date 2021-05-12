@@ -14,8 +14,8 @@ public class SpeedMitigation : Powerup, IPowerup
         base.ExecutePowerup(player);
         Debug.Log("Player collected a speed reduction powerup.");
 
-        float thrust = player.stats.baseForwardThrust + player.stats.forwardThrustEquipment;
-        float maxVelocity = player.stats.baseMaximumVelocity + player.stats.maximumVelocityEquipment;
+        float thrust = player.stats.currentForwardThrust;
+        float maxVelocity = player.stats.currentMaximumVelocity;
 
         float thrustReduction = thrust * (thrustReductionPercentage / 100); // Returns a positive value
         differenceThrust = thrust - thrustReduction;
