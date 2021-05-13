@@ -106,8 +106,6 @@ public class Spawner : MonoBehaviour
                     maxAttempts--;
                 }
             }
-            
- 
         }
 
         if (activeGasClouds.Count < currentGasCloudCap)

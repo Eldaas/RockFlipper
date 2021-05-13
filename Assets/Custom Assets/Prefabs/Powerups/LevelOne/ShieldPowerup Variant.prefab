@@ -7,10 +7,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5644022283112225451, guid: 85027212697f79b478bd5b2cdaef5475,
+        type: 3}
+      propertyPath: shieldRegenPercentage
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: -5644022283112225451, guid: 85027212697f79b478bd5b2cdaef5475,
+        type: 3}
+      propertyPath: shieldCooldownPercentage
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 4700169260480515502, guid: 85027212697f79b478bd5b2cdaef5475,
         type: 3}
       propertyPath: m_Name
-      value: ShieldPowerup
+      value: ShieldPowerup Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8883703168703204450, guid: 85027212697f79b478bd5b2cdaef5475,
         type: 3}

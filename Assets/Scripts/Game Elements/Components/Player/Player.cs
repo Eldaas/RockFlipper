@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -9,18 +10,6 @@ public class Player : MonoBehaviour
     public PlayerStats stats;
     [SerializeField]
     private PlayerEquipment equipment;
-
-    [Header("ReadOnly Properties")]
-    [SerializeField, ReadOnly]
-    private float currentShields;
-    [SerializeField, ReadOnly]
-    private float currentArmour;
-    [SerializeField, ReadOnly]
-    private float currentHull;
-    [SerializeField, ReadOnly]
-    private float shieldsRechargeRate;
-    [SerializeField, ReadOnly]
-    private float currentVelocity;
 
     [Header("Components/Objects")]
     private Rigidbody rb;
@@ -36,13 +25,6 @@ public class Player : MonoBehaviour
     private float shieldDestroyedAt;
 
     #region Properties
-    public float Shields { get => stats.currentShields; set => stats.currentShields = value; }
-    public float MaxShields { get => stats.currentMaxShields; set => stats.currentMaxShields = value; }
-    public float ShieldsRechargeRate { get => stats.currentShieldRegen; set => stats.currentShieldRegen = value; }
-    public float Armour { get => stats.currentArmour; set => stats.currentArmour = value; }
-    public float MaxArmour { get => stats.currentMaxArmour; set => stats.currentMaxArmour = value; }
-    public float Hull { get => stats.currentHull; set => stats.currentHull = value; }
-    public float MaxHull { get => stats.currentMaxHull; set => stats.currentMaxHull = value; }
     public float Velocity { get => rb.velocity.magnitude; }
     #endregion
 
@@ -55,45 +37,13 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
-        // TO DO: Add max stat modifiers from level modifiers and equipment modifiers
-
-        // Initialise stat values (currently from base levels until modifiers fully implemented)
-        stats.currentMaxHull = stats.baseMaxHull;
-        stats.currentHull = stats.currentMaxHull;
-        
-
-        stats.currentMaxArmour = stats.baseMaxArmour;
-        stats.currentArmour = stats.currentMaxArmour;
-
-        stats.currentMaxShields = stats.baseMaxShields;
-        stats.currentShields = stats.currentMaxShields;
-
-        stats.currentShieldRegen = stats.baseShieldRegen;
-        stats.currentShieldCooldownTime = stats.baseShieldCooldownTime;
-
-        stats.currentForwardThrust = stats.baseForwardThrust;
-        stats.currentMaximumVelocity = stats.baseMaximumVelocity;
-        stats.currentManeuveringSpeed = stats.baseManeuveringSpeed;
-
-        stats.currentHeatSinkCapacity = stats.baseHeatSinkCapacity;
-        stats.currentHeatSinkLevel = 0f;
-
-        stats.currentProjectileSpeed = stats.baseProjectileSpeed;
-        stats.currentProjectileDamage = stats.baseProjectileDamage;
-
-        stats.currentCollectionRange = stats.baseCollectionRange;
-
         InvokeRepeating("RegenShield", 1f, 1f);
+        InvokeRepeating("UpdateStats", 0.5f, 0.1f);
     }
 
     private void Update()
     {
-        // Sets the ReadOnly values in the inspector for visual feedback
-        currentShields = Shields;
-        currentArmour = Armour;
-        currentHull = Hull;
-        shieldsRechargeRate = ShieldsRechargeRate;
-        currentVelocity = Velocity;
+        /*stats.UpdateStats();*/
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -146,13 +96,13 @@ public class Player : MonoBehaviour
         EventManager.TriggerEvent("TakeHit");
         float damage = value;
 
-        if(Shields > 0f)
+        if(stats.currentShields > 0f)
         {
-            Shields -= damage;
-            if (Shields < 0f)
+            stats.currentShields -= damage;
+            if (stats.currentShields < 0f)
             {
-                damage = Mathf.Abs(Shields);
-                Shields = 0f;
+                damage = Mathf.Abs(stats.currentShields);
+                stats.currentShields = 0f;
                 shieldDestroyedAt = Time.time;
                 shieldObject.SetActive(false);
                 EventManager.TriggerEvent("ShieldsDestroyed");
@@ -165,13 +115,13 @@ public class Player : MonoBehaviour
             }
         }
         
-        if(Armour > 0f)
+        if(stats.currentArmour > 0f)
         {
-            Armour -= damage;
-            if (Armour < 0f)
+            stats.currentArmour -= damage;
+            if (stats.currentArmour < 0f)
             {
-                damage = Mathf.Abs(Armour);
-                Armour = 0f;
+                damage = Mathf.Abs(stats.currentArmour);
+                stats.currentArmour = 0f;
                 EventManager.TriggerEvent("ArmourDestroyed");
             }
             else
@@ -182,12 +132,12 @@ public class Player : MonoBehaviour
             }
         }
         
-        if(Hull > 0f)
+        if(stats.currentHull > 0f)
         {
-            Hull -= damage;
-            if (Hull < 0f)
+            stats.currentHull -= damage;
+            if (stats.currentHull < 0f)
             {
-                Hull = 0f;
+                stats.currentHull = 0f;
                 EventManager.TriggerEvent("PlayerDeath");
                 return true;
             }
@@ -196,31 +146,13 @@ public class Player : MonoBehaviour
                 EventManager.TriggerEvent("HullHit");
             }
             
-            if (Hull / MaxHull <= 0.5f)
+            if (stats.currentHull / stats.currentMaxHull <= 0.5f)
             {
                 EventManager.TriggerEvent("HealthLow");
             }
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// Increase the maximum shield by X amount.
-    /// </summary>
-    /// <param name="value">The amount to add to the shield, NOT the new shield value.</param>
-    public void IncreaseShieldCapacityByValue(float value)
-    {
-        MaxShields += value;
-    }
-
-    /// <summary>
-    /// Decrease the maximum shield amount by X amount.
-    /// </summary>
-    /// <param name="value">The amount to remove from the shield, NOT the new shield value.</param>
-    public void DecreaseShieldCapacityByValue(float value)
-    {
-        MaxShields -= value;
     }
 
     #endregion
@@ -252,16 +184,16 @@ public class Player : MonoBehaviour
             }
             
             // Check if shield requires recharging
-            if (Shields < MaxShields)
+            if (stats.currentShields < stats.currentMaxShields)
             {
-                Shields += ShieldsRechargeRate;
+                stats.currentShields += stats.currentShieldRegen;
             }
 
             // Check if shield has been recharged beyond its capacity
-            if (Shields > MaxShields)
+            if (stats.currentShields > stats.currentMaxShields)
             {
                 EventManager.TriggerEvent("ShieldsRecharged");
-                Shields = MaxShields;
+                stats.currentShields = stats.currentMaxShields;
             }
         }
     }
@@ -280,6 +212,11 @@ public class Player : MonoBehaviour
         }
 
         powerup.EndPowerup(this);
+    }
+
+    private void UpdateStats()
+    {
+        stats.UpdateStats();
     }
     #endregion
 

@@ -6,150 +6,349 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject
 {
     // "Base" values are used to set initial values via the inspector, which are then applied at runtime.
-    // ReadOnly fields aren't intended to be altered in the inspector at runtime due to being dynamically calculated
+    // "Equipment" values are what the player's current equipment provides.
+    // "Powerup" values are what the player's current active powerup effects provide.
+    // "Current" values are the player's stat values incorporating both equipment and powerup modifiers.
+    // "ReadOnly" fields aren't intended to be altered in the inspector due to being dynamically calculated.
 
-    /// <summary>
-    /// Base max hull represents the starting amount the hull should have, before modifiers are taken into account
-    /// </summary>
+    #region Hull Stats
+
     public float baseMaxHull;
-
-    /// <summary>
-    /// Current hull represents the player's current (live) hull value
-    /// </summary>
+    [ReadOnly] public float maxHullEquipment;
+    [ReadOnly] public float maxHullPowerup;
     [ReadOnly] public float currentHull;
+    [ReadOnly] public float currentMaxHull; 
 
-    /// <summary>
-    /// Current max hull represents the current maximum capacity of the player's hull health value, taking modifiers into account
-    /// </summary>
-    [ReadOnly] public float currentMaxHull;
+    #endregion
 
-    /// <summary>
-    /// Base max armour represents the starting amount the armour should have, before modifiers are taken into account
-    /// </summary>
+
+    #region Armour Stats
+
     public float baseMaxArmour;
-
-    /// <summary>
-    /// Current armour represents the player's current (live) armour value
-    /// </summary>
+    [ReadOnly] public float maxArmourEquipment;
+    [ReadOnly] public float maxArmourPowerup;
     [ReadOnly] public float currentArmour;
+    [ReadOnly] public float currentMaxArmour; 
 
-    /// <summary>
-    /// Current max armour represents the current maximum capacity of the player's armour health value, taking modifiers into account
-    /// </summary>
-    [ReadOnly] public float currentMaxArmour;
+    #endregion
 
-    /// <summary>
-    /// Base max shields represents the starting amount the shield should have, before modifiers are taken into account
-    /// </summary>
+
+    #region Shield Stats
+
+    #region Shield Cap
+
     public float baseMaxShields;
-
-    /// <summary>
-    /// Current shields represents the player's current (live) shields value
-    /// </summary>
+    [ReadOnly] public float maxShieldsEquipment;
+    [ReadOnly] public float maxShieldsPowerup;
     [ReadOnly] public float currentShields;
+    [ReadOnly] public float currentMaxShields; 
 
-    /// <summary>
-    /// Current max shields represents the current maximum capacity of the player's shields health value, taking modifiers into account
-    /// </summary>
-    [ReadOnly] public float currentMaxShields;
+    #endregion
 
-    /// <summary>
-    /// Base shield regen is how much the player's shield will regenerate per second before modifiers are applied
-    /// </summary>
+
+    #region Shield Regen
+
     public float baseShieldRegen;
+    [ReadOnly] public float shieldRegenEquipment;
+    [ReadOnly] public float shieldRegenPowerup;
+    [ReadOnly] public float currentShieldRegen; 
+    
+    #endregion
 
-    /// <summary>
-    /// Current shield regen is the current (live) rate at which the player's shield regenerates per second, with modifiers taken into account
-    /// </summary>
-    [ReadOnly] public float currentShieldRegen;
 
-    /// <summary>
-    /// Base shield cooldown time is the amount of seconds between the shield being destroyed and the time at which it begins regenerating, without taking modifiers into account
-    /// </summary>
+    #region Shield Cooldown
+
     public float baseShieldCooldownTime;
+    [ReadOnly] public float shieldCooldownTimeEquipment;
+    [ReadOnly] public float shieldCooldownTimePowerup;
+    [ReadOnly] public float currentShieldCooldownTime; 
 
-    /// <summary>
-    /// Current shield cooldown time is the current amount of seconds between the shield being destroyed and the time at which it begins regenerating, taking modifiers into account
-    /// </summary>
-    [ReadOnly] public float currentShieldCooldownTime;
+    #endregion
 
-    /// <summary>
-    /// Base forward thrust is the starting thrust at which the player moves forward in the game level, without modifiers taken into account. Thrust is the physics force applied to the player object
-    /// </summary>
+    #endregion
+
+
+    #region Movement Stats
+
     public float baseForwardThrust;
+    [ReadOnly] public float forwardThrustEquipment;
+    [ReadOnly] public float forwardThrustPowerup;
+    [ReadOnly] public float currentForwardThrust; 
 
-    /// <summary>
-    /// Current forward thrust is the thrust at which the player is currently moving forward in the game level. Thrust is the physics force applied to the player object
-    /// </summary>
-    [ReadOnly] public float currentForwardThrust;
-
-    /// <summary>
-    /// This is the base value for the player's maximum velocity, before modifiers are taken into account.
-    /// </summary>
+    public float hardVelocityCap;
     public float baseMaximumVelocity;
-
-    /// <summary>
-    /// This is the current value for the player's maximum velocity, with modifiers taken into account
-    /// </summary>
-    [ReadOnly] public float currentMaximumVelocity;
-
-    /// <summary>
-    /// This caps the velocity to an amount that the player absolutely cannot go beyond.
-    /// </summary>
-    public float velocityCap;
-
-    /// <summary>
-    /// Base maneuvering speed pertains to how fast the player can move left and right to avoid collisions, without modifiers taken into account
-    /// </summary>
+    [ReadOnly] public float maximumVelocityEquipment;
+    [ReadOnly] public float maximumVelocityPowerup;
+    [ReadOnly] public float maximumVelocityIncrementor;
+    [ReadOnly] public float currentMaximumVelocity; 
+    
     public float baseManeuveringSpeed;
-
-    /// <summary>
-    /// Current maneuvering speed pertains to how fast the player can currently move left and right to avoid collisions, with modifiers taken into account
-    /// </summary>
+    [ReadOnly] public float maneuveringSpeedEquipment;
+    [ReadOnly] public float maneuveringSpeedPowerup;
     [ReadOnly] public float currentManeuveringSpeed;
+    #endregion
 
-    /// <summary>
-    /// The base heat sink capacity is the unmodified capacity the player starts with
-    /// </summary>
-    public float baseHeatSinkCapacity;
+    #region Battery Stats
 
-    /// <summary>
-    /// This represents a normalised value (0 - 1) to represent the current % saturation of the heat sink capacity
-    /// </summary>
-    [ReadOnly] public float currentHeatSinkLevel;
+    public float baseBatteryCapacity;
+    [ReadOnly] public float batteryCapacityEquipment;
+    [ReadOnly] public float batteryCapacityPowerup;
+    [ReadOnly] public float currentBatteryLevel;
+    [ReadOnly] public float currentBatteryCapacity;
 
-    /// <summary>
-    /// The current heat sink capacity is the current maximum value that the heat sink can reach, with modifiers taken into account
-    /// </summary>
-    [ReadOnly] public float currentHeatSinkCapacity;
+    public float baseBatteryRecharge;
+    [ReadOnly] public float batteryRechargeEquipment;
+    [ReadOnly] public float batteryRechargePowerup;
+    [ReadOnly] public float currentBatteryRecharge;
 
-    /// <summary>
-    /// Base projectile speed represents the base value (without modifiers applied) at which the player's cannon projectile will travel at
-    /// </summary>
+    #endregion
+
+
+    #region Projectiles
+
     public float baseProjectileSpeed;
-
-    /// <summary>
-    /// Current projectile speed represents the current base value (with modifiers applied) at which the player's cannon projectiles will travel at
-    /// </summary>
+    [ReadOnly] public float projectileSpeedEquipment;
+    [ReadOnly] public float projectileSpeedPowerup;
     [ReadOnly] public float currentProjectileSpeed;
 
-    /// <summary>
-    /// Base projectile damage represents the starting amount of damage (without modifiers applied) that the player deals to asteroids.
-    /// </summary>
     public float baseProjectileDamage;
-
-    /// <summary>
-    /// Current projectile damage represents the amount of damage (with modifiers applied) that the damage deals to asteroids.
-    /// </summary>
+    [ReadOnly] public float projectileDamageEquipment;
+    [ReadOnly] public float projectileDamagePowerup;
     [ReadOnly] public float currentProjectileDamage;
 
-    /// <summary>
-    /// Base collection range is the distance from which resource chunks will be pulled toward the player ship (without modifiers)
-    /// </summary>
-    public float baseCollectionRange;
+    #endregion
 
-    /// <summary>
-    /// Current collection range is the distance from which resource chunks will be pulled toward the player ship (with modifiers)
-    /// </summary>
+
+    #region Collection Stats
+
+    public float baseCollectionRange;
+    [ReadOnly] public float collectionRangeEquipment;
+    [ReadOnly] public float collectionRangePowerup;
     [ReadOnly] public float currentCollectionRange;
+
+    #endregion
+
+
+    #region Miscellaneous Stats
+    public float baseLuck;
+    [ReadOnly] public float luckEquipment;
+    [ReadOnly] public float luckPowerup;
+    [ReadOnly] public float currentLuck;
+
+    public float baseProfitBoost;
+    [ReadOnly] public float profitBoostEquipment;
+    [ReadOnly] public float currentProfitBoost;
+    #endregion
+
+
+    #region Public Methods
+    public void ResetStats()
+    {
+        //Debug.Log("Resetting stats.");
+        currentMaxHull = 0f;
+        maxHullEquipment = 0f;
+        maxHullPowerup = 0f;
+
+        currentMaxArmour = 0f;
+        maxArmourEquipment = 0f;
+        maxArmourPowerup = 0f;
+
+        currentMaxShields = 0f;
+        maxShieldsEquipment = 0f;
+        maxShieldsPowerup = 0f;
+
+        currentShieldRegen = 0f;
+        shieldRegenEquipment = 0f;
+        shieldRegenPowerup = 0f;
+
+        currentShieldCooldownTime = 0f;
+        shieldCooldownTimeEquipment = 0f;
+        shieldCooldownTimePowerup = 0f;
+
+        currentForwardThrust = 0f;
+        forwardThrustEquipment = 0f;
+        forwardThrustPowerup = 0f;
+
+        currentMaximumVelocity = 0f;
+        maximumVelocityEquipment = 0f;
+        maximumVelocityPowerup = 0f;
+        maximumVelocityIncrementor = 0f;
+
+        currentManeuveringSpeed = 0f;
+        maneuveringSpeedEquipment = 0f;
+        maneuveringSpeedPowerup = 0f;
+
+        currentBatteryCapacity = 0f;
+        batteryCapacityEquipment = 0f;
+        batteryCapacityPowerup = 0f;
+
+        currentBatteryRecharge = 0f;
+        batteryRechargeEquipment = 0f;
+        batteryRechargePowerup = 0f;
+
+        currentProjectileSpeed = 0f;
+        projectileSpeedPowerup = 0f;
+        projectileSpeedEquipment = 0f;
+
+        currentProjectileDamage = 0f;
+        projectileDamageEquipment = 0f;
+        projectileDamagePowerup = 0f;
+
+        currentCollectionRange = 0f;
+        collectionRangeEquipment = 0f;
+        collectionRangePowerup = 0f;
+
+        currentLuck = 0f;
+        luckEquipment = 0f;
+        luckPowerup = 0f;
+
+        currentProfitBoost = 0f;
+        profitBoostEquipment = 0f;
+    }
+
+    public void SetInitialStats()
+    {
+        UpdateStats();
+        //Debug.Log("Setting initial stats.");
+        currentShields = currentMaxShields;
+        currentArmour = currentMaxArmour;
+        currentHull = currentMaxHull;
+    }
+
+    public void UpdateStats()
+    {
+        //Debug.Log("Updating stats.");
+        currentMaxHull = baseMaxHull + maxHullEquipment + maxHullPowerup;
+        currentMaxArmour = baseMaxArmour + maxArmourEquipment + maxArmourPowerup;
+        currentMaxShields = baseMaxShields + maxShieldsEquipment + maxShieldsPowerup;
+        currentShieldRegen = baseShieldRegen + shieldRegenEquipment + shieldRegenPowerup;
+
+        currentShieldCooldownTime = 0f;
+        if(baseShieldCooldownTime != 0f)
+        {
+            currentShieldCooldownTime = baseShieldCooldownTime;
+        }
+        if(shieldCooldownTimeEquipment != 0f)
+        {
+            currentShieldCooldownTime += shieldCooldownTimeEquipment;
+        }
+        if(shieldCooldownTimePowerup != 0f)
+        {
+            currentShieldCooldownTime += shieldCooldownTimePowerup;
+        }
+
+        currentForwardThrust = 0f;
+        if (baseForwardThrust != 0f)
+        {
+            currentForwardThrust += baseForwardThrust;
+        }
+        if (forwardThrustEquipment != 0f)
+        {
+            currentForwardThrust *= forwardThrustEquipment;
+        }
+        if (forwardThrustPowerup != 0f)
+        {
+            currentForwardThrust += forwardThrustPowerup;
+        }
+
+        currentMaximumVelocity = baseMaximumVelocity + maximumVelocityEquipment + maximumVelocityPowerup + maximumVelocityIncrementor;
+
+        currentManeuveringSpeed = 0f;
+        if (baseManeuveringSpeed != 0f)
+        {
+            currentManeuveringSpeed += baseManeuveringSpeed;
+        }
+        if (maneuveringSpeedEquipment != 0f)
+        {
+            currentManeuveringSpeed += maneuveringSpeedEquipment;
+        }
+        if (maneuveringSpeedPowerup != 0f)
+        {
+            currentManeuveringSpeed += maneuveringSpeedPowerup;
+        }
+
+        currentBatteryCapacity = 0f;
+        if (baseBatteryCapacity != 0f)
+        {
+            currentBatteryCapacity += baseBatteryCapacity;
+        }
+        if (batteryCapacityEquipment != 0f)
+        {
+            currentBatteryCapacity *= batteryCapacityEquipment;
+        }
+        if (batteryCapacityPowerup != 0f)
+        {
+            currentBatteryCapacity *= batteryCapacityPowerup;
+        }
+
+        currentBatteryRecharge = 0f;
+        if (baseBatteryRecharge != 0f)
+        {
+            currentBatteryRecharge += baseBatteryRecharge;
+        }
+        if (batteryRechargeEquipment != 0f)
+        {
+            currentBatteryRecharge *= batteryRechargeEquipment;
+        }
+        if (batteryRechargePowerup != 0f)
+        {
+            currentBatteryRecharge *= batteryRechargePowerup;
+        }
+
+        currentProjectileSpeed = 0f;
+        if (baseProjectileSpeed != 0f)
+        {
+            currentProjectileSpeed += baseProjectileSpeed;
+        }
+        if (projectileSpeedEquipment != 0f)
+        {
+            currentProjectileSpeed *= projectileSpeedEquipment;
+        }
+        if (projectileSpeedPowerup != 0f)
+        {
+            currentProjectileSpeed *= projectileSpeedPowerup;
+        }
+
+        currentProjectileDamage = baseProjectileDamage + projectileDamageEquipment + projectileDamagePowerup;
+
+        currentCollectionRange = 0f;
+        if (baseCollectionRange != 0f)
+        {
+            currentCollectionRange += baseCollectionRange;
+        }
+        if (collectionRangeEquipment != 0f)
+        {
+            currentCollectionRange *= (1 + (collectionRangeEquipment / 100));
+        }
+        if (collectionRangePowerup != 0f)
+        {
+            currentCollectionRange *= (1 + (collectionRangePowerup / 100));
+        }
+
+        currentLuck = 0f;
+        if (baseLuck != 0f)
+        {
+            currentLuck += baseLuck;
+        }
+        if (luckEquipment != 0f)
+        {
+            currentLuck += luckEquipment;
+        }
+        if (luckPowerup != 0f)
+        {
+            currentLuck += luckPowerup;
+        }
+
+        currentProfitBoost = 0f;
+        if (baseProfitBoost != 0f)
+        {
+            currentProfitBoost += baseProfitBoost;
+        }
+        if (profitBoostEquipment != 0f)
+        {
+            currentProfitBoost += profitBoostEquipment;
+        }
+    }
+    #endregion
+
 }
