@@ -1,5 +1,111 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &407082013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407082014}
+  - component: {fileID: 407082015}
+  m_Layer: 0
+  m_Name: EquipmentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407082014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407082013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1097.5995, y: 1110.8201, z: -627.9339}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2261875415385475842}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407082015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407082013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59a5c29ad22b1145929a4a59d4b820c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 4717faf89fd4b204dac498c891eff097, type: 2}
+  numToGenerate: 50
+  refreshEveryXSeconds: 0
+  equipmentProfiles:
+  - {fileID: 11400000, guid: eebf61621c924254bba6a0c09fd16cef, type: 2}
+  - {fileID: 11400000, guid: aaef12db3ff379d4aaf1a191c5ec87f9, type: 2}
+  - {fileID: 11400000, guid: c7213ecaa88c9344ab676aa7e6de5aec, type: 2}
+  - {fileID: 11400000, guid: ad89360b2b23aac4cbd5ee41f57770de, type: 2}
+  - {fileID: 11400000, guid: 87f5256589a32fb4fbd4d82fe5c1654e, type: 2}
+  - {fileID: 11400000, guid: 51cd9ac4167bba7489a667d598e2c8a1, type: 2}
+  strengthRarityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.20190999
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15910438
+      value: 0.21351704
+      inSlope: 0.07295243
+      outSlope: 0.08182301
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5074265
+      value: 0.2420178
+      inSlope: 0.08402268
+      outSlope: 0.22586669
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 1
+      outWeight: 0.5121418
+    - serializedVersion: 3
+      time: 0.9191155
+      value: 0.5141921
+      inSlope: 3.2460241
+      outSlope: 6.1397324
+      tangentMode: 1
+      weightedMode: 3
+      inWeight: 0.14913128
+      outWeight: 0.98724335
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 6.0061917
+      outSlope: 10.146672
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.10343791
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shopEquipment: []
+  playerEquipment: []
 --- !u!1 &529961019
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +942,7 @@ Transform:
   - {fileID: 2261875415789415447}
   - {fileID: 2261875415578059964}
   - {fileID: 3383038351390877135}
+  - {fileID: 407082014}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1242,4 +1349,6 @@ MonoBehaviour:
     profileName: 
     balance: 0
     reputation: 0
+    currentEquipment: []
+    shopEquipment: []
   fileNames: []
