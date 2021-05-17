@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
     private float shieldDestroyedAt;
 
     #region Properties
-    public float Velocity { get => rb.velocity.magnitude; }
+    public float VelocityX { get => rb.velocity.x; }
+    public float VelocityZ { get => rb.velocity.z; }
     #endregion
 
     #region Unity Methods

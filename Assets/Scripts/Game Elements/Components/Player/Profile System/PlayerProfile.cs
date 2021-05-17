@@ -10,5 +10,6 @@ public class PlayerProfile
     public float reputation;
 
     public List<Equipment> currentEquipment = new List<Equipment>();
+    public List<Equipment> currentInventory = new List<Equipment>();
     public List<Equipment> shopEquipment = new List<Equipment>();
 }

@@ -40,16 +40,16 @@ public class HangarController : MonoBehaviour
     {
         if(GameManager.instance.levelRecord != null)
         {
+            Debug.Log("levelRecord is not null");
             CalculateResources();
-            hangarUi.SetScreen(HangarUIScreen.EndLevel, true);
-            hangarUi.SetScreen(HangarUIScreen.Main, false);
+            hangarUi.SetEndLevelText();
             SellResources();
         }
         else
         {
             EventManager.TriggerEvent("UpdateBalance");
             Debug.Log("Event triggered.");
-            hangarUi.SetScreen(HangarUIScreen.Main, true);
+            hangarUi.SetScreen("NavigationMenu");
         }
     }
 
