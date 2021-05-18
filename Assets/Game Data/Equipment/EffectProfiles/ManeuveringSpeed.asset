@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 8
   minStrength: 10
-  maxStrength: 150
+  maxStrength: 50
   chanceOfBeingAdded: 25
   description: Maneuvering Speed
-  unitOfMeasurement: 2
+  unitOfMeasurement: '%'

@@ -17,6 +17,7 @@ MonoBehaviour:
   guaranteedEffects:
   - {fileID: 11400000, guid: 6eff92459f81e61408cb77b3679842f5, type: 2}
   - {fileID: 11400000, guid: d2b564b709841af49bcb1bf3138f1cca, type: 2}
+  - {fileID: 11400000, guid: 5c0c2f8ae110ee44884f24b0e268f461, type: 2}
   possibleSecondaryEffects:
   - {fileID: 11400000, guid: a997a8fc605af3b4196e5149508f4da1, type: 2}
   - {fileID: 11400000, guid: f526bfc82d8eb1947b1b6d966f8543ea, type: 2}

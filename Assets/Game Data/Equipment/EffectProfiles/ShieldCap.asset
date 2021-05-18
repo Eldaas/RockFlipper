@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ShieldCap
   m_EditorClassIdentifier: 
   effectType: 1
-  minStrength: 50
-  maxStrength: 500
+  minStrength: 5
+  maxStrength: 200
   chanceOfBeingAdded: 25
   description: Shield Capacity
-  unitOfMeasurement: 1
+  unitOfMeasurement: '%'

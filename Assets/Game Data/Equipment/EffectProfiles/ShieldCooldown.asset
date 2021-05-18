@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ShieldCooldown
   m_EditorClassIdentifier: 
   effectType: 3
-  minStrength: 10
-  maxStrength: 90
+  minStrength: -10
+  maxStrength: -90
   chanceOfBeingAdded: 25
   description: Shield Cooldown
-  unitOfMeasurement: 2
+  unitOfMeasurement: '%'

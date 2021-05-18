@@ -23,14 +23,14 @@ MonoBehaviour:
   currentArmour: 100
   currentMaxArmour: 100
   baseMaxShields: 100
-  maxShieldsEquipment: 463.30176
+  maxShieldsEquipment: 0
   maxShieldsPowerup: 0
-  currentShields: 563.30176
-  currentMaxShields: 563.30176
+  currentShields: 100
+  currentMaxShields: 100
   baseShieldRegen: 1
-  shieldRegenEquipment: 2.8234344
+  shieldRegenEquipment: 0
   shieldRegenPowerup: 0
-  currentShieldRegen: 3.8234344
+  currentShieldRegen: 1
   baseShieldCooldownTime: 10
   shieldCooldownTimeEquipment: 0
   shieldCooldownTimePowerup: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
   baseMaximumVelocity: 100
   maximumVelocityEquipment: 0
   maximumVelocityPowerup: 0
-  maximumVelocityIncrementor: 1
-  currentMaximumVelocity: 101
+  maximumVelocityIncrementor: 0
+  currentMaximumVelocity: 100
   baseManeuveringSpeed: 1
   maneuveringSpeedEquipment: 0
   maneuveringSpeedPowerup: 0

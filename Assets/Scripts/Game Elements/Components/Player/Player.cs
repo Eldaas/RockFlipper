@@ -42,11 +42,6 @@ public class Player : MonoBehaviour
         InvokeRepeating("UpdateStats", 0.5f, 0.1f);
     }
 
-    private void Update()
-    {
-        /*stats.UpdateStats();*/
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid"))

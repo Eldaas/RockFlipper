@@ -14,12 +14,10 @@ public class EquipmentEffectProfile : ScriptableObject
     /// </summary>
     public float chanceOfBeingAdded;
     public string description;
-    public Measurement unitOfMeasurement;
+    public string unitOfMeasurement;
 
     
 
 }
 
 public enum EffectType { None, ShieldCap, ShieldRegen, ShieldCooldown, ArmourCap, HullCap, EngineVelocityCap, EngineThrust, ManeuveringSpeed, ProjectileDamage, ProjectileSpeed, CollectorRadius, ProfitBoost, Luck, BatteryCapacity, BatteryRecharge }
-
-public enum Measurement { None, Points, Percent, Milliseconds, Seconds, Minutes, Multiplier, Metres }

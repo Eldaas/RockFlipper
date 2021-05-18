@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 13
   minStrength: 1
-  maxStrength: 50
+  maxStrength: 500
   chanceOfBeingAdded: 1
   description: Luck
-  unitOfMeasurement: 2
+  unitOfMeasurement: '%'

@@ -7,10 +7,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 783696956647853633, guid: b306e7bfd22203c47bbea16fe69cc688,
+        type: 3}
+      propertyPath: percentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 783696956647853633, guid: b306e7bfd22203c47bbea16fe69cc688,
+        type: 3}
+      propertyPath: playerParticleFxOffset.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 4700169260480515502, guid: b306e7bfd22203c47bbea16fe69cc688,
         type: 3}
       propertyPath: m_Name
-      value: ManeuveringPowerup
+      value: ManeuveringPowerup Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8883703168703204450, guid: b306e7bfd22203c47bbea16fe69cc688,
         type: 3}

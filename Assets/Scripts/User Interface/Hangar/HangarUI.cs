@@ -274,50 +274,70 @@ public class HangarUI : MonoBehaviour
                 }
                 else
                 {
-                    sign = "-";
+                    sign = string.Empty;
                 }
 
                 EffectType effectType = effect.profile.effectType;
                 string currentValue = "ERROR";
+                string currentValueSign = "ERROR";
 
                 switch (effectType)
                 {
                     case EffectType.ArmourCap:
                         currentValue = stats.currentMaxArmour.ToString("#.#");
+                        currentValueSign = " points";
                         break;
                     case EffectType.CollectorRadius:
                         currentValue = stats.currentCollectionRange.ToString("#.#");
+                        currentValueSign = " metres";
                         break;
                     case EffectType.EngineThrust:
                         currentValue = stats.currentForwardThrust.ToString("#.#");
+                        currentValueSign = " joules";
                         break;
                     case EffectType.EngineVelocityCap:
                         currentValue = stats.currentMaximumVelocity.ToString("#.#");
+                        currentValueSign = " metres p/sec";
                         break;
                     case EffectType.HullCap:
                         currentValue = stats.currentMaxHull.ToString("#.#");
+                        currentValueSign = " points";
                         break;
                     case EffectType.Luck:
                         currentValue = stats.currentLuck.ToString("#.#");
+                        currentValueSign = "x";
                         break;
                     case EffectType.ManeuveringSpeed:
                         currentValue = stats.currentManeuveringSpeed.ToString("#.#");
+                        currentValueSign = "x";
                         break;
                     case EffectType.ProfitBoost:
                         currentValue = stats.currentProfitBoost.ToString("#.#");
+                        currentValueSign = "x";
                         break;
                     case EffectType.ShieldCap:
                         currentValue = stats.currentMaxShields.ToString("#.#");
+                        currentValueSign = " points";
                         break;
                     case EffectType.ShieldCooldown:
                         currentValue = stats.currentShieldCooldownTime.ToString("#.#");
+                        currentValueSign = " seconds";
                         break;
                     case EffectType.ShieldRegen:
                         currentValue = stats.currentShieldRegen.ToString("#.#");
+                        currentValueSign = " points p/sec";
+                        break;
+                    case EffectType.ProjectileDamage:
+                        currentValue = stats.currentProjectileDamage.ToString("#.#");
+                        currentValueSign = " points";
+                        break;
+                    case EffectType.ProjectileSpeed:
+                        currentValue = stats.currentProjectileSpeed.ToString("#.#");
+                        currentValueSign = " meters p/sec";
                         break;
                 }
 
-                statText.text = $"{effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement} (Now {currentValue})";
+                statText.text = $"{effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement} (Now {currentValue}{currentValueSign})";
             }
         }
     }

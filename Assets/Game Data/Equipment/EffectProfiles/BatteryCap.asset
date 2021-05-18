@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 14
   minStrength: 10
-  maxStrength: 200
+  maxStrength: 100
   chanceOfBeingAdded: 25
   description: Battery Capacity
-  unitOfMeasurement: 2
+  unitOfMeasurement: '%'

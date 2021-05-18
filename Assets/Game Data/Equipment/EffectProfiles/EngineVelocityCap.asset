@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EngineVelocityCap
   m_EditorClassIdentifier: 
   effectType: 6
-  minStrength: 1
-  maxStrength: 50
+  minStrength: -1
+  maxStrength: -50
   chanceOfBeingAdded: 25
   description: Max Velocity Reduction
-  unitOfMeasurement: 7
+  unitOfMeasurement: metres p/sec

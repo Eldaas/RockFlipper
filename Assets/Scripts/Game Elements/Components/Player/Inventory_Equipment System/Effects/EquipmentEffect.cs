@@ -39,7 +39,7 @@ public class EquipmentEffect
                 Debug.Log($"collectionRangeEquipment is now {stats.collectionRangeEquipment}");
                 break;
             case EffectType.EngineThrust:
-                stats.forwardThrustEquipment -= stats.baseForwardThrust * (effectStrength / 100);
+                stats.forwardThrustEquipment += effectStrength;
                 Debug.Log($"forwardThrustEquipment is now {stats.forwardThrustEquipment}");
                 break;
             case EffectType.EngineVelocityCap:
@@ -55,7 +55,7 @@ public class EquipmentEffect
                 Debug.Log($"luckEquipment is now {stats.luckEquipment}");
                 break;
             case EffectType.ManeuveringSpeed:
-                stats.maneuveringSpeedEquipment += stats.baseManeuveringSpeed * (effectStrength / 100);
+                stats.maneuveringSpeedEquipment += effectStrength;
                 Debug.Log($"maneuveringSpeedEquipment is now {stats.maneuveringSpeedEquipment}");
                 break;
             case EffectType.ProfitBoost:
@@ -67,7 +67,7 @@ public class EquipmentEffect
                 Debug.Log($"maxShieldsEquipment is now {stats.maxShieldsEquipment}");
                 break;
             case EffectType.ShieldCooldown:
-                stats.shieldCooldownTimeEquipment += (effectStrength / 100);
+                stats.shieldCooldownTimeEquipment += effectStrength;
                 Debug.Log($"shieldCooldownTimeEquipment is now {stats.shieldCooldownTimeEquipment}");
                 break;
             case EffectType.ShieldRegen:

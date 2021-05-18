@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 12
   minStrength: 1
-  maxStrength: 50
+  maxStrength: 500
   chanceOfBeingAdded: 1
   description: Ore Profit
-  unitOfMeasurement: 2
+  unitOfMeasurement: '%'
