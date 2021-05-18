@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 100
   chanceOfBeingAdded: 25
-  description: Obliterate those asteroids with a damage boost!
+  description: Projectile Damage
   unitOfMeasurement: 2

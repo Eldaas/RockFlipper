@@ -6,8 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class Equipment : IEquippable
 {
+    [SerializeField]
     public EquipmentProfile equipmentProfile;
+    [SerializeField]
     public string name;
+    [SerializeField]
     public List<EquipmentEffect> effects = new List<EquipmentEffect>();    
 
     

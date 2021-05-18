@@ -11,5 +11,4 @@ public class PlayerProfile
 
     public List<Equipment> currentEquipment = new List<Equipment>();
     public List<Equipment> currentInventory = new List<Equipment>();
-    public List<Equipment> shopEquipment = new List<Equipment>();
 }

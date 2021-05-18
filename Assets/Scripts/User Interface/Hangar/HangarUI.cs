@@ -34,15 +34,10 @@ public class HangarUI : MonoBehaviour
     public Button equipCloseButton;
     public GameObject statsParent;
     public GameObject itemsParent;
-    public GameObject weaponSlot;
-    public GameObject shieldSlot;
-    public GameObject armourSlot;
-    public GameObject engineSlot;
-    public GameObject thrusterSlot;
-    public GameObject hullSlot;
-    public GameObject utilitySlot;
+    public List<EquipmentSlot> equipmentSlots;
     public GameObject trashIcon;
     public GameObject equipmentItemPrefab;
+    public GameObject statsItemPrefab;
 
     [Header("Zone Select Screen")]
     public GameObject zoneSelectScreen;
@@ -51,14 +46,21 @@ public class HangarUI : MonoBehaviour
     public Button blackHoleZoneButton;
     public Button zoneCloseButton;
 
+    [Header("Game Data")]
+    public PlayerStats stats;
+
     [Header("Events")]
     private UnityAction updateBalanceDelegate;
     private UnityAction itemPurchasedDelegate;
+    private UnityAction updateInventoryDelegate;
+    private UnityAction updateStatsDelegate;
+    private UnityAction updateEquipmentSlotsDelegate;
 
     #region Unity Methods
     private void Start()
     {
-        
+        RefreshInventory();
+        RefreshEquipment();
     }
     #endregion
 
@@ -89,8 +91,14 @@ public class HangarUI : MonoBehaviour
         updateBalanceDelegate = UpdateBalance;
         EventManager.StartListening("UpdateBalance", updateBalanceDelegate);
 
-        itemPurchasedDelegate = RefreshInventory;
-        EventManager.StartListening("ItemPurchased", itemPurchasedDelegate);
+        updateInventoryDelegate = RefreshInventory;
+        EventManager.StartListening("UpdateInventory", updateInventoryDelegate);        
+
+        updateEquipmentSlotsDelegate = RefreshEquipment;
+        EventManager.StartListening("UpdateEquipmentSlots", updateEquipmentSlotsDelegate);
+
+        updateStatsDelegate = UpdateStats;
+        EventManager.StartListening("UpdateStats", updateStatsDelegate);
     }
 
     public void SetScreen(string tag)
@@ -167,21 +175,151 @@ public class HangarUI : MonoBehaviour
 
     private void RefreshInventory()
     {
-        Transform[] items = itemsParent.GetComponentsInChildren<Transform>();
-
-        foreach(Transform child in items)
+        Debug.Log("Refreshing inventory");
+        foreach (Transform child in itemsParent.transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
 
-        foreach(Equipment item in EquipmentManager.instance.playerInventory)
+        foreach (Equipment item in EquipmentManager.instance.playerInventory)
         {
             GameObject uiItem = Instantiate(equipmentItemPrefab, itemsParent.transform);
+            uiItem.tag = "EquipmentItem";
             List<Image> images = new List<Image>(uiItem.GetComponentsInChildren<Image>());
-            images[1].sprite = item.EquipmentIcon;   
+            images[1].sprite = item.EquipmentIcon;
+
+            AssociatedEquipment assEquipment = uiItem.GetComponent<AssociatedEquipment>();
+            assEquipment.equipment = item;
+        }
+    }
+
+    private void RefreshEquipment()
+    {
+        // Delete any existing child objects that aren't the placeholder image
+        foreach(EquipmentSlot slot in equipmentSlots)
+        {
+            List<Transform> children = new List<Transform>(slot.GetComponentsInChildren<Transform>());
+            children.Remove(slot.transform);
+
+            foreach(Transform child in children)
+            {
+                if(!child.CompareTag("DontDestroy"))
+                {
+                    Destroy(child.gameObject);
+                }
+            }
         }
 
+        // Creates new UI items and assigns the relevant equipment from the player equipment list
+        foreach(Equipment equipment in EquipmentManager.instance.playerEquipment)
+        {
+            EquipmentSlot thisSlot = null;
 
+            foreach(EquipmentSlot slot in equipmentSlots)
+            {
+                if(equipment.EquipmentType == slot.slotType)
+                {
+                    thisSlot = slot;
+                    break;
+                }
+            }
+
+            if(thisSlot != null)
+            {
+                thisSlot.placeholderImage.SetActive(false);
+                GameObject uiItem = Instantiate(equipmentItemPrefab, thisSlot.transform);
+                AssociatedEquipment uiEquipment = uiItem.GetComponent<AssociatedEquipment>();
+                uiEquipment.equipment = equipment;
+                Image icon = uiItem.transform.GetChild(0).GetComponent<Image>();
+                icon.sprite = uiEquipment.equipment.equipmentProfile.equipmentIcon;
+                uiItem.tag = "EquipmentSlot";
+            }
+            else
+            {
+                Debug.LogError("Error in allocating an equipment UI item to an equipment slot.");
+            }
+        }
+
+        EventManager.TriggerEvent("UpdateInventory");
+        EquipmentManager.instance.RecalcEquipmentEffects();
+    }
+
+    private void ClearStats()
+    {
+        foreach(Transform child in statsParent.transform)
+        {
+            if(!child.CompareTag("DontDestroy"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
+    private void UpdateStats()
+    {
+        ClearStats();
+
+        foreach(Equipment equipment in EquipmentManager.instance.playerEquipment)
+        {
+            foreach(EquipmentEffect effect in equipment.effects)
+            {
+                GameObject statItem = Instantiate(statsItemPrefab, statsParent.transform);
+                TextMeshProUGUI statText = statItem.GetComponent<TextMeshProUGUI>();
+
+                string sign;
+
+                if(effect.effectStrength > 0f)
+                {
+                    sign = "+";
+                }
+                else
+                {
+                    sign = "-";
+                }
+
+                EffectType effectType = effect.profile.effectType;
+                string currentValue = "ERROR";
+
+                switch (effectType)
+                {
+                    case EffectType.ArmourCap:
+                        currentValue = stats.currentMaxArmour.ToString("#.#");
+                        break;
+                    case EffectType.CollectorRadius:
+                        currentValue = stats.currentCollectionRange.ToString("#.#");
+                        break;
+                    case EffectType.EngineThrust:
+                        currentValue = stats.currentForwardThrust.ToString("#.#");
+                        break;
+                    case EffectType.EngineVelocityCap:
+                        currentValue = stats.currentMaximumVelocity.ToString("#.#");
+                        break;
+                    case EffectType.HullCap:
+                        currentValue = stats.currentMaxHull.ToString("#.#");
+                        break;
+                    case EffectType.Luck:
+                        currentValue = stats.currentLuck.ToString("#.#");
+                        break;
+                    case EffectType.ManeuveringSpeed:
+                        currentValue = stats.currentManeuveringSpeed.ToString("#.#");
+                        break;
+                    case EffectType.ProfitBoost:
+                        currentValue = stats.currentProfitBoost.ToString("#.#");
+                        break;
+                    case EffectType.ShieldCap:
+                        currentValue = stats.currentMaxShields.ToString("#.#");
+                        break;
+                    case EffectType.ShieldCooldown:
+                        currentValue = stats.currentShieldCooldownTime.ToString("#.#");
+                        break;
+                    case EffectType.ShieldRegen:
+                        currentValue = stats.currentShieldRegen.ToString("#.#");
+                        break;
+                }
+
+                statText.text = $"{effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement} (Now {currentValue})";
+            }
+        }
     }
 
     #endregion

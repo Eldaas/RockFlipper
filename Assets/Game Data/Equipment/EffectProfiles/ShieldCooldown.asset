@@ -16,6 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 90
   chanceOfBeingAdded: 25
-  description: Reduces the time delay between when your shield is destroyed and when
-    it begins regenerating again.
+  description: Shield Cooldown
   unitOfMeasurement: 2

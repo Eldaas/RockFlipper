@@ -49,9 +49,7 @@ public class EquipmentManager : MonoBehaviour
     private void Start()
     {
         RegisterListeners();
-        //ClearShopEquipment();
-        //GenerateShopEquipment();
-        EquipPlayer();
+        GetPlayerData();
     }
     #endregion
 
@@ -67,7 +65,6 @@ public class EquipmentManager : MonoBehaviour
         }
 
         stats.SetInitialStats();
-
     }
 
     public bool GenerateItem(EquipmentType type)
@@ -114,14 +111,29 @@ public class EquipmentManager : MonoBehaviour
         playerInventory.Add(newModule);
         ProfileManager.instance.SaveProfile();
         EventManager.TriggerEvent("ItemPurchased");
+        EventManager.TriggerEvent("UpdateInventory");
 
         return true;
+    }
+
+    public void RecalcEquipmentEffects()
+    {
+        stats.ResetStats();
+        EquipPlayer();
+        stats.SetInitialStats();
+        EventManager.TriggerEvent("UpdateStats");
     }
     #endregion
 
     #region Private Methods
     private void RegisterListeners()
     {
+    }
+
+    private void GetPlayerData()
+    {
+        playerEquipment = ProfileManager.instance.currentProfile.currentEquipment;
+        playerInventory = ProfileManager.instance.currentProfile.currentInventory;
     }
 
     private void GenerateNewEffect(EquipmentEffectProfile effectProfile, Equipment newModule)

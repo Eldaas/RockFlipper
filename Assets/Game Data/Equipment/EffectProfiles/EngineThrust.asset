@@ -16,7 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 30
   chanceOfBeingAdded: 25
-  description: Improves thrust control, making your ship accelerate slower after
-    a collision. This can give you that crucial time to wreck even the largest of
-    asteroids.
+  description: Engine Thrust
   unitOfMeasurement: 2

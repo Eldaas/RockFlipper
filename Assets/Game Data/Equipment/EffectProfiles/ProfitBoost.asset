@@ -16,6 +16,5 @@ MonoBehaviour:
   minStrength: 1
   maxStrength: 50
   chanceOfBeingAdded: 1
-  description: Make more from every sale! This effect grants you better prices when
-    you sell your ore at the end of each trip. This is a super rare effect.
+  description: Ore Profit
   unitOfMeasurement: 2

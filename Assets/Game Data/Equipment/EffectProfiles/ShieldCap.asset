@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 50
   maxStrength: 500
   chanceOfBeingAdded: 25
-  description: Base shield capacity is improved.
+  description: Shield Capacity
   unitOfMeasurement: 1

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 /// <summary>
 /// EquipmentEffect is the runtime data container that generates according to the effect profiles assigned to the parent module via the inspector.
 /// </summary>
@@ -26,7 +27,6 @@ public class EquipmentEffect
     {
         PlayerStats stats = EquipmentManager.instance.stats;
         EffectType effectType = profile.effectType;
-        //Debug.Log($"Applying effect type {effectType.ToString()} with strength {effectStrength} and a rarity of {effectRarity}.");
 
         switch(effectType)
         {

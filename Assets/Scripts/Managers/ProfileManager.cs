@@ -66,11 +66,13 @@ public class ProfileManager : MonoBehaviour
             Debug.Log("Successfully created a profile with name " + name);
             return true;
         }
-        
     }
 
     public void SaveProfile()
     {
+        currentProfile.currentEquipment = EquipmentManager.instance.playerEquipment;
+        currentProfile.currentInventory = EquipmentManager.instance.playerInventory;
+
         Debug.Log("SaveProfile called.");
         string saveData = JsonUtility.ToJson(currentProfile);
         string filePath = dataPath + currentProfile.profileName + ".json";

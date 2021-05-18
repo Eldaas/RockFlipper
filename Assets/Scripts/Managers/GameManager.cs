@@ -197,6 +197,9 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
         EventManager.AddEvent("UpdateBalance");
         EventManager.AddEvent("ItemPurchased"); // TO DO: Add audio cue
+        EventManager.AddEvent("UpdateInventory");
+        EventManager.AddEvent("UpdateStats");
+        EventManager.AddEvent("UpdateEquipmentSlots");
     }
     #endregion
 }

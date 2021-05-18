@@ -16,6 +16,5 @@ MonoBehaviour:
   minStrength: 1
   maxStrength: 50
   chanceOfBeingAdded: 25
-  description: An engine module providing better velocity control. Your maximum velocity
-    is reduced, so you have more time to vacuum resources. Get cleaning!
+  description: Max Velocity Reduction
   unitOfMeasurement: 7

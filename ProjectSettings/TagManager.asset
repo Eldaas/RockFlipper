@@ -19,6 +19,9 @@ TagManager:
   - EndLevelScreen
   - NavigationMenu
   - ZoneSelectScreen
+  - DontDestroy
+  - EquipmentSlot
+  - EquipmentItem
   layers:
   - Default
   - TransparentFX

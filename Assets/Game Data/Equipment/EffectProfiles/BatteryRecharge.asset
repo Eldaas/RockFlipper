@@ -16,6 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 200
   chanceOfBeingAdded: 25
-  description: Boosts your ship battery's recharge speed so you can recover from
-    intense button spam.
+  description: Battery Recharge
   unitOfMeasurement: 2

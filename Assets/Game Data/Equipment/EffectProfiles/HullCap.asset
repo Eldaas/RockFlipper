@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 50
   maxStrength: 500
   chanceOfBeingAdded: 25
-  description: Base hull capacity is improved.
+  description: Hull Capacity
   unitOfMeasurement: 1

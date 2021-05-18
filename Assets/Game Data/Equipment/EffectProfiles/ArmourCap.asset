@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 50
   maxStrength: 500
   chanceOfBeingAdded: 25
-  description: Base armour capacity is improved.
+  description: Armour Capacity
   unitOfMeasurement: 1

@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 1
   maxStrength: 10
   chanceOfBeingAdded: 25
-  description: Shield regeneration is improved.
+  description: Shield Regen
   unitOfMeasurement: 1

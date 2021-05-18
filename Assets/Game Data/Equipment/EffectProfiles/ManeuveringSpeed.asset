@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 150
   chanceOfBeingAdded: 25
-  description: Boosts horizontal maneuvering speed.
+  description: Maneuvering Speed
   unitOfMeasurement: 2

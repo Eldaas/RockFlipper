@@ -16,6 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 100
   chanceOfBeingAdded: 1
-  description: Grab hold of those runaway resource chunks! Boosts your gravity collector's
-    range. This is a super rare effect!
+  description: Collector Radius
   unitOfMeasurement: 2

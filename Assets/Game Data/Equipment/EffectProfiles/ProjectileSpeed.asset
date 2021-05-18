@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 100
   chanceOfBeingAdded: 25
-  description: Boost projectile speed to help in those tight moments before impact.
+  description: Projectile Speed
   unitOfMeasurement: 2

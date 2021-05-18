@@ -16,6 +16,5 @@ MonoBehaviour:
   minStrength: 10
   maxStrength: 200
   chanceOfBeingAdded: 25
-  description: Boosts your ship's battery capacity so you can smash out more shots
-    before needing to recharge.
+  description: Battery Capacity
   unitOfMeasurement: 2
