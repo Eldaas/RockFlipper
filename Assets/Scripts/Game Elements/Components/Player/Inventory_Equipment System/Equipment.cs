@@ -11,7 +11,8 @@ public class Equipment : IEquippable
     [SerializeField]
     public string name;
     [SerializeField]
-    public List<EquipmentEffect> effects = new List<EquipmentEffect>();    
+    public List<EquipmentEffect> effects = new List<EquipmentEffect>();
+    public bool isEquipped;
 
     
     #region Properties
@@ -20,7 +21,7 @@ public class Equipment : IEquippable
     #endregion
 
     #region Public Methods
-    public virtual void Equip()
+    public virtual void ApplyEffects()
     {
         // Common (all equipment types) equip logic here
 

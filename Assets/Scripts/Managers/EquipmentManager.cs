@@ -13,10 +13,6 @@ public class EquipmentManager : MonoBehaviour
 
     [Header("Generation")]
     [SerializeField]
-    private int numToGenerate;
-    [SerializeField]
-    private int refreshEveryXSeconds;
-    [SerializeField]
     private List<EquipmentProfile> equipmentProfiles;
     [SerializeField]
     private AnimationCurve strengthRarityCurve;
@@ -25,9 +21,6 @@ public class EquipmentManager : MonoBehaviour
     [SerializeField]
     public List<Equipment> playerInventory;
     public List<Equipment> playerEquipment;
-
-    [Header("Events")]
-    private UnityAction generateShopItemsDelegate;
 
     #region Unity Methods
     private void Awake()
@@ -54,16 +47,55 @@ public class EquipmentManager : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void EquipPlayer()
+    public void ApplyEquipmentEffects()
     {
-        Debug.Log("Equipping player.");
-        stats.ResetStats();
         foreach (Equipment equipment in playerEquipment)
         {
-            equipment.Equip();
+            equipment.ApplyEffects();
+        }
+    }
+
+    public void EquipItem(Equipment equipment)
+    {
+        // Removes any item already in the slot
+        foreach(Equipment item in playerEquipment.ToArray())
+        {
+            if(item.EquipmentType == equipment.EquipmentType)
+            {
+                UnequipItem(item, false);
+            }
         }
 
-        stats.SetInitialStats();
+        playerInventory.Remove(equipment);
+        playerEquipment.Add(equipment);
+        equipment.isEquipped = true;
+        ProfileManager.instance.SaveProfile();
+
+        EventManager.TriggerEvent("UpdateEquipmentSlots");
+        EventManager.TriggerEvent("UpdateInventory");
+    }
+
+    public void UnequipItem(Equipment equipment, bool triggerEvents)
+    {
+        playerInventory.Add(equipment);
+        playerEquipment.Remove(equipment);
+        equipment.isEquipped = false;
+        ProfileManager.instance.SaveProfile();
+
+        if(triggerEvents)
+        {
+            EventManager.TriggerEvent("UpdateEquipmentSlots");
+            EventManager.TriggerEvent("UpdateInventory");
+        }
+    }
+
+    /// <summary>
+    /// Overload method for removing equipment without needing to specify whether events should be triggered
+    /// </summary>
+    /// <param name="equipment">The equipment item to be unequipped.</param>
+    public void UnequipItem(Equipment equipment)
+    {
+        UnequipItem(equipment, false);
     }
 
     public bool GenerateItem(EquipmentType type)
@@ -94,7 +126,8 @@ public class EquipmentManager : MonoBehaviour
         foreach (EquipmentEffectProfile effectProfile in newModule.equipmentProfile.guaranteedEffects)
         {
             // Generate the strength of the effect and add the effect to the equipment module's effects list
-            GenerateNewEffect(effectProfile, newModule);
+            EquipmentEffect thisEffect = GenerateNewEffect(effectProfile, newModule);
+            thisEffect.wasGuaranteed = true;
         }
 
         // Test if secondary effect(s) should be added (based on their chance value)
@@ -108,6 +141,7 @@ public class EquipmentManager : MonoBehaviour
         }
 
         playerInventory.Add(newModule);
+        UpdateModulePrice(newModule.EquipmentType);
         ProfileManager.instance.SaveProfile();
         EventManager.TriggerEvent("ItemPurchased");
         EventManager.TriggerEvent("UpdateInventory");
@@ -118,9 +152,20 @@ public class EquipmentManager : MonoBehaviour
     public void RecalcEquipmentEffects()
     {
         stats.ResetStats();
-        EquipPlayer();
+        ApplyEquipmentEffects();
         stats.SetInitialStats();
         EventManager.TriggerEvent("UpdateStats");
+    }
+
+    public void DestroyEquipment(Equipment equipment)
+    {
+        playerEquipment.Remove(equipment);
+        playerInventory.Remove(equipment);
+
+        ProfileManager.instance.SaveProfile();
+        EventManager.TriggerEvent("UpdateInventory");
+        EventManager.TriggerEvent("UpdateEquipmentSlots");
+        RecalcEquipmentEffects();
     }
     #endregion
 
@@ -135,7 +180,7 @@ public class EquipmentManager : MonoBehaviour
         playerInventory = ProfileManager.instance.currentProfile.currentInventory;
     }
 
-    private void GenerateNewEffect(EquipmentEffectProfile effectProfile, Equipment newModule)
+    private EquipmentEffect GenerateNewEffect(EquipmentEffectProfile effectProfile, Equipment newModule)
     {
         // Get a value from the curve.
         float rarityValue = strengthRarityCurve.Evaluate(Utility.GenerateRandomFloat(0f, 1f));
@@ -152,6 +197,37 @@ public class EquipmentManager : MonoBehaviour
         
         // Add the effect to the list of effects for the equipment module.
         newModule.effects.Add(newEffect);
+        return newEffect;
+    }
+
+    private void UpdateModulePrice(EquipmentType type)
+    {
+        PlayerProfile profile = ProfileManager.instance.currentProfile;
+
+        switch(type)
+        {
+            case EquipmentType.Armour:
+                profile.armourModPrice *= 1.1f;
+                break;
+            case EquipmentType.Engine:
+                profile.engineModPrice *= 1.1f;
+                break;
+            case EquipmentType.Hull:
+                profile.hullModPrice *= 1.1f;
+                break;
+            case EquipmentType.Maneuvering:
+                profile.thrusterModPrice *= 1.1f;
+                break;
+            case EquipmentType.Shield:
+                profile.shieldModPrice *= 1.1f;
+                break;
+            case EquipmentType.Weapon:
+                profile.weaponModPrice *= 1.1f;
+                break;
+        }
+
+        EventManager.TriggerEvent("UpdateModulePrices");
+        ProfileManager.instance.SaveProfile();
     }
 
     #endregion

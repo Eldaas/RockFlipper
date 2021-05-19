@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 4717faf89fd4b204dac498c891eff097, type: 2}
-  numToGenerate: 50
-  refreshEveryXSeconds: 0
   equipmentProfiles:
   - {fileID: 11400000, guid: eebf61621c924254bba6a0c09fd16cef, type: 2}
   - {fileID: 11400000, guid: aaef12db3ff379d4aaf1a191c5ec87f9, type: 2}
@@ -58,53 +56,53 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.20190999
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.15910438
-      value: 0.21351704
-      inSlope: 0.07295243
-      outSlope: 0.08182301
+      value: 0.051132396
+      inSlope: 0.1388407
+      outSlope: 0.39404657
       tangentMode: 69
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 1
     - serializedVersion: 3
-      time: 0.5074265
-      value: 0.2420178
-      inSlope: 0.08402268
-      outSlope: 0.22586669
-      tangentMode: 1
+      time: 0.5016455
+      value: 0.24880409
+      inSlope: 0.39404657
+      outSlope: 0.8472747
+      tangentMode: 69
       weightedMode: 3
-      inWeight: 1
-      outWeight: 0.5121418
+      inWeight: 0.99982715
+      outWeight: 0.65418386
     - serializedVersion: 3
-      time: 0.9191155
-      value: 0.5141921
-      inSlope: 3.2460241
-      outSlope: 6.1397324
-      tangentMode: 1
+      time: 0.80001825
+      value: 0.5016078
+      inSlope: 0.8472747
+      outSlope: 1.990316
+      tangentMode: 69
       weightedMode: 3
-      inWeight: 0.14913128
-      outWeight: 0.98724335
+      inWeight: 0.09576279
+      outWeight: 0.1916905
+    - serializedVersion: 3
+      time: 0.94976956
+      value: 0.7996602
+      inSlope: 1.990316
+      outSlope: 3.9884138
+      tangentMode: 69
+      weightedMode: 3
+      inWeight: 1.3068299
+      outWeight: 0.9999843
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 6.0061917
+      inSlope: 3.9884138
       outSlope: 10.146672
       tangentMode: 69
       weightedMode: 0
-      inWeight: 0.10343791
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shopEquipment: []
+  playerInventory: []
   playerEquipment: []
 --- !u!1 &529961019
 GameObject:
@@ -1302,6 +1300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadScreen: {fileID: 529961019}
+  itemSelectionColor: {r: 1, g: 0.7076588, b: 0, a: 1}
+  itemBackgroundColor: {r: 0.4, g: 0.4, b: 0.4, a: 0}
 --- !u!1 &3932143707920735123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,5 +1350,11 @@ MonoBehaviour:
     balance: 0
     reputation: 0
     currentEquipment: []
-    shopEquipment: []
+    currentInventory: []
+    shieldModPrice: 10000
+    armourModPrice: 10000
+    hullModPrice: 10000
+    engineModPrice: 10000
+    thrusterModPrice: 10000
+    weaponModPrice: 10000
   fileNames: []

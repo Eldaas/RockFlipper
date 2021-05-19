@@ -32,12 +32,29 @@ public class HangarUI : MonoBehaviour
     public Button buyThruster;
     public Button buyWeapon;
     public Button equipCloseButton;
+    public TextMeshProUGUI shieldPrice;
+    public TextMeshProUGUI armourPrice;
+    public TextMeshProUGUI hullPrice;
+    public TextMeshProUGUI enginePrice;
+    public TextMeshProUGUI thrusterPrice;
+    public TextMeshProUGUI weaponPrice;
     public GameObject statsParent;
     public GameObject itemsParent;
     public List<EquipmentSlot> equipmentSlots;
     public GameObject trashIcon;
     public GameObject equipmentItemPrefab;
     public GameObject statsItemPrefab;
+
+    [Header("Equipment Stats Modal")]
+    public GameObject equipmentStatsModal;
+    public TextMeshProUGUI esmItemTitle;
+    public GameObject esmStatsList;
+    public Button esmDestroyModButton;
+    public TextMeshProUGUI esmEquipModButtonText;
+    public Button esmEquipModButton;
+    public Button esmCloseButton;
+    public GameObject esmItemPrefab;
+    public Equipment selectedItem;
 
     [Header("Zone Select Screen")]
     public GameObject zoneSelectScreen;
@@ -87,6 +104,10 @@ public class HangarUI : MonoBehaviour
         blackHoleZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.BlackHoles); });
         zoneCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); });
 
+        esmDestroyModButton.onClick.AddListener(DestroySelectedItem);
+        esmEquipModButton.onClick.AddListener(EquipMod);
+        esmCloseButton.onClick.AddListener(delegate { equipmentStatsModal.SetActive(false); });
+
         // Custom Events
         updateBalanceDelegate = UpdateBalance;
         EventManager.StartListening("UpdateBalance", updateBalanceDelegate);
@@ -99,13 +120,17 @@ public class HangarUI : MonoBehaviour
 
         updateStatsDelegate = UpdateStats;
         EventManager.StartListening("UpdateStats", updateStatsDelegate);
+
+        itemPurchasedDelegate = UpdateModulePrices;
+        EventManager.StartListening("ItemPurchased", itemPurchasedDelegate);
     }
 
     public void SetScreen(string tag)
     {
         Debug.Log("Setting screen to " + tag);
+        equipmentStatsModal.SetActive(false);
 
-        foreach(GameObject item in screenList)
+        foreach (GameObject item in screenList)
         {
             if(item.CompareTag(tag))
             {
@@ -120,7 +145,7 @@ public class HangarUI : MonoBehaviour
 
     public void UpdateBalance()
     {
-        Debug.Log("Update balance called");
+        //Debug.Log("Update balance called");
         if(ProfileManager.instance.currentProfile.balance != 0f)
         {
             balanceText.text = $"Balance: ${ProfileManager.instance.currentProfile.balance.ToString("#,#")}";
@@ -130,6 +155,18 @@ public class HangarUI : MonoBehaviour
             balanceText.text = "Balance: $0";
         }
         
+    }
+
+    public void UpdateModulePrices()
+    {
+        PlayerProfile profile = ProfileManager.instance.currentProfile;
+
+        shieldPrice.text = $"${profile.shieldModPrice.ToString("#,#")}";
+        armourPrice.text = $"${profile.armourModPrice.ToString("#,#")}";
+        hullPrice.text = $"${profile.hullModPrice.ToString("#,#")}";
+        enginePrice.text = $"${profile.engineModPrice.ToString("#,#")}";
+        thrusterPrice.text = $"${profile.thrusterModPrice.ToString("#,#")}";
+        weaponPrice.text = $"${profile.weaponModPrice.ToString("#,#")}";
     }
 
     public void SetEndLevelText()
@@ -169,13 +206,49 @@ public class HangarUI : MonoBehaviour
         SetScreen("EndLevelScreen");
     }
 
+    public void EquipmentItemSelected(Equipment equipment, bool isInSlot)
+    {
+        selectedItem = equipment;
+
+        foreach(Transform child in esmStatsList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        esmItemTitle.text = equipment.name;
+        if (isInSlot) esmEquipModButtonText.text = "Unequip";
+        else esmEquipModButtonText.text = "Equip";
+
+        foreach (EquipmentEffect effect in equipment.effects)
+        {
+            string sign = "ERROR";
+            if (effect.effectStrength > 0f) sign = "+";
+            else sign = string.Empty;
+
+            GameObject newEffect = Instantiate(esmItemPrefab, esmStatsList.transform);
+            newEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"On Equip: {effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement}";
+            newEffect.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"Rarity of Strength: {effect.effectStrengthRarity}";
+
+            if(effect.wasGuaranteed)
+            {
+                newEffect.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Rarity of Effect: Always Present";
+            }
+            else
+            {
+                newEffect.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Rarity of Effect: {effect.effectRarity}";
+            }
+        }
+
+        equipmentStatsModal.SetActive(true);
+    }
+
     #endregion
 
     #region Private Methods
 
     private void RefreshInventory()
     {
-        Debug.Log("Refreshing inventory");
+        //Debug.Log("Refreshing inventory");
         foreach (Transform child in itemsParent.transform)
         {
             Destroy(child.gameObject);
@@ -198,7 +271,7 @@ public class HangarUI : MonoBehaviour
         // Delete any existing child objects that aren't the placeholder image
         foreach(EquipmentSlot slot in equipmentSlots)
         {
-            List<Transform> children = new List<Transform>(slot.GetComponentsInChildren<Transform>());
+            List<Transform> children = new List<Transform>(slot.GetComponentsInChildren<Transform>(true));
             children.Remove(slot.transform);
 
             foreach(Transform child in children)
@@ -206,6 +279,10 @@ public class HangarUI : MonoBehaviour
                 if(!child.CompareTag("DontDestroy"))
                 {
                     Destroy(child.gameObject);
+                }
+                else
+                {
+                    child.gameObject.SetActive(true);
                 }
             }
         }
@@ -340,6 +417,26 @@ public class HangarUI : MonoBehaviour
                 statText.text = $"{effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement} (Now {currentValue}{currentValueSign})";
             }
         }
+    }
+
+    private void DestroySelectedItem()
+    {
+        EquipmentManager.instance.DestroyEquipment(selectedItem);
+        equipmentStatsModal.SetActive(false);
+    }
+
+    private void EquipMod()
+    {
+        if(selectedItem.isEquipped)
+        {
+            EquipmentManager.instance.UnequipItem(selectedItem, true);
+        }
+        else
+        {
+            EquipmentManager.instance.EquipItem(selectedItem);
+        }
+
+        equipmentStatsModal.SetActive(false);
     }
 
     #endregion

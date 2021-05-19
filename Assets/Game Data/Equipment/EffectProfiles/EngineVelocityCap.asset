@@ -16,5 +16,5 @@ MonoBehaviour:
   minStrength: -1
   maxStrength: -50
   chanceOfBeingAdded: 25
-  description: Max Velocity Reduction
-  unitOfMeasurement: metres p/sec
+  description: Max Velocity
+  unitOfMeasurement: m/sec
