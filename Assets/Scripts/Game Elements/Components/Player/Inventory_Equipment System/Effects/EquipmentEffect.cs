@@ -74,6 +74,12 @@ public class EquipmentEffect
                 stats.shieldRegenEquipment += effectStrength;
                 Debug.Log($"shieldRegenEquipment is now {stats.shieldRegenEquipment}");
                 break;
+            case EffectType.ProjectileDamage:
+                stats.projectileDamageEquipment += effectStrength;
+                break;
+            case EffectType.ProjectileSpeed:
+                stats.projectileSpeedEquipment += effectStrength;
+                break;
         }
 
     }
