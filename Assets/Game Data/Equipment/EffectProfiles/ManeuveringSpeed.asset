@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 8
   minStrength: 10
+<<<<<<< HEAD
   maxStrength: 150
   chanceOfBeingAdded: 25
   description: Boosts horizontal maneuvering speed.
   unitOfMeasurement: 2
+=======
+  maxStrength: 50
+  chanceOfBeingAdded: 25
+  description: Maneuvering Speed
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

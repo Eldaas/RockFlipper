@@ -9,6 +9,7 @@ public class ShieldOvercharge : Powerup, IPowerup
     public float shieldCooldownPercentage;
     public float shieldCapacityPercentage;
 
+<<<<<<< HEAD
     private float[] stats = new float[3];
     private float[] newStats = new float[3];
     private float[] difference = new float[3];
@@ -25,12 +26,15 @@ public class ShieldOvercharge : Powerup, IPowerup
     private float diffCooldown;
     private float diffMax;
 
+=======
+>>>>>>> implement-inventory-equipment
     public override void ExecutePowerup(Player player)
     {
         EventManager.TriggerEvent("ShieldOvercharge");
         base.ExecutePowerup(player);
         Debug.Log("Player collected a shield powerup.");
 
+<<<<<<< HEAD
         currentRegen = player.stats.currentShieldRegen;
         currentCooldown = player.stats.currentShieldCooldownTime;
         currentMax = player.stats.currentMaxShields;
@@ -46,13 +50,24 @@ public class ShieldOvercharge : Powerup, IPowerup
         player.stats.shieldRegenPowerup += diffRegen;
         player.stats.shieldCooldownTimePowerup += diffCooldown;
         player.stats.maxShieldsPowerup += diffMax;
+=======
+        player.stats.shieldRegenPowerup += shieldRegenPercentage;
+        player.stats.shieldCooldownTimePowerup += shieldCooldownPercentage;
+        player.stats.maxShieldsPowerup += shieldCapacityPercentage;
+>>>>>>> implement-inventory-equipment
     }
 
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
+<<<<<<< HEAD
         player.stats.shieldRegenPowerup -= diffRegen;
         player.stats.shieldCooldownTimePowerup -= diffCooldown;
         player.stats.maxShieldsPowerup -= diffMax;
+=======
+        player.stats.shieldRegenPowerup -= shieldRegenPercentage;
+        player.stats.shieldCooldownTimePowerup -= shieldCooldownPercentage;
+        player.stats.maxShieldsPowerup -= shieldCapacityPercentage;
+>>>>>>> implement-inventory-equipment
     }
 }

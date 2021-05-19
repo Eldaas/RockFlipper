@@ -14,8 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 12
   minStrength: 1
+<<<<<<< HEAD
   maxStrength: 50
   chanceOfBeingAdded: 1
   description: Make more from every sale! This effect grants you better prices when
     you sell your ore at the end of each trip. This is a super rare effect.
   unitOfMeasurement: 2
+=======
+  maxStrength: 500
+  chanceOfBeingAdded: 1
+  description: Ore Profit
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

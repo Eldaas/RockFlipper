@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EngineThrust
   m_EditorClassIdentifier: 
   effectType: 7
+<<<<<<< HEAD
   minStrength: 10
   maxStrength: 30
   chanceOfBeingAdded: 25
@@ -20,3 +21,10 @@ MonoBehaviour:
     a collision. This can give you that crucial time to wreck even the largest of
     asteroids.
   unitOfMeasurement: 2
+=======
+  minStrength: -10
+  maxStrength: -50
+  chanceOfBeingAdded: 25
+  description: Engine Thrust
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

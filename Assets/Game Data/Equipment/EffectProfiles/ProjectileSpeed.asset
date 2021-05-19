@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 10
   minStrength: 10
+<<<<<<< HEAD
   maxStrength: 100
   chanceOfBeingAdded: 25
   description: Boost projectile speed to help in those tight moments before impact.
   unitOfMeasurement: 2
+=======
+  maxStrength: 200
+  chanceOfBeingAdded: 25
+  description: Projectile Speed
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

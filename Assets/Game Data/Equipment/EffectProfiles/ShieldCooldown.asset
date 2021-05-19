@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: ShieldCooldown
   m_EditorClassIdentifier: 
   effectType: 3
+<<<<<<< HEAD
   minStrength: 10
   maxStrength: 90
   chanceOfBeingAdded: 25
   description: Reduces the time delay between when your shield is destroyed and when
     it begins regenerating again.
   unitOfMeasurement: 2
+=======
+  minStrength: -10
+  maxStrength: -90
+  chanceOfBeingAdded: 25
+  description: Shield Cooldown
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

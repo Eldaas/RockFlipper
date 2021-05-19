@@ -15,6 +15,13 @@ TagManager:
   - Silver
   - Gold
   - ProfileManager
+  - EquipmentScreen
+  - EndLevelScreen
+  - NavigationMenu
+  - ZoneSelectScreen
+  - DontDestroy
+  - EquipmentSlot
+  - EquipmentItem
   layers:
   - Default
   - TransparentFX

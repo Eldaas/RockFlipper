@@ -100,10 +100,17 @@ public class PlayerStats : ScriptableObject
     [ReadOnly] public float batteryRechargeEquipment;
     [ReadOnly] public float batteryRechargePowerup;
     [ReadOnly] public float currentBatteryRecharge;
+<<<<<<< HEAD
 
     #endregion
 
 
+=======
+
+    #endregion
+
+
+>>>>>>> implement-inventory-equipment
     #region Projectiles
 
     public float baseProjectileSpeed;
@@ -117,10 +124,17 @@ public class PlayerStats : ScriptableObject
     [ReadOnly] public float currentProjectileDamage;
 
     #endregion
+<<<<<<< HEAD
 
 
     #region Collection Stats
 
+=======
+
+
+    #region Collection Stats
+
+>>>>>>> implement-inventory-equipment
     public float baseCollectionRange;
     [ReadOnly] public float collectionRangeEquipment;
     [ReadOnly] public float collectionRangePowerup;
@@ -209,7 +223,10 @@ public class PlayerStats : ScriptableObject
     public void SetInitialStats()
     {
         UpdateStats();
+<<<<<<< HEAD
         //Debug.Log("Setting initial stats.");
+=======
+>>>>>>> implement-inventory-equipment
         currentShields = currentMaxShields;
         currentArmour = currentMaxArmour;
         currentHull = currentMaxHull;
@@ -217,6 +234,7 @@ public class PlayerStats : ScriptableObject
 
     public void UpdateStats()
     {
+<<<<<<< HEAD
         //Debug.Log("Updating stats.");
         currentMaxHull = baseMaxHull + maxHullEquipment + maxHullPowerup;
         currentMaxArmour = baseMaxArmour + maxArmourEquipment + maxArmourPowerup;
@@ -349,6 +367,25 @@ public class PlayerStats : ScriptableObject
             currentProfitBoost += profitBoostEquipment;
         }
     }
+=======
+        currentMaxHull = baseMaxHull * (1 + ((maxHullEquipment + maxHullPowerup) / 100));
+        currentMaxArmour = baseMaxArmour * (1 + ((maxArmourEquipment + maxArmourPowerup) / 100));
+        currentMaxShields = baseMaxShields * (1 + ((maxShieldsEquipment + maxShieldsPowerup) / 100));
+        currentShieldRegen = baseShieldRegen * (1 + ((shieldRegenEquipment + shieldRegenPowerup) / 100));
+        currentShieldCooldownTime = baseShieldCooldownTime * (1 + ((shieldCooldownTimeEquipment + shieldCooldownTimePowerup) / 100));
+        currentForwardThrust = baseForwardThrust * (1 + ((forwardThrustEquipment + forwardThrustPowerup) / 100));
+        currentMaximumVelocity = baseMaximumVelocity * (1 + ((maximumVelocityEquipment + maximumVelocityPowerup) / 100)) + maximumVelocityIncrementor;
+        currentManeuveringSpeed = baseManeuveringSpeed * (1 + ((maneuveringSpeedEquipment + maneuveringSpeedPowerup) / 100));
+        currentBatteryCapacity = baseBatteryCapacity * (1 + ((batteryCapacityEquipment + batteryCapacityPowerup) / 100));
+        currentBatteryRecharge = baseBatteryRecharge * (1 + ((batteryRechargeEquipment + batteryRechargePowerup) / 100));
+        currentProjectileSpeed = baseProjectileSpeed * (1 + ((projectileSpeedEquipment + projectileSpeedPowerup) / 100));
+        currentProjectileDamage = baseProjectileDamage * (1 + ((projectileDamageEquipment + projectileDamagePowerup) / 100));
+        currentCollectionRange = baseCollectionRange * (1 + ((collectionRangeEquipment + collectionRangePowerup) / 100));
+        currentLuck = baseLuck * (1 + ((luckEquipment + luckPowerup) / 100));
+        currentProfitBoost = baseProfitBoost * (1 + (profitBoostEquipment / 100));
+    }
+
+>>>>>>> implement-inventory-equipment
     #endregion
 
 }

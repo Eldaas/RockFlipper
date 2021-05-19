@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: ProjectileDamage
   m_EditorClassIdentifier: 
   effectType: 9
+<<<<<<< HEAD
   minStrength: 10
   maxStrength: 100
   chanceOfBeingAdded: 25
   description: Obliterate those asteroids with a damage boost!
   unitOfMeasurement: 2
+=======
+  minStrength: 5
+  maxStrength: 200
+  chanceOfBeingAdded: 25
+  description: Projectile Damage
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

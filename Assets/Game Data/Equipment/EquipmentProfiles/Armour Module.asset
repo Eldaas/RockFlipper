@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Armour Module
   m_EditorClassIdentifier: 
   equipmentType: 2
+<<<<<<< HEAD
   equipmentIcon: {fileID: 21300000, guid: 2d1cc464e40b3ce4e9f08805c4ffe915, type: 3}
+=======
+  equipmentIcon: {fileID: 21300000, guid: 3c2feabaf56259c419b7874556e1664d, type: 3}
+>>>>>>> implement-inventory-equipment
   guaranteedEffects:
   - {fileID: 11400000, guid: 2495b60940f7dda48b641a46b736aee1, type: 2}
   possibleSecondaryEffects:
