@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: Weapon Module
   m_EditorClassIdentifier: 
   equipmentType: 6
-<<<<<<< HEAD
-  equipmentIcon: {fileID: 21300000, guid: 74f543da290c4074a9de38c27fd5f362, type: 3}
-=======
   equipmentIcon: {fileID: 21300000, guid: bd7541378d2481348ac77dee1461bc0b, type: 3}
->>>>>>> implement-inventory-equipment
   guaranteedEffects:
   - {fileID: 11400000, guid: 80e7dc410578b8243a95438f554b4038, type: 2}
   - {fileID: 11400000, guid: 1bf687defd71d994facf7a079097b72b, type: 2}

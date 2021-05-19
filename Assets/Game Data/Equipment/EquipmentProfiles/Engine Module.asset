@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: Engine Module
   m_EditorClassIdentifier: 
   equipmentType: 4
-<<<<<<< HEAD
-  equipmentIcon: {fileID: 21300000, guid: 9427747b2db24b2408e31055d0e33f3e, type: 3}
-=======
   equipmentIcon: {fileID: 21300000, guid: 85ebb97c95f29b946becbacfabee65de, type: 3}
->>>>>>> implement-inventory-equipment
   guaranteedEffects:
   - {fileID: 11400000, guid: 070dca439bd1ca14793260c24189ddc4, type: 2}
   - {fileID: 11400000, guid: 3677933479bddfb408c06024a09dadc5, type: 2}

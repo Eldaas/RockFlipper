@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: Maneuvering Thruster Module
   m_EditorClassIdentifier: 
   equipmentType: 5
-<<<<<<< HEAD
-  equipmentIcon: {fileID: 21300000, guid: 949468317d48082469b0a4984333c4a1, type: 3}
-=======
   equipmentIcon: {fileID: 21300000, guid: 69b852f3b9953144c83c67f852c22c8c, type: 3}
->>>>>>> implement-inventory-equipment
   guaranteedEffects:
   - {fileID: 11400000, guid: 5fdef22324517eb43854f83bd22dfb6e, type: 2}
   possibleSecondaryEffects:

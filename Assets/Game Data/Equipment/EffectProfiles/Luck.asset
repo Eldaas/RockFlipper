@@ -14,15 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 13
   minStrength: 1
-<<<<<<< HEAD
-  maxStrength: 50
-  chanceOfBeingAdded: 1
-  description: Luck improves your chances of finding an asteroid containing rare
-    resources. Asteroids may also drop more! This is a super rare effect.
-  unitOfMeasurement: 2
-=======
   maxStrength: 500
   chanceOfBeingAdded: 1
   description: Luck
   unitOfMeasurement: '%'
->>>>>>> implement-inventory-equipment
