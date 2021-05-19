@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: ArmourCap
   m_EditorClassIdentifier: 
   effectType: 4
+<<<<<<< HEAD
   minStrength: 50
   maxStrength: 500
   chanceOfBeingAdded: 25
   description: Base armour capacity is improved.
   unitOfMeasurement: 1
+=======
+  minStrength: 5
+  maxStrength: 100
+  chanceOfBeingAdded: 25
+  description: Armour Capacity
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

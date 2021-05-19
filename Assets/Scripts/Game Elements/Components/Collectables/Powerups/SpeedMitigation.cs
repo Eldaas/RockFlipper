@@ -4,8 +4,12 @@ public class SpeedMitigation : Powerup, IPowerup
 {
     // ThrustReductionPercentage is out of 100. If you want to decrease by 10%, input 10 in the inspector field.
 	[SerializeField] private float thrustReductionPercentage;
+<<<<<<< HEAD
     private float differenceThrust;
     private float differenceVelocity;
+=======
+    [SerializeField] private float maxVelocityReductionPercentage;
+>>>>>>> implement-inventory-equipment
 
 	// Implement 'on execute' functionality within this function
     public override void ExecutePowerup(Player player)
@@ -14,6 +18,7 @@ public class SpeedMitigation : Powerup, IPowerup
         base.ExecutePowerup(player);
         Debug.Log("Player collected a speed reduction powerup.");
 
+<<<<<<< HEAD
         float thrust = player.stats.currentForwardThrust;
         float maxVelocity = player.stats.currentMaximumVelocity;
 
@@ -29,6 +34,11 @@ public class SpeedMitigation : Powerup, IPowerup
         // Reduce maximum velocity by reduction percentage (temporary effect)
         player.stats.maximumVelocityPowerup -= differenceVelocity;
 
+=======
+        player.stats.forwardThrustPowerup += Mathf.Abs(thrustReductionPercentage);
+        player.stats.maximumVelocityPowerup += Mathf.Abs(maxVelocityReductionPercentage);
+
+>>>>>>> implement-inventory-equipment
         // Reset velocity incrementor back to base value, so it starts counting from 0 again (permanent effect)
         player.stats.maximumVelocityIncrementor = 0f;
 
@@ -40,8 +50,14 @@ public class SpeedMitigation : Powerup, IPowerup
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
+<<<<<<< HEAD
         player.stats.forwardThrustPowerup += differenceThrust;
         player.stats.maximumVelocityPowerup += differenceVelocity;
+=======
+        player.stats.forwardThrustPowerup -= Mathf.Abs(thrustReductionPercentage);
+        player.stats.maximumVelocityPowerup -= Mathf.Abs(maxVelocityReductionPercentage);
+
+>>>>>>> implement-inventory-equipment
         player.activeEnginesFx.SetActive(true);
         player.inactiveEnginesFx.SetActive(false);
     }

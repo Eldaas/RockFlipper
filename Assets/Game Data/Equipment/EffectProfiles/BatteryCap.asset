@@ -14,8 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 14
   minStrength: 10
+<<<<<<< HEAD
   maxStrength: 200
   chanceOfBeingAdded: 25
   description: Boosts your ship's battery capacity so you can smash out more shots
     before needing to recharge.
   unitOfMeasurement: 2
+=======
+  maxStrength: 100
+  chanceOfBeingAdded: 25
+  description: Battery Capacity
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

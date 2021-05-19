@@ -6,9 +6,7 @@ using UnityEngine.Events;
 public class HangarController : MonoBehaviour
 {
     public static HangarController instance;
-
-    [SerializeField]
-    private HangarUI hangarUi;
+    public HangarUI hangarUi;
 
     [Header("Game Data")]
     public ResourceValues resources;
@@ -38,24 +36,39 @@ public class HangarController : MonoBehaviour
 
     public void ActivateUI()
     {
-        if(GameManager.instance.levelRecord != null)
+        LevelRecord levelRecord = GameManager.instance.levelRecord;
+
+        if (GameManager.instance.levelRecord != null)
         {
-            CalculateResources();
-            hangarUi.SetScreen(HangarUIScreen.EndLevel, true);
-            hangarUi.SetScreen(HangarUIScreen.Main, false);
-            SellResources();
+
+            if (levelRecord.ironCollected != 0 || levelRecord.silverCollected != 0 || levelRecord.goldCollected != 0)
+            {
+                CalculateResources();
+                hangarUi.SetEndLevelText();
+                SellResources();
+            }
+            else
+            {
+                GameManager.instance.levelRecord = null;
+                SetToNavigation();
+            }
+
         }
         else
         {
-            EventManager.TriggerEvent("UpdateBalance");
-            Debug.Log("Event triggered.");
-            hangarUi.SetScreen(HangarUIScreen.Main, true);
+            SetToNavigation();
         }
     }
 
     #region Private Methods
     private void RegisterListeners()
     {
+    }
+
+    private void SetToNavigation()
+    {
+        EventManager.TriggerEvent("UpdateBalance");
+        hangarUi.SetScreen("NavigationMenu");
     }
 
     private void CalculateResources()

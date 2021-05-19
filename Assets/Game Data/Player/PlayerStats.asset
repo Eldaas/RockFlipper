@@ -23,6 +23,7 @@ MonoBehaviour:
   currentArmour: 100
   currentMaxArmour: 100
   baseMaxShields: 100
+<<<<<<< HEAD
   maxShieldsEquipment: 463.30176
   maxShieldsPowerup: 0
   currentShields: 563.30176
@@ -31,6 +32,16 @@ MonoBehaviour:
   shieldRegenEquipment: 2.8234344
   shieldRegenPowerup: 0
   currentShieldRegen: 3.8234344
+=======
+  maxShieldsEquipment: 0
+  maxShieldsPowerup: 0
+  currentShields: 100
+  currentMaxShields: 100
+  baseShieldRegen: 1
+  shieldRegenEquipment: 0
+  shieldRegenPowerup: 0
+  currentShieldRegen: 1
+>>>>>>> implement-inventory-equipment
   baseShieldCooldownTime: 10
   shieldCooldownTimeEquipment: 0
   shieldCooldownTimePowerup: 0
@@ -43,8 +54,13 @@ MonoBehaviour:
   baseMaximumVelocity: 100
   maximumVelocityEquipment: 0
   maximumVelocityPowerup: 0
+<<<<<<< HEAD
   maximumVelocityIncrementor: 1
   currentMaximumVelocity: 101
+=======
+  maximumVelocityIncrementor: 0
+  currentMaximumVelocity: 100
+>>>>>>> implement-inventory-equipment
   baseManeuveringSpeed: 1
   maneuveringSpeedEquipment: 0
   maneuveringSpeedPowerup: 0

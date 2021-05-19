@@ -10,7 +10,16 @@ PrefabInstance:
     - target: {fileID: -7737160104356408364, guid: c53932e40ddb2074b8c171be68978462,
         type: 3}
       propertyPath: thrustReductionPercentage
+<<<<<<< HEAD
       value: 30
+=======
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: -7737160104356408364, guid: c53932e40ddb2074b8c171be68978462,
+        type: 3}
+      propertyPath: maxVelocityReductionPercentage
+      value: -30
+>>>>>>> implement-inventory-equipment
       objectReference: {fileID: 0}
     - target: {fileID: 4700169260480515502, guid: c53932e40ddb2074b8c171be68978462,
         type: 3}

@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: CollectorRadius
   m_EditorClassIdentifier: 
   effectType: 11
+<<<<<<< HEAD
   minStrength: 10
   maxStrength: 100
   chanceOfBeingAdded: 1
   description: Grab hold of those runaway resource chunks! Boosts your gravity collector's
     range. This is a super rare effect!
   unitOfMeasurement: 2
+=======
+  minStrength: 5
+  maxStrength: 100
+  chanceOfBeingAdded: 1
+  description: Collector Radius
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

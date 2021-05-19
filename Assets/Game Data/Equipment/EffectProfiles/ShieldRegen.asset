@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: ShieldRegen
   m_EditorClassIdentifier: 
   effectType: 2
+<<<<<<< HEAD
   minStrength: 1
   maxStrength: 10
   chanceOfBeingAdded: 25
   description: Shield regeneration is improved.
   unitOfMeasurement: 1
+=======
+  minStrength: 5
+  maxStrength: 200
+  chanceOfBeingAdded: 25
+  description: Shield Regen
+  unitOfMeasurement: '%'
+>>>>>>> implement-inventory-equipment

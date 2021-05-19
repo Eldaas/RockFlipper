@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
+=======
+[System.Serializable]
+>>>>>>> implement-inventory-equipment
 /// <summary>
 /// EquipmentEffect is the runtime data container that generates according to the effect profiles assigned to the parent module via the inspector.
 /// </summary>
@@ -26,7 +30,10 @@ public class EquipmentEffect
     {
         PlayerStats stats = EquipmentManager.instance.stats;
         EffectType effectType = profile.effectType;
+<<<<<<< HEAD
         //Debug.Log($"Applying effect type {effectType.ToString()} with strength {effectStrength} and a rarity of {effectRarity}.");
+=======
+>>>>>>> implement-inventory-equipment
 
         switch(effectType)
         {
@@ -39,7 +46,11 @@ public class EquipmentEffect
                 Debug.Log($"collectionRangeEquipment is now {stats.collectionRangeEquipment}");
                 break;
             case EffectType.EngineThrust:
+<<<<<<< HEAD
                 stats.forwardThrustEquipment -= stats.baseForwardThrust * (effectStrength / 100);
+=======
+                stats.forwardThrustEquipment += effectStrength;
+>>>>>>> implement-inventory-equipment
                 Debug.Log($"forwardThrustEquipment is now {stats.forwardThrustEquipment}");
                 break;
             case EffectType.EngineVelocityCap:
@@ -55,7 +66,11 @@ public class EquipmentEffect
                 Debug.Log($"luckEquipment is now {stats.luckEquipment}");
                 break;
             case EffectType.ManeuveringSpeed:
+<<<<<<< HEAD
                 stats.maneuveringSpeedEquipment += stats.baseManeuveringSpeed * (effectStrength / 100);
+=======
+                stats.maneuveringSpeedEquipment += effectStrength;
+>>>>>>> implement-inventory-equipment
                 Debug.Log($"maneuveringSpeedEquipment is now {stats.maneuveringSpeedEquipment}");
                 break;
             case EffectType.ProfitBoost:
@@ -67,13 +82,26 @@ public class EquipmentEffect
                 Debug.Log($"maxShieldsEquipment is now {stats.maxShieldsEquipment}");
                 break;
             case EffectType.ShieldCooldown:
+<<<<<<< HEAD
                 stats.shieldCooldownTimeEquipment += (effectStrength / 100);
+=======
+                stats.shieldCooldownTimeEquipment += effectStrength;
+>>>>>>> implement-inventory-equipment
                 Debug.Log($"shieldCooldownTimeEquipment is now {stats.shieldCooldownTimeEquipment}");
                 break;
             case EffectType.ShieldRegen:
                 stats.shieldRegenEquipment += effectStrength;
                 Debug.Log($"shieldRegenEquipment is now {stats.shieldRegenEquipment}");
                 break;
+<<<<<<< HEAD
+=======
+            case EffectType.ProjectileDamage:
+                stats.projectileDamageEquipment += effectStrength;
+                break;
+            case EffectType.ProjectileSpeed:
+                stats.projectileSpeedEquipment += effectStrength;
+                break;
+>>>>>>> implement-inventory-equipment
         }
 
     }

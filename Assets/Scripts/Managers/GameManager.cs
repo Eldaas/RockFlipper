@@ -155,30 +155,30 @@ public class GameManager : MonoBehaviour
     private void AddEvents()
     {
         // Global level events
-        EventManager.AddEvent("AsteroidCollision");
+        EventManager.AddEvent("AsteroidCollision"); // TO DO: Add audio cue
         EventManager.AddEvent("LargeAsteroidExplosion");
         EventManager.AddEvent("MediumAsteroidExplosion");
         EventManager.AddEvent("TakeHit");
         EventManager.AddEvent("ShieldsRecharged");
-        EventManager.AddEvent("ShieldsHit");
-        EventManager.AddEvent("ShieldsDestroyed");
-        EventManager.AddEvent("ShieldsOnline");
-        EventManager.AddEvent("ArmourHit");
-        EventManager.AddEvent("ArmourDestroyed");
-        EventManager.AddEvent("HullHit");
-        EventManager.AddEvent("HealthLow");
-        EventManager.AddEvent("PlayerDeath");
-        EventManager.AddEvent("PowerupCollected");
-        EventManager.AddEvent("ShieldOvercharge");
-        EventManager.AddEvent("ManeuveringBoost");
-        EventManager.AddEvent("HullRepair");
-        EventManager.AddEvent("ArmourRepair");
-        EventManager.AddEvent("SpeedMitigation");
-        EventManager.AddEvent("ResourceCollected");
+        EventManager.AddEvent("ShieldsHit"); // TO DO: Add audio cue
+        EventManager.AddEvent("ShieldsDestroyed"); // TO DO: Add audio cue
+        EventManager.AddEvent("ShieldsOnline"); // TO DO: Add audio cue
+        EventManager.AddEvent("ArmourHit"); // TO DO: Add audio cue
+        EventManager.AddEvent("ArmourDestroyed"); // TO DO: Add audio cue
+        EventManager.AddEvent("HullHit"); // TO DO: Add audio cue
+        EventManager.AddEvent("HealthLow"); // TO DO: Add audio cue
+        EventManager.AddEvent("PlayerDeath"); // TO DO: Add audio cue
+        EventManager.AddEvent("PowerupCollected"); // TO DO: Add audio cue
+        EventManager.AddEvent("ShieldOvercharge"); // TO DO: Add audio cue
+        EventManager.AddEvent("ManeuveringBoost"); // TO DO: Add audio cue
+        EventManager.AddEvent("HullRepair"); // TO DO: Add audio cue
+        EventManager.AddEvent("ArmourRepair"); // TO DO: Add audio cue
+        EventManager.AddEvent("SpeedMitigation"); // TO DO: Add audio cue
+        EventManager.AddEvent("ResourceCollected"); 
         EventManager.AddEvent("ProjectileHit");
         EventManager.AddEvent("ProjectileShot");
         EventManager.AddEvent("SpaceSceneLoaded");
-        EventManager.AddEvent("ReturningToBase");
+        EventManager.AddEvent("ReturningToBase"); // TO DO: Add audio cue
 
         // Scene load events
         EventManager.AddEvent("IntroSceneLoaded");
@@ -194,9 +194,16 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UpdateProfileSelection");
 
         // Hangar Scene Events
-        EventManager.AddEvent("SellResources");
+        EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
         EventManager.AddEvent("UpdateBalance");
+<<<<<<< HEAD
         EventManager.AddEvent("GenerateShopItems");
+=======
+        EventManager.AddEvent("ItemPurchased"); // TO DO: Add audio cue
+        EventManager.AddEvent("UpdateInventory");
+        EventManager.AddEvent("UpdateStats");
+        EventManager.AddEvent("UpdateEquipmentSlots");
+>>>>>>> implement-inventory-equipment
     }
     #endregion
 }
