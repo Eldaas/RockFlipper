@@ -13,16 +13,8 @@ MonoBehaviour:
   m_Name: HullCap
   m_EditorClassIdentifier: 
   effectType: 5
-<<<<<<< HEAD
-  minStrength: 50
-  maxStrength: 500
-  chanceOfBeingAdded: 25
-  description: Base hull capacity is improved.
-  unitOfMeasurement: 1
-=======
   minStrength: 5
   maxStrength: 200
   chanceOfBeingAdded: 25
   description: Hull Capacity
   unitOfMeasurement: '%'
->>>>>>> implement-inventory-equipment

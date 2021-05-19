@@ -100,17 +100,9 @@ public class PlayerStats : ScriptableObject
     [ReadOnly] public float batteryRechargeEquipment;
     [ReadOnly] public float batteryRechargePowerup;
     [ReadOnly] public float currentBatteryRecharge;
-<<<<<<< HEAD
 
     #endregion
 
-
-=======
-
-    #endregion
-
-
->>>>>>> implement-inventory-equipment
     #region Projectiles
 
     public float baseProjectileSpeed;
@@ -124,17 +116,9 @@ public class PlayerStats : ScriptableObject
     [ReadOnly] public float currentProjectileDamage;
 
     #endregion
-<<<<<<< HEAD
-
 
     #region Collection Stats
 
-=======
-
-
-    #region Collection Stats
-
->>>>>>> implement-inventory-equipment
     public float baseCollectionRange;
     [ReadOnly] public float collectionRangeEquipment;
     [ReadOnly] public float collectionRangePowerup;
@@ -158,7 +142,6 @@ public class PlayerStats : ScriptableObject
     #region Public Methods
     public void ResetStats()
     {
-        //Debug.Log("Resetting stats.");
         currentMaxHull = 0f;
         maxHullEquipment = 0f;
         maxHullPowerup = 0f;
@@ -223,10 +206,6 @@ public class PlayerStats : ScriptableObject
     public void SetInitialStats()
     {
         UpdateStats();
-<<<<<<< HEAD
-        //Debug.Log("Setting initial stats.");
-=======
->>>>>>> implement-inventory-equipment
         currentShields = currentMaxShields;
         currentArmour = currentMaxArmour;
         currentHull = currentMaxHull;
@@ -234,140 +213,6 @@ public class PlayerStats : ScriptableObject
 
     public void UpdateStats()
     {
-<<<<<<< HEAD
-        //Debug.Log("Updating stats.");
-        currentMaxHull = baseMaxHull + maxHullEquipment + maxHullPowerup;
-        currentMaxArmour = baseMaxArmour + maxArmourEquipment + maxArmourPowerup;
-        currentMaxShields = baseMaxShields + maxShieldsEquipment + maxShieldsPowerup;
-        currentShieldRegen = baseShieldRegen + shieldRegenEquipment + shieldRegenPowerup;
-
-        currentShieldCooldownTime = 0f;
-        if(baseShieldCooldownTime != 0f)
-        {
-            currentShieldCooldownTime = baseShieldCooldownTime;
-        }
-        if(shieldCooldownTimeEquipment != 0f)
-        {
-            currentShieldCooldownTime += shieldCooldownTimeEquipment;
-        }
-        if(shieldCooldownTimePowerup != 0f)
-        {
-            currentShieldCooldownTime += shieldCooldownTimePowerup;
-        }
-
-        currentForwardThrust = 0f;
-        if (baseForwardThrust != 0f)
-        {
-            currentForwardThrust += baseForwardThrust;
-        }
-        if (forwardThrustEquipment != 0f)
-        {
-            currentForwardThrust *= forwardThrustEquipment;
-        }
-        if (forwardThrustPowerup != 0f)
-        {
-            currentForwardThrust += forwardThrustPowerup;
-        }
-
-        currentMaximumVelocity = baseMaximumVelocity + maximumVelocityEquipment + maximumVelocityPowerup + maximumVelocityIncrementor;
-
-        currentManeuveringSpeed = 0f;
-        if (baseManeuveringSpeed != 0f)
-        {
-            currentManeuveringSpeed += baseManeuveringSpeed;
-        }
-        if (maneuveringSpeedEquipment != 0f)
-        {
-            currentManeuveringSpeed += maneuveringSpeedEquipment;
-        }
-        if (maneuveringSpeedPowerup != 0f)
-        {
-            currentManeuveringSpeed += maneuveringSpeedPowerup;
-        }
-
-        currentBatteryCapacity = 0f;
-        if (baseBatteryCapacity != 0f)
-        {
-            currentBatteryCapacity += baseBatteryCapacity;
-        }
-        if (batteryCapacityEquipment != 0f)
-        {
-            currentBatteryCapacity *= batteryCapacityEquipment;
-        }
-        if (batteryCapacityPowerup != 0f)
-        {
-            currentBatteryCapacity *= batteryCapacityPowerup;
-        }
-
-        currentBatteryRecharge = 0f;
-        if (baseBatteryRecharge != 0f)
-        {
-            currentBatteryRecharge += baseBatteryRecharge;
-        }
-        if (batteryRechargeEquipment != 0f)
-        {
-            currentBatteryRecharge *= batteryRechargeEquipment;
-        }
-        if (batteryRechargePowerup != 0f)
-        {
-            currentBatteryRecharge *= batteryRechargePowerup;
-        }
-
-        currentProjectileSpeed = 0f;
-        if (baseProjectileSpeed != 0f)
-        {
-            currentProjectileSpeed += baseProjectileSpeed;
-        }
-        if (projectileSpeedEquipment != 0f)
-        {
-            currentProjectileSpeed *= projectileSpeedEquipment;
-        }
-        if (projectileSpeedPowerup != 0f)
-        {
-            currentProjectileSpeed *= projectileSpeedPowerup;
-        }
-
-        currentProjectileDamage = baseProjectileDamage + projectileDamageEquipment + projectileDamagePowerup;
-
-        currentCollectionRange = 0f;
-        if (baseCollectionRange != 0f)
-        {
-            currentCollectionRange += baseCollectionRange;
-        }
-        if (collectionRangeEquipment != 0f)
-        {
-            currentCollectionRange *= (1 + (collectionRangeEquipment / 100));
-        }
-        if (collectionRangePowerup != 0f)
-        {
-            currentCollectionRange *= (1 + (collectionRangePowerup / 100));
-        }
-
-        currentLuck = 0f;
-        if (baseLuck != 0f)
-        {
-            currentLuck += baseLuck;
-        }
-        if (luckEquipment != 0f)
-        {
-            currentLuck += luckEquipment;
-        }
-        if (luckPowerup != 0f)
-        {
-            currentLuck += luckPowerup;
-        }
-
-        currentProfitBoost = 0f;
-        if (baseProfitBoost != 0f)
-        {
-            currentProfitBoost += baseProfitBoost;
-        }
-        if (profitBoostEquipment != 0f)
-        {
-            currentProfitBoost += profitBoostEquipment;
-        }
-    }
-=======
         currentMaxHull = baseMaxHull * (1 + ((maxHullEquipment + maxHullPowerup) / 100));
         currentMaxArmour = baseMaxArmour * (1 + ((maxArmourEquipment + maxArmourPowerup) / 100));
         currentMaxShields = baseMaxShields * (1 + ((maxShieldsEquipment + maxShieldsPowerup) / 100));
@@ -384,8 +229,6 @@ public class PlayerStats : ScriptableObject
         currentLuck = baseLuck * (1 + ((luckEquipment + luckPowerup) / 100));
         currentProfitBoost = baseProfitBoost * (1 + (profitBoostEquipment / 100));
     }
-
->>>>>>> implement-inventory-equipment
     #endregion
 
 }

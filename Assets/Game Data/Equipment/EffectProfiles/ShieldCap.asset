@@ -13,16 +13,8 @@ MonoBehaviour:
   m_Name: ShieldCap
   m_EditorClassIdentifier: 
   effectType: 1
-<<<<<<< HEAD
-  minStrength: 50
-  maxStrength: 500
-  chanceOfBeingAdded: 25
-  description: Base shield capacity is improved.
-  unitOfMeasurement: 1
-=======
   minStrength: 5
   maxStrength: 200
   chanceOfBeingAdded: 25
   description: Shield Capacity
   unitOfMeasurement: '%'
->>>>>>> implement-inventory-equipment

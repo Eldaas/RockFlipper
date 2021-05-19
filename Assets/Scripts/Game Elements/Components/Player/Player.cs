@@ -25,12 +25,8 @@ public class Player : MonoBehaviour
     private float shieldDestroyedAt;
 
     #region Properties
-<<<<<<< HEAD
-    public float Velocity { get => rb.velocity.magnitude; }
-=======
     public float VelocityX { get => rb.velocity.x; }
     public float VelocityZ { get => rb.velocity.z; }
->>>>>>> implement-inventory-equipment
     #endregion
 
     #region Unity Methods
@@ -44,14 +40,6 @@ public class Player : MonoBehaviour
     {
         InvokeRepeating("RegenShield", 1f, 1f);
         InvokeRepeating("UpdateStats", 0.5f, 0.1f);
-<<<<<<< HEAD
-    }
-
-    private void Update()
-    {
-        /*stats.UpdateStats();*/
-=======
->>>>>>> implement-inventory-equipment
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -196,14 +196,10 @@ public class GameManager : MonoBehaviour
         // Hangar Scene Events
         EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
         EventManager.AddEvent("UpdateBalance");
-<<<<<<< HEAD
-        EventManager.AddEvent("GenerateShopItems");
-=======
         EventManager.AddEvent("ItemPurchased"); // TO DO: Add audio cue
         EventManager.AddEvent("UpdateInventory");
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
->>>>>>> implement-inventory-equipment
     }
     #endregion
 }

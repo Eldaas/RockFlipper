@@ -6,16 +6,11 @@ using UnityEngine;
 [System.Serializable]
 public class Equipment : IEquippable
 {
-<<<<<<< HEAD
-    public EquipmentProfile equipmentProfile;
-    public string name;
-=======
     [SerializeField]
     public EquipmentProfile equipmentProfile;
     [SerializeField]
     public string name;
     [SerializeField]
->>>>>>> implement-inventory-equipment
     public List<EquipmentEffect> effects = new List<EquipmentEffect>();    
 
     

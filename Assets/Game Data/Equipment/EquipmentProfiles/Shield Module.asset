@@ -13,18 +13,11 @@ MonoBehaviour:
   m_Name: Shield Module
   m_EditorClassIdentifier: 
   equipmentType: 1
-<<<<<<< HEAD
-  equipmentIcon: {fileID: 21300000, guid: 912bb6575440e3b44b8de7040f907312, type: 3}
-  guaranteedEffects:
-  - {fileID: 11400000, guid: 6eff92459f81e61408cb77b3679842f5, type: 2}
-  - {fileID: 11400000, guid: d2b564b709841af49bcb1bf3138f1cca, type: 2}
-=======
   equipmentIcon: {fileID: 21300000, guid: e4efd9774ffc5a64899d96ef3da1e23a, type: 3}
   guaranteedEffects:
   - {fileID: 11400000, guid: 6eff92459f81e61408cb77b3679842f5, type: 2}
   - {fileID: 11400000, guid: d2b564b709841af49bcb1bf3138f1cca, type: 2}
   - {fileID: 11400000, guid: 5c0c2f8ae110ee44884f24b0e268f461, type: 2}
->>>>>>> implement-inventory-equipment
   possibleSecondaryEffects:
   - {fileID: 11400000, guid: a997a8fc605af3b4196e5149508f4da1, type: 2}
   - {fileID: 11400000, guid: f526bfc82d8eb1947b1b6d966f8543ea, type: 2}
