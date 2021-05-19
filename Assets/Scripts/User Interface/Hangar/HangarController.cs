@@ -31,6 +31,7 @@ public class HangarController : MonoBehaviour
     {
         RegisterListeners();
         hangarUi.RegisterListeners();
+        hangarUi.UpdateModulePrices();
         ActivateUI();
     }
 

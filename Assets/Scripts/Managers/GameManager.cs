@@ -200,6 +200,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UpdateInventory");
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
+        EventManager.AddEvent("UpdateModulePrices");
     }
     #endregion
 }

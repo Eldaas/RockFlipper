@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     public GameObject loadScreen;
+    public Color itemSelectionColor;
+    public Color itemBackgroundColor;
 
     #region Properties
     public float LoadScreenAlpha => LoadScreenAlphaValue();

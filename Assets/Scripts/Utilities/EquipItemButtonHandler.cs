@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class EquipItemButtonHandler : MonoBehaviour, IPointerClickHandler
 {
@@ -11,30 +12,31 @@ public class EquipItemButtonHandler : MonoBehaviour, IPointerClickHandler
     {
         clickCount = eventData.clickCount;
         Equipment equipment = GetComponent<AssociatedEquipment>().equipment;
+        bool isInSlot = false;
 
-        if (clickCount == 1)
+        if (CompareTag("EquipmentSlot")) isInSlot = true;
+        else if (CompareTag("EquipmentItem")) isInSlot = false;
+
+        HangarController.instance.hangarUi.EquipmentItemSelected(equipment, isInSlot);
+
+        if (clickCount == 2)
         {
-            HangarController.instance.hangarUi.EquipmentItemSelected(equipment);
-        }
-        else if (clickCount == 2)
-        {
-            Debug.Log("Double-click registered.");
-            if (CompareTag("EquipmentItem"))
+
+            HangarController.instance.hangarUi.equipmentStatsModal.SetActive(false);
+
+            if (isInSlot)
             {
-                EquipmentManager.instance.playerInventory.Remove(equipment);
-                EquipmentManager.instance.playerEquipment.Add(equipment);
-                tag = "EquipmentSlot";
-            }
-            else if (CompareTag("EquipmentSlot"))
-            {
-                EquipmentManager.instance.playerInventory.Add(equipment);
-                EquipmentManager.instance.playerEquipment.Remove(equipment);
+                EquipmentManager.instance.UnequipItem(equipment, true);
                 tag = "EquipmentItem";
+            }
+            else
+            {
+                EquipmentManager.instance.EquipItem(equipment);
+                tag = "EquipmentSlot";
             }
 
             ProfileManager.instance.SaveProfile();
-            EventManager.TriggerEvent("UpdateEquipmentSlots");
-            EventManager.TriggerEvent("UpdateInventory");
+            
         }
 
     }

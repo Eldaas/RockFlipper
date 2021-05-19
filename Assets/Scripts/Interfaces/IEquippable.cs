@@ -7,5 +7,5 @@ public interface IEquippable
 {
     EquipmentType EquipmentType { get; }
     Sprite EquipmentIcon { get; }
-    void Equip();
+    void ApplyEffects();
 }
