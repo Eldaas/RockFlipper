@@ -10,11 +10,15 @@ public class EquipItemButtonHandler : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         clickCount = eventData.clickCount;
+        Equipment equipment = GetComponent<AssociatedEquipment>().equipment;
 
-        if (clickCount == 2)
+        if (clickCount == 1)
         {
-            Equipment equipment = GetComponent<AssociatedEquipment>().equipment;
-
+            HangarController.instance.hangarUi.EquipmentItemSelected(equipment);
+        }
+        else if (clickCount == 2)
+        {
+            Debug.Log("Double-click registered.");
             if (CompareTag("EquipmentItem"))
             {
                 EquipmentManager.instance.playerInventory.Remove(equipment);

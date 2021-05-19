@@ -12,12 +12,14 @@ public class EquipmentEffect
     {
         profile = inputProfile;
         effectStrength = inputEffectStrength;
-        effectRarity = rarity;
+        effectRarityValue = rarity;
+        TranslateRarity();
     }
 
     public EquipmentEffectProfile profile;
     public float effectStrength;
-    public float effectRarity;
+    public float effectRarityValue;
+    public Rarity effectRarity;
 
     #region Effect Implementation
     /// <summary>
@@ -81,7 +83,18 @@ public class EquipmentEffect
                 stats.projectileSpeedEquipment += effectStrength;
                 break;
         }
+    }
+    #endregion
 
+    #region Private Methods
+    private void TranslateRarity()
+    {
+        if (effectRarityValue >= 0f && effectRarityValue <= 0.35f) effectRarity = Rarity.Common;
+        else if (effectRarityValue > 0.35f && effectRarityValue <= 0.60f) effectRarity = Rarity.Uncommon;
+        else if (effectRarityValue > 0.60f && effectRarityValue <= 0.85f) effectRarity = Rarity.Rare;
+        else if (effectRarityValue > 0.85f) effectRarity = Rarity.Legendary;
     }
     #endregion
 }
+
+public enum Rarity { Common, Uncommon, Rare, Legendary }

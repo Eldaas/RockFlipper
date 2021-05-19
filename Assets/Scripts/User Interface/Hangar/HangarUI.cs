@@ -39,6 +39,15 @@ public class HangarUI : MonoBehaviour
     public GameObject equipmentItemPrefab;
     public GameObject statsItemPrefab;
 
+    [Header("Equipment Stats Modal")]
+    public GameObject equipmentStatsModal;
+    public TextMeshProUGUI esmItemTitle;
+    public GameObject esmStatsList;
+    public Button esmDestroyModButton;
+    public Button esmEquipModButton;
+    public Button esmCloseButton;
+    public GameObject esmItemPrefab;
+
     [Header("Zone Select Screen")]
     public GameObject zoneSelectScreen;
     public Button asteroidZoneButton;
@@ -86,6 +95,10 @@ public class HangarUI : MonoBehaviour
         nebulaZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.Nebula); });
         blackHoleZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.BlackHoles); });
         zoneCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); });
+
+        esmDestroyModButton.onClick.AddListener(delegate { }); // TO DO
+        esmEquipModButton.onClick.AddListener(delegate { });
+        esmCloseButton.onClick.AddListener(delegate { equipmentStatsModal.SetActive(false); });
 
         // Custom Events
         updateBalanceDelegate = UpdateBalance;
@@ -167,6 +180,29 @@ public class HangarUI : MonoBehaviour
         }
 
         SetScreen("EndLevelScreen");
+    }
+
+    public void EquipmentItemSelected(Equipment equipment)
+    {
+        foreach(Transform child in esmStatsList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        esmItemTitle.text = equipment.name;
+
+        foreach(EquipmentEffect effect in equipment.effects)
+        {
+            string sign = "ERROR";
+            if (effect.effectStrength > 0f) sign = "+";
+            else sign = string.Empty;
+
+            GameObject newEffect = Instantiate(esmItemPrefab, esmStatsList.transform);
+            newEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Effect: {effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement}";
+            newEffect.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Rarity: {effect.effectRarity}";
+        }
+
+        equipmentStatsModal.SetActive(true);
     }
 
     #endregion
