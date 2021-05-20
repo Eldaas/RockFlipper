@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     {
         EquipmentManager.instance.RecalcEquipmentEffects();
         InvokeRepeating("RegenShield", 1f, 1f);
+        InvokeRepeating("RechargeBattery", 1f, 1f);
         InvokeRepeating("UpdateStats", 0.5f, 0.1f);
     }
 
@@ -194,6 +195,19 @@ public class Player : MonoBehaviour
                 EventManager.TriggerEvent("ShieldsRecharged");
                 stats.currentShields = stats.currentMaxShields;
             }
+        }
+    }
+
+    private void RechargeBattery()
+    {
+        if(stats.currentBatteryLevel < stats.currentBatteryCapacity)
+        {
+            stats.currentBatteryLevel += stats.currentBatteryRecharge;
+        }
+
+        if(stats.currentBatteryLevel > stats.currentBatteryCapacity)
+        {
+            stats.currentBatteryLevel = stats.currentBatteryCapacity;
         }
     }
 

@@ -101,6 +101,11 @@ public class PlayerStats : ScriptableObject
     [ReadOnly] public float batteryRechargePowerup;
     [ReadOnly] public float currentBatteryRecharge;
 
+    public float baseBatteryDrain;
+    [ReadOnly] public float batteryDrainEquipment;
+    [ReadOnly] public float batteryDrainPowerup;
+    [ReadOnly] public float currentBatteryDrain;
+
     #endregion
 
     #region Projectiles
@@ -183,6 +188,10 @@ public class PlayerStats : ScriptableObject
         batteryRechargeEquipment = 0f;
         batteryRechargePowerup = 0f;
 
+        currentBatteryDrain = 0f;
+        batteryDrainEquipment = 0f;
+        batteryDrainPowerup = 0f;
+
         currentProjectileSpeed = 0f;
         projectileSpeedPowerup = 0f;
         projectileSpeedEquipment = 0f;
@@ -223,6 +232,7 @@ public class PlayerStats : ScriptableObject
         currentManeuveringSpeed = baseManeuveringSpeed * (1 + ((maneuveringSpeedEquipment + maneuveringSpeedPowerup) / 100));
         currentBatteryCapacity = baseBatteryCapacity * (1 + ((batteryCapacityEquipment + batteryCapacityPowerup) / 100));
         currentBatteryRecharge = baseBatteryRecharge * (1 + ((batteryRechargeEquipment + batteryRechargePowerup) / 100));
+        currentBatteryDrain = baseBatteryDrain * (1 + ((batteryDrainEquipment + batteryDrainPowerup) / 100));
         currentProjectileSpeed = baseProjectileSpeed * (1 + ((projectileSpeedEquipment + projectileSpeedPowerup) / 100));
         currentProjectileDamage = baseProjectileDamage * (1 + ((projectileDamageEquipment + projectileDamagePowerup) / 100));
         currentCollectionRange = baseCollectionRange * (1 + ((collectionRangeEquipment + collectionRangePowerup) / 100));

@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6bcb29eef997143bb3ad1ac0fc19f2, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  baseMaxHull: 1
+  baseMaxHull: 100
   maxHullEquipment: 0
   maxHullPowerup: 0
   currentHull: 0
   currentMaxHull: 1
-  baseMaxArmour: 1
+  baseMaxArmour: 100
   maxArmourEquipment: 0
   maxArmourPowerup: 0
   currentArmour: 0
   currentMaxArmour: 1
-  baseMaxShields: 1
+  baseMaxShields: 100
   maxShieldsEquipment: 0
   maxShieldsPowerup: 0
   currentShields: 1
@@ -54,10 +54,13 @@ MonoBehaviour:
   batteryCapacityPowerup: 0
   currentBatteryLevel: 0
   currentBatteryCapacity: 100
-  baseBatteryRecharge: 0
+  baseBatteryRecharge: 10
   batteryRechargeEquipment: 0
   batteryRechargePowerup: 0
   currentBatteryRecharge: 0
+  baseBatteryDrain: 0
+  batteryDrainEquipment: 0
+  batteryDrainPowerup: 0
   baseProjectileSpeed: 200
   projectileSpeedEquipment: 0
   projectileSpeedPowerup: 0

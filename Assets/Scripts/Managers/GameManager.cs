@@ -198,6 +198,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ProjectileShot");
         EventManager.AddEvent("SpaceSceneLoaded");
         EventManager.AddEvent("ReturningToBase"); // TO DO: Add audio cue
+        EventManager.AddEvent("BatteryIsEmpty"); // TO DO: Add audio cue
 
         // Scene load events
         EventManager.AddEvent("IntroSceneLoaded");

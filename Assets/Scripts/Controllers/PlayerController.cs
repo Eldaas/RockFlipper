@@ -66,41 +66,44 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Shoot"))
             {
-                GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
-                if (parentGo)
+                if(player.stats.currentBatteryLevel >= player.stats.currentBatteryDrain)
                 {
-                    // Get parent particle system and set the location
-                    Transform parentObject = parentGo.GetComponentInParent<Transform>();
-                    parentGo.transform.position = parentObject.position;
+                    player.stats.currentBatteryLevel -= player.stats.currentBatteryDrain;
 
-                    // Get the children particle systems
-                    ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
-
-                    // Find the particle system responsible for the projectile
-                    for (int i = 0; i < children.Length; i++)
+                    GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
+                    if (parentGo)
                     {
-                        if (children[i].CompareTag("Projectile"))
+                        // Get parent particle system and set the location
+                        Transform parentObject = parentGo.GetComponentInParent<Transform>();
+                        parentGo.transform.position = parentObject.position;
+
+                        // Get the children particle systems
+                        ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
+
+                        // Find the particle system responsible for the projectile
+                        for (int i = 0; i < children.Length; i++)
                         {
-                            ParticleSystem projectileParticle = children[i];
+                            if (children[i].CompareTag("Projectile"))
+                            {
+                                ParticleSystem projectileParticle = children[i];
 
-                            /* FOR DEBUG PURPOSES
-                            int randomInt = Utility.GenerateRandomInt(0, 1000);
-                            string projectileName = "Projectile " + randomInt.ToString();
-                            projectileParticle.gameObject.name = projectileName;
-                            Debug.Log("Projectile particle " + projectileParticle.gameObject.name + " is currently active?: " + projectileParticle.gameObject.activeSelf);
-                            */
+                                parentGo.SetActive(true);
+                                ParticleSystem.MainModule main = projectileParticle.main;
+                                main.startSpeed = 300 + rb.velocity.z;
 
-                            parentGo.SetActive(true);
-                            ParticleSystem.MainModule main = projectileParticle.main;
-                            main.startSpeed = 300 + rb.velocity.z;
-
-                            IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
-                            StartCoroutine(coroutine);
-                            EventManager.TriggerEvent("ProjectileShot");
-                            break;
+                                IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
+                                StartCoroutine(coroutine);
+                                EventManager.TriggerEvent("ProjectileShot");
+                                break;
+                            }
                         }
                     }
                 }
+                else
+                {
+                    EventManager.TriggerEvent("BatteryIsEmpty");
+                }
+               
             }
         }
 
