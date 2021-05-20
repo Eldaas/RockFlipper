@@ -335,7 +335,7 @@ MonoBehaviour:
   blackHoleCount: 0
   pooledBlackHoles: []
   powerupsParent: {fileID: 2101467028}
-  powerupCount: 5
+  powerupCount: 30
   backgroundAsteroidPrefabs:
   - {fileID: 2761578440254174976, guid: aaf1d9211cebe55419e947c9193c1b9f, type: 3}
   - {fileID: 8043590927628062330, guid: b2e92b6a1a08298428542307b11fb196, type: 3}
@@ -354,10 +354,6 @@ MonoBehaviour:
   - {fileID: 6182977668715802973, guid: 96024cf1c76ba124aa45db6f1fce7133, type: 3}
   particleHitFxParent: {fileID: 1884746651}
   particleHitFxCount: 100
-  asteroidChunks: {fileID: 681693878662958011, guid: b6796c4598962384eabef725963b1d2b,
-    type: 3}
-  asteroidChunksParent: {fileID: 316212507}
-  asteroidChunksCount: 100
   ironPrefab: {fileID: 1179360110622288585, guid: a67273bce436ccd4c86639303ffcbb9f,
     type: 3}
   silverPrefab: {fileID: 4305696967015055750, guid: 86f161c2494b6d741a9b4bc85c425640,

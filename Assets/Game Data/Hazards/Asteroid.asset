@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98cdbc024338de3459d9bb07a6840442, type: 3}
   m_Name: Asteroid
   m_EditorClassIdentifier: 
+  barrenAsteroidMaterial: {fileID: 2100000, guid: 34f8c80c247668346a011585d8d31477,
+    type: 2}
   ironRockMaterial: {fileID: 2100000, guid: 457ae3f5c5aa083408dc1459faf3c8b8, type: 2}
-  ironMaterial: {fileID: 2100000, guid: dfc69a7d5daab7645bb6b3982646faeb, type: 2}
   silverRockMaterial: {fileID: 2100000, guid: f646f6c5c8da8214b8fffdb6df072db9, type: 2}
-  silverMaterial: {fileID: 2100000, guid: 0a372a36772f36642a5622b594aeae15, type: 2}
   goldRockMaterial: {fileID: 2100000, guid: 65d26890adbe34747aff7a217d81c4d8, type: 2}
-  goldMaterial: {fileID: 2100000, guid: 45a8d7a751fb886439181959220a9d2f, type: 2}
   collisionSensitivity: 1000
   collisionMaxForce: 10000000
   baseHealth: 100
-  currentHealth: 0

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-
     public static ObjectPooler instance;
     [SerializeField]
     private Spawner spawner;
+    private LevelModifier level;
 
     [Header("Hazard: Asteroids")]
     [SerializeField]
@@ -69,15 +69,6 @@ public class ObjectPooler : MonoBehaviour
     private int particleHitFxCount;
     private List<GameObject> pooledParticleHitFx = new List<GameObject>();
 
-    [Header("Resource Particle FX [DEPRECATED]")] 
-    [SerializeField]
-    private GameObject asteroidChunks;
-    [SerializeField]
-    private GameObject asteroidChunksParent;
-    [SerializeField]
-    private int asteroidChunksCount;
-    private List<GameObject> pooledAsteroidChunks = new List<GameObject>();
-
     [Header("Resource Collectables")]
     [SerializeField]
     private GameObject ironPrefab;
@@ -93,6 +84,7 @@ public class ObjectPooler : MonoBehaviour
     private GameObject goldParent;
     [SerializeField]
     private int resourcesCount;
+    private List<GameObject> pooledBarren = new List<GameObject>();
     private List<GameObject> pooledIron = new List<GameObject>();
     private List<GameObject> pooledSilver = new List<GameObject>();
     private List<GameObject> pooledGold = new List<GameObject>();
@@ -112,11 +104,17 @@ public class ObjectPooler : MonoBehaviour
             instance = this;
         }
         #endregion
+
+        level = SceneController.instance.levelMods;
     }
 
     private void Start()
     {
         InstantiatePools();
+
+        
+        Debug.LogError("BREAK");
+        Debug.Log($"LevelMods loaded: {level.asteroidDensityMultiplier}");
     }
 
     /// <summary>
@@ -135,6 +133,7 @@ public class ObjectPooler : MonoBehaviour
             pooledAsteroids.Add(go);
 
             Asteroid asteroid = go.GetComponent<Asteroid>();
+            asteroid.asteroidType = GenerateTypeFromData();
             ApplyAsteroidMaterial(asteroid);
             asteroid.SetAsteroidHealth();
             asteroid.MultiplyAsteroidMass();
@@ -469,16 +468,20 @@ public class ObjectPooler : MonoBehaviour
 
         switch (asteroid.asteroidType)
         {
+            case AsteroidType.Barren:
+                mats[0] = asteroid.data.barrenAsteroidMaterial;
+                mats[1] = asteroid.data.barrenAsteroidMaterial;
+                break;
             case AsteroidType.Iron:
-                mats[0] = asteroid.data.ironMaterial;
+                mats[0] = asteroid.data.ironRockMaterial;
                 mats[1] = asteroid.data.ironRockMaterial;
                 break;
             case AsteroidType.Silver:
-                mats[0] = asteroid.data.silverMaterial;
+                mats[0] = asteroid.data.silverRockMaterial;
                 mats[1] = asteroid.data.silverRockMaterial;
                 break;
             case AsteroidType.Gold:
-                mats[0] = asteroid.data.goldMaterial;
+                mats[0] = asteroid.data.goldRockMaterial;
                 mats[1] = asteroid.data.goldRockMaterial;
                 break;
             default:
@@ -516,6 +519,38 @@ public class ObjectPooler : MonoBehaviour
             return false;
         }
         
+    }
+
+    private AsteroidType GenerateTypeFromData()
+    {
+        if (level.goldChance > 0f)
+        {
+            float diceRoll = Utility.GenerateRandomFloat(0f, 1f);
+            if(diceRoll <= level.goldChance)
+            {
+                return AsteroidType.Gold;
+            }
+        }
+
+        if (level.silverChance > 0f)
+        {
+            float diceRoll = Utility.GenerateRandomFloat(0f, 1f);
+            if (diceRoll <= level.silverChance)
+            {
+                return AsteroidType.Silver;
+            }
+        }
+
+        if(level.ironChance > 0f)
+        {
+            float diceRoll = Utility.GenerateRandomFloat(0f, 1f);
+            if (diceRoll <= level.ironChance)
+            {
+                return AsteroidType.Iron;
+            }
+        }
+
+        return AsteroidType.Barren;
     }
     #endregion
 }

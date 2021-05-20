@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88baa2d30c420cc42bf9c3ea5343f093, type: 3}
   m_Name: LevelOneModifiers
   m_EditorClassIdentifier: 
-  takenDamageMultiplier: 1
-  dealtDamageMultiplier: 1
-  speedMultiplier: 1
-  shieldsMultiplier: 1
-  shieldsRegenMultiplier: 1
-  armourMultiplier: 1
-  hullMultiplier: 1
+  asteroidHealthMultiplier: 1
+  asteroidDensityMultiplier: 1
+  resourcesDroppedMultiplier: 1
+  ironChance: 0.5
+  silverChance: 0.2
+  goldChance: 0.05

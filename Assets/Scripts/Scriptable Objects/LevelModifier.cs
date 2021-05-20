@@ -5,17 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Level Data/Level Modifier Profile")]
 public class LevelModifier : ScriptableObject
 {
+    // All multipliers use a decimal value, where 1f = no change
+
     [Header("Core Modifiers")]
-    public float takenDamageMultiplier;
-    public float dealtDamageMultiplier;
-    public float speedMultiplier;
+    public float asteroidHealthMultiplier;
+    public float asteroidDensityMultiplier;
+    public float resourcesDroppedMultiplier;
 
-    [Header("Health Modifiers")]
-    public float shieldsMultiplier;
-    public float shieldsRegenMultiplier;
-    public float armourMultiplier;
-    public float hullMultiplier;
-
-
-
+    // Normalised modifiers require a value between 0f and 1f
+    [Header("Normalised Modifiers")]
+    public float ironChance; 
+    public float silverChance;
+    public float goldChance;
 }

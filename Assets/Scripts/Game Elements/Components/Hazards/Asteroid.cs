@@ -107,6 +107,7 @@ public class Asteroid : Hazard
 
     private void AssignDelegate()
     {
+
         if (asteroidType == AsteroidType.Iron)
         {
             getPooledObject = ObjectPooler.instance.GetPooledIron;
@@ -167,7 +168,11 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                SpawnCollectables();
+                if(asteroidType != AsteroidType.Barren)
+                {
+                    SpawnCollectables();
+                }
+                
                 ExplodeAsteroid(120000f * transform.localScale.magnitude, 1000f);
             }
 
@@ -176,4 +181,4 @@ public class Asteroid : Hazard
     #endregion
 }
 
-public enum AsteroidType { Iron, Silver, Gold }
+public enum AsteroidType { Barren, Iron, Silver, Gold }

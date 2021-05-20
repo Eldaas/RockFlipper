@@ -6,12 +6,10 @@ using UnityEngine;
 public class AsteroidData : ScriptableObject
 {
     [Header("Inspector References")]
+    public Material barrenAsteroidMaterial;
     public Material ironRockMaterial;
-    public Material ironMaterial;
     public Material silverRockMaterial;
-    public Material silverMaterial;
     public Material goldRockMaterial;
-    public Material goldMaterial;
     public float collisionSensitivity;
     public float collisionMaxForce;
     

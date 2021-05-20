@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
                 if (player != null)
                 {
                     float normalisedDamage = Mathf.Clamp(collisionForce / asteroid.data.collisionMaxForce, 0, 1);
-                    player.TakeDamage(normalisedDamage * 100 * SceneController.instance.levelMods.takenDamageMultiplier);
+                    player.TakeDamage(normalisedDamage * 100);
                 }
             }
         }
