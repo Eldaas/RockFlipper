@@ -8,6 +8,7 @@ public class PlayerProfile
     public string profileName;
     public float balance;
     public float reputation;
+    public bool isDead;
 
     public List<Equipment> currentEquipment = new List<Equipment>();
     public List<Equipment> currentInventory = new List<Equipment>();
@@ -18,4 +19,5 @@ public class PlayerProfile
     public float engineModPrice = 10000;
     public float thrusterModPrice = 10000;
     public float weaponModPrice = 10000;
+    public float deathCost = 1000;
 }

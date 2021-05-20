@@ -43,8 +43,8 @@ MonoBehaviour:
   baseMaximumVelocity: 100
   maximumVelocityEquipment: 0
   maximumVelocityPowerup: 0
-  maximumVelocityIncrementor: 0
-  currentMaximumVelocity: 100
+  maximumVelocityIncrementor: 27
+  currentMaximumVelocity: 127
   baseManeuveringSpeed: 1
   maneuveringSpeedEquipment: 0
   maneuveringSpeedPowerup: 0
@@ -52,12 +52,16 @@ MonoBehaviour:
   baseBatteryCapacity: 100
   batteryCapacityEquipment: 0
   batteryCapacityPowerup: 0
-  currentBatteryLevel: 0
+  currentBatteryLevel: 20
   currentBatteryCapacity: 100
-  baseBatteryRecharge: 0
+  baseBatteryRecharge: 10
   batteryRechargeEquipment: 0
   batteryRechargePowerup: 0
-  currentBatteryRecharge: 0
+  currentBatteryRecharge: 10
+  baseBatteryDrain: 10
+  batteryDrainEquipment: 0
+  batteryDrainPowerup: 0
+  currentBatteryDrain: 10
   baseProjectileSpeed: 200
   projectileSpeedEquipment: 0
   projectileSpeedPowerup: 0

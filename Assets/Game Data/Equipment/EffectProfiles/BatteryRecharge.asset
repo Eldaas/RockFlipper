@@ -15,6 +15,6 @@ MonoBehaviour:
   effectType: 15
   minStrength: 5
   maxStrength: 100
-  chanceOfBeingAdded: 25
+  chanceOfBeingAdded: 10
   description: Battery Recharge
   unitOfMeasurement: '%'

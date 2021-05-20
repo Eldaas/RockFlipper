@@ -746,12 +746,6 @@ Transform:
   m_Father: {fileID: 316212508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1055645917 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7539312131535729061, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349310938834635075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1056147656
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +854,7 @@ MonoBehaviour:
   player: {fileID: 2124795020}
   offsetFromPlayer: 700
   cleanupDistanceFromPlayer: 200
+  isActive: 1
   hazardBounds:
     m_Center: {x: 0, y: 0, z: 500}
     m_Extent: {x: 150, y: 0, z: 400}
@@ -894,12 +889,6 @@ MonoBehaviour:
   activeIron: []
   activeSilver: []
   activeGold: []
---- !u!1 &1420865004 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 498689986292496399, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349310938834635075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1435849772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1469,18 +1458,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2349310938834635075}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2124795022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124795020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 750433b40fe195843be67a0480f66929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2124795025 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
@@ -2011,73 +1988,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 695886959}
     m_Modifications:
-    - target: {fileID: 2349310938951541812, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Parameters.m_DragCurve.scalar
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310938951541812, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Parameters.m_GravityCurve.scalar
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940356709421, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 3874d10ccae1e8f44882c39bdc6c4391,
-        type: 2}
-    - target: {fileID: 2349310940658917941, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 288e4ca209d15e545911cda88ebddf61,
-        type: 2}
-    - target: {fileID: 2349310940658917943, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 69071898}
-    - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: horizontalDrag
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: forceMultiplier
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940686075340, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: maxHorizontalVelocity
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940686075341, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Mass
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940686075341, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 116
-      objectReference: {fileID: 0}
     - target: {fileID: 2349310940686075342, guid: 2fddc4c8b71f41e46bc96011ac645d13,
         type: 3}
       propertyPath: m_RootOrder
@@ -2138,46 +2053,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2349310940686075343, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: healHullFx
-      value: 
-      objectReference: {fileID: 1753491271562446640, guid: 5fee70bc3b141ed4188a625cc4fa911e,
-        type: 3}
-    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: healArmourFx
-      value: 
-      objectReference: {fileID: 5123891127911671129, guid: 9ffdba3aed7ed424492621825939ad16,
-        type: 3}
-    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: activeEnginesFx
-      value: 
-      objectReference: {fileID: 1055645917}
-    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: healShieldAuraFx
-      value: 
-      objectReference: {fileID: 2719622899003654772, guid: e30efacdbc715344aae279887093d0d3,
-        type: 3}
-    - target: {fileID: 2349310940686075346, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: inactiveEnginesFx
-      value: 
-      objectReference: {fileID: 1420865004}
-    - target: {fileID: 6362493756983924674, guid: 2fddc4c8b71f41e46bc96011ac645d13,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2349310940686075344, guid: 2fddc4c8b71f41e46bc96011ac645d13, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fddc4c8b71f41e46bc96011ac645d13, type: 3}
 --- !u!4 &2850315218118366504
 Transform:

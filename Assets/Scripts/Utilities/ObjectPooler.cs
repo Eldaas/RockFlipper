@@ -40,6 +40,7 @@ public class ObjectPooler : MonoBehaviour
     private GameObject powerupsParent;
     public int powerupCount;
     private List<GameObject> pooledPowerups = new List<GameObject>();
+    private List<GameObject> levelPowerups = new List<GameObject>();
 
     [Header("Background Asteroids")]
     [SerializeField]
@@ -123,6 +124,8 @@ public class ObjectPooler : MonoBehaviour
     /// </summary>
     public void InstantiatePools()
     {
+        levelPowerups = SceneController.instance.levelPowerups.powerups;
+
         for (int i = 0; i < asteroidCount; i++)
         {
             GameObject go = Instantiate(asteroidPrefabs[Utility.GenerateRandomInt(0, asteroidPrefabs.Length)]);
@@ -161,40 +164,46 @@ public class ObjectPooler : MonoBehaviour
             pooledBackgroundAsteroids.Add(go);
         }
 
-        SceneController.instance.levelPowerups.GenerateRuntimeList();
-        List<GameObject> levelPowerups = SceneController.instance.levelPowerups.runtimeList;
         List<GameObject> hits = new List<GameObject>();
 
         for (int i = 0; i < powerupCount; i++)
         {
             bool generated = false;
 
-            while (!generated)
+            if(levelPowerups.Count > 0)
             {
-                if (GeneratePowerup(levelPowerups, hits)) 
+                while (!generated)
                 {
-                    generated = true;
-                }
-            }
-
-            while (hits.Count > 1)
-            {
-                GameObject[] array = hits.ToArray();
-
-                foreach (GameObject powerup in array)
-                {
-                    int randomInt = Utility.GenerateRandomInt(0, 100);
-                    if (randomInt < 50 && hits.Count > 1) // Have to check hits.Count again - not an error
+                    if (GeneratePowerup(levelPowerups, hits))
                     {
-                        hits.Remove(powerup);
+                        generated = true;
                     }
                 }
-            }
 
-            GameObject instantiatedPowerup = Instantiate(hits[0], powerupsParent.transform);
-            pooledPowerups.Add(instantiatedPowerup);
-            instantiatedPowerup.SetActive(false);
+                while (hits.Count > 1)
+                {
+                    GameObject[] array = hits.ToArray();
+
+                    foreach (GameObject powerup in array)
+                    {
+                        int randomInt = Utility.GenerateRandomInt(0, 100);
+                        if (randomInt < 50 && hits.Count > 1) // Have to check hits.Count again - not an error
+                        {
+                            hits.Remove(powerup);
+                        }
+                    }
+                }
+
+                GameObject instantiatedPowerup = Instantiate(hits[0], powerupsParent.transform);
+                pooledPowerups.Add(instantiatedPowerup);
+                instantiatedPowerup.SetActive(false);
+            }
+            else
+            {
+                Debug.LogError("There were no powerups defined within the levelPowerups profile attached to the SceneManager.");
+            }
         }
+        
 
         for (int i = 0; i < projectileCount; i++)
         {
@@ -488,6 +497,7 @@ public class ObjectPooler : MonoBehaviour
         
         foreach (GameObject powerup in levelPowerups)
         {
+            Debug.Log($"{powerup.gameObject.name}");
             IPowerup thisPowerup = powerup.GetComponent<IPowerup>();
             float randomInt = Utility.GenerateRandomInt(0, 100);
             if (thisPowerup.ChanceToSpawn != 0f && randomInt <= thisPowerup.ChanceToSpawn)

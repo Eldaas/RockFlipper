@@ -8,18 +8,20 @@ public class Player : MonoBehaviour
 {
     [Header("Data Containers")]
     public PlayerStats stats;
-    [SerializeField]
-    private PlayerEquipment equipment;
 
     [Header("Components/Objects")]
     private Rigidbody rb;
     [SerializeField]
     private GameObject shieldObject;
+    [SerializeField]
+    private GameObject shipVisual;
+    private ResourceCollector resourceCollector;
 
     [Header("VFX")]
     public GameObject vfxParent;
     public GameObject activeEnginesFx;
     public GameObject inactiveEnginesFx;
+    public GameObject explosionFX;
 
     [Header("Misc Data")]
     private float shieldDestroyedAt;
@@ -33,12 +35,15 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        resourceCollector = GetComponent<ResourceCollector>();
         CheckForMissingDataContainers();
     }
     
     private void Start()
     {
+        EquipmentManager.instance.RecalcEquipmentEffects();
         InvokeRepeating("RegenShield", 1f, 1f);
+        InvokeRepeating("RechargeBattery", 1f, 1f);
         InvokeRepeating("UpdateStats", 0.5f, 0.1f);
     }
 
@@ -52,7 +57,6 @@ public class Player : MonoBehaviour
             if (rb)
             {
                 Asteroid asteroid = rb.GetComponent<Asteroid>();
-                Rigidbody prb = GetComponent<Rigidbody>();
 
                 float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
                 if (collisionForce > 20000f)
@@ -134,7 +138,7 @@ public class Player : MonoBehaviour
             if (stats.currentHull < 0f)
             {
                 stats.currentHull = 0f;
-                EventManager.TriggerEvent("PlayerDeath");
+                DeathSequence();
                 return true;
             }
             else
@@ -159,7 +163,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void CheckForMissingDataContainers()
     {
-        if (!stats || !equipment)
+        if (!stats)
         {
             Debug.LogError("Missing a critical component on the Player object!");
         }
@@ -194,6 +198,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void RechargeBattery()
+    {
+        if(stats.currentBatteryLevel < stats.currentBatteryCapacity)
+        {
+            stats.currentBatteryLevel += stats.currentBatteryRecharge;
+        }
+
+        if(stats.currentBatteryLevel > stats.currentBatteryCapacity)
+        {
+            stats.currentBatteryLevel = stats.currentBatteryCapacity;
+        }
+    }
+
     private IEnumerator PowerupCoroutine(IPowerup powerup)
     {
         //Debug.Log("Coroutine started.");
@@ -213,6 +230,22 @@ public class Player : MonoBehaviour
     private void UpdateStats()
     {
         stats.UpdateStats();
+    }
+
+    private void DeathSequence()
+    {
+        Debug.Log("Player has died!");
+        EventManager.TriggerEvent("PlayerDeath");
+        ProfileManager.instance.currentProfile.isDead = true;
+        ProfileManager.instance.SaveProfile();
+        rb.isKinematic = true;
+        resourceCollector.enabled = false;
+        explosionFX.SetActive(true);
+        activeEnginesFx.SetActive(false);
+        inactiveEnginesFx.SetActive(false);
+        shipVisual.SetActive(false);
+        GameManager.instance.SetState(GameStates.DeathState);
+        StopAllCoroutines();
     }
     #endregion
 

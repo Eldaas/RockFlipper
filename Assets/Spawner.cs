@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Spawner : MonoBehaviour
     public GameObject player;
     public float offsetFromPlayer;
     public float cleanupDistanceFromPlayer = 200f;
+    public bool isActive;
 
     [Header("General Hazard Settings")]
     public Bounds hazardBounds = new Bounds();
@@ -55,6 +57,9 @@ public class Spawner : MonoBehaviour
     public List<GameObject> activeSilver = new List<GameObject>();
     public List<GameObject> activeGold = new List<GameObject>();
 
+    [Header("Events")]
+    private UnityAction playerDeathDelegate;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -66,6 +71,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        RegisterListeners();
         PopulateBackgroundField();
         InvokeRepeating("IncreaseAsteroidCap", 1f, 1f);
         timeUntilNextPowerup = GetNextSpawnTime();
@@ -73,105 +79,119 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        CleanUp();
-        transform.position = (player.transform.position.z + offsetFromPlayer) * Vector3.forward;
-        hazardBounds.center = transform.position;
-        powerupBounds.center = transform.position + powerupBoundsOffset;
-        backgroundAsteroidBounds.center = transform.position + backgroundAsteroidBoundsOffset;
+        SpawnAndClear();
+    }
 
-        if(ObjectPooler.instance.asteroidCount > 0 && activeAsteroids.Count < currentAsteroidCap)
+    private void RegisterListeners()
+    {
+        playerDeathDelegate = delegate { isActive = false; };
+        EventManager.StartListening("PlayerDeath", playerDeathDelegate);
+    }
+
+    private void SpawnAndClear()
+    {
+        if(isActive)
         {
-            GameObject asteroid = ObjectPooler.instance.GetPooledAsteroid();
-            Vector3 spawnPoint;
-            float randomScaleFactor = Utility.GenerateRandomFloat(minAsteroidScaleFactor, maxAsteroidScaleFactor);
-            asteroid.transform.localScale = Vector3.one * randomScaleFactor;
-            Asteroid roid = asteroid.GetComponent<Asteroid>();
-            Bounds roidBounds = roid.mainObject.GetComponent<MeshRenderer>().bounds;
+            CleanUp();
+            transform.position = (player.transform.position.z + offsetFromPlayer) * Vector3.forward;
+            hazardBounds.center = transform.position;
+            powerupBounds.center = transform.position + powerupBoundsOffset;
+            backgroundAsteroidBounds.center = transform.position + backgroundAsteroidBoundsOffset;
 
-            bool boundsCheck = false;
-            int maxAttempts = 3;
-            while(!boundsCheck && maxAttempts >= 0)
+            if (ObjectPooler.instance.asteroidCount > 0 && activeAsteroids.Count < currentAsteroidCap)
             {
-                spawnPoint = GetHazardSpawnPoint();
-                Collider[] list = Physics.OverlapBox(spawnPoint, roidBounds.extents * asteroidDensity);
-                if (list.Length == 0)
+                GameObject asteroid = ObjectPooler.instance.GetPooledAsteroid();
+                Vector3 spawnPoint;
+                float randomScaleFactor = Utility.GenerateRandomFloat(minAsteroidScaleFactor, maxAsteroidScaleFactor);
+                asteroid.transform.localScale = Vector3.one * randomScaleFactor;
+                Asteroid roid = asteroid.GetComponent<Asteroid>();
+                Bounds roidBounds = roid.mainObject.GetComponent<MeshRenderer>().bounds;
+
+                bool boundsCheck = false;
+                int maxAttempts = 3;
+                while (!boundsCheck && maxAttempts >= 0)
                 {
-                    activeAsteroids.Add(asteroid);
+                    spawnPoint = GetHazardSpawnPoint();
+                    Collider[] list = Physics.OverlapBox(spawnPoint, roidBounds.extents * asteroidDensity);
+                    if (list.Length == 0)
+                    {
+                        activeAsteroids.Add(asteroid);
+                        asteroid.transform.position = spawnPoint;
+                        asteroid.SetActive(true);
+                        boundsCheck = true;
+                    }
+                    else
+                    {
+                        maxAttempts--;
+                    }
+                }
+            }
+
+            if (activeGasClouds.Count < currentGasCloudCap)
+            {
+                GameObject gasCloud = ObjectPooler.instance.GetPooledGasCloud();
+
+                if (gasCloud != null)
+                {
+                    Vector3 spawnPoint = GetHazardSpawnPoint();
+                    float randomScaleFactor = Utility.GenerateRandomFloat(minGasCloudScaleFactor, maxGasCloudScaleFactor);
+                    activeGasClouds.Add(gasCloud);
+                    gasCloud.transform.position = spawnPoint;
+                    gasCloud.transform.localScale = Vector3.one * randomScaleFactor;
+                    gasCloud.SetActive(true);
+                }
+
+            }
+
+            if (activeBlackHoles.Count < currentBlackHoleCap)
+            {
+                GameObject blackHole = ObjectPooler.instance.GetPooledBlackHole();
+
+                if (blackHole != null)
+                {
+                    Vector3 spawnPoint = GetHazardSpawnPoint();
+                    float randomScaleFactor = Utility.GenerateRandomFloat(minBlackHoleScaleFactor, maxBlackHoleScaleFactor);
+                    activeBlackHoles.Add(blackHole);
+                    blackHole.transform.position = spawnPoint;
+                    blackHole.transform.localScale = Vector3.one * randomScaleFactor;
+                    blackHole.SetActive(true);
+                }
+            }
+
+            if (activeBackgroundAsteroids.Count < ObjectPooler.instance.backgroundAsteroidCount)
+            {
+                GameObject asteroid = ObjectPooler.instance.GetPooledBackgroundAsteroid();
+
+                if (asteroid != null)
+                {
+                    Vector3 spawnPoint = GetBackgroundSpawnPoint();
+                    float randomScaleFactor = Utility.GenerateRandomFloat(minBackgroundScaleFactor, maxBackgroundScaleFactor);
+                    activeBackgroundAsteroids.Add(asteroid);
                     asteroid.transform.position = spawnPoint;
+                    asteroid.transform.localScale = Vector3.one * randomScaleFactor;
                     asteroid.SetActive(true);
-                    boundsCheck = true;
+
+                }
+            }
+
+            if (activePowerups.Count < ObjectPooler.instance.powerupCount && Time.time > timeUntilNextPowerup)
+            {
+                GameObject powerup = ObjectPooler.instance.GetPooledPowerup();
+
+                if (powerup != null)
+                {
+                    Vector3 spawnPoint = GetPowerupSpawnPoint();
+                    activePowerups.Add(powerup);
+                    powerup.transform.position = spawnPoint;
+                    powerup.SetActive(true);
+                    timeUntilNextPowerup = GetNextSpawnTime();
                 }
                 else
                 {
-                    maxAttempts--;
+                    Debug.Log("GetPooledPowerup() returned null.");
                 }
             }
-        }
-
-        if (activeGasClouds.Count < currentGasCloudCap)
-        {
-            GameObject gasCloud = ObjectPooler.instance.GetPooledGasCloud();
-
-            if(gasCloud != null)
-            {
-                Vector3 spawnPoint = GetHazardSpawnPoint();
-                float randomScaleFactor = Utility.GenerateRandomFloat(minGasCloudScaleFactor, maxGasCloudScaleFactor);
-                activeGasClouds.Add(gasCloud);
-                gasCloud.transform.position = spawnPoint;
-                gasCloud.transform.localScale = Vector3.one * randomScaleFactor;
-                gasCloud.SetActive(true);
-            }
-            
-        }
-
-        if (activeBlackHoles.Count < currentBlackHoleCap)
-        {
-            GameObject blackHole = ObjectPooler.instance.GetPooledBlackHole();
-
-            if (blackHole != null)
-            {
-                Vector3 spawnPoint = GetHazardSpawnPoint();
-                float randomScaleFactor = Utility.GenerateRandomFloat(minBlackHoleScaleFactor, maxBlackHoleScaleFactor);
-                activeBlackHoles.Add(blackHole);
-                blackHole.transform.position = spawnPoint;
-                blackHole.transform.localScale = Vector3.one * randomScaleFactor;
-                blackHole.SetActive(true);
-            }
-        }
-
-        if (activeBackgroundAsteroids.Count < ObjectPooler.instance.backgroundAsteroidCount)
-        {
-            GameObject asteroid = ObjectPooler.instance.GetPooledBackgroundAsteroid();
-            
-            if(asteroid != null)
-            {
-                Vector3 spawnPoint = GetBackgroundSpawnPoint();
-                float randomScaleFactor = Utility.GenerateRandomFloat(minBackgroundScaleFactor, maxBackgroundScaleFactor);
-                activeBackgroundAsteroids.Add(asteroid);
-                asteroid.transform.position = spawnPoint;
-                asteroid.transform.localScale = Vector3.one * randomScaleFactor;
-                asteroid.SetActive(true);
-
-            }
-        }
-
-        if(activePowerups.Count < ObjectPooler.instance.powerupCount && Time.time > timeUntilNextPowerup)
-        {
-            GameObject powerup = ObjectPooler.instance.GetPooledPowerup();
-            
-            if(powerup != null)
-            {
-                Vector3 spawnPoint = GetPowerupSpawnPoint();
-                activePowerups.Add(powerup);
-                powerup.transform.position = spawnPoint;
-                powerup.SetActive(true);
-                timeUntilNextPowerup = GetNextSpawnTime();
-            }
-            else
-            {
-                Debug.Log("GetPooledPowerup() returned null.");
-            }
-        }
+        }   
     }
 
     private Vector3 GetHazardSpawnPoint()
