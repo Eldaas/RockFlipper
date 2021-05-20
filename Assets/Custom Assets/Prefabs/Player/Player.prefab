@@ -1998,12 +1998,17 @@ PrefabInstance:
     - target: {fileID: -516098083770646512, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}
       propertyPath: m_Name
       value: ShipV2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: df56503c3d562bd42ab4e51b7afe6c7b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2504684441949758045, guid: df56503c3d562bd42ab4e51b7afe6c7b,
         type: 3}

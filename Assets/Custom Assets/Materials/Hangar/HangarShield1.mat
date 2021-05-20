@@ -58,7 +58,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CullOff: 2
-    - _CutOff: 0.276
+    - _CutOff: 0.162
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _Distort: 0
@@ -74,14 +74,14 @@ Material:
     - _FadePower08: 2
     - _FadePower09: 2
     - _Fresnel: 100
-    - _FresnelWidth: 1.633
+    - _FresnelWidth: 1.55
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _IntersectionThreshold: 0.206
+    - _IntersectionThreshold: 0.226
     - _Metallic: 0
     - _Mode: 0
-    - _NormalIncrease: 0.162
+    - _NormalIncrease: 0.164
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Radius00: 0
