@@ -98,55 +98,65 @@ public class EquipmentManager : MonoBehaviour
         UnequipItem(equipment, false);
     }
 
-    public bool GenerateItem(EquipmentType type)
+    public bool BuyItem(EquipmentType type)
     {
-        // Creates a new empty equipment object, assigns a random profile to determine which type it will become, and gives it a name.
-        Equipment newModule = new Equipment();
-
-        for (int i = 0; i < equipmentProfiles.Count; i++)
+        if(PerformTransaction(type))
         {
-            if (equipmentProfiles[i].equipmentType == type)
+            // Creates a new empty equipment object, assigns a random profile to determine which type it will become, and gives it a name.
+            Equipment newModule = new Equipment();
+
+            for (int i = 0; i < equipmentProfiles.Count; i++)
             {
-                newModule.equipmentProfile = equipmentProfiles[i];
-                break;
+                if (equipmentProfiles[i].equipmentType == type)
+                {
+                    newModule.equipmentProfile = equipmentProfiles[i];
+                    break;
+                }
             }
-        }
 
-        if (newModule.equipmentProfile == null)
+            if (newModule.equipmentProfile == null)
+            {
+                Debug.LogError("There was an error in generating an item. newModule.equipmentProfile should not be null.");
+                return false;
+            }
+
+            // TO DO: Pick name from a list of pre-generated names
+            newModule.name = newModule.equipmentProfile.equipmentType.ToString();
+
+            // Determine the effects this module should provide as according to the random profile picked and assigned.
+            // Add guaranteed effects as defined in equipment profile.
+            foreach (EquipmentEffectProfile effectProfile in newModule.equipmentProfile.guaranteedEffects)
+            {
+                // Generate the strength of the effect and add the effect to the equipment module's effects list
+                EquipmentEffect thisEffect = GenerateNewEffect(effectProfile, newModule);
+                thisEffect.wasGuaranteed = true;
+            }
+
+            // Test if secondary effect(s) should be added (based on their chance value)
+            foreach (EquipmentEffectProfile effectProfile in newModule.equipmentProfile.possibleSecondaryEffects)
+            {
+                float randomFloat = Utility.GenerateRandomFloat(0, 100);
+                if (effectProfile.chanceOfBeingAdded >= randomFloat)
+                {
+                    GenerateNewEffect(effectProfile, newModule);
+                }
+            }
+
+            playerInventory.Add(newModule);
+            UpdateModulePrice(newModule.EquipmentType);
+            ProfileManager.instance.SaveProfile();
+            EventManager.TriggerEvent("ItemPurchased");
+            EventManager.TriggerEvent("UpdateInventory");
+            EventManager.TriggerEvent("UpdateBalance");
+
+            return true;
+        }
+        else
         {
-            Debug.LogError("There was an error in generating an item. newModule.equipmentProfile should not be null.");
+            EventManager.TriggerEvent("CantAffordItem");
             return false;
         }
-
-        // TO DO: Pick name from a list of pre-generated names
-        newModule.name = newModule.equipmentProfile.equipmentType.ToString();
-
-        // Determine the effects this module should provide as according to the random profile picked and assigned.
-        // Add guaranteed effects as defined in equipment profile.
-        foreach (EquipmentEffectProfile effectProfile in newModule.equipmentProfile.guaranteedEffects)
-        {
-            // Generate the strength of the effect and add the effect to the equipment module's effects list
-            EquipmentEffect thisEffect = GenerateNewEffect(effectProfile, newModule);
-            thisEffect.wasGuaranteed = true;
-        }
-
-        // Test if secondary effect(s) should be added (based on their chance value)
-        foreach (EquipmentEffectProfile effectProfile in newModule.equipmentProfile.possibleSecondaryEffects)
-        {
-            float randomFloat = Utility.GenerateRandomFloat(0, 100);
-            if (effectProfile.chanceOfBeingAdded >= randomFloat)
-            {
-                GenerateNewEffect(effectProfile, newModule);
-            }
-        }
-
-        playerInventory.Add(newModule);
-        UpdateModulePrice(newModule.EquipmentType);
-        ProfileManager.instance.SaveProfile();
-        EventManager.TriggerEvent("ItemPurchased");
-        EventManager.TriggerEvent("UpdateInventory");
-
-        return true;
+        
     }
 
     public void RecalcEquipmentEffects()
@@ -198,6 +208,51 @@ public class EquipmentManager : MonoBehaviour
         // Add the effect to the list of effects for the equipment module.
         newModule.effects.Add(newEffect);
         return newEffect;
+    }
+
+    private bool PerformTransaction(EquipmentType type)
+    {
+        PlayerProfile profile = ProfileManager.instance.currentProfile;
+        bool hasFunds = false;
+
+        switch (type)
+        {
+            case EquipmentType.Armour:
+                hasFunds = TakeFromBalance(profile.armourModPrice);
+                break;
+            case EquipmentType.Engine:
+                hasFunds = TakeFromBalance(profile.engineModPrice);
+                break;
+            case EquipmentType.Hull:
+                hasFunds = TakeFromBalance(profile.hullModPrice);
+                break;
+            case EquipmentType.Maneuvering:
+                hasFunds = TakeFromBalance(profile.thrusterModPrice);
+                break;
+            case EquipmentType.Shield:
+                hasFunds = TakeFromBalance(profile.shieldModPrice);
+                break;
+            case EquipmentType.Weapon:
+                hasFunds = TakeFromBalance(profile.weaponModPrice);
+                break;
+        }
+
+        return hasFunds;
+    }
+
+    private bool TakeFromBalance(float modPrice)
+    {
+        PlayerProfile profile = ProfileManager.instance.currentProfile;
+
+        if (modPrice < profile.balance)
+        {
+            profile.balance -= modPrice;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void UpdateModulePrice(EquipmentType type)

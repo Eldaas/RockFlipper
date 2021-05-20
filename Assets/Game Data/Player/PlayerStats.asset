@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6bcb29eef997143bb3ad1ac0fc19f2, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  baseMaxHull: 100
+  baseMaxHull: 1
   maxHullEquipment: 0
   maxHullPowerup: 0
-  currentHull: 100
-  currentMaxHull: 100
-  baseMaxArmour: 100
+  currentHull: 0
+  currentMaxHull: 1
+  baseMaxArmour: 1
   maxArmourEquipment: 0
   maxArmourPowerup: 0
-  currentArmour: 100
-  currentMaxArmour: 100
-  baseMaxShields: 100
+  currentArmour: 0
+  currentMaxArmour: 1
+  baseMaxShields: 1
   maxShieldsEquipment: 0
   maxShieldsPowerup: 0
-  currentShields: 100
-  currentMaxShields: 100
+  currentShields: 1
+  currentMaxShields: 1
   baseShieldRegen: 1
   shieldRegenEquipment: 0
   shieldRegenPowerup: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
   baseMaximumVelocity: 100
   maximumVelocityEquipment: 0
   maximumVelocityPowerup: 0
-  maximumVelocityIncrementor: 0
-  currentMaximumVelocity: 100
+  maximumVelocityIncrementor: 20
+  currentMaximumVelocity: 120
   baseManeuveringSpeed: 1
   maneuveringSpeedEquipment: 0
   maneuveringSpeedPowerup: 0

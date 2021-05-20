@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private AsteroidLevelState asteroidLevelState;
     private NebulaLevelState nebulaLevelState;
     private BlackHoleLevelState blackHoleLevelState;
+    private DeathState deathState;
 
     #endregion
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
             asteroidLevelState = new AsteroidLevelState(this, gameSM);
             nebulaLevelState = new NebulaLevelState(this, gameSM);
             blackHoleLevelState = new BlackHoleLevelState(this, gameSM);
+            deathState = new DeathState(this, gameSM);
 
             #endregion
 
@@ -98,6 +100,23 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.BlackHoles:
                 gameSM.ChangeState(blackHoleLevelState);
+                break;
+            default:
+                gameSM.ChangeState(introState);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Game state method which can be called from other scripts. Use this to implement non-scene states (such as player death). For scene states (such as triggering the loading of a scene, use LoadLevel instead).
+    /// </summary>
+    /// <param name="state">The relevant GameStates enum index pertaining to the state to be loaded.</param>
+    public void SetState(GameStates state)
+    {
+        switch (state)
+        {
+            case GameStates.DeathState:
+                gameSM.ChangeState(deathState);
                 break;
             default:
                 gameSM.ChangeState(introState);
@@ -201,8 +220,10 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
         EventManager.AddEvent("UpdateModulePrices");
+        EventManager.AddEvent("CantAffordItem");
+        EventManager.AddEvent("ReturnedFromDeath");
     }
     #endregion
 }
 
-public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles }
+public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles, DeathState }

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Events")]
     private UnityAction returningToBaseDelegate;
+    private UnityAction playerDeathDelegate;
 
     #region Unity Methods
     private void Awake()
@@ -43,10 +44,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HandleVelocity();
+        
 
         if(!locked)
         {
+            HandleVelocity();
+
 #if UNITY_ANDROID
 
         input = joystick.Horizontal;
@@ -121,6 +124,9 @@ public class PlayerController : MonoBehaviour
     {
         returningToBaseDelegate = LockInput;
         EventManager.StartListening("ReturningToBase", returningToBaseDelegate);
+
+        playerDeathDelegate = PlayerDeath;
+        EventManager.StartListening("PlayerDeath", playerDeathDelegate);
     }
 
     /// <summary>
@@ -209,8 +215,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    
+    private void PlayerDeath()
+    {
+        locked = true;
+    }
 
     #endregion
 

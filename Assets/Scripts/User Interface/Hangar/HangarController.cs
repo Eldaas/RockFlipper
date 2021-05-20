@@ -59,6 +59,22 @@ public class HangarController : MonoBehaviour
         {
             SetToNavigation();
         }
+
+        if(hangarUi.devModeEnabled)
+        {
+            hangarUi.devModePanel.SetActive(true);
+        }
+
+        PlayerProfile profile = ProfileManager.instance.currentProfile;
+
+        if (profile.isDead)
+        {
+            profile.isDead = false;
+            profile.balance -= profile.deathCost;
+            EventManager.TriggerEvent("ReturnedFromDeath");
+            profile.deathCost *= 2f;
+            ProfileManager.instance.SaveProfile();
+        }
     }
 
     #region Private Methods

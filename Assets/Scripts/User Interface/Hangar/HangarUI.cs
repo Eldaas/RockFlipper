@@ -7,6 +7,12 @@ using TMPro;
 
 public class HangarUI : MonoBehaviour
 {
+    [Header("Developer Mode")]
+    public bool devModeEnabled;
+    public GameObject devModePanel;
+    public Button givePlayerMoneyButton;
+    public Button clearEquipmentButton;
+
     [Header("Main Navigation")]
     public GameObject mainHud;
     public TextMeshProUGUI balanceText;
@@ -72,6 +78,7 @@ public class HangarUI : MonoBehaviour
     private UnityAction updateInventoryDelegate;
     private UnityAction updateStatsDelegate;
     private UnityAction updateEquipmentSlotsDelegate;
+    private UnityAction cantAffordItemDelegate;
 
     #region Unity Methods
     private void Start()
@@ -91,12 +98,12 @@ public class HangarUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.IntroMenu); });
         exitGameButton.onClick.AddListener(delegate { Utility.QuitGame(); });
 
-        buyShield.onClick.AddListener(delegate { EquipmentManager.instance.GenerateItem(EquipmentType.Shield); });
-        buyArmour.onClick.AddListener(delegate { EquipmentManager.instance.GenerateItem(EquipmentType.Armour); });
-        buyHull.onClick.AddListener(delegate { EquipmentManager.instance.GenerateItem(EquipmentType.Hull); });
-        buyEngine.onClick.AddListener(delegate { EquipmentManager.instance.GenerateItem(EquipmentType.Engine); });
-        buyThruster.onClick.AddListener(delegate { EquipmentManager.instance.GenerateItem(EquipmentType.Maneuvering); });
-        buyWeapon.onClick.AddListener(delegate { EquipmentManager.instance.GenerateItem(EquipmentType.Weapon); });
+        buyShield.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Shield); });
+        buyArmour.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Armour); });
+        buyHull.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Hull); });
+        buyEngine.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Engine); });
+        buyThruster.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Maneuvering); });
+        buyWeapon.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Weapon); });
         equipCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); });
 
         asteroidZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.AsteroidField); });
@@ -107,6 +114,12 @@ public class HangarUI : MonoBehaviour
         esmDestroyModButton.onClick.AddListener(DestroySelectedItem);
         esmEquipModButton.onClick.AddListener(EquipMod);
         esmCloseButton.onClick.AddListener(delegate { equipmentStatsModal.SetActive(false); });
+
+        if(devModeEnabled)
+        {
+            givePlayerMoneyButton.onClick.AddListener(DevGiveMoney);
+            clearEquipmentButton.onClick.AddListener(DevClearEquipment);
+        }
 
         // Custom Events
         updateBalanceDelegate = UpdateBalance;
@@ -437,6 +450,23 @@ public class HangarUI : MonoBehaviour
         }
 
         equipmentStatsModal.SetActive(false);
+    }
+
+    private void DevGiveMoney()
+    {
+        ProfileManager.instance.currentProfile.balance += 100000;
+        EventManager.TriggerEvent("UpdateBalance");
+        ProfileManager.instance.SaveProfile();
+    }
+
+    private void DevClearEquipment()
+    {
+        ProfileManager.instance.currentProfile.currentEquipment.Clear();
+        ProfileManager.instance.currentProfile.currentInventory.Clear();
+
+        EventManager.TriggerEvent("UpdateInventory");
+        EventManager.TriggerEvent("UpdateEquipmentSlots");
+        ProfileManager.instance.SaveProfile();
     }
 
     #endregion
