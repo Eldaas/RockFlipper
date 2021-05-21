@@ -100,7 +100,7 @@ public class EquipmentManager : MonoBehaviour
 
     public bool BuyItem(EquipmentType type)
     {
-        if(PerformTransaction(type))
+        if(TakeFromBalance(type))
         {
             // Creates a new empty equipment object, assigns a random profile to determine which type it will become, and gives it a name.
             Equipment newModule = new Equipment();
@@ -155,8 +155,7 @@ public class EquipmentManager : MonoBehaviour
         {
             EventManager.TriggerEvent("CantAffordItem");
             return false;
-        }
-        
+        } 
     }
 
     public void RecalcEquipmentEffects()
@@ -176,6 +175,42 @@ public class EquipmentManager : MonoBehaviour
         EventManager.TriggerEvent("UpdateInventory");
         EventManager.TriggerEvent("UpdateEquipmentSlots");
         RecalcEquipmentEffects();
+    }
+
+    public float CalcModulePrice(EquipmentType type)
+    {
+        PlayerProfile profile = ProfileManager.instance.currentProfile;
+        ProgressionMapping progMap = GameManager.instance.progMap;
+        int clampedPurchases = 0;
+
+        switch (type)
+        {
+            case EquipmentType.Armour:
+                clampedPurchases = Mathf.Clamp(profile.armourModValueIndex, 0, progMap.equipIndexRate);
+                Debug.Log($"clampedPurchases: {clampedPurchases}, armourModValueIndex: {profile.armourModValueIndex}");
+                break;
+            case EquipmentType.Engine:
+                clampedPurchases = Mathf.Clamp(profile.engineModValueIndex, 0, progMap.equipIndexRate);
+                break;
+            case EquipmentType.Hull:
+                clampedPurchases = Mathf.Clamp(profile.hullModValueIndex, 0, progMap.equipIndexRate);
+                break;
+            case EquipmentType.Maneuvering:
+                clampedPurchases = Mathf.Clamp(profile.thrusterModValueIndex, 0, progMap.equipIndexRate);
+                break;
+            case EquipmentType.Shield:
+                clampedPurchases = Mathf.Clamp(profile.shieldModValueIndex, 0, progMap.equipIndexRate);
+                break;
+            case EquipmentType.Weapon:
+                clampedPurchases = Mathf.Clamp(profile.weaponModValueIndex, 0, progMap.equipIndexRate);
+                break;
+        }
+
+        float percentage = (float)clampedPurchases / (float)progMap.equipIndexRate;
+        float curveValue = GameManager.instance.progMap.equipmentCostScale.Evaluate(percentage);
+        float modPrice = progMap.maxPrice * curveValue;
+
+        return modPrice;
     }
     #endregion
 
@@ -210,39 +245,10 @@ public class EquipmentManager : MonoBehaviour
         return newEffect;
     }
 
-    private bool PerformTransaction(EquipmentType type)
+    private bool TakeFromBalance(EquipmentType type)
     {
         PlayerProfile profile = ProfileManager.instance.currentProfile;
-        bool hasFunds = false;
-
-        switch (type)
-        {
-            case EquipmentType.Armour:
-                hasFunds = TakeFromBalance(profile.armourModPrice);
-                break;
-            case EquipmentType.Engine:
-                hasFunds = TakeFromBalance(profile.engineModPrice);
-                break;
-            case EquipmentType.Hull:
-                hasFunds = TakeFromBalance(profile.hullModPrice);
-                break;
-            case EquipmentType.Maneuvering:
-                hasFunds = TakeFromBalance(profile.thrusterModPrice);
-                break;
-            case EquipmentType.Shield:
-                hasFunds = TakeFromBalance(profile.shieldModPrice);
-                break;
-            case EquipmentType.Weapon:
-                hasFunds = TakeFromBalance(profile.weaponModPrice);
-                break;
-        }
-
-        return hasFunds;
-    }
-
-    private bool TakeFromBalance(float modPrice)
-    {
-        PlayerProfile profile = ProfileManager.instance.currentProfile;
+        float modPrice = CalcModulePrice(type);
 
         if (modPrice < profile.balance)
         {
@@ -262,22 +268,22 @@ public class EquipmentManager : MonoBehaviour
         switch(type)
         {
             case EquipmentType.Armour:
-                profile.armourModPrice *= 1.1f;
+                profile.armourModValueIndex++;
                 break;
             case EquipmentType.Engine:
-                profile.engineModPrice *= 1.1f;
+                profile.engineModValueIndex++;
                 break;
             case EquipmentType.Hull:
-                profile.hullModPrice *= 1.1f;
+                profile.hullModValueIndex++;
                 break;
             case EquipmentType.Maneuvering:
-                profile.thrusterModPrice *= 1.1f;
+                profile.thrusterModValueIndex++;
                 break;
             case EquipmentType.Shield:
-                profile.shieldModPrice *= 1.1f;
+                profile.shieldModValueIndex++;
                 break;
             case EquipmentType.Weapon:
-                profile.weaponModPrice *= 1.1f;
+                profile.weaponModValueIndex++;
                 break;
         }
 

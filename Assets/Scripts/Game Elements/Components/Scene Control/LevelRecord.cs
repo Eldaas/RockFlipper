@@ -8,4 +8,8 @@
     public float ironTotalValue;
     public float silverTotalValue;
     public float goldTotalValue;
+
+    public float ironBonusValue;
+    public float silverBonusValue;
+    public float goldBonusValue;
 }

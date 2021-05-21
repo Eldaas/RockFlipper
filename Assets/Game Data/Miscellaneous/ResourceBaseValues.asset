@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a61827645bc81469b6d1b360e9b14f, type: 3}
   m_Name: ResourceBaseValues
   m_EditorClassIdentifier: 
-  ironValue: 5
-  silverValue: 10
-  goldValue: 20
+  ironValue: 25
+  silverValue: 50
+  goldValue: 100

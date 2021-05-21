@@ -104,6 +104,7 @@ public class Spawner : MonoBehaviour
                 Vector3 spawnPoint;
                 float randomScaleFactor = Utility.GenerateRandomFloat(minAsteroidScaleFactor, maxAsteroidScaleFactor);
                 asteroid.transform.localScale = Vector3.one * randomScaleFactor;
+                asteroid.transform.localRotation = Quaternion.Euler(Utility.GenerateRandomVector(0f, 360f));
                 Asteroid roid = asteroid.GetComponent<Asteroid>();
                 Bounds roidBounds = roid.mainObject.GetComponent<MeshRenderer>().bounds;
 
@@ -169,6 +170,7 @@ public class Spawner : MonoBehaviour
                     activeBackgroundAsteroids.Add(asteroid);
                     asteroid.transform.position = spawnPoint;
                     asteroid.transform.localScale = Vector3.one * randomScaleFactor;
+                    asteroid.transform.localRotation = Quaternion.Euler(Utility.GenerateRandomVector(0f, 360f));
                     asteroid.SetActive(true);
 
                 }

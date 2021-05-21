@@ -23,7 +23,6 @@ public class Asteroid : Hazard
     delegate GameObject GetPooledObject();
     GetPooledObject getPooledObject;
     
-
     #region Public Methods
     /// <summary>
     /// Disables the asteroid visual game object and sets active explosion particle effect.
@@ -36,6 +35,11 @@ public class Asteroid : Hazard
         explosionParticles.SetActive(true);
         // TO DO: differentiate between large and medium explosions, play different sound for each
         EventManager.TriggerEvent("LargeAsteroidExplosion");
+
+        if (asteroidType != AsteroidType.Barren)
+        {
+            SpawnCollectables(force, explosionRadius);
+        }
     }
 
     /// <summary>
@@ -43,14 +47,7 @@ public class Asteroid : Hazard
     /// </summary>
     public void CollideWithAsteroid()
     {
-        //Rigidbody rb = GetComponent<Rigidbody>();
-        //rb.isKinematic = true;
         
-        //mainObject.SetActive(false);
-/*        for (int i = 0; i < childrenObjects.Count; i++)
-        {
-            childrenObjects[i].gameObject.SetActive(true);
-        }*/
     }
 
     public void SetAsteroidHealth()
@@ -71,41 +68,7 @@ public class Asteroid : Hazard
         rb.mass *= 40;
     }
 
-    /// <summary>
-    /// Resets the positions of all asteroid childrenObjects, deactivates them and reactivates the main asteroid.
-    /// </summary>
-    public override void ResetHazard()
-    {
-        base.ResetHazard();
-        mainObject.SetActive(true);
-        explosionParticles.SetActive(false);
-        SetAsteroidHealth();
-
-    }
-
-    #endregion
-
-    #region Private Methods
-    private void SpawnCollectables()
-    {
-        int numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
-        
-        for (int i = 0; i < numToSpawn; i++)
-        {
-            GameObject go = getPooledObject();
-
-            if(go != null)
-            {
-                go.transform.position = transform.position + Utility.GenerateRandomOffset(new Vector3(-0.5f, 0f, -0.5f), new Vector3(0.5f, 0f, 0.5f));
-                go.SetActive(true);
-
-                Rigidbody rb = go.GetComponent<Rigidbody>();
-                rb.AddExplosionForce(1200f * transform.localScale.magnitude, transform.position, 1000f);
-            }
-        }
-    }
-
-    private void AssignDelegate()
+    public void AssignCollectableType()
     {
         if (asteroidType == AsteroidType.Iron)
         {
@@ -121,19 +84,57 @@ public class Asteroid : Hazard
         }
     }
 
+    /// <summary>
+    /// Resets the positions of all asteroid childrenObjects, deactivates them and reactivates the main asteroid.
+    /// </summary>
+    public override void ResetHazard()
+    {
+        base.ResetHazard();
+        mainObject.SetActive(true);
+        explosionParticles.SetActive(false);
+        SetAsteroidHealth();
+
+    }
+
+    #endregion
+
+    #region Private Methods
+    private void SpawnCollectables(float force, float explosionRadius)
+    {
+        int numToSpawn;
+
+        if(SceneController.instance.player.StruckLucky())
+        {
+           numToSpawn = dropYieldMax * 2;
+            EventManager.TriggerEvent("StruckLucky");
+        }
+        else
+        {
+            numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
+        }
+        
+        for (int i = 0; i < numToSpawn; i++)
+        {
+            GameObject go = getPooledObject();
+
+            if(go != null)
+            {
+                go.transform.position = transform.position + Utility.GenerateRandomOffset(new Vector3(-0.5f, 0f, -0.5f), new Vector3(0.5f, 0f, 0.5f));
+                go.SetActive(true);
+
+                Rigidbody rb = go.GetComponent<Rigidbody>();
+                rb.AddExplosionForce(force * transform.localScale.magnitude, transform.position, explosionRadius);
+            }
+        }
+    }
+
     #endregion
 
     #region Unity Methods
 
-    private void Awake()
-    {
-        AssignDelegate();
-    }
-
     protected override void OnCollisionEnter(Collision collision)
     {
-        /*base.OnCollisionEnter(collision);
-        Debug.Log(collision.collider.name);*/
+        
     }
 
     protected override void OnParticleCollision(GameObject collider)
@@ -167,8 +168,7 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                SpawnCollectables();
-                ExplodeAsteroid(120000f * transform.localScale.magnitude, 1000f);
+                ExplodeAsteroid(5000f * transform.localScale.magnitude, 100f);
             }
 
         }
@@ -176,4 +176,4 @@ public class Asteroid : Hazard
     #endregion
 }
 
-public enum AsteroidType { Iron, Silver, Gold }
+public enum AsteroidType { Barren, Iron, Silver, Gold }

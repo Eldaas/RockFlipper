@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance;

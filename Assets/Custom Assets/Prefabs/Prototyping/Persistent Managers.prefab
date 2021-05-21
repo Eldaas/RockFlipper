@@ -651,6 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27fbf2ed6f884b44b4a0d6afaf28628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progMap: {fileID: 11400000, guid: 85b9ffd562f60ae47b3dcf6352160022, type: 2}
   startingState: 1
 --- !u!1 &2261875415235573138
 GameObject:
@@ -1355,15 +1356,16 @@ MonoBehaviour:
     profileName: 
     balance: 0
     reputation: 0
+    numOfDeaths: 0
     isDead: 0
     currentEquipment: []
     currentInventory: []
-    shieldModPrice: 10000
-    armourModPrice: 10000
-    hullModPrice: 10000
-    engineModPrice: 10000
-    thrusterModPrice: 10000
-    weaponModPrice: 10000
+    shieldModValueIndex: 0
+    armourModValueIndex: 0
+    hullModValueIndex: 0
+    engineModValueIndex: 0
+    thrusterModValueIndex: 0
+    weaponModValueIndex: 0
   fileNames: []
 --- !u!1001 &7860143610777055752
 PrefabInstance:

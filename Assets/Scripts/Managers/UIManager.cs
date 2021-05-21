@@ -126,7 +126,7 @@ public class UIManager : MonoBehaviour
                 break;
             case ErrorType.ReturnFromDeath:
                 errorModalTitle.text = "New Ship";
-                errorModalDescription.text = $"We've issued you with a new ship and deducted ${ProfileManager.instance.currentProfile.deathCost.ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
+                errorModalDescription.text = $"We've issued you with a new ship and deducted ${GameManager.instance.CalcDeathCost().ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
                 ApplyStandardModalListeners();
                 break;
         }

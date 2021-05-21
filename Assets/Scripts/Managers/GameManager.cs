@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public ProgressionMapping progMap;
+
     #region Temporary/Runtime Data
     public LevelRecord levelRecord;
     #endregion
@@ -199,6 +201,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("SpaceSceneLoaded");
         EventManager.AddEvent("ReturningToBase"); // TO DO: Add audio cue
         EventManager.AddEvent("BatteryIsEmpty"); // TO DO: Add audio cue
+        EventManager.AddEvent("StruckLucky"); // TO DO: Add audio cue
 
         // Scene load events
         EventManager.AddEvent("IntroSceneLoaded");
@@ -223,6 +226,17 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UpdateModulePrices");
         EventManager.AddEvent("CantAffordItem");
         EventManager.AddEvent("ReturnedFromDeath");
+    }
+    #endregion
+
+    #region Miscellaneous Methods
+    public float CalcDeathCost()
+    {
+        float baseCost = 1000f;
+        int numOfDeaths = Mathf.Clamp(ProfileManager.instance.currentProfile.numOfDeaths, 0, progMap.deathIndexRate);
+        float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths);
+
+        return (1 + deathScale) * baseCost;
     }
     #endregion
 }

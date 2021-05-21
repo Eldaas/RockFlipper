@@ -70,9 +70,8 @@ public class HangarController : MonoBehaviour
         if (profile.isDead)
         {
             profile.isDead = false;
-            profile.balance -= profile.deathCost;
+            profile.balance -= GameManager.instance.CalcDeathCost();
             EventManager.TriggerEvent("ReturnedFromDeath");
-            profile.deathCost *= 2f;
             ProfileManager.instance.SaveProfile();
         }
     }
@@ -91,11 +90,17 @@ public class HangarController : MonoBehaviour
     private void CalculateResources()
     {
         LevelRecord record = GameManager.instance.levelRecord;
+        float profitMultiplier = hangarUi.stats.currentProfitBoost;
 
-        record.ironTotalValue = record.ironCollected * resources.ironValue;
-        record.silverTotalValue = record.silverCollected * resources.silverValue;
-        record.goldTotalValue = record.goldCollected * resources.goldValue;
+        record.ironTotalValue = record.ironCollected * resources.ironValue * profitMultiplier;
+        record.silverTotalValue = record.silverCollected * resources.silverValue * profitMultiplier;
+        record.goldTotalValue = record.goldCollected * resources.goldValue * profitMultiplier;
+
+        record.ironBonusValue = record.ironTotalValue - (record.ironCollected * resources.ironValue);
+        record.silverBonusValue = record.silverTotalValue - (record.silverCollected * resources.silverValue);
+        record.goldBonusValue = record.goldTotalValue - (record.goldCollected * resources.goldValue);
     }
+
 
     private void SellResources()
     {

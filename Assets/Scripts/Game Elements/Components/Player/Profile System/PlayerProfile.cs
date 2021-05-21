@@ -8,16 +8,16 @@ public class PlayerProfile
     public string profileName;
     public float balance;
     public float reputation;
+    public int numOfDeaths;
     public bool isDead;
 
     public List<Equipment> currentEquipment = new List<Equipment>();
     public List<Equipment> currentInventory = new List<Equipment>();
 
-    public float shieldModPrice = 10000;
-    public float armourModPrice = 10000;
-    public float hullModPrice = 10000;
-    public float engineModPrice = 10000;
-    public float thrusterModPrice = 10000;
-    public float weaponModPrice = 10000;
-    public float deathCost = 1000;
+    public int shieldModValueIndex = 1;
+    public int armourModValueIndex = 1;
+    public int hullModValueIndex = 1;
+    public int engineModValueIndex = 1;
+    public int thrusterModValueIndex = 1;
+    public int weaponModValueIndex = 1;
 }
