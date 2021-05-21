@@ -12,8 +12,8 @@ public class LevelModifier : ScriptableObject
     public float asteroidDensityMultiplier;
     public float resourcesDroppedMultiplier;
 
-    // Normalised modifiers require a value between 0f and 1f
-    [Header("Normalised Modifiers")]
+    // These modifiers take a value of 0f to 100f
+    [Header("0 - 100% Modifiers")]
     public float ironChance; 
     public float silverChance;
     public float goldChance;

@@ -172,14 +172,12 @@ public class HangarUI : MonoBehaviour
 
     public void UpdateModulePrices()
     {
-        PlayerProfile profile = ProfileManager.instance.currentProfile;
-
-        shieldPrice.text = $"${profile.shieldModPrice.ToString("#,#")}";
-        armourPrice.text = $"${profile.armourModPrice.ToString("#,#")}";
-        hullPrice.text = $"${profile.hullModPrice.ToString("#,#")}";
-        enginePrice.text = $"${profile.engineModPrice.ToString("#,#")}";
-        thrusterPrice.text = $"${profile.thrusterModPrice.ToString("#,#")}";
-        weaponPrice.text = $"${profile.weaponModPrice.ToString("#,#")}";
+        shieldPrice.text = $"${EquipmentManager.instance.CalcModulePrice(EquipmentType.Shield).ToString("#,#")}";
+        armourPrice.text = $"${EquipmentManager.instance.CalcModulePrice(EquipmentType.Armour).ToString("#,#")}";
+        hullPrice.text = $"${EquipmentManager.instance.CalcModulePrice(EquipmentType.Hull).ToString("#,#")}";
+        enginePrice.text = $"${EquipmentManager.instance.CalcModulePrice(EquipmentType.Engine).ToString("#,#")}";
+        thrusterPrice.text = $"${EquipmentManager.instance.CalcModulePrice(EquipmentType.Maneuvering).ToString("#,#")}";
+        weaponPrice.text = $"${EquipmentManager.instance.CalcModulePrice(EquipmentType.Weapon).ToString("#,#")}";
     }
 
     public void SetEndLevelText()
@@ -188,7 +186,13 @@ public class HangarUI : MonoBehaviour
 
         if (record.ironCollected > 0)
         {
-            ironText.text = $"Iron: {record.ironCollected} - ${record.ironTotalValue}";
+            string bonusText = string.Empty;
+            if(record.ironBonusValue > 0f)
+            {
+                bonusText = $" (+ {record.ironBonusValue} bonus)";
+            }
+
+            ironText.text = $"Iron: {record.ironCollected} collected - ${record.ironTotalValue}{bonusText}";
             ironText.enabled = true;
         }
         else
@@ -198,7 +202,13 @@ public class HangarUI : MonoBehaviour
 
         if (record.silverCollected > 0)
         {
-            silverText.text = $"Silver: {record.silverCollected} - ${record.silverTotalValue}";
+            string bonusText = string.Empty;
+            if (record.silverBonusValue > 0f)
+            {
+                bonusText = $" (+ {record.silverBonusValue} bonus)";
+            }
+
+            silverText.text = $"Silver: {record.silverCollected} - ${record.silverTotalValue}{bonusText}";
             silverText.enabled = true;
         }
         else
@@ -208,7 +218,13 @@ public class HangarUI : MonoBehaviour
 
         if (record.goldCollected > 0)
         {
-            goldText.text = $"Gold: {record.goldCollected} - ${record.goldTotalValue}";
+            string bonusText = string.Empty;
+            if (record.goldBonusValue > 0f)
+            {
+                bonusText = $" (+ {record.goldBonusValue} bonus)";
+            }
+
+            goldText.text = $"Gold: {record.goldCollected} - ${record.goldTotalValue}{bonusText}";
             goldText.enabled = true;
         }
         else

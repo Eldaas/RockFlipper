@@ -84,11 +84,9 @@ public class ObjectPooler : MonoBehaviour
     private GameObject goldParent;
     [SerializeField]
     private int resourcesCount;
-    private List<GameObject> pooledBarren = new List<GameObject>();
     private List<GameObject> pooledIron = new List<GameObject>();
     private List<GameObject> pooledSilver = new List<GameObject>();
     private List<GameObject> pooledGold = new List<GameObject>();
-
 
     private void Awake()
     {
@@ -134,6 +132,7 @@ public class ObjectPooler : MonoBehaviour
 
             Asteroid asteroid = go.GetComponent<Asteroid>();
             asteroid.asteroidType = GenerateTypeFromData();
+            asteroid.AssignCollectableType();
             ApplyAsteroidMaterial(asteroid);
             asteroid.SetAsteroidHealth();
             asteroid.MultiplyAsteroidMass();
@@ -526,7 +525,7 @@ public class ObjectPooler : MonoBehaviour
         if (level.goldChance > 0f)
         {
             float diceRoll = Utility.GenerateRandomFloat(0f, 1f);
-            if(diceRoll <= level.goldChance)
+            if(diceRoll <= level.goldChance / 100)
             {
                 return AsteroidType.Gold;
             }
@@ -535,7 +534,7 @@ public class ObjectPooler : MonoBehaviour
         if (level.silverChance > 0f)
         {
             float diceRoll = Utility.GenerateRandomFloat(0f, 1f);
-            if (diceRoll <= level.silverChance)
+            if (diceRoll <= level.silverChance / 100)
             {
                 return AsteroidType.Silver;
             }
@@ -544,7 +543,7 @@ public class ObjectPooler : MonoBehaviour
         if(level.ironChance > 0f)
         {
             float diceRoll = Utility.GenerateRandomFloat(0f, 1f);
-            if (diceRoll <= level.ironChance)
+            if (diceRoll <= level.ironChance / 100)
             {
                 return AsteroidType.Iron;
             }

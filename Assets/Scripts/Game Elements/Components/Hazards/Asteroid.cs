@@ -23,7 +23,6 @@ public class Asteroid : Hazard
     delegate GameObject GetPooledObject();
     GetPooledObject getPooledObject;
     
-
     #region Public Methods
     /// <summary>
     /// Disables the asteroid visual game object and sets active explosion particle effect.
@@ -36,6 +35,11 @@ public class Asteroid : Hazard
         explosionParticles.SetActive(true);
         // TO DO: differentiate between large and medium explosions, play different sound for each
         EventManager.TriggerEvent("LargeAsteroidExplosion");
+
+        if (asteroidType != AsteroidType.Barren)
+        {
+            SpawnCollectables(force, explosionRadius);
+        }
     }
 
     /// <summary>
@@ -43,14 +47,7 @@ public class Asteroid : Hazard
     /// </summary>
     public void CollideWithAsteroid()
     {
-        //Rigidbody rb = GetComponent<Rigidbody>();
-        //rb.isKinematic = true;
         
-        //mainObject.SetActive(false);
-/*        for (int i = 0; i < childrenObjects.Count; i++)
-        {
-            childrenObjects[i].gameObject.SetActive(true);
-        }*/
     }
 
     public void SetAsteroidHealth()
@@ -71,6 +68,22 @@ public class Asteroid : Hazard
         rb.mass *= 40;
     }
 
+    public void AssignCollectableType()
+    {
+        if (asteroidType == AsteroidType.Iron)
+        {
+            getPooledObject = ObjectPooler.instance.GetPooledIron;
+        }
+        else if (asteroidType == AsteroidType.Silver)
+        {
+            getPooledObject = ObjectPooler.instance.GetPooledSilver;
+        }
+        else if (asteroidType == AsteroidType.Gold)
+        {
+            getPooledObject = ObjectPooler.instance.GetPooledGold;
+        }
+    }
+
     /// <summary>
     /// Resets the positions of all asteroid childrenObjects, deactivates them and reactivates the main asteroid.
     /// </summary>
@@ -86,9 +99,19 @@ public class Asteroid : Hazard
     #endregion
 
     #region Private Methods
-    private void SpawnCollectables()
+    private void SpawnCollectables(float force, float explosionRadius)
     {
-        int numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
+        int numToSpawn;
+
+        if(SceneController.instance.player.StruckLucky())
+        {
+           numToSpawn = dropYieldMax * 2;
+            EventManager.TriggerEvent("StruckLucky");
+        }
+        else
+        {
+            numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
+        }
         
         for (int i = 0; i < numToSpawn; i++)
         {
@@ -100,25 +123,8 @@ public class Asteroid : Hazard
                 go.SetActive(true);
 
                 Rigidbody rb = go.GetComponent<Rigidbody>();
-                rb.AddExplosionForce(1200f * transform.localScale.magnitude, transform.position, 1000f);
+                rb.AddExplosionForce(force * transform.localScale.magnitude, transform.position, explosionRadius);
             }
-        }
-    }
-
-    private void AssignDelegate()
-    {
-
-        if (asteroidType == AsteroidType.Iron)
-        {
-            getPooledObject = ObjectPooler.instance.GetPooledIron;
-        }
-        else if (asteroidType == AsteroidType.Silver)
-        {
-            getPooledObject = ObjectPooler.instance.GetPooledSilver;
-        }
-        else if (asteroidType == AsteroidType.Gold)
-        {
-            getPooledObject = ObjectPooler.instance.GetPooledGold;
         }
     }
 
@@ -126,15 +132,9 @@ public class Asteroid : Hazard
 
     #region Unity Methods
 
-    private void Awake()
-    {
-        AssignDelegate();
-    }
-
     protected override void OnCollisionEnter(Collision collision)
     {
-        /*base.OnCollisionEnter(collision);
-        Debug.Log(collision.collider.name);*/
+        
     }
 
     protected override void OnParticleCollision(GameObject collider)
@@ -168,12 +168,7 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                if(asteroidType != AsteroidType.Barren)
-                {
-                    SpawnCollectables();
-                }
-                
-                ExplodeAsteroid(120000f * transform.localScale.magnitude, 1000f);
+                ExplodeAsteroid(5000f * transform.localScale.magnitude, 100f);
             }
 
         }

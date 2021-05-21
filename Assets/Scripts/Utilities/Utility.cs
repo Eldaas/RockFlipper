@@ -15,6 +15,14 @@ public static class Utility
         return Random.Range(min, max);
     }
 
+    public static Vector3 GenerateRandomVector(float minValues, float maxValues)
+    {
+        float randomX = GenerateRandomFloat(minValues, maxValues);
+        float randomY = GenerateRandomFloat(minValues, maxValues);
+        float randomZ = GenerateRandomFloat(minValues, maxValues);
+        return new Vector3(randomX, randomY, randomZ);
+    }
+
     public static Vector3 GenerateRandomOffset(Vector3 minOffSet, Vector3 maxOffset)
     {
         float randomX = GenerateRandomFloat(minOffSet.x, maxOffset.x);

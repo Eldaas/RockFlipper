@@ -236,7 +236,7 @@ public class PlayerStats : ScriptableObject
         currentProjectileSpeed = baseProjectileSpeed * (1 + ((projectileSpeedEquipment + projectileSpeedPowerup) / 100));
         currentProjectileDamage = baseProjectileDamage * (1 + ((projectileDamageEquipment + projectileDamagePowerup) / 100));
         currentCollectionRange = baseCollectionRange * (1 + ((collectionRangeEquipment + collectionRangePowerup) / 100));
-        currentLuck = baseLuck * (1 + ((luckEquipment + luckPowerup) / 100));
+        currentLuck = baseLuck * (1 + (luckEquipment / 100 + luckPowerup / 100));
         currentProfitBoost = baseProfitBoost * (1 + (profitBoostEquipment / 100));
     }
     #endregion

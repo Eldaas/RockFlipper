@@ -114,7 +114,8 @@ MonoBehaviour:
   playerParticleFxOffset: {x: 0, y: -5, z: 0}
   isActive: 0
   chanceToSpawn: 30
-  thrustReductionPercentage: 50
+  thrustReductionPercentage: -50
+  maxVelocityReductionPercentage: -30
 --- !u!1001 &4737847610971258508
 PrefabInstance:
   m_ObjectHideFlags: 0

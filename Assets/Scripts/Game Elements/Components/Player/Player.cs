@@ -59,9 +59,10 @@ public class Player : MonoBehaviour
                 Asteroid asteroid = rb.GetComponent<Asteroid>();
 
                 float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-                if (collisionForce > 20000f)
+                Debug.Log($"Collided with force: {collisionForce}");
+                if (collisionForce > 10000000f)
                 {
-                    asteroid.CollideWithAsteroid();
+                    asteroid.ExplodeAsteroid(1000f * transform.localScale.magnitude, 100f);
                 }
 
                 Player player = GetComponent<Player>();
@@ -153,6 +154,20 @@ public class Player : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool StruckLucky()
+    {
+        int randomInt = Utility.GenerateRandomInt(0, 100);
+
+        if (randomInt <= 1 * (stats.currentLuck / 100))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     #endregion
