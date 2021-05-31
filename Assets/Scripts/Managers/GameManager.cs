@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
     private void AddEvents()
     {
         // Global level events
+        EventManager.AddEvent("Shoot");
         EventManager.AddEvent("AsteroidCollision"); // TO DO: Add audio cue
         EventManager.AddEvent("LargeAsteroidExplosion");
         EventManager.AddEvent("MediumAsteroidExplosion");

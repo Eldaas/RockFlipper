@@ -107,11 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c25d487ffe6c1c469bc0e3e2f5bbaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDuration: 15
+  baseDuration: 10
   objectParticle: {fileID: 1354899038816111086}
   playerParticleFxPrefab: {fileID: 963823900583085287, guid: ceec69da2bef54241a6bd77c218d4748,
     type: 3}
   playerParticleFxOffset: {x: 0, y: -5, z: 0}
+  uiIconPrefab: {fileID: 2750623661471591418, guid: da024000fd6e6c840a061c3a0a71b6be,
+    type: 3}
   isActive: 0
   chanceToSpawn: 30
   thrustReductionPercentage: -50

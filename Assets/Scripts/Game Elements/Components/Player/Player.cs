@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -233,12 +234,31 @@ public class Player : MonoBehaviour
         float endTime = Time.time + powerup.EffectDuration;
         //Debug.Log("Effect duration is: " + powerup.EffectDuration);
         powerup.ExecutePowerup(this);
+        bool hasIcon = false;
+        GameObject icon = null;
+        Image iconImage = null;
+
+        if(powerup.UiIconPrefab != null)
+        {
+            hasIcon = true;
+            icon = Instantiate(powerup.UiIconPrefab, SceneController.instance.sceneUi.powerupsParent.transform);
+            iconImage = icon.GetComponent<Image>();
+        }
+        
+        bool blinkStarted = false;
 
         while(Time.time < endTime)
         {
+            if(endTime - Time.time < 2f && !blinkStarted && hasIcon)
+            {
+                blinkStarted = true;
+                StartCoroutine(SceneController.instance.sceneUi.BlinkIcon(iconImage, 2f));
+            }
+
             yield return null;
         }
 
+        Destroy(icon);
         powerup.EndPowerup(this);
     }
 
