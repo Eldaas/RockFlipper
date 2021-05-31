@@ -14,6 +14,7 @@ public class SceneController : MonoBehaviour
     public Player player;
     public int resourcesCollected;
     public PlayLevelUI sceneUi;
+    public Canvas hpBarCanvas;
     
     private void Awake()
     {
