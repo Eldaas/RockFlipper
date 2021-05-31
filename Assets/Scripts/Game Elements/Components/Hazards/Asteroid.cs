@@ -11,10 +11,11 @@ public class Asteroid : Hazard
     public AsteroidType asteroidType;
     public AsteroidData data;
     public float healthMultiplier;
+    public HealthBar healthBar;
     [SerializeField]
     private GameObject explosionParticles;
-    [SerializeField]
-    private float currentHealth;
+    public float currentHealth;
+    public float maxHealth;
     [SerializeField]
     private int dropYieldMin;
     [SerializeField]
@@ -54,12 +55,15 @@ public class Asteroid : Hazard
     {
         if(healthMultiplier != 0f)
         {
-            currentHealth = data.baseHealth * healthMultiplier;
+            maxHealth = data.baseHealth * healthMultiplier;
+            
         }
         else
         {
-            currentHealth = data.baseHealth;
+            maxHealth = data.baseHealth;
         }
+
+        currentHealth = maxHealth;
     }
 
     public void MultiplyAsteroidMass()
@@ -164,10 +168,12 @@ public class Asteroid : Hazard
 
             // Deal damage to the asteroid health
             currentHealth -= SceneController.instance.player.stats.currentProjectileDamage;
+            healthBar.Activate();
 
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
+                healthBar.Deactivate();
                 ExplodeAsteroid(5000f * transform.localScale.magnitude, 100f);
             }
 

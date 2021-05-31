@@ -14,6 +14,10 @@ public class ObjectPooler : MonoBehaviour
     private GameObject[] asteroidPrefabs;
     [SerializeField]
     private GameObject asteroidsParent;
+    [SerializeField]
+    private GameObject asteroidHpBarPrefab;
+    [SerializeField]
+    private GameObject asteroidHpBarsParent;
     public int asteroidCount;
     private List<GameObject> pooledAsteroids = new List<GameObject>();
 
@@ -136,6 +140,9 @@ public class ObjectPooler : MonoBehaviour
             ApplyAsteroidMaterial(asteroid);
             asteroid.SetAsteroidHealth();
             asteroid.MultiplyAsteroidMass();
+            GameObject healthBar = Instantiate(asteroidHpBarPrefab, asteroidHpBarsParent.transform);
+            asteroid.healthBar = healthBar.GetComponent<HealthBar>();
+            asteroid.healthBar.Deactivate();
         }
 
         for (int i = 0; i < gasCloudCount; i++)
