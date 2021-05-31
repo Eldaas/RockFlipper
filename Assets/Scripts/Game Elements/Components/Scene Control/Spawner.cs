@@ -92,7 +92,7 @@ public class Spawner : MonoBehaviour
     {
         if(isActive)
         {
-            CleanUp();
+            UpdateAndClean();
             transform.position = (player.transform.position.z + offsetFromPlayer) * Vector3.forward;
             hazardBounds.center = transform.position;
             powerupBounds.center = transform.position + powerupBoundsOffset;
@@ -251,21 +251,32 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void CleanUp()
+    private void UpdateAndClean()
     {
         if(activeAsteroids.Count > 0)
         {
             foreach (GameObject asteroid in activeAsteroids.ToArray())
             {
+                Asteroid roid = asteroid.GetComponent<Asteroid>();
+
                 if (asteroid.transform.position.z < player.transform.position.z - cleanupDistanceFromPlayer)
                 {
                     Rigidbody rb = asteroid.GetComponent<Rigidbody>();
-                    Asteroid roid = asteroid.GetComponent<Asteroid>();
                     activeAsteroids.Remove(asteroid);
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                     roid.ResetHazard();
                     asteroid.SetActive(false);
+                    roid.healthBar.Deactivate();
+                }
+                else
+                {
+                    if(roid.currentHealth < roid.maxHealth)
+                    {
+                        roid.healthBar.UpdatePosition(asteroid.transform);
+                        float newPercentage = roid.currentHealth / roid.maxHealth;
+                        roid.healthBar.UpdateHpBar(newPercentage);
+                    }
                 }
             }
         }
