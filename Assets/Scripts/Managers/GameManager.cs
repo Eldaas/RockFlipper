@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Developer Mode")]
+    public bool devModeEnabled;
+
+    [Header("Misc")]
     public ProgressionMapping progMap;
 
     #region Temporary/Runtime Data

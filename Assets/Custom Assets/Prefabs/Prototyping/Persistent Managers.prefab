@@ -651,6 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27fbf2ed6f884b44b4a0d6afaf28628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  devModeEnabled: 1
   progMap: {fileID: 11400000, guid: 85b9ffd562f60ae47b3dcf6352160022, type: 2}
   startingState: 1
 --- !u!1 &2261875415235573138

@@ -7,12 +7,6 @@ using TMPro;
 
 public class HangarUI : MonoBehaviour
 {
-    [Header("Developer Mode")]
-    public bool devModeEnabled;
-    public GameObject devModePanel;
-    public Button givePlayerMoneyButton;
-    public Button clearEquipmentButton;
-
     [Header("Main Navigation")]
     public GameObject mainHud;
     public TextMeshProUGUI balanceText;
@@ -114,12 +108,6 @@ public class HangarUI : MonoBehaviour
         esmDestroyModButton.onClick.AddListener(DestroySelectedItem);
         esmEquipModButton.onClick.AddListener(EquipMod);
         esmCloseButton.onClick.AddListener(delegate { equipmentStatsModal.SetActive(false); });
-
-        if(devModeEnabled)
-        {
-            givePlayerMoneyButton.onClick.AddListener(DevGiveMoney);
-            clearEquipmentButton.onClick.AddListener(DevClearEquipment);
-        }
 
         // Custom Events
         updateBalanceDelegate = UpdateBalance;
@@ -466,23 +454,6 @@ public class HangarUI : MonoBehaviour
         }
 
         equipmentStatsModal.SetActive(false);
-    }
-
-    private void DevGiveMoney()
-    {
-        ProfileManager.instance.currentProfile.balance += 100000;
-        EventManager.TriggerEvent("UpdateBalance");
-        ProfileManager.instance.SaveProfile();
-    }
-
-    private void DevClearEquipment()
-    {
-        ProfileManager.instance.currentProfile.currentEquipment.Clear();
-        ProfileManager.instance.currentProfile.currentInventory.Clear();
-
-        EventManager.TriggerEvent("UpdateInventory");
-        EventManager.TriggerEvent("UpdateEquipmentSlots");
-        ProfileManager.instance.SaveProfile();
     }
 
     #endregion
