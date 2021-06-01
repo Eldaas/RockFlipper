@@ -7,6 +7,7 @@ public class PlayerProfile
 {
     public string profileName;
     public float balance;
+    public float totalPlayTime;
     public float reputation;
     public int numOfDeaths;
     public bool isDead;

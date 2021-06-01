@@ -58,6 +58,7 @@ public class ProfileManager : MonoBehaviour
             newProfile.profileName = name;
             newProfile.balance = 0;
             newProfile.reputation = 0f;
+            newProfile.totalPlayTime = 0f;
 
             currentProfile = newProfile;
             SaveProfile();

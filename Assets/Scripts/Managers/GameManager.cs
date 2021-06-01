@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private NebulaLevelState nebulaLevelState;
     private BlackHoleLevelState blackHoleLevelState;
     private DeathState deathState;
+    private HighScoresState highScoresState;
 
     #endregion
 
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
             nebulaLevelState = new NebulaLevelState(this, gameSM);
             blackHoleLevelState = new BlackHoleLevelState(this, gameSM);
             deathState = new DeathState(this, gameSM);
+            highScoresState = new HighScoresState(this, gameSM);
 
             #endregion
 
@@ -106,6 +108,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.BlackHoles:
                 gameSM.ChangeState(blackHoleLevelState);
+                break;
+            case GameStates.HighScores:
+                gameSM.ChangeState(highScoresState);
                 break;
             default:
                 gameSM.ChangeState(introState);
@@ -163,6 +168,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.BlackHoles:
                 gameSM.Initialise(asteroidLevelState);
+                break;
+            case GameStates.HighScores:
+                gameSM.Initialise(highScoresState);
                 break;
             default:
                 gameSM.Initialise(introState);
@@ -246,4 +254,4 @@ public class GameManager : MonoBehaviour
     #endregion
 }
 
-public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles, DeathState }
+public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles, DeathState, HighScores }
