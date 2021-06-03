@@ -28238,11 +28238,6 @@ PrefabInstance:
       propertyPath: m_ForceModuleActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9146340558925649786, guid: 5543996e5a464984bb2c2f4c40f20e2e,
-        type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5543996e5a464984bb2c2f4c40f20e2e, type: 3}
 --- !u!224 &2069936455 stripped

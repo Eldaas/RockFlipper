@@ -5,15 +5,15 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Runtime.InteropServices;
 
-[Serializable]
+[DefaultExecutionOrder(-1)]
 public class HighScores : MonoBehaviour
 {
-    [SerializeField]
     public DreamloData data;
+    public bool dataRetrieved = false;
 
-    private LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingScores;
-    private LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingTimes;
-    private BinaryTree dataTree;
+    public LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingScores;
+    public LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingTimes;
+    public BinaryTree dataTree = new BinaryTree();
 
     #region External Methods
     [DllImport("SortingSearchingDLL")]
@@ -26,16 +26,21 @@ public class HighScores : MonoBehaviour
     private void Awake()
     {
         PlayerProfile profile = ProfileManager.instance.currentProfile;
-        AddScore(profile.profileName, profile.balance.ToString(), profile.totalPlayTime.ToString());
+        //AddScore(profile.profileName, profile.balance.ToString(), profile.totalPlayTime.ToString());
     }
 
     private void Start()
     {
-        AddDummyScores();
+        //AddDummyScores();
         StartCoroutine(GetRequest("http://dreamlo.com/lb/60b5ed888f40bb64eca5f56d/json"));
         
     }
 
+    /// <summary>
+    /// Queries the Dreamlo online leaderboard for its data. This is returned in JSON format and parsed into a local data class structure.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     IEnumerator GetRequest(string url)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
@@ -55,11 +60,15 @@ public class HighScores : MonoBehaviour
                     data = JsonUtility.FromJson<DreamloData>(webRequest.downloadHandler.text);
                     SortAscendingScore();
                     SortAscendingTime();
+                    dataRetrieved = true;
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Used for debug purposes
+    /// </summary>
     private void AddDummyScores()
     {
         AddScore("Bob", "12345", "678");
@@ -67,11 +76,20 @@ public class HighScores : MonoBehaviour
         AddScore("Andrew", "123", "321");
     }
 
+    /// <summary>
+    /// Sends a new score to the Dreamlo online leaderboard.
+    /// </summary>
+    /// <param name="name">The name of the record to send. This is the player's profile name.</param>
+    /// <param name="balance">The player's balance, which is synonymous with the player's score.</param>
+    /// <param name="totalTime">The player's total time spent in a game level, therefore the player's total time spent playing.</param>
     private void AddScore(string name, string balance, string totalTime)
     {
         StartCoroutine(GetRequest($"http://dreamlo.com/lb/REyGVjWkkkqwY5J0ITSyWA4CP2veOrbU-1yqU3OD6r4A/add/{name}/{balance}/{totalTime}"));
     }
 
+    /// <summary>
+    /// Uses BubbleSort to sort an array of the downloaded record scores into a LinkedList.
+    /// </summary>
     private void SortAscendingScore()
     {
         int[] scores = new int[data.dreamlo.leaderboard.entry.Count];
@@ -86,7 +104,7 @@ public class HighScores : MonoBehaviour
         string scoresOutput = "Sorted scores: ";
         foreach (int score in scores)
         {
-            scoresOutput += ", " + score.ToString();
+            scoresOutput += score.ToString() + ", ";
         }
         Debug.Log(scoresOutput);
         ascendingScores = PairWithData(scores, true);
@@ -99,9 +117,12 @@ public class HighScores : MonoBehaviour
         Debug.Log(sortedScoreRecords);
 
         StoreDataInBinaryTree(ascendingScores, dataTree);
-        dataTree.TraverseInOrder(dataTree.root);
+        //dataTree.TraverseInOrder(dataTree.root);
     }
 
+    /// <summary>
+    /// Uses QuickSort to sort an array of the downloaded record times into a LinkedList.
+    /// </summary>
     private void SortAscendingTime()
     {
         int[] times = new int[data.dreamlo.leaderboard.entry.Count];
@@ -111,22 +132,25 @@ public class HighScores : MonoBehaviour
             times[i] = (int)data.dreamlo.leaderboard.entry[i].seconds;
         }
 
-        QuickSort(times, 0, times.Length);
+        BubbleSort(times, times.Length);
+        //QuickSort(times, 0, times.Length - 1);
 
         string timesOutput = "Sorted times: ";
         foreach(int time in times)
         {
-            timesOutput += ", " + time.ToString();
+            timesOutput += time + ", "; 
         }
         Debug.Log(timesOutput);
         ascendingTimes = PairWithData(times, false);
 
-        string sortedScoreRecords = "Sorted time records: ";
-        foreach (DreamloData.Dreamlo.Leaderboard.HighScoreRecord record in ascendingScores)
+        string sortedTimeRecords = "Sorted time records: ";
+        foreach (DreamloData.Dreamlo.Leaderboard.HighScoreRecord record in ascendingTimes)
         {
-            sortedScoreRecords += $"[Name: {record.name}, Score: {record.seconds}] ";
+            Debug.Log(record.name);
+            sortedTimeRecords += $"[Name: {record.name}, Time: {record.seconds}] ";
         }
-        Debug.Log(sortedScoreRecords);
+
+        //Debug.Log($"Sorted final time: {ascendingTimes.Last.Value.name}");
     }
 
     /// <summary>
@@ -168,6 +192,11 @@ public class HighScores : MonoBehaviour
         return new LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord>(sortedRecords);
     }
 
+    /// <summary>
+    /// Traverses the passed LinkedList (in reverse order) and converts this into rankings. The index at which a record appears is its ranking.
+    /// </summary>
+    /// <param name="data">The LinkedList to be sorted into the binary tree.</param>
+    /// <param name="tree">The BinaryTree for the LinkedList to be sorted into.</param>
     public void StoreDataInBinaryTree(LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> data, BinaryTree tree)
     {
         LinkedListNode<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> currentNode = data.Last;
@@ -176,10 +205,29 @@ public class HighScores : MonoBehaviour
         {
             BinaryTree.BinaryTreeNode node = new BinaryTree.BinaryTreeNode();
             node.index = i;
-            node.data = (UnityEngine.Object)currentNode.Value;
+            node.data = currentNode.Value;
+            //Debug.Log($"Index: {node.index}, Name: {node.data.name}");
             tree.CreateNode(node);
             currentNode = currentNode.Previous;
         }
+    }
+
+    /// <summary>
+    /// Searches the binary tree for a given rank.
+    /// </summary>
+    /// <param name="rank">The rank number to searched for.</param>
+    public void GetRankFromBinaryTree(int rank)
+    {
+        BinaryTree.BinaryTreeNode result = dataTree.Find(rank - 1);
+        if(result != null)
+        {
+            Debug.Log($"Result returned for rank #{rank}: [Name: {result.data.name}, Score: {result.data.score}, Total Time: {result.data.seconds} seconds, Record Last Updated: {result.data.date}]");
+        }
+    }
+
+    public void SearchForName(string name)
+    {
+
     }
 
     /// <summary>

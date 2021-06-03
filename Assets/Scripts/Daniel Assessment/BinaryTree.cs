@@ -18,7 +18,7 @@ public class BinaryTree
     public class BinaryTreeNode
     {
         public int index;
-        public Object data;
+        public HighScores.DreamloData.Dreamlo.Leaderboard.HighScoreRecord data;
         public BinaryTreeNode left;
         public BinaryTreeNode right;
     }
