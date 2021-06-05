@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BinaryTree
 {
-    // Tree constructors
+    #region Constructors
     public BinaryTree()
     {
 
@@ -14,17 +14,18 @@ public class BinaryTree
     {
         root = _root;
     }
+    #endregion
 
-    public class BinaryTreeNode
-    {
-        public int index;
-        public HighScores.DreamloData.Dreamlo.Leaderboard.HighScoreRecord data;
-        public BinaryTreeNode left;
-        public BinaryTreeNode right;
-    }
-
+    #region Fields
     public BinaryTreeNode root;
+    #endregion
 
+    #region Public Methods
+    /// <summary>
+    /// Creates a new node at the specified index.
+    /// </summary>
+    /// <param name="index">The index at which to generate a new node.</param>
+    /// <returns>True if successful, false if unsuccessful.</returns>
     public bool CreateNodeAtIndex(int index)
     {
         BinaryTreeNode before = null;
@@ -69,6 +70,11 @@ public class BinaryTree
         return true;
     }
 
+    /// <summary>
+    /// Creates a new node at the next available index.
+    /// </summary>
+    /// <param name="node">The node to be inserted into the binary tree.</param>
+    /// <returns>True if successful, false if unsuccessful.</returns>
     public bool CreateNode(BinaryTreeNode node)
     {
         if (node != null)
@@ -119,11 +125,48 @@ public class BinaryTree
         return false;
     }
 
+    /// <summary>
+    /// Overload for the Find() method, to be used when the root node doesn't need to be specified.
+    /// </summary>
+    /// <param name="index">The index of the binary tree containing the desired node.</param>
+    /// <returns>If found, returns the node. If not found, returns null.</returns>
     public BinaryTreeNode Find(int index)
     {
         return Find(index, root);
     }
 
+    /// <summary>
+    /// Searches the binary tree for HighScores data with name matching the input query. 
+    /// </summary>
+    /// <param name="query">The string to be searched for within each of the HighScores records held within the binary tree.</param>
+    /// <returns>If found, returns the node. If not found, returns null.</returns>
+    public BinaryTreeNode Find(string query)
+    {
+        BinaryTreeNode node = root;
+        bool found = false;
+
+        while (node != null && !found)
+        {
+            if (node.data.name == query)
+            {
+                found = true;
+                return node;
+            }
+
+            node = node.right;
+        }
+
+        return null;
+    }
+    #endregion
+
+    #region Private Methods
+    /// <summary>
+    /// Searches the binary tree for a particular node at the input index.
+    /// </summary>
+    /// <param name="index">The index to find within the binary tree.</param>
+    /// <param name="parent">The node to start traversing through the binary tree from.</param>
+    /// <returns>If found, returns the node. If not found, returns null.</returns>
     private BinaryTreeNode Find(int index, BinaryTreeNode parent)
     {
         if (parent != null)
@@ -147,35 +190,16 @@ public class BinaryTree
         }
 
     }
+    #endregion
 
-    public void TraversePreOrder(BinaryTreeNode parent)
+    /// <summary>
+    /// Represents a single node within a binary tree structure.
+    /// </summary>
+    public class BinaryTreeNode
     {
-        if (parent != null)
-        {
-            Debug.Log(parent.index);
-            TraversePreOrder(parent.left);
-            TraversePreOrder(parent.right);
-        }
+        public int index;
+        public HighScores.DreamloData.Dreamlo.Leaderboard.HighScoreRecord data;
+        public BinaryTreeNode left;
+        public BinaryTreeNode right;
     }
-
-    public void TraversePostOrder(BinaryTreeNode parent)
-    {
-        if (parent != null)
-        {
-            TraversePostOrder(parent.left);
-            TraversePostOrder(parent.right);
-            Debug.Log(parent.index);
-        }
-    }
-
-    public void TraverseInOrder(BinaryTreeNode parent)
-    {
-        if (parent != null)
-        {
-            TraverseInOrder(parent.left);
-            Debug.Log(parent);
-            TraverseInOrder(parent.right);
-        }
-    }
-
 }

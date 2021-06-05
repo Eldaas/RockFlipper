@@ -15,12 +15,17 @@ public class HighScores : MonoBehaviour
     public LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingTimes;
     public BinaryTree dataTree = new BinaryTree();
 
-    #region External Methods
+    [Header("Searching by Score")]
+    public int[] scores;
+    public DreamloData.Dreamlo.Leaderboard.HighScoreRecord result;
+
+    #region DLL Methods
     [DllImport("SortingSearchingDLL")]
     private static extern void BubbleSort(int[] arr, int n);
     [DllImport("SortingSearchingDLL")]
     private static extern void QuickSort(int[] arr, int low, int high);
-
+    [DllImport("SortingSearchingDLL")]
+    public static extern int LinearSearch(int[] arr, int maxIndex, int query);
     #endregion
 
     private void Awake()
@@ -92,32 +97,31 @@ public class HighScores : MonoBehaviour
     /// </summary>
     private void SortAscendingScore()
     {
-        int[] scores = new int[data.dreamlo.leaderboard.entry.Count];
+        scores = new int[data.dreamlo.leaderboard.entry.Count];
 
         for (int i = 0; i < scores.Length; i++)
         {
-            scores[i] = (int)data.dreamlo.leaderboard.entry[i].score;
+            scores[i] = data.dreamlo.leaderboard.entry[i].score;
         }
 
         BubbleSort(scores, scores.Length);
 
-        string scoresOutput = "Sorted scores: ";
+        /*string scoresOutput = "Sorted scores: ";
         foreach (int score in scores)
         {
             scoresOutput += score.ToString() + ", ";
         }
-        Debug.Log(scoresOutput);
+        Debug.Log(scoresOutput);*/
         ascendingScores = PairWithData(scores, true);
 
-        string sortedScoreRecords = "Sorted score records: ";
+        /*string sortedScoreRecords = "Sorted score records: ";
         foreach(DreamloData.Dreamlo.Leaderboard.HighScoreRecord record in ascendingScores)
         {
             sortedScoreRecords += $"[Name: {record.name}, Score: {record.score}] ";
-        }
-        Debug.Log(sortedScoreRecords);
+        }*/
+        //Debug.Log(sortedScoreRecords);
 
         StoreDataInBinaryTree(ascendingScores, dataTree);
-        //dataTree.TraverseInOrder(dataTree.root);
     }
 
     /// <summary>
@@ -127,10 +131,13 @@ public class HighScores : MonoBehaviour
     {
         int[] times = new int[data.dreamlo.leaderboard.entry.Count];
 
+        string inputTimes = "Input times: ";
         for (int i = 0; i < times.Length; i++)
         {
-            times[i] = (int)data.dreamlo.leaderboard.entry[i].seconds;
+            times[i] = data.dreamlo.leaderboard.entry[i].seconds;
+            inputTimes += times[i] + ", ";
         }
+        Debug.Log(inputTimes);
 
         BubbleSort(times, times.Length);
         //QuickSort(times, 0, times.Length - 1);
@@ -146,11 +153,10 @@ public class HighScores : MonoBehaviour
         string sortedTimeRecords = "Sorted time records: ";
         foreach (DreamloData.Dreamlo.Leaderboard.HighScoreRecord record in ascendingTimes)
         {
-            Debug.Log(record.name);
+            //Debug.Log(record.name);
             sortedTimeRecords += $"[Name: {record.name}, Time: {record.seconds}] ";
         }
-
-        //Debug.Log($"Sorted final time: {ascendingTimes.Last.Value.name}");
+        Debug.Log(sortedTimeRecords);
     }
 
     /// <summary>
@@ -170,7 +176,7 @@ public class HighScores : MonoBehaviour
             {
                 if (isScore)
                 {
-                    if ((int)workingList[w].score == input[i])
+                    if (workingList[w].score == input[i])
                     {
                         sortedRecords[i] = workingList[w];
                         workingList.RemoveAt(w);
@@ -179,7 +185,7 @@ public class HighScores : MonoBehaviour
                 }
                 else
                 {
-                    if ((int)workingList[w].seconds == input[i])
+                    if (workingList[w].seconds == input[i])
                     {
                         sortedRecords[i] = workingList[w];
                         workingList.RemoveAt(w);
@@ -225,11 +231,6 @@ public class HighScores : MonoBehaviour
         }
     }
 
-    public void SearchForName(string name)
-    {
-
-    }
-
     /// <summary>
     /// Nested classes implementation
     /// </summary>
@@ -252,8 +253,8 @@ public class HighScores : MonoBehaviour
                 public class HighScoreRecord
                 {
                     public string name;
-                    public float score;
-                    public float seconds;
+                    public int score;
+                    public int seconds;
                     public string text;
                     public string date;
                 }

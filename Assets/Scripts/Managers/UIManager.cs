@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     private UnityAction errorModalCantAffordDelegate;
     private UnityAction errorModalPlayerDiedDelegate;
     private UnityAction errorModalReturnedFromDeathDelegate;
+    private UnityAction errorModalWrongInputDelegate;
+    private UnityAction errorModalNoResultsDelegate;
 
     #region Properties
     public float LoadScreenAlpha => LoadScreenAlphaValue();
@@ -86,6 +88,12 @@ public class UIManager : MonoBehaviour
 
         errorModalReturnedFromDeathDelegate = delegate { ErrorModal(ErrorType.ReturnFromDeath); };
         EventManager.StartListening("ReturnedFromDeath", errorModalReturnedFromDeathDelegate);
+
+        errorModalWrongInputDelegate = delegate { ErrorModal(ErrorType.WrongInput); };
+        EventManager.StartListening("IncorrectInput", errorModalWrongInputDelegate);
+
+        errorModalNoResultsDelegate = delegate { ErrorModal(ErrorType.NoResults); };
+        EventManager.StartListening("NoResults", errorModalNoResultsDelegate);
     }
 
     private float LoadScreenAlphaValue()
@@ -129,6 +137,16 @@ public class UIManager : MonoBehaviour
                 errorModalDescription.text = $"We've issued you with a new ship and deducted ${GameManager.instance.CalcDeathCost().ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
                 ApplyStandardModalListeners();
                 break;
+            case ErrorType.WrongInput:
+                errorModalTitle.text = "Oops.";
+                errorModalDescription.text = "Something went wrong with the submitted input. Try again.";
+                ApplyStandardModalListeners();
+                break;
+            case ErrorType.NoResults:
+                errorModalTitle.text = "No results.";
+                errorModalDescription.text = "Try a different search query and you're using correct casing.";
+                ApplyStandardModalListeners();
+                break;
         }
 
         errorModal.SetActive(true);
@@ -149,4 +167,4 @@ public class UIManager : MonoBehaviour
 
 }
 
-public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath }
+public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults }

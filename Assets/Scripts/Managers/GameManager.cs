@@ -228,6 +228,8 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UISuccess");
         EventManager.AddEvent("LoadProfiles");
         EventManager.AddEvent("UpdateProfileSelection");
+        EventManager.AddEvent("IncorrectInput");
+        EventManager.AddEvent("NoResults");
 
         // Hangar Scene Events
         EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
