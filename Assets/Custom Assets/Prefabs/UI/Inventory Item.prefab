@@ -88,6 +88,8 @@ GameObject:
   - component: {fileID: 3953463602691753769}
   - component: {fileID: -9195042790368679876}
   - component: {fileID: -4996337986303726534}
+  - component: {fileID: 5647151736321316124}
+  - component: {fileID: 2361667052352019985}
   m_Layer: 5
   m_Name: Inventory Item
   m_TagString: Untagged
@@ -168,6 +170,7 @@ MonoBehaviour:
     equipmentProfile: {fileID: 0}
     name: 
     effects: []
+    isEquipped: 0
 --- !u!114 &-9195042790368679876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +226,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b9648a65a90b34cba6014cc0bf95a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5647151736321316124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499931711455547026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c5c6f6c5afd384293ce180e3e020c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &2361667052352019985
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499931711455547026}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

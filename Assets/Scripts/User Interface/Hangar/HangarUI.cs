@@ -15,6 +15,7 @@ public class HangarUI : MonoBehaviour
     public Button mainMenuButton;
     public Button exitGameButton;
     public List<GameObject> screenList;
+    public Canvas canvas;
 
     [Header("End Level Screen")]
     public GameObject endLevelScreen;

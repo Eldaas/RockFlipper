@@ -2400,9 +2400,10 @@ GameObject:
   - component: {fileID: 178248848}
   - component: {fileID: 178248847}
   - component: {fileID: 178248846}
+  - component: {fileID: 178248849}
   m_Layer: 5
   m_Name: Armour Mod Slot
-  m_TagString: Untagged
+  m_TagString: EquipmentSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2523,6 +2524,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &178248849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178248842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &178978189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,9 +3852,10 @@ GameObject:
   - component: {fileID: 304581847}
   - component: {fileID: 304581846}
   - component: {fileID: 304581845}
+  - component: {fileID: 304581848}
   m_Layer: 5
   m_Name: Hull Mod Slot
-  m_TagString: Untagged
+  m_TagString: EquipmentSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3962,6 +3976,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &304581848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304581841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &305779484
 GameObject:
   m_ObjectHideFlags: 0
@@ -14953,9 +14979,10 @@ GameObject:
   - component: {fileID: 1078053083}
   - component: {fileID: 1078053082}
   - component: {fileID: 1078053081}
+  - component: {fileID: 1078053084}
   m_Layer: 5
   m_Name: Weapon Mod Slot
-  m_TagString: Untagged
+  m_TagString: EquipmentSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15076,6 +15103,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1078053084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078053077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1085011698
 GameObject:
   m_ObjectHideFlags: 0
@@ -17105,6 +17144,7 @@ GameObject:
   - component: {fileID: 1247254229}
   - component: {fileID: 1247254232}
   - component: {fileID: 1247254231}
+  - component: {fileID: 1247254233}
   m_Layer: 5
   m_Name: Inventory Panel
   m_TagString: Untagged
@@ -17215,6 +17255,18 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 300
   m_LayoutPriority: 1
+--- !u!114 &1247254233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247254227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254612591
 GameObject:
   m_ObjectHideFlags: 0
@@ -19036,9 +19088,10 @@ GameObject:
   - component: {fileID: 1364158495}
   - component: {fileID: 1364158494}
   - component: {fileID: 1364158493}
+  - component: {fileID: 1364158496}
   m_Layer: 5
   m_Name: Thruster Mod Slot
-  m_TagString: Untagged
+  m_TagString: EquipmentSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19159,6 +19212,24 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1364158496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364158489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!223 &1370378999 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7130111959666857597, guid: 5543996e5a464984bb2c2f4c40f20e2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069936454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1370730132
 GameObject:
   m_ObjectHideFlags: 0
@@ -19173,9 +19244,10 @@ GameObject:
   - component: {fileID: 1370730138}
   - component: {fileID: 1370730137}
   - component: {fileID: 1370730136}
+  - component: {fileID: 1370730139}
   m_Layer: 5
   m_Name: Shield Mod Slot
-  m_TagString: Untagged
+  m_TagString: EquipmentSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19296,6 +19368,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1370730139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370730132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1379841509
 GameObject:
   m_ObjectHideFlags: 0
@@ -20599,9 +20683,10 @@ GameObject:
   - component: {fileID: 1509924062}
   - component: {fileID: 1509924061}
   - component: {fileID: 1509924060}
+  - component: {fileID: 1509924063}
   m_Layer: 5
   m_Name: Engine Mod Slot
-  m_TagString: Untagged
+  m_TagString: EquipmentSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20722,6 +20807,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1509924063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509924056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781a16ec65565c4a86ae0ff418045ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1510414156
 GameObject:
   m_ObjectHideFlags: 0
@@ -28275,6 +28372,7 @@ MonoBehaviour:
   - {fileID: 1307456708}
   - {fileID: 1490484106}
   - {fileID: 1313071728}
+  canvas: {fileID: 1370378999}
   endLevelScreen: {fileID: 1773871689}
   ironText: {fileID: 321027752}
   silverText: {fileID: 495753345}
