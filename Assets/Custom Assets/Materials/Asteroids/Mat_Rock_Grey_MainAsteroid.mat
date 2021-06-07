@@ -75,7 +75,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _HighIntensity: 1.96
-    - _LightScalar: 10
+    - _LightScalar: 1
     - _LowIntensity: 0.77
     - _Metallic: 0
     - _Mode: 0
@@ -85,7 +85,7 @@ Material:
     - _RampLevels: 50
     - _RimAlpha: 0.309
     - _RimDropOff: 0.138
-    - _RimPower: 0.414
+    - _RimPower: 0.32
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
