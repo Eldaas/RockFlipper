@@ -12,31 +12,21 @@ public class EquipItemButtonHandler : MonoBehaviour, IPointerClickHandler
     {
         clickCount = eventData.clickCount;
         Equipment equipment = GetComponent<AssociatedEquipment>().equipment;
-        bool isInSlot = false;
 
-        if (CompareTag("EquipmentSlot")) isInSlot = true;
-        else if (CompareTag("EquipmentItem")) isInSlot = false;
-
-        HangarController.instance.hangarUi.EquipmentItemSelected(equipment, isInSlot);
+        HangarController.instance.hangarUi.EquipmentItemSelected(equipment, equipment.isEquipped);
 
         if (clickCount == 2)
         {
-
             HangarController.instance.hangarUi.equipmentStatsModal.SetActive(false);
 
-            if (isInSlot)
+            if (equipment.isEquipped)
             {
                 EquipmentManager.instance.UnequipItem(equipment, true);
-                tag = "EquipmentItem";
             }
             else
             {
                 EquipmentManager.instance.EquipItem(equipment);
-                tag = "EquipmentSlot";
-            }
-
-            ProfileManager.instance.SaveProfile();
-            
+            }            
         }
 
     }

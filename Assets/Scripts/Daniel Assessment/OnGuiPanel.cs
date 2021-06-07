@@ -4,28 +4,36 @@ using UnityEngine;
 
 public class OnGuiPanel : MonoBehaviour
 {
+    [SerializeField]
+    private int topOffset;
+    [SerializeField]
+    private int leftOffset;
+    [SerializeField]
+    private int buttonWidth;
+    [SerializeField]
+    private int buttonHeight;
+    [SerializeField]
+    private int paddingBetween;
+
+
     private void OnGUI()
     {
-        int buttonHeight = Screen.height / 20;
-        int buttonWidth = Screen.width / 10;
-        int paddingBetween = Screen.width / 100;
-
         GUIStyle style = GUI.skin.GetStyle("button");
         style.fontSize = 18;
 
         if(GameManager.instance.devModeEnabled)
         {
-            if (GUI.Button(new Rect(20, 40, buttonWidth, buttonHeight), "Give Player Money"))
+            if (GUI.Button(new Rect(leftOffset, topOffset, buttonWidth, buttonHeight), "Give Player Money"))
             {
                 DevGiveMoney();
             }
 
-            if (GUI.Button(new Rect(buttonWidth + paddingBetween, 40, buttonWidth, buttonHeight), "Clear Equipment"))
+            if (GUI.Button(new Rect(leftOffset + buttonWidth + paddingBetween, topOffset, buttonWidth, buttonHeight), "Clear Equipment"))
             {
                 DevClearEquipment();
             }
 
-            if (GUI.Button(new Rect(buttonWidth * 2 + paddingBetween, 40, buttonWidth, buttonHeight), "Wipe Profile"))
+            if (GUI.Button(new Rect(leftOffset + buttonWidth * 2 + paddingBetween, topOffset, buttonWidth, buttonHeight), "Wipe Profile"))
             {
                 WipeProfile();
             }

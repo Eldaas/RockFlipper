@@ -230,6 +230,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UpdateProfileSelection");
         EventManager.AddEvent("IncorrectInput");
         EventManager.AddEvent("NoResults");
+        EventManager.AddEvent("PauseMenu");
 
         // Hangar Scene Events
         EventManager.AddEvent("SellResources"); // TO DO: Add audio cue

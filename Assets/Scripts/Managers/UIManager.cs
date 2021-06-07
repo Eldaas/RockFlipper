@@ -19,12 +19,19 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI errorModalTitle;
     public TextMeshProUGUI errorModalDescription;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+    public Button returnToHangarButton;
+    public Button quitGameButton;
+    public Button resumeGameButton;
+
     [Header("Events")]
     private UnityAction errorModalCantAffordDelegate;
     private UnityAction errorModalPlayerDiedDelegate;
     private UnityAction errorModalReturnedFromDeathDelegate;
     private UnityAction errorModalWrongInputDelegate;
     private UnityAction errorModalNoResultsDelegate;
+    private UnityAction pauseMenuDelegate;
 
     #region Properties
     public float LoadScreenAlpha => LoadScreenAlphaValue();
@@ -78,7 +85,11 @@ public class UIManager : MonoBehaviour
     #region Private Methods
     private void RegisterListeners()
     {
-       
+        // Buttons
+        returnToHangarButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.Hangar); ShowPauseMenu(); });
+        quitGameButton.onClick.AddListener(delegate { Utility.QuitGame(); });
+        resumeGameButton.onClick.AddListener(delegate { ShowPauseMenu(); });
+
         // Custom events
         errorModalCantAffordDelegate = delegate { ErrorModal(ErrorType.CantAfford); };
         EventManager.StartListening("CantAffordItem", errorModalCantAffordDelegate);
@@ -94,6 +105,9 @@ public class UIManager : MonoBehaviour
 
         errorModalNoResultsDelegate = delegate { ErrorModal(ErrorType.NoResults); };
         EventManager.StartListening("NoResults", errorModalNoResultsDelegate);
+		
+        pauseMenuDelegate = delegate { ShowPauseMenu(); };
+        EventManager.StartListening("PauseMenu", pauseMenuDelegate);
     }
 
     private float LoadScreenAlphaValue()
@@ -165,6 +179,19 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    private void ShowPauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        if(pauseMenu.activeInHierarchy)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 }
 
 public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults }

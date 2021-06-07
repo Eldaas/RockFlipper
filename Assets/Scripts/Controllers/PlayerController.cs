@@ -45,32 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-
-        if(!locked)
-        {
-            HandleVelocity();
-
-#if UNITY_ANDROID
-
-            input = joystick.Horizontal;
-
-#endif
-
-#if UNITY_STANDALONE_WIN
-
-            input = Input.GetAxis("Horizontal");
-
-#endif
-            HandleHorizontal(input);
-            anim.SetFloat("Roll", input);
-
-            if (Input.GetButtonDown("Shoot"))
-            {
-                Shoot();
-            }
-        }
-
+        HandleInput();
     }
     #endregion
 
@@ -105,6 +80,38 @@ public class PlayerController : MonoBehaviour
     private void LockInput()
     {
         locked = true;
+    }
+
+    private void HandleInput()
+    {
+        if (!locked)
+        {
+            HandleVelocity();
+
+#if UNITY_ANDROID
+
+            input = joystick.Horizontal;
+
+#endif
+
+#if UNITY_STANDALONE_WIN
+
+            input = Input.GetAxis("Horizontal");
+
+#endif
+            HandleHorizontal(input);
+            anim.SetFloat("Roll", input);
+
+            if (Input.GetButtonDown("Shoot"))
+            {
+                Shoot();
+            }
+
+            if (Input.GetButtonDown("Cancel"))
+            {
+                EventManager.TriggerEvent("PauseMenu");
+            }
+        }
     }
 
     /// <summary>
