@@ -25,13 +25,21 @@ public class HighScoresUI : UIController
     [SerializeField]
     private TextMeshProUGUI timeField;
 
+    [Header("Hashing")]
+    [SerializeField]
+    private TMP_InputField hashInput;
+    [SerializeField]
+    private Button hashResetButton;
+    [SerializeField]
+    private Button hashHashButton;
+
     [Header("Search")]
     [SerializeField]
     private TMP_Dropdown dropdown;
     [SerializeField]
-    private TMP_InputField inputField;
+    private TMP_InputField searchInput;
     [SerializeField]
-    private Button resetButton;
+    private Button searchResetButton;
     [SerializeField]
     private Button searchButton;
 
@@ -41,7 +49,7 @@ public class HighScoresUI : UIController
     [SerializeField]
     private GameObject timesBoard;
     [SerializeField]
-    private GameObject searchBoard;
+    private GameObject resultsBoard;
     [SerializeField]
     private Button switchBoardButton;
     [SerializeField]
@@ -51,19 +59,14 @@ public class HighScoresUI : UIController
     [SerializeField]
     private Transform timesContent;
     [SerializeField]
-    private Transform searchContent;
+    private Transform resultsContent;
 
     // Misc
-    private enum Leaderboard { Wealth, Times, Search }
+    private enum Leaderboard { Wealth, Times, Results }
     private Leaderboard currentBoard = Leaderboard.Wealth;
     #endregion
 
     #region Unity Methods
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         RegisterListeners();
@@ -81,7 +84,9 @@ public class HighScoresUI : UIController
         closeButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.IntroMenu); });
         switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Wealth); });
         searchButton.onClick.AddListener(SearchQuery);
-        resetButton.onClick.AddListener(ResetSearch);
+        searchResetButton.onClick.AddListener(ResetSearch);
+        hashResetButton.onClick.AddListener(ResetHash);
+        hashHashButton.onClick.AddListener(HashString);
     }
 
     /// <summary>
@@ -178,10 +183,13 @@ public class HighScoresUI : UIController
     private void ValidateInputs()
     {
         switchBoardButton.interactable = scores.dataRetrieved;
-        resetButton.interactable = scores.dataRetrieved;
+        searchResetButton.interactable = scores.dataRetrieved;
         searchButton.interactable = scores.dataRetrieved;
-        inputField.interactable = scores.dataRetrieved;
+        searchInput.interactable = scores.dataRetrieved;
         dropdown.interactable = scores.dataRetrieved;
+        hashInput.interactable = scores.dataRetrieved;
+        hashHashButton.interactable = scores.dataRetrieved;
+        hashResetButton.interactable = scores.dataRetrieved;
     }
 
     /// <summary>
@@ -196,7 +204,7 @@ public class HighScoresUI : UIController
                 ResetSearch();
                 wealthBoard.SetActive(false);
                 timesBoard.SetActive(true);
-                searchBoard.SetActive(false);
+                resultsBoard.SetActive(false);
                 switchBoardButtonText.text = "View Wealth Rankings";
                 currentBoard = board;
                 switchBoardButton.onClick.RemoveAllListeners();
@@ -207,18 +215,18 @@ public class HighScoresUI : UIController
                 ResetSearch();
                 wealthBoard.SetActive(true);
                 timesBoard.SetActive(false);
-                searchBoard.SetActive(false);
+                resultsBoard.SetActive(false);
                 switchBoardButtonText.text = "View Time Rankings";
                 currentBoard = board;
                 switchBoardButton.onClick.RemoveAllListeners();
                 switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Wealth); });
 
             }
-            else if (board == Leaderboard.Search)
+            else if (board == Leaderboard.Results)
             {
                 wealthBoard.SetActive(false);
                 timesBoard.SetActive(false);
-                searchBoard.SetActive(true);
+                resultsBoard.SetActive(true);
                 switchBoardButtonText.text = "Return to Rankings";
                 currentBoard = board;
                 switchBoardButton.onClick.RemoveAllListeners();
@@ -234,33 +242,33 @@ public class HighScoresUI : UIController
     {
         if(dropdown.value == 0) // Search by name
         {
-            SearchByName(inputField.text);
+            SearchByName(searchInput.text);
         }
         else if(dropdown.value == 1) // Search by rank number
         {
             int result;
-            bool parseSuccess = int.TryParse(inputField.text, out result);
+            bool parseSuccess = int.TryParse(searchInput.text, out result);
             if (parseSuccess)
             {
                 SearchByRank(result);
             }
             else
             {
-                Debug.Log("User submitted a query which couldn't be parsed to an integer: " + inputField.text);
+                Debug.Log("User submitted a query which couldn't be parsed to an integer: " + searchInput.text);
                 EventManager.TriggerEvent("IncorrectInput");
             }
         }
         else if(dropdown.value == 2) // Search by score
         {
             int result;
-            bool parseSuccess = int.TryParse(inputField.text, out result);
+            bool parseSuccess = int.TryParse(searchInput.text, out result);
             if(parseSuccess)
             {
                 SearchByScore(result);
             }
             else
             {
-                Debug.Log("User submitted a query which couldn't be parsed to an integer: " + inputField.text);
+                Debug.Log("User submitted a query which couldn't be parsed to an integer: " + searchInput.text);
                 EventManager.TriggerEvent("IncorrectInput");
             }
         }
@@ -272,7 +280,7 @@ public class HighScoresUI : UIController
     /// <param name="score"></param>
     private void SearchByScore(int score)
     {
-        string query = inputField.text;
+        string query = searchInput.text;
         int arrIndex = HighScores.LinearSearch(scores.scores, scores.scores.Length, score);
 
         if(arrIndex != -1)
@@ -281,9 +289,9 @@ public class HighScoresUI : UIController
 
             if(node != null)
             {
-                GameObject newRecord = Instantiate(recordPrefab, searchContent.transform);
+                GameObject newRecord = Instantiate(recordPrefab, resultsContent.transform);
                 newRecord.GetComponent<TextMeshProUGUI>().text = $"Rank #{arrIndex + 1} - Name: {node.data.name} || Score: {node.data.score} || Total Time: {node.data.seconds} seconds";
-                SwitchBoard(Leaderboard.Search);
+                SwitchBoard(Leaderboard.Results);
             }
             else
             {
@@ -296,7 +304,6 @@ public class HighScoresUI : UIController
         }
     }
 
-
     /// <summary>
     /// Uses a comparator pattern (Find) to check if the input string matches the record string.
     /// </summary>
@@ -307,9 +314,9 @@ public class HighScoresUI : UIController
 
         if(result != null)
         {
-            GameObject newRecord = Instantiate(recordPrefab, searchContent.transform);
+            GameObject newRecord = Instantiate(recordPrefab, resultsContent.transform);
             newRecord.GetComponent<TextMeshProUGUI>().text = $"Rank #{result.index + 1} - Name: {result.data.name} || Score: {result.data.score} || Total Time: {result.data.seconds} seconds";
-            SwitchBoard(Leaderboard.Search);
+            SwitchBoard(Leaderboard.Results);
         }
         else
         {
@@ -327,9 +334,9 @@ public class HighScoresUI : UIController
 
         if(result != null)
         {
-            GameObject newRecord = Instantiate(recordPrefab, searchContent.transform);
+            GameObject newRecord = Instantiate(recordPrefab, resultsContent.transform);
             newRecord.GetComponent<TextMeshProUGUI>().text = $"Rank #{result.index + 1} - Name: {result.data.name} || Score: {result.data.score} || Total Time: {result.data.seconds} seconds";
-            SwitchBoard(Leaderboard.Search);
+            SwitchBoard(Leaderboard.Results);
         }
         else
         {
@@ -342,13 +349,40 @@ public class HighScoresUI : UIController
     /// </summary>
     private void ResetSearch()
     {
-        inputField.text = "";
-        
-        foreach(Transform child in searchContent.transform)
+        searchInput.text = string.Empty;
+        ClearResults();
+    }
+
+    /// <summary>
+    /// Resets all hashing UI components.
+    /// </summary>
+    private void ResetHash()
+    {
+        hashInput.text = string.Empty;
+        ClearResults();
+    }
+
+    /// <summary>
+    /// Removes all results from the results window.
+    /// </summary>
+    private void ClearResults()
+    {
+        foreach (Transform child in resultsContent.transform)
         {
             Destroy(child.gameObject);
         }
+    }
 
+    /// <summary>
+    /// Calls the hashing utility method to convert an input string into an integer hash. This is returned and output as a result on the results board.
+    /// </summary>
+    private void HashString()
+    {
+        int result = HashUtility.HashString(hashInput.text);
+        GameObject newResult = Instantiate(recordPrefab, resultsContent);
+        TextMeshProUGUI text = newResult.GetComponent<TextMeshProUGUI>();
+        text.text = result.ToString();
+        SwitchBoard(Leaderboard.Results);
     }
     #endregion
 }
