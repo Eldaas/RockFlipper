@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using RengeGames.HealthBars;
 
 public class PlayLevelUI : UIController
 {
@@ -15,22 +17,28 @@ public class PlayLevelUI : UIController
 
     [Header("Player Stat Bars")]
     [SerializeField]
-    private Vector3 statBarsOffset;
+    private RadialSegmentedHealthBar energyBar;
     [SerializeField]
-    private GameObject playerStatBars;
+    private TextMeshProUGUI energyBarText;
     [SerializeField]
-    private GameObject playerStatBarsParent;
-    public GameObject powerupsParent;
+    private RadialSegmentedHealthBar shieldBar;
     [SerializeField]
-    private Image batteryIndicator;
+    private TextMeshProUGUI shieldBarText;
     [SerializeField]
-    private Image velocityIndicator;
+    private RadialSegmentedHealthBar armourBar;
     [SerializeField]
-    private Image hullIndicator;
+    private TextMeshProUGUI armourBarText;
     [SerializeField]
-    private Image armourIndicator;
+    private RadialSegmentedHealthBar hullBar;
     [SerializeField]
-    private Image shieldsIndicator;
+    private TextMeshProUGUI hullBarText;
+    [SerializeField]
+    private float activeAlphaValue;
+    [SerializeField]
+    private float inactiveAlphaValue;
+
+    [Header("Powerups")]
+    public Transform powerupsParent;
 
     [Header("Resources Panel")]
     [SerializeField]
@@ -146,23 +154,35 @@ public class PlayLevelUI : UIController
 
     private void UpdateStatBars()
     {
-        playerStatBars.transform.position = player.transform.position + statBarsOffset;
-
-        // Rotation causes glitching of the world space canvas. Unsure how to fix at present.
-            //Vector3 newRotation = new Vector3(0f, 0f, player.transform.eulerAngles.z);
-            //playerStatBarsParent.transform.rotation = Quaternion.Euler(newRotation);
-
-        UpdateStat(batteryIndicator, stats.currentBatteryLevel, stats.currentBatteryCapacity);
-        UpdateStat(velocityIndicator, player.VelocityZ, stats.currentMaximumVelocity);
-        UpdateStat(armourIndicator, stats.currentArmour, stats.currentMaxArmour);
-        UpdateStat(hullIndicator, stats.currentHull, stats.currentMaxHull);
-        UpdateStat(shieldsIndicator, stats.currentShields, stats.currentMaxShields);
+        UpdateStat(energyBar, energyBarText, stats.currentBatteryLevel, stats.currentBatteryCapacity);
+        //UpdateStat(armourBar, armourBarText, stats.currentArmour, stats.currentMaxArmour);
+        //UpdateStat(hullBar, hullBarText, stats.currentHull, stats.currentMaxHull); ;
+        //UpdateStat(shieldBar, shieldBarText, stats.currentShields, stats.currentMaxShields);
     }
 
-    private void UpdateStat(Image image, float currValue, float maxValue)
+    private void UpdateStat(RadialSegmentedHealthBar bar, TextMeshProUGUI text, float currValue, float maxValue)
     {
         float percentage = currValue / maxValue;
-        image.fillAmount = Mathf.SmoothStep(image.fillAmount, percentage, 0.1f);
+        Debug.Log(percentage);
+        float uiPercentage = Mathf.SmoothStep(bar.RemovedSegments.Value, percentage, 0.1f);
+        bar.SetPercent(uiPercentage);
+        text.text = Math.Truncate(percentage * 100) + "%";
+        Color color = bar.InnerColor.Value;
+        Color textColour = text.color;
+
+        if (currValue < maxValue)
+        {
+            color.a = activeAlphaValue;
+            textColour.a = activeAlphaValue;
+        }
+        else
+        {
+            color.a = inactiveAlphaValue;
+            textColour.a = inactiveAlphaValue;
+        }
+
+        bar.InnerColor.Value = color;
+        text.color = textColour;
     }
 
     private void Shoot()
@@ -198,12 +218,12 @@ public class PlayLevelUI : UIController
 
     private void PauseMenu()
     {
-        // TO DO: Write pause menu functionality (procedural GUI)
+        UIManager.instance.ShowPauseMenu();
     }
 
     private void ClearPowerupIcons()
     {
-        foreach(Transform powerupIcon in powerupsParent.transform)
+        foreach (Transform powerupIcon in powerupsParent.transform)
         {
             Destroy(powerupIcon.gameObject);
         }

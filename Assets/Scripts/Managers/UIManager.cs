@@ -179,7 +179,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-    private void ShowPauseMenu()
+    public void ShowPauseMenu()
     {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
 

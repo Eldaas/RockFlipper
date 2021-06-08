@@ -112,7 +112,7 @@ MonoBehaviour:
   playerParticleFxPrefab: {fileID: 963823900583085287, guid: 81c10866cd3bee645aa7a6b05f939fe7,
     type: 3}
   playerParticleFxOffset: {x: 0, y: 0, z: 0}
-  uiIconPrefab: {fileID: 6967198862045981007, guid: 76d3911a7f5d84448ae092e7b7d06fc0,
+  uiIconPrefab: {fileID: 7068742818301266327, guid: 8a31bac92d01ee04fbe74b5eafcddfa7,
     type: 3}
   isActive: 0
   chanceToSpawn: 30
