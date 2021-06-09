@@ -116,7 +116,7 @@ MonoBehaviour:
     type: 3}
   isActive: 0
   chanceToSpawn: 50
-  shieldRegenPercentage: 150
+  shieldRegenPercentage: 500
   shieldCooldownPercentage: 200
   shieldCapacityPercentage: 150
 --- !u!1001 &4864684722754962432

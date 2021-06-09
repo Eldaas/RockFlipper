@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -234,10 +235,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator PowerupCoroutine(IPowerup powerup)
     {
-        //Debug.Log("Coroutine started.");
-
         float endTime = Time.time + powerup.EffectDuration;
-        //Debug.Log("Effect duration is: " + powerup.EffectDuration);
         powerup.ExecutePowerup(this);
         GameObject icon = null;
 
@@ -248,12 +246,12 @@ public class Player : MonoBehaviour
 
         PowerupUI pui = icon.GetComponent<PowerupUI>();
         float timeRemaining = endTime - Time.time;
-        float percentage = timeRemaining / powerup.EffectDuration;
 
-        while(timeRemaining > Mathf.Epsilon)
+        while (timeRemaining > Mathf.Epsilon)
         {
-            pui.text.text = percentage.ToString("#");
-            pui.bar.SetPercent(percentage);
+            timeRemaining -= Time.deltaTime;
+            pui.text.text = $"{Math.Truncate(timeRemaining)}s";
+            pui.bar.SetPercent(timeRemaining / powerup.EffectDuration);
             yield return new WaitForEndOfFrame();
         }
 
@@ -281,6 +279,7 @@ public class Player : MonoBehaviour
         explosionFX.SetActive(true);
         activeEnginesFx.SetActive(false);
         inactiveEnginesFx.SetActive(false);
+        vfxParent.SetActive(false);
         shipVisual.SetActive(false);
         GameManager.instance.SetState(GameStates.DeathState);
         StopAllCoroutines();

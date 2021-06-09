@@ -19,19 +19,27 @@ public class PlayLevelUI : UIController
     [SerializeField]
     private RadialSegmentedHealthBar energyBar;
     [SerializeField]
-    private TextMeshProUGUI energyBarText;
+    private TextMeshProUGUI energyBarPercentageText;
+    [SerializeField]
+    private TextMeshProUGUI energyBarValueText;
     [SerializeField]
     private RadialSegmentedHealthBar shieldBar;
     [SerializeField]
-    private TextMeshProUGUI shieldBarText;
+    private TextMeshProUGUI shieldBarPercentageText;
+    [SerializeField]
+    private TextMeshProUGUI shieldBarValueText;
     [SerializeField]
     private RadialSegmentedHealthBar armourBar;
     [SerializeField]
-    private TextMeshProUGUI armourBarText;
+    private TextMeshProUGUI armourBarPercentageText;
+    [SerializeField]
+    private TextMeshProUGUI armourBarValueText;
     [SerializeField]
     private RadialSegmentedHealthBar hullBar;
     [SerializeField]
-    private TextMeshProUGUI hullBarText;
+    private TextMeshProUGUI hullBarPercentageText;
+    [SerializeField]
+    private TextMeshProUGUI hullBarValueText;
     [SerializeField]
     private float activeAlphaValue;
     [SerializeField]
@@ -90,22 +98,7 @@ public class PlayLevelUI : UIController
     }
 
     #region Public Methods
-    public IEnumerator BlinkIcon(Image image, float time)
-    {
-        float trackedTime = time;
-        Color colour = image.color;
-        float counter = 0f;
-        
-        while(trackedTime > Mathf.Epsilon)
-        {
-            trackedTime -= Time.deltaTime;
-            counter += 0.1f;
-
-            colour.a = Mathf.PingPong(counter, 1f);
-            image.color = colour;
-            yield return new WaitForEndOfFrame();
-        }  
-    }
+    
     #endregion
 
     #region Protected & Private Methods
@@ -154,35 +147,22 @@ public class PlayLevelUI : UIController
 
     private void UpdateStatBars()
     {
-        UpdateStat(energyBar, energyBarText, stats.currentBatteryLevel, stats.currentBatteryCapacity);
-        //UpdateStat(armourBar, armourBarText, stats.currentArmour, stats.currentMaxArmour);
-        //UpdateStat(hullBar, hullBarText, stats.currentHull, stats.currentMaxHull); ;
-        //UpdateStat(shieldBar, shieldBarText, stats.currentShields, stats.currentMaxShields);
+        UpdateStat(energyBar, energyBarPercentageText, energyBarValueText, stats.currentBatteryLevel, stats.currentBatteryCapacity);
+        UpdateStat(armourBar, armourBarPercentageText, armourBarValueText, stats.currentArmour, stats.currentMaxArmour);
+        UpdateStat(hullBar, hullBarPercentageText, hullBarValueText, stats.currentHull, stats.currentMaxHull); ;
+        UpdateStat(shieldBar, shieldBarPercentageText, shieldBarValueText, stats.currentShields, stats.currentMaxShields);
     }
 
-    private void UpdateStat(RadialSegmentedHealthBar bar, TextMeshProUGUI text, float currValue, float maxValue)
+    private void UpdateStat(RadialSegmentedHealthBar bar, TextMeshProUGUI percentageText, TextMeshProUGUI valueText, float currValue, float maxValue)
     {
         float percentage = currValue / maxValue;
-        Debug.Log(percentage);
-        float uiPercentage = Mathf.SmoothStep(bar.RemovedSegments.Value, percentage, 0.1f);
+        
+        float currentRadialValue = 1 - bar.RemovedSegments.Value;
+        float uiPercentage = Mathf.SmoothStep(currentRadialValue, percentage, 0.1f);
         bar.SetPercent(uiPercentage);
-        text.text = Math.Truncate(percentage * 100) + "%";
-        Color color = bar.InnerColor.Value;
-        Color textColour = text.color;
 
-        if (currValue < maxValue)
-        {
-            color.a = activeAlphaValue;
-            textColour.a = activeAlphaValue;
-        }
-        else
-        {
-            color.a = inactiveAlphaValue;
-            textColour.a = inactiveAlphaValue;
-        }
-
-        bar.InnerColor.Value = color;
-        text.color = textColour;
+        percentageText.text = Math.Truncate(percentage * 100) + "%";
+        valueText.text = $"{Math.Truncate(currValue)}/{Math.Truncate(maxValue)}";
     }
 
     private void Shoot()

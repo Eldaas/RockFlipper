@@ -119,16 +119,19 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void HandleVelocity()
     {
-        // Speed up
-        if(rb.velocity.z < player.stats.currentMaximumVelocity)
+        if(Time.timeScale > 0f)
         {
-            rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
-        }
-        // Slow down
-        else if(rb.velocity.z > player.stats.currentMaximumVelocity)
-        {
-            rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
-        }
+            // Speed up
+            if (rb.velocity.z < player.stats.currentMaximumVelocity)
+            {
+                rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
+            }
+            // Slow down
+            else if (rb.velocity.z > player.stats.currentMaximumVelocity)
+            {
+                rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
+            }
+        }  
     }
 
     /// <summary>
@@ -222,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
                         parentGo.SetActive(true);
                         ParticleSystem.MainModule main = projectileParticle.main;
-                        main.startSpeed = 300 + rb.velocity.z;
+                        main.startSpeed = player.stats.currentProjectileSpeed + rb.velocity.z;
 
                         IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
                         StartCoroutine(coroutine);
