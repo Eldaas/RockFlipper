@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ using TMPro;
 
 public class IntroMenu : UIController
 {
+    public static IntroMenu instance;
+
     [Header("Main Menu")]
     [SerializeField]
     private Canvas introMenuCanvas;
@@ -25,28 +28,42 @@ public class IntroMenu : UIController
     [SerializeField]
     private Canvas profileScreenCanvas;
     [SerializeField]
+    private Transform profileScreenContent;
+    [SerializeField]
     private Button newProfileButton;
-    [SerializeField]
-    private TMP_InputField newProfileInput;
-    [SerializeField]
-    private Button inputConfirmButton;
-    [SerializeField]
-    private TMP_Dropdown profileSelectDropdown;
     [SerializeField]
     private Button returnToMenuButton;
     [SerializeField]
     private TextMeshProUGUI currentProfileText;
     [SerializeField]
-    private TextMeshProUGUI balanceText;
+    private Button profileScreenCloseButton;
     [SerializeField]
-    private TextMeshProUGUI reputationText;
+    private GameObject profileRecordPrefab;
+    public ProfileRecord selectedProfileRecord;
+    private bool alreadyLoaded = false;
+
+    [Header("New Profile Modal")]
+    [SerializeField]
+    private GameObject newProfileModal;
+    [SerializeField]
+    private TMP_InputField newProfileModalInput;
+    [SerializeField]
+    private Button newProfileModalConfirmButton;
+    [SerializeField]
+    private Button newProfileModalCloseButton;
 
     [Header("Events")]
-    private UnityAction updateProfileSelection;
+    private UnityAction profileLoadedDelegate;
 
     private void Awake()
     {
+        instance = this;
         RegisterListeners();
+    }
+
+    private void Start()
+    {
+        PopulateProfileList();
     }
 
     private void Update()
@@ -56,18 +73,21 @@ public class IntroMenu : UIController
 
     protected override void RegisterListeners()
     {
+        // Buttons
         visitHangarButton.onClick.AddListener(VisitHangar);
         profileButton.onClick.AddListener(ProfileWindow);
         highScoresButton.onClick.AddListener(HighScores);
         settingsButton.onClick.AddListener(Settings);
         exitGameButton.onClick.AddListener(ExitGame);
         newProfileButton.onClick.AddListener(NewProfile);
-        inputConfirmButton.onClick.AddListener(ConfirmProfileInput);
+        newProfileModalConfirmButton.onClick.AddListener(ConfirmProfileInput);
         returnToMenuButton.onClick.AddListener(ReturnToMenu);
-        profileSelectDropdown.onValueChanged.AddListener(SelectProfileOption);
+        profileScreenCloseButton.onClick.AddListener(ReturnToMenu);
+        newProfileModalCloseButton.onClick.AddListener(delegate { newProfileModal.SetActive(false); });
 
-        updateProfileSelection = UpdateProfileSelection;
-        EventManager.StartListening("UpdateProfileSelection", updateProfileSelection);
+        // Custom Events
+        profileLoadedDelegate = UpdateProfileWindow;
+        EventManager.StartListening("ProfileLoaded", profileLoadedDelegate);
     }
 
     #region Private Methods
@@ -80,22 +100,14 @@ public class IntroMenu : UIController
 
             visitHangarButton.interactable = false;
             highScoresButton.interactable = false;
-            profileSelectDropdown.captionText.text = "Select a profile";
         }
         else 
         {
-            TextMeshProUGUI text = profileButton.GetComponent<TextMeshProUGUI>();
-            text.text = "View Profile";
-
             visitHangarButton.interactable = true;
             highScoresButton.interactable = true;
 
-            currentProfileText.text = "Current Profile: " + ProfileManager.instance.currentProfile.profileName;
-            balanceText.text = "Balance: " + ProfileManager.instance.currentProfile.balance.ToString();
-            reputationText.text = "Reputation: " + ProfileManager.instance.currentProfile.reputation.ToString();
+            currentProfileText.text = "Current Loaded Profile: " + ProfileManager.instance.currentProfile.profileName;
         }
-
-
     }
 
     private void VisitHangar()
@@ -107,38 +119,15 @@ public class IntroMenu : UIController
     private void ProfileWindow()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
-        EventManager.TriggerEvent("LoadProfiles");
 
         introMenuCanvas.gameObject.SetActive(false);
         profileScreenCanvas.gameObject.SetActive(true);
     }
 
-    private void UpdateProfileSelection()
-    {
-        List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-
-        foreach (string profileName in ProfileManager.instance.fileNames)
-        {
-            TMP_Dropdown.OptionData thisOption = new TMP_Dropdown.OptionData();
-            thisOption.text = profileName;
-            options.Add(thisOption);
-        }
-
-        profileSelectDropdown.ClearOptions();
-        profileSelectDropdown.AddOptions(options);
-    }
-
-    private void SelectProfileOption(int thisOption)
-    {
-        TMP_Dropdown.OptionData option = profileSelectDropdown.options[thisOption];
-        string optionName = option.text;
-
-        ProfileManager.instance.LoadProfile(optionName);
-    }
-
     private void HighScores()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
+        GameManager.instance.LoadLevel(GameStates.HighScores);
     }
 
     private void Settings()
@@ -149,32 +138,30 @@ public class IntroMenu : UIController
     private void NewProfile()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
-        newProfileButton.gameObject.SetActive(false);
-        newProfileInput.gameObject.SetActive(true);
-        newProfileInput.ActivateInputField();
+        newProfileModal.gameObject.SetActive(true);
+        newProfileModalInput.ActivateInputField();
     }
 
     private void ConfirmProfileInput()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
-        string name = newProfileInput.text;
-        Debug.Log("The player has entered " + name);
-        if(ProfileManager.instance.CreateNewProfile(name))
+        string name = newProfileModalInput.text;
+       
+        if(name != string.Empty)
         {
-            newProfileInput.DeactivateInputField(true);
-            newProfileInput.gameObject.SetActive(false);
-            newProfileButton.gameObject.SetActive(true);
-        }
+            Debug.Log("The player has entered " + name);
+            newProfileModalInput.text = string.Empty;
 
-        for (int i = 0; i < profileSelectDropdown.options.Count; i++)
-        {
-            if (profileSelectDropdown.options[i].text == name)
+            if (ProfileManager.instance.CreateNewProfile(name))
             {
-                profileSelectDropdown.value = profileSelectDropdown.options.IndexOf(profileSelectDropdown.options[i]);
-                break;
+                newProfileModal.SetActive(false);
+                GameManager.instance.LoadLevel(GameStates.Hangar);
+            }
+            else
+            {
+                EventManager.TriggerEvent("InvalidProfileName");
             }
         }
-        
     }
 
     private void ReturnToMenu()
@@ -190,9 +177,33 @@ public class IntroMenu : UIController
         Application.Quit();
     }
 
-    private void RefreshProfileData()
+    private void UpdateProfileWindow()
     {
+        currentProfileText.text = $"Current Loaded Profile: {ProfileManager.instance.currentProfile.profileName}";
+    }
 
+    private void PopulateProfileList()
+    {
+        ClearProfileList();
+        if(ProfileManager.instance.profileList.Count > 0)
+        {
+            foreach (PlayerProfile profile in ProfileManager.instance.profileList)
+            {
+                GameObject uiObj = Instantiate(profileRecordPrefab, profileScreenContent);
+                ProfileRecord record = uiObj.GetComponent<ProfileRecord>();
+                record.nameField.text = profile.profileName;
+                record.statsField.text = $"Balance: {Math.Truncate(profile.balance)}\nSaved On: {profile.lastSaved}";
+            }
+        }
+    }
+
+    private void ClearProfileList()
+    {
+        Debug.Log("Clearing profiles.");
+        foreach(Transform child in profileScreenContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
     #endregion
 }

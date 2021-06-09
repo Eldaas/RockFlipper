@@ -227,10 +227,15 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UIButtonOptionSelected");
         EventManager.AddEvent("UISuccess");
         EventManager.AddEvent("LoadProfiles");
-        EventManager.AddEvent("UpdateProfileSelection");
+        EventManager.AddEvent("ProfileLoaded");
+
+        // Error Modal Events
         EventManager.AddEvent("IncorrectInput");
         EventManager.AddEvent("NoResults");
         EventManager.AddEvent("PauseMenu");
+        EventManager.AddEvent("InvalidProfileName");
+        EventManager.AddEvent("CantAffordItem");
+        EventManager.AddEvent("ReturnedFromDeath");
 
         // Hangar Scene Events
         EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
@@ -240,8 +245,6 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
         EventManager.AddEvent("UpdateModulePrices");
-        EventManager.AddEvent("CantAffordItem");
-        EventManager.AddEvent("ReturnedFromDeath");
     }
     #endregion
 

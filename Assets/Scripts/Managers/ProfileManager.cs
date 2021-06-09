@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,10 @@ public class ProfileManager : MonoBehaviour
     public static ProfileManager instance;
 
     public PlayerProfile currentProfile;
+    public List<PlayerProfile> profileList;
 
     private string dataPath;
     private FileInfo[] files;
-    public List<string> fileNames = new List<string>();
 
     [Header("Events")]
     private UnityAction loadProfiles;
@@ -37,9 +38,13 @@ public class ProfileManager : MonoBehaviour
         #endregion
 
         #region Events
-        loadProfiles = LoadProfiles;
-        EventManager.StartListening("LoadProfiles", loadProfiles);
+
         #endregion
+    }
+
+    private void Start()
+    {
+        LoadProfiles();
     }
 
     #region Public Methods
@@ -49,7 +54,7 @@ public class ProfileManager : MonoBehaviour
         // TO DO: Add validation to ensure no illegal characters entered
         if(File.Exists(dataPath + name + ".json"))
         {
-            Debug.LogError("Cannot create a profile with name " + name + " because it already exists.");
+            Debug.Log("Cannot create a profile with name " + name + " because it already exists.");
             return false;
         }
         else
@@ -59,11 +64,11 @@ public class ProfileManager : MonoBehaviour
             newProfile.balance = 0;
             newProfile.reputation = 0f;
             newProfile.totalPlayTime = 0f;
+            newProfile.lastSaved = DateTime.Now.ToString();
 
             currentProfile = newProfile;
             SaveProfile();
-            EventManager.TriggerEvent("LoadProfiles");
-            EventManager.TriggerEvent("UpdateProfileSelection");
+            LoadProfiles();
             Debug.Log("Successfully created a profile with name " + name);
             return true;
         }
@@ -73,6 +78,7 @@ public class ProfileManager : MonoBehaviour
     {
         currentProfile.currentEquipment = EquipmentManager.instance.playerEquipment;
         currentProfile.currentInventory = EquipmentManager.instance.playerInventory;
+        currentProfile.lastSaved = DateTime.Now.ToString();
 
         Debug.Log("SaveProfile called.");
         string saveData = JsonUtility.ToJson(currentProfile);
@@ -85,14 +91,14 @@ public class ProfileManager : MonoBehaviour
         Debug.Log("LoadProfiles called.");
         DirectoryInfo dir = new DirectoryInfo(dataPath);
         files = dir.GetFiles();
-        fileNames.Clear();
+        profileList.Clear();
 
         foreach (FileInfo file in files)
-        {    
-            fileNames.Add(Path.GetFileNameWithoutExtension(dataPath + file.Name));
+        {
+            string fileContents = File.ReadAllText(file.FullName);
+            PlayerProfile profileData = JsonUtility.FromJson<PlayerProfile>(fileContents);
+            profileList.Add(profileData);
         }
-
-        EventManager.TriggerEvent("UpdateProfileSelection");
     }
 
     public bool LoadProfile(string name)
@@ -104,14 +110,16 @@ public class ProfileManager : MonoBehaviour
         }
 
         bool found = false;
+        PlayerProfile loadedProfile = null;
 
-        if(files != null)
+        if(profileList.Count != 0)
         {
-            foreach (FileInfo file in files)
+            foreach (PlayerProfile profile in profileList)
             {
-                if (file.Name == name + ".json")
+                if (name == profile.profileName)
                 {
                     found = true;
+                    loadedProfile = profile;
                     break;
                 }
             }
@@ -119,10 +127,9 @@ public class ProfileManager : MonoBehaviour
         
         if(found)
         {
-            string fileContents = File.ReadAllText(dataPath + name + ".json");
-            PlayerProfile loadedProfile = JsonUtility.FromJson<PlayerProfile>(fileContents);
             currentProfile = loadedProfile;
             EventManager.TriggerEvent("UISuccess");
+            EventManager.TriggerEvent("ProfileLoaded");
 
             Debug.Log("Successfully loaded player profile named " + name);
             return true;

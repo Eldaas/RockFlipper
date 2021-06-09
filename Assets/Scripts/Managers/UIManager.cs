@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     private UnityAction errorModalWrongInputDelegate;
     private UnityAction errorModalNoResultsDelegate;
     private UnityAction pauseMenuDelegate;
+    private UnityAction errorModalInvalidProfileNameDelegate;
 
     #region Properties
     public float LoadScreenAlpha => LoadScreenAlphaValue();
@@ -108,6 +109,9 @@ public class UIManager : MonoBehaviour
 		
         pauseMenuDelegate = delegate { ShowPauseMenu(); };
         EventManager.StartListening("PauseMenu", pauseMenuDelegate);
+
+        errorModalInvalidProfileNameDelegate = delegate { ErrorModal(ErrorType.InvalidProfileName); };
+        EventManager.StartListening("InvalidProfileName", errorModalInvalidProfileNameDelegate);
     }
 
     private float LoadScreenAlphaValue()
@@ -161,6 +165,11 @@ public class UIManager : MonoBehaviour
                 errorModalDescription.text = "Try a different search query and you're using correct casing.";
                 ApplyStandardModalListeners();
                 break;
+            case ErrorType.InvalidProfileName:
+                errorModalTitle.text = "Oops.";
+                errorModalDescription.text = "Either this name was invalid or a profile already exists. Cancel or try a different name.";
+                ApplyStandardModalListeners();
+                break;
         }
 
         errorModal.SetActive(true);
@@ -194,4 +203,4 @@ public class UIManager : MonoBehaviour
     }
 }
 
-public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults }
+public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults, InvalidProfileName }
