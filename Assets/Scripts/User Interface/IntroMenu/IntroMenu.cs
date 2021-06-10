@@ -127,7 +127,12 @@ public class IntroMenu : UIController
     private void HighScores()
     {
         EventManager.TriggerEvent("UIButtonOptionSelected");
+#if UNITY_STANDALONE_WIN
         GameManager.instance.LoadLevel(GameStates.HighScores);
+#endif
+#if UNITY_ANDROID
+        EventManager.TriggerEvent("InactiveOnThisPlatform");
+#endif
     }
 
     private void Settings()
@@ -205,5 +210,5 @@ public class IntroMenu : UIController
             Destroy(child.gameObject);
         }
     }
-    #endregion
+#endregion
 }

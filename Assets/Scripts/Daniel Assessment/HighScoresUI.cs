@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[DefaultExecutionOrder(1)]
 public class HighScoresUI : UIController
 {
     #region Fields
@@ -82,7 +84,7 @@ public class HighScoresUI : UIController
     protected override void RegisterListeners()
     {
         closeButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.IntroMenu); });
-        switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Wealth); });
+        switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Times); });
         searchButton.onClick.AddListener(SearchQuery);
         searchResetButton.onClick.AddListener(ResetSearch);
         hashResetButton.onClick.AddListener(ResetHash);
@@ -112,11 +114,10 @@ public class HighScoresUI : UIController
     /// </summary>
     private void Initialise()
     {
-        //ValidateInputs();
-
+        ValidateInputs();
         nameField.text = $"Name: {ProfileManager.instance.currentProfile.profileName}";
-        wealthField.text = $"Wealth: {ProfileManager.instance.currentProfile.balance}";
-        timeField.text = $"Time Played: {ProfileManager.instance.currentProfile.totalPlayTime} seconds";
+        wealthField.text = $"Wealth: {ProfileManager.instance.currentProfile.balance.ToString("C")}";
+        timeField.text = $"Time Played: {Math.Truncate(ProfileManager.instance.currentProfile.totalPlayTime)} seconds";
     }
 
     /// <summary>
@@ -127,7 +128,7 @@ public class HighScoresUI : UIController
     {
         Transform loading = wealthContent.transform.GetChild(0);
         TextMeshProUGUI loadingText = loading.GetComponent<TextMeshProUGUI>();
-        string baseString = "Loading data...";
+        string baseString = "Loading data";
         float nextTime = 0f;
         int dots = 0;
 
@@ -167,7 +168,7 @@ public class HighScoresUI : UIController
             TextMeshProUGUI wealthLineText = wealthLine.GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI timeLineText = timeLine.GetComponent<TextMeshProUGUI>();
 
-            wealthLineText.text = $"Rank #{i} - {scoreNode.Value.name} - Wealth: {scoreNode.Value.score}";
+            wealthLineText.text = $"Rank #{i} - {scoreNode.Value.name} - Wealth: {scoreNode.Value.score.ToString("C")}";
             timeLineText.text = $"Rank #{i} - {timeNode.Value.name} - Time Played: {timeNode.Value.seconds} seconds";
 
             scoreNode = scoreNode.Previous;
@@ -175,6 +176,7 @@ public class HighScoresUI : UIController
         }
 
         ValidateInputs();
+        scores.ResetDataState();
     }
 
     /// <summary>
@@ -197,15 +199,16 @@ public class HighScoresUI : UIController
     /// </summary>
     private void SwitchBoard(Leaderboard board)
     {
+        Debug.Log($"Current board: {currentBoard}, switching to: {board}");
         if(currentBoard != board)
         {
             if (board == Leaderboard.Wealth)
             {
                 ResetSearch();
-                wealthBoard.SetActive(false);
-                timesBoard.SetActive(true);
+                wealthBoard.SetActive(true);
+                timesBoard.SetActive(false);
                 resultsBoard.SetActive(false);
-                switchBoardButtonText.text = "View Wealth Rankings";
+                switchBoardButtonText.text = "VIEW TIME RANKINGS";
                 currentBoard = board;
                 switchBoardButton.onClick.RemoveAllListeners();
                 switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Times); });
@@ -213,10 +216,10 @@ public class HighScoresUI : UIController
             else if (board == Leaderboard.Times)
             {
                 ResetSearch();
-                wealthBoard.SetActive(true);
-                timesBoard.SetActive(false);
+                wealthBoard.SetActive(false);
+                timesBoard.SetActive(true);
                 resultsBoard.SetActive(false);
-                switchBoardButtonText.text = "View Time Rankings";
+                switchBoardButtonText.text = "VIEW WEALTH RANKINGS";
                 currentBoard = board;
                 switchBoardButton.onClick.RemoveAllListeners();
                 switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Wealth); });
@@ -227,7 +230,7 @@ public class HighScoresUI : UIController
                 wealthBoard.SetActive(false);
                 timesBoard.SetActive(false);
                 resultsBoard.SetActive(true);
-                switchBoardButtonText.text = "Return to Rankings";
+                switchBoardButtonText.text = "RETURN TO RANKINGS";
                 currentBoard = board;
                 switchBoardButton.onClick.RemoveAllListeners();
                 switchBoardButton.onClick.AddListener(delegate { SwitchBoard(Leaderboard.Wealth); });
@@ -282,15 +285,16 @@ public class HighScoresUI : UIController
     {
         string query = searchInput.text;
         int arrIndex = HighScores.LinearSearch(scores.scores, scores.scores.Length, score);
-
-        if(arrIndex != -1)
+        
+        if (arrIndex != -1)
         {
-            BinaryTree.BinaryTreeNode node = scores.dataTree.Find(arrIndex);
+            int sortedIndex = (scores.scores.Length - 1) - arrIndex;
+            BinaryTree.BinaryTreeNode node = scores.dataTree.Find(sortedIndex);
 
             if(node != null)
             {
                 GameObject newRecord = Instantiate(recordPrefab, resultsContent.transform);
-                newRecord.GetComponent<TextMeshProUGUI>().text = $"Rank #{arrIndex + 1} - Name: {node.data.name} || Score: {node.data.score} || Total Time: {node.data.seconds} seconds";
+                newRecord.GetComponent<TextMeshProUGUI>().text = $"Rank #{sortedIndex + 1} - Name: {node.data.name} || Score: {node.data.score} || Total Time: {node.data.seconds} seconds";
                 SwitchBoard(Leaderboard.Results);
             }
             else

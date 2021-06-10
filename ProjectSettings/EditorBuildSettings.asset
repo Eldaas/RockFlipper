@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlackHoleLevel.unity
     guid: f0273fe847678ed48bcc1361d6041fb7
+  - enabled: 1
+    path: Assets/Scenes/HighScoresScene.unity
+    guid: 6c89bfa84f81f0f43bd5a25aeecca566
   m_configObjects: {}

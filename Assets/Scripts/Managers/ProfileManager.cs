@@ -96,6 +96,7 @@ public class ProfileManager : MonoBehaviour
         foreach (FileInfo file in files)
         {
             string fileContents = File.ReadAllText(file.FullName);
+            Debug.Log($"File Directory: {file.FullName}, File Contents: {fileContents}");
             PlayerProfile profileData = JsonUtility.FromJson<PlayerProfile>(fileContents);
             profileList.Add(profileData);
         }

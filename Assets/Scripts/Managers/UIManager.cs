@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     private UnityAction errorModalNoResultsDelegate;
     private UnityAction pauseMenuDelegate;
     private UnityAction errorModalInvalidProfileNameDelegate;
+    private UnityAction errorModalInactiveOnThisPlatformDelegate;
 
     #region Properties
     public float LoadScreenAlpha => LoadScreenAlphaValue();
@@ -112,6 +113,9 @@ public class UIManager : MonoBehaviour
 
         errorModalInvalidProfileNameDelegate = delegate { ErrorModal(ErrorType.InvalidProfileName); };
         EventManager.StartListening("InvalidProfileName", errorModalInvalidProfileNameDelegate);
+
+        errorModalInactiveOnThisPlatformDelegate = delegate { ErrorModal(ErrorType.InactiveOnThisPlatform); };
+        EventManager.StartListening("InactiveOnThisPlatform", errorModalInactiveOnThisPlatformDelegate);
     }
 
     private float LoadScreenAlphaValue()
@@ -152,7 +156,7 @@ public class UIManager : MonoBehaviour
                 break;
             case ErrorType.ReturnFromDeath:
                 errorModalTitle.text = "New Ship";
-                errorModalDescription.text = $"We've issued you with a new ship and deducted ${GameManager.instance.CalcDeathCost().ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
+                errorModalDescription.text = $"We've issued you a new ship and deducted ${GameManager.instance.CalcDeathCost().ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
                 ApplyStandardModalListeners();
                 break;
             case ErrorType.WrongInput:
@@ -162,12 +166,17 @@ public class UIManager : MonoBehaviour
                 break;
             case ErrorType.NoResults:
                 errorModalTitle.text = "No results.";
-                errorModalDescription.text = "Try a different search query and you're using correct casing.";
+                errorModalDescription.text = "Try a different search query and ensure you're using correct casing.";
                 ApplyStandardModalListeners();
                 break;
             case ErrorType.InvalidProfileName:
                 errorModalTitle.text = "Oops.";
                 errorModalDescription.text = "Either this name was invalid or a profile already exists. Cancel or try a different name.";
+                ApplyStandardModalListeners();
+                break;
+            case ErrorType.InactiveOnThisPlatform:
+                errorModalTitle.text = "Sorry.";
+                errorModalDescription.text = "This feature isn't available yet on this platform.";
                 ApplyStandardModalListeners();
                 break;
         }
@@ -203,4 +212,4 @@ public class UIManager : MonoBehaviour
     }
 }
 
-public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults, InvalidProfileName }
+public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults, InvalidProfileName, InactiveOnThisPlatform }

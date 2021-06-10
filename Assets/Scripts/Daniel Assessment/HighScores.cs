@@ -8,8 +8,11 @@ using System.Runtime.InteropServices;
 [DefaultExecutionOrder(-1)]
 public class HighScores : MonoBehaviour
 {
+    private PlayerProfile profile;
     public DreamloData data;
+    public bool dataSent = false;
     public bool dataRetrieved = false;
+    private enum RequestType { Send, Receive }
 
     public LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingScores;
     public LinkedList<DreamloData.Dreamlo.Leaderboard.HighScoreRecord> ascendingTimes;
@@ -30,27 +33,22 @@ public class HighScores : MonoBehaviour
 
     private void Awake()
     {
-        PlayerProfile profile = ProfileManager.instance.currentProfile;
-        //AddScore(profile.profileName, profile.balance.ToString(), profile.totalPlayTime.ToString());
+        profile = ProfileManager.instance.currentProfile;
     }
 
     private void Start()
     {
-        //AddDummyScores();
-        StartCoroutine(GetRequest("http://dreamlo.com/lb/60b5ed888f40bb64eca5f56d/json"));
-        
+        StartCoroutine(UpdateData());
     }
 
     /// <summary>
-    /// Queries the Dreamlo online leaderboard for its data. This is returned in JSON format and parsed into a local data class structure.
+    /// Queries the Dreamlo online leaderboard for its data.
     /// </summary>
-    /// <param name="url"></param>
-    /// <returns></returns>
-    IEnumerator GetRequest(string url)
+    /// <param name="url">The Dreamlo URL to request</param>
+    IEnumerator GetRequest(string url, RequestType type)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
-            // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
             if (webRequest.isNetworkError)
@@ -59,26 +57,39 @@ public class HighScores : MonoBehaviour
             }
             else
             {
-                // Seems to send an OK string before it sends the body text. STUPID. WASTED 4 HOURS OF MY TIME.
-                if(webRequest.downloadHandler.text != "OK")
+                if(type == RequestType.Send)
                 {
-                    data = JsonUtility.FromJson<DreamloData>(webRequest.downloadHandler.text);
-                    SortAscendingScore();
-                    SortAscendingTime();
-                    dataRetrieved = true;
+                    dataSent = true;
+                }
+                else if(type == RequestType.Receive)
+                {
+                    // Seems to send an OK string before it sends the body text. STUPID. WASTED 4 HOURS OF MY TIME.
+                    if (webRequest.downloadHandler.text != "OK")
+                    {
+                        data = JsonUtility.FromJson<DreamloData>(webRequest.downloadHandler.text);
+                        SortAscendingScore();
+                        SortAscendingTime();
+                        dataRetrieved = true;
+                    }
                 }
             }
         }
     }
 
     /// <summary>
-    /// Used for debug purposes
+    /// Updates the data on the server with the current profile information before downloading all info. The UI waits for this to complete before populating itself.
     /// </summary>
-    private void AddDummyScores()
+    /// <returns></returns>
+    IEnumerator UpdateData()
     {
-        AddScore("Bob", "12345", "678");
-        AddScore("Lisa", "54321", "876");
-        AddScore("Andrew", "123", "321");
+        AddScore(profile.profileName, profile.balance.ToString(), profile.totalPlayTime.ToString());
+
+        while (!dataSent)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        StartCoroutine(GetRequest("http://dreamlo.com/lb/60b5ed888f40bb64eca5f56d/json", RequestType.Receive));
     }
 
     /// <summary>
@@ -89,7 +100,7 @@ public class HighScores : MonoBehaviour
     /// <param name="totalTime">The player's total time spent in a game level, therefore the player's total time spent playing.</param>
     private void AddScore(string name, string balance, string totalTime)
     {
-        StartCoroutine(GetRequest($"http://dreamlo.com/lb/REyGVjWkkkqwY5J0ITSyWA4CP2veOrbU-1yqU3OD6r4A/add/{name}/{balance}/{totalTime}"));
+        StartCoroutine(GetRequest($"http://dreamlo.com/lb/REyGVjWkkkqwY5J0ITSyWA4CP2veOrbU-1yqU3OD6r4A/add/{name}/{balance}/{totalTime}", RequestType.Send));
     }
 
     /// <summary>
@@ -105,22 +116,7 @@ public class HighScores : MonoBehaviour
         }
 
         BubbleSort(scores, scores.Length);
-
-        /*string scoresOutput = "Sorted scores: ";
-        foreach (int score in scores)
-        {
-            scoresOutput += score.ToString() + ", ";
-        }
-        Debug.Log(scoresOutput);*/
         ascendingScores = PairWithData(scores, true);
-
-        /*string sortedScoreRecords = "Sorted score records: ";
-        foreach(DreamloData.Dreamlo.Leaderboard.HighScoreRecord record in ascendingScores)
-        {
-            sortedScoreRecords += $"[Name: {record.name}, Score: {record.score}] ";
-        }*/
-        //Debug.Log(sortedScoreRecords);
-
         StoreDataInBinaryTree(ascendingScores, dataTree);
     }
 
@@ -140,7 +136,6 @@ public class HighScores : MonoBehaviour
         Debug.Log(inputTimes);
 
         BubbleSort(times, times.Length);
-        //QuickSort(times, 0, times.Length - 1);
 
         string timesOutput = "Sorted times: ";
         foreach(int time in times)
@@ -153,7 +148,6 @@ public class HighScores : MonoBehaviour
         string sortedTimeRecords = "Sorted time records: ";
         foreach (DreamloData.Dreamlo.Leaderboard.HighScoreRecord record in ascendingTimes)
         {
-            //Debug.Log(record.name);
             sortedTimeRecords += $"[Name: {record.name}, Time: {record.seconds}] ";
         }
         Debug.Log(sortedTimeRecords);
@@ -212,7 +206,6 @@ public class HighScores : MonoBehaviour
             BinaryTree.BinaryTreeNode node = new BinaryTree.BinaryTreeNode();
             node.index = i;
             node.data = currentNode.Value;
-            //Debug.Log($"Index: {node.index}, Name: {node.data.name}");
             tree.CreateNode(node);
             currentNode = currentNode.Previous;
         }
@@ -229,6 +222,16 @@ public class HighScores : MonoBehaviour
         {
             Debug.Log($"Result returned for rank #{rank}: [Name: {result.data.name}, Score: {result.data.score}, Total Time: {result.data.seconds} seconds, Record Last Updated: {result.data.date}]");
         }
+    }
+
+    /// <summary>
+    /// Allows HighScoresUI to reset the data send/retrieval state, ready to be re-retrieved if the player returns to the high scores scene later.
+    /// Whilst not strictly necessary, Unity sometimes caches scenes for a time rather than completely unloading them, which means the Start() function won't be recalled if the scene has been cached. This means the data won't update.
+    /// </summary>
+    public void ResetDataState()
+    {
+        dataSent = false;
+        dataRetrieved = false;
     }
 
     /// <summary>

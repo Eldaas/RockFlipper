@@ -222,6 +222,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("AsteroidFieldSceneLoaded");
         EventManager.AddEvent("NebulaSceneLoaded");
         EventManager.AddEvent("BlackHoleSceneLoaded");
+        EventManager.AddEvent("HighScoresSceneLoaded");
 
         // Global UI Events
         EventManager.AddEvent("UIButtonOptionSelected");
@@ -236,6 +237,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("InvalidProfileName");
         EventManager.AddEvent("CantAffordItem");
         EventManager.AddEvent("ReturnedFromDeath");
+        EventManager.AddEvent("InactiveOnThisPlatform");
 
         // Hangar Scene Events
         EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
