@@ -93,7 +93,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-4551242743148123931
 MonoBehaviour:
@@ -112,6 +112,7 @@ MonoBehaviour:
   playerParticleFxPrefab: {fileID: 5123891127911671129, guid: 9ffdba3aed7ed424492621825939ad16,
     type: 3}
   playerParticleFxOffset: {x: 0, y: 0, z: 0}
+  uiIconPrefab: {fileID: 0}
   isActive: 0
   chanceToSpawn: 30
   value: 50

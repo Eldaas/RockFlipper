@@ -17,4 +17,4 @@ MonoBehaviour:
   resourcesDroppedMultiplier: 1
   ironChance: 60
   silverChance: 5
-  goldChance: 1
+  goldChance: 0.5

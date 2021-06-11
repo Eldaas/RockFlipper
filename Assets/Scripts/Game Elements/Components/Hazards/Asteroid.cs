@@ -174,7 +174,7 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                ExplodeAsteroid(5000f * transform.localScale.magnitude, 100f);
+                ExplodeAsteroid(3000f * transform.localScale.magnitude, 100f);
             }
 
         }

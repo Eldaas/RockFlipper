@@ -15,6 +15,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlasmaShot
       objectReference: {fileID: 0}
+    - target: {fileID: 4368588031581946, guid: 359f5b6f28e085941a89ec70fa67ef0d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368588031581946, guid: 359f5b6f28e085941a89ec70fa67ef0d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368588031581946, guid: 359f5b6f28e085941a89ec70fa67ef0d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4977486018297876, guid: 359f5b6f28e085941a89ec70fa67ef0d, type: 3}
       propertyPath: m_RootOrder
       value: 0
