@@ -14,8 +14,12 @@ public class PlayLevelUI : UIController
     private GameObject androidUi;
     [SerializeField]
     private GameObject windowsUi;
+    [SerializeField]
+    private GameObject universalUi;
 
     [Header("Player Stat Bars")]
+    [SerializeField]
+    private GameObject barsPanel;
     [SerializeField]
     private RadialSegmentedHealthBar energyBar;
     [SerializeField]
@@ -50,8 +54,6 @@ public class PlayLevelUI : UIController
 
     [Header("Resources Panel")]
     [SerializeField]
-    private GameObject resourcesPanel;
-    [SerializeField]
     private GameObject ironPanel;
     [SerializeField]
     private TextMeshProUGUI ironText;
@@ -78,6 +80,7 @@ public class PlayLevelUI : UIController
 
     [Header("Events")]
     private UnityAction updateResourceDelegate;
+    private UnityAction playerDeathDelegate;
 
     private void Awake()
     {
@@ -110,6 +113,9 @@ public class PlayLevelUI : UIController
 
         updateResourceDelegate = UpdateResourcesCount;
         EventManager.StartListening("ResourceCollected", updateResourceDelegate);
+
+        playerDeathDelegate = PlayerDeath;
+        EventManager.StartListening("PlayerDeath", playerDeathDelegate);
     }
 
     private void Initialise()
@@ -214,6 +220,13 @@ public class PlayLevelUI : UIController
         ironPanel.SetActive(false);
         silverPanel.SetActive(false);
         goldPanel.SetActive(false);
+    }
+
+    private void PlayerDeath()
+    {
+        universalUi.SetActive(false);
+        windowsUi.SetActive(false);
+        androidUi.SetActive(false);
     }
 
 #endregion
