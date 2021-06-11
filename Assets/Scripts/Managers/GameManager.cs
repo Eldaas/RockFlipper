@@ -257,7 +257,6 @@ public class GameManager : MonoBehaviour
         float baseCost = 1000f;
         int numOfDeaths = Mathf.Clamp(ProfileManager.instance.currentProfile.numOfDeaths, 0, progMap.deathIndexRate);
         float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths);
-
         return (1 + deathScale) * baseCost;
     }
     #endregion

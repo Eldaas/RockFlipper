@@ -273,6 +273,7 @@ public class Player : MonoBehaviour
         Debug.Log("Player has died!");
         EventManager.TriggerEvent("PlayerDeath");
         ProfileManager.instance.currentProfile.isDead = true;
+        ProfileManager.instance.currentProfile.numOfDeaths++;
         ProfileManager.instance.SaveProfile();
         rb.isKinematic = true;
         resourceCollector.enabled = false;
