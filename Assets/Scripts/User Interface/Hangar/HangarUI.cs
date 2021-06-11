@@ -430,6 +430,14 @@ public class HangarUI : MonoBehaviour
                         currentValue = stats.currentProjectileSpeed.ToString("#.#");
                         currentValueSign = " meters p/sec";
                         break;
+                    case EffectType.BatteryCapacity:
+                        currentValue = stats.currentBatteryCapacity.ToString("#.#");
+                        currentValueSign = " points";
+                        break;
+                    case EffectType.BatteryRecharge:
+                        currentValue = stats.currentBatteryRecharge.ToString("#.#");
+                        currentValueSign = " points p/sec";
+                        break;
                 }
 
                 statText.text = $"{effect.profile.description} {sign}{effect.effectStrength.ToString("#.#")} {effect.profile.unitOfMeasurement} (Now {currentValue}{currentValueSign})";
