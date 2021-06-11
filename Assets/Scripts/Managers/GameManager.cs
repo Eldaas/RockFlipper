@@ -208,6 +208,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("HullRepair"); // TO DO: Add audio cue
         EventManager.AddEvent("ArmourRepair"); // TO DO: Add audio cue
         EventManager.AddEvent("SpeedMitigation"); // TO DO: Add audio cue
+        EventManager.AddEvent("BatteryRecharge"); // TO DO: Add audio cue
         EventManager.AddEvent("ResourceCollected"); 
         EventManager.AddEvent("ProjectileHit");
         EventManager.AddEvent("ProjectileShot");
