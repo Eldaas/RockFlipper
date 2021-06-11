@@ -87,11 +87,11 @@ public class HangarUI : MonoBehaviour
     public void RegisterListeners()
     {
         // Buttons
-        endLevelOkButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); });
-        zoneSelectButton.onClick.AddListener(delegate { SetScreen("ZoneSelectScreen"); });
-        shipFitoutButton.onClick.AddListener(delegate { SetScreen("EquipmentScreen"); });
-        mainMenuButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.IntroMenu); });
-        exitGameButton.onClick.AddListener(delegate { Utility.QuitGame(); });
+        endLevelOkButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); EventManager.TriggerEvent("UISelect"); });
+        zoneSelectButton.onClick.AddListener(delegate { SetScreen("ZoneSelectScreen"); EventManager.TriggerEvent("UISelect"); });
+        shipFitoutButton.onClick.AddListener(delegate { SetScreen("EquipmentScreen"); EventManager.TriggerEvent("UISelect"); });
+        mainMenuButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.IntroMenu); EventManager.TriggerEvent("UISelect"); });
+        exitGameButton.onClick.AddListener(delegate { Utility.QuitGame(); EventManager.TriggerEvent("UISelect"); });
 
         buyShield.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Shield); });
         buyArmour.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Armour); });
@@ -99,16 +99,16 @@ public class HangarUI : MonoBehaviour
         buyEngine.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Engine); });
         buyThruster.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Maneuvering); });
         buyWeapon.onClick.AddListener(delegate { EquipmentManager.instance.BuyItem(EquipmentType.Weapon); });
-        equipCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); });
+        equipCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); EventManager.TriggerEvent("UIClick"); });
 
-        asteroidZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.AsteroidField); });
-        nebulaZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.Nebula); });
-        blackHoleZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.BlackHoles); });
-        zoneCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); });
+        asteroidZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.AsteroidField); EventManager.TriggerEvent("UISelect"); });
+        nebulaZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.Nebula); EventManager.TriggerEvent("UISelect"); });
+        blackHoleZoneButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.BlackHoles); EventManager.TriggerEvent("UISelect"); });
+        zoneCloseButton.onClick.AddListener(delegate { SetScreen("NavigationMenu"); EventManager.TriggerEvent("UIClick"); });
 
         esmDestroyModButton.onClick.AddListener(DestroySelectedItem);
         esmEquipModButton.onClick.AddListener(EquipMod);
-        esmCloseButton.onClick.AddListener(delegate { equipmentStatsModal.SetActive(false); });
+        esmCloseButton.onClick.AddListener(delegate { equipmentStatsModal.SetActive(false); EventManager.TriggerEvent("UIClick"); });
 
         // Custom Events
         updateBalanceDelegate = UpdateBalance;
@@ -226,6 +226,7 @@ public class HangarUI : MonoBehaviour
 
     public void EquipmentItemSelected(Equipment equipment, bool isInSlot)
     {
+        EventManager.TriggerEvent("UIClick");
         selectedItem = equipment;
 
         foreach(Transform child in esmStatsList.transform)
@@ -263,7 +264,6 @@ public class HangarUI : MonoBehaviour
     #endregion
 
     #region Private Methods
-
     private void RefreshInventory()
     {
         //Debug.Log("Refreshing inventory");
@@ -447,12 +447,14 @@ public class HangarUI : MonoBehaviour
 
     private void DestroySelectedItem()
     {
+        EventManager.TriggerEvent("ItemDestroyed");
         EquipmentManager.instance.DestroyEquipment(selectedItem);
         equipmentStatsModal.SetActive(false);
     }
 
     private void EquipMod()
     {
+        EventManager.TriggerEvent("ItemEquipped");
         if(selectedItem.isEquipped)
         {
             EquipmentManager.instance.UnequipItem(selectedItem, true);
@@ -469,3 +471,4 @@ public class HangarUI : MonoBehaviour
 }
 
 public enum HangarUIScreen { None, Main, EndLevel, Equipment }
+

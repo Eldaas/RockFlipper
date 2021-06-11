@@ -92,6 +92,10 @@ public class ObjectPooler : MonoBehaviour
     private List<GameObject> pooledSilver = new List<GameObject>();
     private List<GameObject> pooledGold = new List<GameObject>();
 
+    [Header("UIElements")]
+    [SerializeField]
+    private Transform notificationsParent;
+
     private void Awake()
     {
         #region Singleton

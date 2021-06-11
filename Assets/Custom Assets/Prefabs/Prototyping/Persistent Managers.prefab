@@ -1206,9 +1206,30 @@ MonoBehaviour:
     type: 3}
   mediumAsteroidExplosion: {fileID: 8300000, guid: ed09eebeda20fdf4795fc9bca06f9944,
     type: 3}
-  uiSelect: {fileID: 8300000, guid: a9bc057975e25d74c871f788def3be64, type: 3}
-  uiSuccess: {fileID: 0}
   returningToBase: {fileID: 0}
+  shieldsHit: {fileID: 8300000, guid: 3bbae60acbc72d74baea2ca8b0b5f0d2, type: 3}
+  shieldsDestroyed: {fileID: 8300000, guid: 71eba45433656564d990f25a0a72929d, type: 3}
+  shieldsOnline: {fileID: 8300000, guid: c4535c9458e50304ea7e015acb1b1eb9, type: 3}
+  armourHit: {fileID: 8300000, guid: a8c4a14cbe0990f419cb6f6c4ca553cb, type: 3}
+  armourDestroyed: {fileID: 8300000, guid: 944156b6448f41940b2bb4bb58790ca3, type: 3}
+  hullHit: {fileID: 8300000, guid: a8c4a14cbe0990f419cb6f6c4ca553cb, type: 3}
+  healthLow: {fileID: 8300000, guid: 86ece9c6354815f47a32be41a1a3fb65, type: 3}
+  struckLucky: {fileID: 8300000, guid: 866da803160424f4f9a915c17752aa92, type: 3}
+  powerupActivated: {fileID: 8300000, guid: 7a4effd1b1ab01c4ba0e79569bd9824f, type: 3}
+  powerupDeactivated: {fileID: 8300000, guid: ccea385b0755bbf428823000d6431b9f, type: 3}
+  resourcesDropped: {fileID: 8300000, guid: 22a008f9f58e7c744bffa9a34d263b9d, type: 3}
+  uiClick: {fileID: 8300000, guid: a9854703f9d0ec040a47cdbc5b35a8ba, type: 3}
+  uiRelease: {fileID: 8300000, guid: f8758fb214eaaa2468a47289b70fd43b, type: 3}
+  uiSelect: {fileID: 8300000, guid: a9854703f9d0ec040a47cdbc5b35a8ba, type: 3}
+  uiSuccess: {fileID: 8300000, guid: 0c842d79194be81429a2f81c105f153b, type: 3}
+  uiError: {fileID: 8300000, guid: 84bfd6cec6066e3439908c2d86707935, type: 3}
+  uiNotification: {fileID: 8300000, guid: cc0133c6761efe34e8e9e32cd3322b40, type: 3}
+  uiEquip: {fileID: 8300000, guid: c6b1f4f6217181d44b4d796a86eb000f, type: 3}
+  uiUnequip: {fileID: 8300000, guid: 0c842d79194be81429a2f81c105f153b, type: 3}
+  uiDestroy: {fileID: 8300000, guid: 3f812041ac4b4f04196e47c450e215a1, type: 3}
+  uiPause: {fileID: 8300000, guid: a9854703f9d0ec040a47cdbc5b35a8ba, type: 3}
+  uiResume: {fileID: 8300000, guid: f8758fb214eaaa2468a47289b70fd43b, type: 3}
+  uiItemPurchased: {fileID: 8300000, guid: f230d18e0adcbcd48bef5cfdc370927e, type: 3}
   asteroidFieldMusicTracks:
   - {fileID: 8300000, guid: 9ee07ba3d0e238f4195c599cd18eb18c, type: 3}
   hangarMusicTracks:
@@ -2229,6 +2250,7 @@ MonoBehaviour:
     reputation: 0
     numOfDeaths: 0
     isDead: 0
+    lastSaved: 
     currentEquipment: []
     currentInventory: []
     shieldModValueIndex: 0

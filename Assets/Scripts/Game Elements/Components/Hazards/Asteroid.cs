@@ -111,11 +111,12 @@ public class Asteroid : Hazard
         if(SceneController.instance.player.StruckLucky())
         {
            numToSpawn = dropYieldMax * 2;
-            EventManager.TriggerEvent("StruckLucky");
+           EventManager.TriggerEvent("StruckLucky");
         }
         else
         {
             numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
+            EventManager.TriggerEvent("ResourcesDropped");
         }
         
         for (int i = 0; i < numToSpawn; i++)

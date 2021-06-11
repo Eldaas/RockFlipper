@@ -112,13 +112,13 @@ public class IntroMenu : UIController
 
     private void VisitHangar()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
         GameManager.instance.LoadLevel(GameStates.Hangar);
     }
 
     private void ProfileWindow()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
 
         introMenuCanvas.gameObject.SetActive(false);
         profileScreenCanvas.gameObject.SetActive(true);
@@ -126,7 +126,7 @@ public class IntroMenu : UIController
 
     private void HighScores()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
 #if UNITY_STANDALONE_WIN
         GameManager.instance.LoadLevel(GameStates.HighScores);
 #endif
@@ -137,19 +137,19 @@ public class IntroMenu : UIController
 
     private void Settings()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
     }
 
     private void NewProfile()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
         newProfileModal.gameObject.SetActive(true);
         newProfileModalInput.ActivateInputField();
     }
 
     private void ConfirmProfileInput()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
         string name = newProfileModalInput.text;
        
         if(name != string.Empty)
@@ -171,14 +171,14 @@ public class IntroMenu : UIController
 
     private void ReturnToMenu()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
         profileScreenCanvas.gameObject.SetActive(false);
         introMenuCanvas.gameObject.SetActive(true);
     }
 
     private void ExitGame()
     {
-        EventManager.TriggerEvent("UIButtonOptionSelected");
+        EventManager.TriggerEvent("UISelect");
         Application.Quit();
     }
 

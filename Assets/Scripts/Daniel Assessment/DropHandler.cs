@@ -7,6 +7,7 @@ public class DropHandler : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData data)
     {
+        EventManager.TriggerEvent("UIRelease");
         AssociatedEquipment assEquip = data.pointerDrag.GetComponent<AssociatedEquipment>();
         Equipment equipment = assEquip.equipment;
 

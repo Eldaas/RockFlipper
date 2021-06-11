@@ -10,6 +10,7 @@ public class EquipItemButtonHandler : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        EventManager.TriggerEvent("UIClick");
         clickCount = eventData.clickCount;
         Equipment equipment = GetComponent<AssociatedEquipment>().equipment;
 

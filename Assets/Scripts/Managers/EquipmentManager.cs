@@ -57,6 +57,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void EquipItem(Equipment equipment)
     {
+        EventManager.TriggerEvent("ItemEquipped");
         // Removes any item already in the slot
         foreach(Equipment item in playerEquipment.ToArray())
         {
@@ -168,6 +169,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void DestroyEquipment(Equipment equipment)
     {
+        EventManager.TriggerEvent("ItemDestroyed");
         playerEquipment.Remove(equipment);
         playerInventory.Remove(equipment);
 

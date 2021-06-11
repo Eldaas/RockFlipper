@@ -136,6 +136,7 @@ public class PlayLevelUI : UIController
 
     private void ReturnToBase()
     {
+        EventManager.TriggerEvent("UISelect");
         UIManager.instance.LoadScreen(true);
         EventManager.TriggerEvent("ReturningToBase");
         StartCoroutine("EndScene");
@@ -204,7 +205,7 @@ public class PlayLevelUI : UIController
 
     private void PauseMenu()
     {
-        UIManager.instance.ShowPauseMenu();
+        EventManager.TriggerEvent("PauseMenu");
     }
 
     private void ClearPowerupIcons()

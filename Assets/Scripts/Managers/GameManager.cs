@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
     {
         // Global level events
         EventManager.AddEvent("Shoot");
-        EventManager.AddEvent("AsteroidCollision"); // TO DO: Add audio cue
+        EventManager.AddEvent("AsteroidCollision");
         EventManager.AddEvent("LargeAsteroidExplosion");
         EventManager.AddEvent("MediumAsteroidExplosion");
         EventManager.AddEvent("TakeHit");
@@ -197,9 +197,8 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ShieldsHit"); // TO DO: Add audio cue
         EventManager.AddEvent("ShieldsDestroyed"); // TO DO: Add audio cue
         EventManager.AddEvent("ShieldsOnline"); // TO DO: Add audio cue
-        EventManager.AddEvent("ArmourHit"); // TO DO: Add audio cue
         EventManager.AddEvent("ArmourDestroyed"); // TO DO: Add audio cue
-        EventManager.AddEvent("HullHit"); // TO DO: Add audio cue
+        EventManager.AddEvent("ArmourHullHit"); // TO DO: Add audio cue
         EventManager.AddEvent("HealthLow"); // TO DO: Add audio cue
         EventManager.AddEvent("PlayerDeath"); // TO DO: Add audio cue
         EventManager.AddEvent("PowerupCollected"); // TO DO: Add audio cue
@@ -225,9 +224,15 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("BlackHoleSceneLoaded");
         EventManager.AddEvent("HighScoresSceneLoaded");
 
-        // Global UI Events
-        EventManager.AddEvent("UIButtonOptionSelected");
+        // UI Events
+        EventManager.AddEvent("UIClick");
+        EventManager.AddEvent("UISelect");
+        EventManager.AddEvent("UIRelease");
         EventManager.AddEvent("UISuccess");
+        EventManager.AddEvent("UIError");
+        EventManager.AddEvent("UINotification");
+        EventManager.AddEvent("UIPause");
+        EventManager.AddEvent("UIResume");
         EventManager.AddEvent("LoadProfiles");
         EventManager.AddEvent("ProfileLoaded");
 
@@ -241,13 +246,16 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("InactiveOnThisPlatform");
 
         // Hangar Scene Events
-        EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
+        EventManager.AddEvent("SellResources");
         EventManager.AddEvent("UpdateBalance");
         EventManager.AddEvent("ItemPurchased"); // TO DO: Add audio cue
         EventManager.AddEvent("UpdateInventory");
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
         EventManager.AddEvent("UpdateModulePrices");
+        EventManager.AddEvent("ItemEquipped"); // TO DO: Add audio cue & tie in logic
+        EventManager.AddEvent("ItemUnequipped");
+        EventManager.AddEvent("ItemDestroyed"); // TO DO: Add audio cue
     }
     #endregion
 

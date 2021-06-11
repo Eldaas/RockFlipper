@@ -43,6 +43,7 @@ public class ProfileRecord : MonoBehaviour
 
     private void SelectRecord()
     {
+        EventManager.TriggerEvent("UISelect");
         if(IntroMenu.instance.selectedProfileRecord != null)
         {
             IntroMenu.instance.selectedProfileRecord.DeselectRecord();
@@ -56,6 +57,7 @@ public class ProfileRecord : MonoBehaviour
 
     private void LoadHangar()
     {
+        EventManager.TriggerEvent("UISelect");
         GameManager.instance.LoadLevel(GameStates.Hangar);
     }
     #endregion
