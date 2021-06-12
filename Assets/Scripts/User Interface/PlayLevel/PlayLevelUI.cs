@@ -76,7 +76,9 @@ public class PlayLevelUI : UIController
 
     [Header("Top Notification Panel")]
     [SerializeField]
-    private float tnpTime;
+    private int maxNotifications;
+    [SerializeField]
+    private List<TopPanelNotification> activeNotifications = new List<TopPanelNotification>();
     [SerializeField]
     private Transform tnpParent;
     [SerializeField]
@@ -283,13 +285,25 @@ public class PlayLevelUI : UIController
     private void NewNotification(string message, Color color)
     {
         GameObject newUiElement = Instantiate(tnpPrefab, tnpParent);
-        TextMeshProUGUI elementText = newUiElement.GetComponentInChildren<TextMeshProUGUI>();
-        elementText.text = message;
-        elementText.color = color;
+        TopPanelNotification notification = newUiElement.GetComponent<TopPanelNotification>();
+        notification.SetMessage(message, color);
 
-        StartCoroutine(ElementTimer(tnpTime, newUiElement));
+        activeNotifications.Add(notification);
+        if (activeNotifications.Count >= maxNotifications)
+        {
+            for (int i = 0; i < activeNotifications.Count; i++)
+            
+                if(activeNotifications[i].isActive)
+                {
+                    activeNotifications[i].DeactivateImmediate();
+                    break;
+                }
+            }
+        }
+        notification.Activate();
     }
 
+    // Deprecated
     private IEnumerator ElementTimer(float time, GameObject element)
     {
         float timeRemaining = time;

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Powerup Type/BatteryRecharge")]
 public class BatteryRecharge : Powerup, IPowerup
 {
 	// Define custom fields here
