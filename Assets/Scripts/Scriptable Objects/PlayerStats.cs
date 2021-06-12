@@ -218,6 +218,7 @@ public class PlayerStats : ScriptableObject
         currentShields = currentMaxShields;
         currentArmour = currentMaxArmour;
         currentHull = currentMaxHull;
+        currentBatteryLevel = currentBatteryCapacity;
     }
 
     public void UpdateStats()

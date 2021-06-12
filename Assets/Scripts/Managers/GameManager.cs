@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Developer Mode")]
+    public bool devModeEnabled;
+
+    [Header("Misc")]
     public ProgressionMapping progMap;
 
     #region Temporary/Runtime Data
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
     private NebulaLevelState nebulaLevelState;
     private BlackHoleLevelState blackHoleLevelState;
     private DeathState deathState;
+    private HighScoresState highScoresState;
 
     #endregion
 
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
             nebulaLevelState = new NebulaLevelState(this, gameSM);
             blackHoleLevelState = new BlackHoleLevelState(this, gameSM);
             deathState = new DeathState(this, gameSM);
+            highScoresState = new HighScoresState(this, gameSM);
 
             #endregion
 
@@ -102,6 +108,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.BlackHoles:
                 gameSM.ChangeState(blackHoleLevelState);
+                break;
+            case GameStates.HighScores:
+                gameSM.ChangeState(highScoresState);
                 break;
             default:
                 gameSM.ChangeState(introState);
@@ -160,6 +169,9 @@ public class GameManager : MonoBehaviour
             case GameStates.BlackHoles:
                 gameSM.Initialise(asteroidLevelState);
                 break;
+            case GameStates.HighScores:
+                gameSM.Initialise(highScoresState);
+                break;
             default:
                 gameSM.Initialise(introState);
                 break;
@@ -176,7 +188,8 @@ public class GameManager : MonoBehaviour
     private void AddEvents()
     {
         // Global level events
-        EventManager.AddEvent("AsteroidCollision"); // TO DO: Add audio cue
+        EventManager.AddEvent("Shoot");
+        EventManager.AddEvent("AsteroidCollision");
         EventManager.AddEvent("LargeAsteroidExplosion");
         EventManager.AddEvent("MediumAsteroidExplosion");
         EventManager.AddEvent("TakeHit");
@@ -184,9 +197,8 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ShieldsHit"); // TO DO: Add audio cue
         EventManager.AddEvent("ShieldsDestroyed"); // TO DO: Add audio cue
         EventManager.AddEvent("ShieldsOnline"); // TO DO: Add audio cue
-        EventManager.AddEvent("ArmourHit"); // TO DO: Add audio cue
         EventManager.AddEvent("ArmourDestroyed"); // TO DO: Add audio cue
-        EventManager.AddEvent("HullHit"); // TO DO: Add audio cue
+        EventManager.AddEvent("ArmourHullHit"); // TO DO: Add audio cue
         EventManager.AddEvent("HealthLow"); // TO DO: Add audio cue
         EventManager.AddEvent("PlayerDeath"); // TO DO: Add audio cue
         EventManager.AddEvent("PowerupCollected"); // TO DO: Add audio cue
@@ -195,6 +207,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("HullRepair"); // TO DO: Add audio cue
         EventManager.AddEvent("ArmourRepair"); // TO DO: Add audio cue
         EventManager.AddEvent("SpeedMitigation"); // TO DO: Add audio cue
+        EventManager.AddEvent("BatteryRecharge"); // TO DO: Add audio cue
         EventManager.AddEvent("ResourceCollected"); 
         EventManager.AddEvent("ProjectileHit");
         EventManager.AddEvent("ProjectileShot");
@@ -209,23 +222,40 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("AsteroidFieldSceneLoaded");
         EventManager.AddEvent("NebulaSceneLoaded");
         EventManager.AddEvent("BlackHoleSceneLoaded");
+        EventManager.AddEvent("HighScoresSceneLoaded");
 
-        // Global UI Events
-        EventManager.AddEvent("UIButtonOptionSelected");
+        // UI Events
+        EventManager.AddEvent("UIClick");
+        EventManager.AddEvent("UISelect");
+        EventManager.AddEvent("UIRelease");
         EventManager.AddEvent("UISuccess");
+        EventManager.AddEvent("UIError");
+        EventManager.AddEvent("UINotification");
+        EventManager.AddEvent("UIPause");
+        EventManager.AddEvent("UIResume");
         EventManager.AddEvent("LoadProfiles");
-        EventManager.AddEvent("UpdateProfileSelection");
+        EventManager.AddEvent("ProfileLoaded");
+
+        // Error Modal Events
+        EventManager.AddEvent("IncorrectInput");
+        EventManager.AddEvent("NoResults");
+        EventManager.AddEvent("PauseMenu");
+        EventManager.AddEvent("InvalidProfileName");
+        EventManager.AddEvent("CantAffordItem");
+        EventManager.AddEvent("ReturnedFromDeath");
+        EventManager.AddEvent("InactiveOnThisPlatform");
 
         // Hangar Scene Events
-        EventManager.AddEvent("SellResources"); // TO DO: Add audio cue
+        EventManager.AddEvent("SellResources");
         EventManager.AddEvent("UpdateBalance");
         EventManager.AddEvent("ItemPurchased"); // TO DO: Add audio cue
         EventManager.AddEvent("UpdateInventory");
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
         EventManager.AddEvent("UpdateModulePrices");
-        EventManager.AddEvent("CantAffordItem");
-        EventManager.AddEvent("ReturnedFromDeath");
+        EventManager.AddEvent("ItemEquipped"); // TO DO: Add audio cue & tie in logic
+        EventManager.AddEvent("ItemUnequipped");
+        EventManager.AddEvent("ItemDestroyed"); // TO DO: Add audio cue
     }
     #endregion
 
@@ -235,10 +265,9 @@ public class GameManager : MonoBehaviour
         float baseCost = 1000f;
         int numOfDeaths = Mathf.Clamp(ProfileManager.instance.currentProfile.numOfDeaths, 0, progMap.deathIndexRate);
         float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths);
-
         return (1 + deathScale) * baseCost;
     }
     #endregion
 }
 
-public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles, DeathState }
+public enum GameStates { None, IntroMenu, Hangar, AsteroidField, Nebula, BlackHoles, DeathState, HighScores }

@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -45,6 +47,11 @@ public class Player : MonoBehaviour
         InvokeRepeating("RegenShield", 1f, 1f);
         InvokeRepeating("RechargeBattery", 1f, 1f);
         InvokeRepeating("UpdateStats", 0.5f, 0.1f);
+    }
+
+    private void Update()
+    {
+        ProfileManager.instance.currentProfile.totalPlayTime += Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,9 +103,11 @@ public class Player : MonoBehaviour
     {
         EventManager.TriggerEvent("TakeHit");
         float damage = value;
+        bool eventTriggered = false;
 
         if(stats.currentShields > 0f)
         {
+            EventManager.TriggerEvent("ShieldsHit");
             stats.currentShields -= damage;
             if (stats.currentShields < 0f)
             {
@@ -107,10 +116,10 @@ public class Player : MonoBehaviour
                 shieldDestroyedAt = Time.time;
                 shieldObject.SetActive(false);
                 EventManager.TriggerEvent("ShieldsDestroyed");
+
             }
             else
             {
-                EventManager.TriggerEvent("ShieldsHit");
                 damage = 0f;
                 return false;
             }
@@ -118,6 +127,8 @@ public class Player : MonoBehaviour
         
         if(stats.currentArmour > 0f)
         {
+            EventManager.TriggerEvent("ArmourHullHit");
+            eventTriggered = true;
             stats.currentArmour -= damage;
             if (stats.currentArmour < 0f)
             {
@@ -128,23 +139,23 @@ public class Player : MonoBehaviour
             else
             {
                 damage = 0f;
-                EventManager.TriggerEvent("ArmourHit");
                 return false;
             }
         }
-        
-        if(stats.currentHull > 0f)
+
+        if (stats.currentHull > 0f)
         {
+            if(!eventTriggered)
+            {
+                EventManager.TriggerEvent("ArmourHullHit");
+            }
+
             stats.currentHull -= damage;
             if (stats.currentHull < 0f)
             {
                 stats.currentHull = 0f;
                 DeathSequence();
                 return true;
-            }
-            else
-            {
-                EventManager.TriggerEvent("HullHit");
             }
             
             if (stats.currentHull / stats.currentMaxHull <= 0.5f)
@@ -153,6 +164,9 @@ public class Player : MonoBehaviour
             }
         }
 
+        
+
+        
         return false;
     }
 
@@ -228,17 +242,31 @@ public class Player : MonoBehaviour
 
     private IEnumerator PowerupCoroutine(IPowerup powerup)
     {
-        //Debug.Log("Coroutine started.");
-
         float endTime = Time.time + powerup.EffectDuration;
-        //Debug.Log("Effect duration is: " + powerup.EffectDuration);
         powerup.ExecutePowerup(this);
+        GameObject icon = null;
 
-        while(Time.time < endTime)
+        if(powerup.UiIconPrefab != null)
         {
-            yield return null;
+            icon = Instantiate(powerup.UiIconPrefab, SceneController.instance.sceneUi.powerupsParent.transform);
         }
 
+        PowerupUI pui = icon.GetComponent<PowerupUI>();
+        float timeRemaining = endTime - Time.time;
+
+        while (timeRemaining > Mathf.Epsilon)
+        {
+            timeRemaining -= Time.deltaTime;
+            pui.text.text = $"{Math.Truncate(timeRemaining)}s";
+            pui.bar.SetPercent(timeRemaining / powerup.EffectDuration);
+            yield return new WaitForEndOfFrame();
+        }
+
+        if(icon != null)
+        {
+            Destroy(icon);
+        }
+        
         powerup.EndPowerup(this);
     }
 
@@ -252,12 +280,14 @@ public class Player : MonoBehaviour
         Debug.Log("Player has died!");
         EventManager.TriggerEvent("PlayerDeath");
         ProfileManager.instance.currentProfile.isDead = true;
+        ProfileManager.instance.currentProfile.numOfDeaths++;
         ProfileManager.instance.SaveProfile();
         rb.isKinematic = true;
         resourceCollector.enabled = false;
         explosionFX.SetActive(true);
         activeEnginesFx.SetActive(false);
         inactiveEnginesFx.SetActive(false);
+        vfxParent.SetActive(false);
         shipVisual.SetActive(false);
         GameManager.instance.SetState(GameStates.DeathState);
         StopAllCoroutines();

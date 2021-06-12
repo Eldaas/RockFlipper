@@ -19,10 +19,21 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI errorModalTitle;
     public TextMeshProUGUI errorModalDescription;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+    public Button returnToHangarButton;
+    public Button quitGameButton;
+    public Button resumeGameButton;
+
     [Header("Events")]
     private UnityAction errorModalCantAffordDelegate;
     private UnityAction errorModalPlayerDiedDelegate;
     private UnityAction errorModalReturnedFromDeathDelegate;
+    private UnityAction errorModalWrongInputDelegate;
+    private UnityAction errorModalNoResultsDelegate;
+    private UnityAction pauseMenuDelegate;
+    private UnityAction errorModalInvalidProfileNameDelegate;
+    private UnityAction errorModalInactiveOnThisPlatformDelegate;
 
     #region Properties
     public float LoadScreenAlpha => LoadScreenAlphaValue();
@@ -76,7 +87,11 @@ public class UIManager : MonoBehaviour
     #region Private Methods
     private void RegisterListeners()
     {
-       
+        // Buttons
+        returnToHangarButton.onClick.AddListener(delegate { GameManager.instance.LoadLevel(GameStates.Hangar); ShowPauseMenu(); });
+        quitGameButton.onClick.AddListener(delegate { Utility.QuitGame(); });
+        resumeGameButton.onClick.AddListener(delegate { ShowPauseMenu(); });
+
         // Custom events
         errorModalCantAffordDelegate = delegate { ErrorModal(ErrorType.CantAfford); };
         EventManager.StartListening("CantAffordItem", errorModalCantAffordDelegate);
@@ -86,6 +101,21 @@ public class UIManager : MonoBehaviour
 
         errorModalReturnedFromDeathDelegate = delegate { ErrorModal(ErrorType.ReturnFromDeath); };
         EventManager.StartListening("ReturnedFromDeath", errorModalReturnedFromDeathDelegate);
+
+        errorModalWrongInputDelegate = delegate { ErrorModal(ErrorType.WrongInput); };
+        EventManager.StartListening("IncorrectInput", errorModalWrongInputDelegate);
+
+        errorModalNoResultsDelegate = delegate { ErrorModal(ErrorType.NoResults); };
+        EventManager.StartListening("NoResults", errorModalNoResultsDelegate);
+		
+        pauseMenuDelegate = delegate { ShowPauseMenu(); };
+        EventManager.StartListening("PauseMenu", pauseMenuDelegate);
+
+        errorModalInvalidProfileNameDelegate = delegate { ErrorModal(ErrorType.InvalidProfileName); };
+        EventManager.StartListening("InvalidProfileName", errorModalInvalidProfileNameDelegate);
+
+        errorModalInactiveOnThisPlatformDelegate = delegate { ErrorModal(ErrorType.InactiveOnThisPlatform); };
+        EventManager.StartListening("InactiveOnThisPlatform", errorModalInactiveOnThisPlatformDelegate);
     }
 
     private float LoadScreenAlphaValue()
@@ -109,24 +139,52 @@ public class UIManager : MonoBehaviour
         switch (type)
         {
             case ErrorType.Unspecified:
+                EventManager.TriggerEvent("UIError");
                 errorModalDescription.text = "An unknown error occurred.";
                 RemoveModalListeners();
                 ApplyStandardModalListeners();
                 break;
             case ErrorType.CantAfford:
+                EventManager.TriggerEvent("UIError");
                 errorModalTitle.text = "Oops.";
                 errorModalDescription.text = "You can't afford this item! Try again after collecting some resources.";
                 RemoveModalListeners();
                 ApplyStandardModalListeners(); 
                 break;
             case ErrorType.PlayerDeath:
+                EventManager.TriggerEvent("UINotification");
                 errorModalTitle.text = "Oops.";
                 errorModalDescription.text = "Oh no! Your ship exploded. Don't worry. The Company will give you a new one on your return to base... for a small fee.";
                 // Button listeners are handled by the DeathState state 
                 break;
             case ErrorType.ReturnFromDeath:
+                EventManager.TriggerEvent("UINotification");
                 errorModalTitle.text = "New Ship";
-                errorModalDescription.text = $"We've issued you with a new ship and deducted ${GameManager.instance.CalcDeathCost().ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
+                errorModalDescription.text = $"We've issued you a new ship and deducted ${GameManager.instance.CalcDeathCost().ToString("#,#")} from your balance to cover the insurance costs. Try not to let it happen again, otherwise the costs keep going up!";
+                ApplyStandardModalListeners();
+                break;
+            case ErrorType.WrongInput:
+                EventManager.TriggerEvent("UIError");
+                errorModalTitle.text = "Oops.";
+                errorModalDescription.text = "Something went wrong with the submitted input. Try again.";
+                ApplyStandardModalListeners();
+                break;
+            case ErrorType.NoResults:
+                EventManager.TriggerEvent("UINotification");
+                errorModalTitle.text = "No results.";
+                errorModalDescription.text = "Try a different search query and ensure you're using correct casing.";
+                ApplyStandardModalListeners();
+                break;
+            case ErrorType.InvalidProfileName:
+                EventManager.TriggerEvent("UIError");
+                errorModalTitle.text = "Oops.";
+                errorModalDescription.text = "Either this name was invalid or a profile already exists. Cancel or try a different name.";
+                ApplyStandardModalListeners();
+                break;
+            case ErrorType.InactiveOnThisPlatform:
+                EventManager.TriggerEvent("UINotification");
+                errorModalTitle.text = "Sorry.";
+                errorModalDescription.text = "This feature isn't available yet on this platform.";
                 ApplyStandardModalListeners();
                 break;
         }
@@ -147,6 +205,21 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    public void ShowPauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        if(pauseMenu.activeInHierarchy)
+        {
+            EventManager.TriggerEvent("UIPause");
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            EventManager.TriggerEvent("UIResume");
+            Time.timeScale = 1f;
+        }
+    }
 }
 
-public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath }
+public enum ErrorType { Unspecified, CantAfford, PlayerDeath, ReturnFromDeath, WrongInput, NoResults, InvalidProfileName, InactiveOnThisPlatform }

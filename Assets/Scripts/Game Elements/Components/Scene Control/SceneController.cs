@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
     public LevelPowerups levelPowerups;
     public Player player;
     public int resourcesCollected;
+    public PlayLevelUI sceneUi;
     public Canvas hpBarCanvas;
     
     private void Awake()

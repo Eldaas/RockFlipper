@@ -92,6 +92,10 @@ public class ObjectPooler : MonoBehaviour
     private List<GameObject> pooledSilver = new List<GameObject>();
     private List<GameObject> pooledGold = new List<GameObject>();
 
+    [Header("UIElements")]
+    [SerializeField]
+    private Transform notificationsParent;
+
     private void Awake()
     {
         #region Singleton
@@ -113,10 +117,6 @@ public class ObjectPooler : MonoBehaviour
     private void Start()
     {
         InstantiatePools();
-
-        
-        Debug.LogError("BREAK");
-        Debug.Log($"LevelMods loaded: {level.asteroidDensityMultiplier}");
     }
 
     /// <summary>
@@ -456,7 +456,7 @@ public class ObjectPooler : MonoBehaviour
                 mats[0] = asteroid.data.goldRockMaterial;
                 break;
             default:
-                Debug.Log("Couldn't find the appropriate material for the asteroid.");
+                mats[0] = asteroid.data.barrenAsteroidMaterial;
                 break;
         }
 
@@ -506,7 +506,6 @@ public class ObjectPooler : MonoBehaviour
         
         foreach (GameObject powerup in levelPowerups)
         {
-            Debug.Log($"{powerup.gameObject.name}");
             IPowerup thisPowerup = powerup.GetComponent<IPowerup>();
             float randomInt = Utility.GenerateRandomInt(0, 100);
             if (thisPowerup.ChanceToSpawn != 0f && randomInt <= thisPowerup.ChanceToSpawn)

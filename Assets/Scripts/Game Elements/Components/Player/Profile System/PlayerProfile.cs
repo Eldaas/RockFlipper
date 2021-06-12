@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +8,11 @@ public class PlayerProfile
 {
     public string profileName;
     public float balance;
+    public float totalPlayTime;
     public float reputation;
     public int numOfDeaths;
     public bool isDead;
+    public string lastSaved;
 
     public List<Equipment> currentEquipment = new List<Equipment>();
     public List<Equipment> currentInventory = new List<Equipment>();

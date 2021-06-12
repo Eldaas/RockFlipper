@@ -26,26 +26,60 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource bgMusic;
 
-    [Header("Audio Clips")]
+    #region Audio Clips
+
+    [Header("Audio Clips (General)")]
     public AudioClip resourceCollect;
     public AudioClip projectileShot;
     public AudioClip projectileHit;
     public AudioClip spaceAmbience;
     public AudioClip largeAsteroidExplosion;
     public AudioClip mediumAsteroidExplosion;
+    public AudioClip returningToBase;
+    public AudioClip shieldsHit;
+    public AudioClip shieldsDestroyed;
+    public AudioClip shieldsOnline;
+    public AudioClip armourHit;
+    public AudioClip armourDestroyed;
+    public AudioClip hullHit;
+    public AudioClip healthLow;
+    public AudioClip struckLucky;
+    public AudioClip powerupActivated;
+    public AudioClip powerupDeactivated;
+    public AudioClip resourcesDropped;
+
+    [Header("Audio Clips (UI Sounds)")]
+    public AudioClip uiClick;
+    public AudioClip uiRelease;
     public AudioClip uiSelect;
     public AudioClip uiSuccess;
-    public AudioClip returningToBase;
+    public AudioClip uiError;
+    public AudioClip uiNotification;
+    public AudioClip uiEquip;
+    public AudioClip uiUnequip;
+    public AudioClip uiDestroy;
+    public AudioClip uiPause;
+    public AudioClip uiResume;
+    public AudioClip uiItemPurchased;
 
     [Header("Music Track Clips")]
     public AudioClip[] asteroidFieldMusicTracks;
     public AudioClip[] hangarMusicTracks;
     public AudioClip[] introMenuMusicTracks;
+    #endregion
+
+    #region Mixer Groups
 
     [Header("Mixer Groups")] // Not all groups need to be added here; just the ones needed for runtime manipulation
     public AudioMixerGroup ambientMixer;
 
-    [Header("Unity Actions (Event Delegates)")]
+    #endregion
+
+    #region Events
+
+    #region Events (General)
+
+    [Header("Events (General)")]
     private UnityAction resourceCollectDelegate;
     private UnityAction projectileShotDelegate;
     private UnityAction projectileHitDelegate;
@@ -55,10 +89,38 @@ public class AudioManager : MonoBehaviour
     private UnityAction asteroidFieldSceneLoadedDelegate;
     private UnityAction hangarSceneLoadedDelegate;
     private UnityAction introMenuSceneLoadedDelegate;
-    private UnityAction uiButtonOptionSelectDelegate;
-    private UnityAction uiSuccessDelegate;
     private UnityAction returningToBaseDelegate;
-    
+    private UnityAction struckLuckyDelegate;
+    private UnityAction shieldsHitDelegate;
+    private UnityAction shieldsDestroyedDelegate;
+    private UnityAction shieldsOnlineDelegate;
+    private UnityAction armourHitDelegate;
+    private UnityAction armourDestroyedDelegate;
+    private UnityAction hullHitDelegate;
+    private UnityAction healthLowDelegate;
+    private UnityAction powerupActivatedDelegate;
+    private UnityAction powerupDeactivatedDelegate;
+    private UnityAction resourcesDroppedDelegate;
+
+    #endregion
+
+    #region Events (UI)
+    [Header("Events (UI)")]
+    private UnityAction uiClickDelegate;
+    private UnityAction uiReleaseDelegate;
+    private UnityAction uiSelectDelegate;
+    private UnityAction uiSuccessDelegate;
+    private UnityAction uiErrorDelegate;
+    private UnityAction uiNotificationDelegate;
+    private UnityAction uiEquipDelegate;
+    private UnityAction uiUnequipDelegate;
+    private UnityAction uiDestroyDelegate;
+    private UnityAction uiPauseDelegate;
+    private UnityAction uiResumeDelegate;
+    private UnityAction uiItemPurchasedDelegate;
+    #endregion
+
+    #endregion
 
     #endregion
 
@@ -103,6 +165,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     private void RegisterEventListeners()
     {
+        #region General Events
         resourceCollectDelegate = PlayResourceCollect;
         EventManager.StartListening("ResourceCollected", resourceCollectDelegate);
 
@@ -130,14 +193,73 @@ public class AudioManager : MonoBehaviour
         hangarSceneLoadedDelegate = PlayHangarSceneMusic;
         EventManager.StartListening("HangarSceneLoaded", hangarSceneLoadedDelegate);
 
-        uiButtonOptionSelectDelegate = PlayUiButtonOptionSelect;
-        EventManager.StartListening("UIButtonOptionSelected", uiButtonOptionSelectDelegate);
-
-        uiSuccessDelegate = PlayUiSuccess;
-        EventManager.StartListening("UISuccess", uiSuccessDelegate);
-
         returningToBaseDelegate = PlayReturningToBase;
         EventManager.StartListening("ReturningToBase", returningToBaseDelegate);
+        #endregion
+
+        #region UI Events
+
+        uiClickDelegate = delegate { PlayOneShot(uiSounds, uiClick); };
+        EventManager.StartListening("UIClick", uiClickDelegate);
+
+        uiReleaseDelegate = delegate { PlayOneShot(uiSounds, uiRelease); };
+        EventManager.StartListening("UIRelease", uiReleaseDelegate);
+
+        uiSelectDelegate = delegate { PlayOneShot(uiSounds, uiSelect); };
+        EventManager.StartListening("UISelect", uiSelectDelegate);
+
+        uiSuccessDelegate = delegate { PlayOneShot(uiSounds, uiSuccess); };
+        EventManager.StartListening("UISuccess", uiSuccessDelegate);
+
+        uiErrorDelegate = delegate { PlayOneShot(uiSounds, uiError); };
+        EventManager.StartListening("UIError", uiErrorDelegate);
+
+        uiNotificationDelegate = delegate { PlayOneShot(uiSounds, uiNotification); };
+        EventManager.StartListening("UINotification", uiNotificationDelegate);
+
+        uiEquipDelegate = delegate { PlayOneShot(uiSounds, uiEquip); };
+        EventManager.StartListening("ItemEquipped", uiEquipDelegate);
+
+        uiUnequipDelegate = delegate { PlayOneShot(uiSounds, uiUnequip); };
+        EventManager.StartListening("ItemUnequipped", uiUnequipDelegate);
+
+        uiDestroyDelegate = delegate { PlayOneShot(uiSounds, uiDestroy); };
+        EventManager.StartListening("ItemDestroyed", uiDestroyDelegate);
+
+        uiPauseDelegate = delegate { PlayOneShot(uiSounds, uiPause); };
+        EventManager.StartListening("UIPause", uiPauseDelegate);
+
+        uiResumeDelegate = delegate { PlayOneShot(uiSounds, uiResume); };
+        EventManager.StartListening("UIResume", uiResumeDelegate);
+
+        uiItemPurchasedDelegate = delegate { PlayOneShot(uiSounds, uiItemPurchased); };
+        EventManager.StartListening("ItemPurchased", uiItemPurchasedDelegate);
+
+        struckLuckyDelegate = delegate { PlayOneShot(uiSounds, struckLucky); };
+        EventManager.StartListening("StruckLucky", struckLuckyDelegate);
+
+        shieldsHitDelegate = delegate { PlayOneShot(shipSounds, shieldsHit); };
+        EventManager.StartListening("ShieldsHit", shieldsHitDelegate);
+
+        shieldsDestroyedDelegate = delegate { PlayOneShot(shipSounds, shieldsDestroyed); };
+        EventManager.StartListening("ShieldsDestroyed", shieldsDestroyedDelegate);
+
+        armourHitDelegate = delegate { PlayOneShot(shipSounds, armourHit); };
+        EventManager.StartListening("ArmourHit", armourHitDelegate);
+
+        armourDestroyedDelegate = delegate { PlayOneShot(shipSounds, armourDestroyed); };
+        EventManager.StartListening("ArmourDestroyed", armourDestroyedDelegate);
+
+        hullHitDelegate = delegate { PlayOneShot(shipSounds, hullHit); };
+        EventManager.StartListening("HullHit", hullHitDelegate);
+
+        healthLowDelegate = delegate { PlayOneShot(shipSounds, healthLow); };
+        EventManager.StartListening("HealthLow", healthLowDelegate);
+
+        resourcesDroppedDelegate = delegate { PlayOneShot(uiSounds, resourcesDropped); };
+        EventManager.StartListening("ResourcesDropped", resourcesDroppedDelegate);
+
+        #endregion
     }
 
     private void PlayMusicTrack(AudioClip track)
@@ -240,14 +362,6 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Plays the UI success sound - for example, when you successfully load a profile
-    /// </summary>
-    private void PlayUiSuccess()
-    {
-        PlayOneShot(uiSounds, uiSuccess);
-    }
-
-    /// <summary>
     /// Plays an audio clip when the 'returning to base' event is triggered.
     /// </summary>
     private void PlayReturningToBase()
@@ -260,11 +374,7 @@ public class AudioManager : MonoBehaviour
 
     #region Public Methods
 
-    public void PlayUiButtonOptionSelect()
-    {
-        PlayOneShot(uiSounds, uiSelect);
-    }
-
 
     #endregion
 }
+

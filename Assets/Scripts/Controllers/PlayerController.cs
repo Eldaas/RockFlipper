@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("Events")]
     private UnityAction returningToBaseDelegate;
     private UnityAction playerDeathDelegate;
+    private UnityAction shootingDelegate;
 
     #region Unity Methods
     private void Awake()
@@ -44,69 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-
-        if(!locked)
-        {
-            HandleVelocity();
-
-#if UNITY_ANDROID
-
-        input = joystick.Horizontal;
-
-#endif
-
-#if UNITY_STANDALONE_WIN
-
-            input = Input.GetAxis("Horizontal");
-
-#endif
-            HandleHorizontal(input);
-            anim.SetFloat("Roll", input);
-
-            if (Input.GetButtonDown("Shoot"))
-            {
-                if(player.stats.currentBatteryLevel >= player.stats.currentBatteryDrain)
-                {
-                    player.stats.currentBatteryLevel -= player.stats.currentBatteryDrain;
-
-                    GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
-                    if (parentGo)
-                    {
-                        // Get parent particle system and set the location
-                        Transform parentObject = parentGo.GetComponentInParent<Transform>();
-                        parentGo.transform.position = parentObject.position;
-
-                        // Get the children particle systems
-                        ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
-
-                        // Find the particle system responsible for the projectile
-                        for (int i = 0; i < children.Length; i++)
-                        {
-                            if (children[i].CompareTag("Projectile"))
-                            {
-                                ParticleSystem projectileParticle = children[i];
-
-                                parentGo.SetActive(true);
-                                ParticleSystem.MainModule main = projectileParticle.main;
-                                main.startSpeed = 300 + rb.velocity.z;
-
-                                IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
-                                StartCoroutine(coroutine);
-                                EventManager.TriggerEvent("ProjectileShot");
-                                break;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    EventManager.TriggerEvent("BatteryIsEmpty");
-                }
-               
-            }
-        }
-
+        HandleInput();
     }
     #endregion
 
@@ -130,6 +69,9 @@ public class PlayerController : MonoBehaviour
 
         playerDeathDelegate = PlayerDeath;
         EventManager.StartListening("PlayerDeath", playerDeathDelegate);
+
+        shootingDelegate = Shoot;
+        EventManager.StartListening("Shoot", shootingDelegate);
     }
 
     /// <summary>
@@ -140,21 +82,56 @@ public class PlayerController : MonoBehaviour
         locked = true;
     }
 
+    private void HandleInput()
+    {
+        if (!locked)
+        {
+            HandleVelocity();
+
+#if UNITY_ANDROID
+
+            input = joystick.Horizontal;
+
+#endif
+
+#if UNITY_STANDALONE_WIN
+
+            input = Input.GetAxis("Horizontal");
+
+#endif
+            HandleHorizontal(input);
+            anim.SetFloat("Roll", input);
+
+            if (Input.GetButtonDown("Shoot"))
+            {
+                Shoot();
+            }
+
+            if (Input.GetButtonDown("Cancel"))
+            {
+                EventManager.TriggerEvent("PauseMenu");
+            }
+        }
+    }
+
     /// <summary>
     /// Manages the player's velocity.
     /// </summary>
     private void HandleVelocity()
     {
-        // Speed up
-        if(rb.velocity.z < player.stats.currentMaximumVelocity)
+        if(Time.timeScale > 0f)
         {
-            rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
-        }
-        // Slow down
-        else if(rb.velocity.z > player.stats.currentMaximumVelocity)
-        {
-            rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
-        }
+            // Speed up
+            if (rb.velocity.z < player.stats.currentMaximumVelocity)
+            {
+                rb.AddForce(Vector3.forward * player.stats.currentForwardThrust);
+            }
+            // Slow down
+            else if (rb.velocity.z > player.stats.currentMaximumVelocity)
+            {
+                rb.AddForce(Vector3.forward * -0.5f, ForceMode.VelocityChange);
+            }
+        }  
     }
 
     /// <summary>
@@ -221,6 +198,47 @@ public class PlayerController : MonoBehaviour
     private void PlayerDeath()
     {
         locked = true;
+    }
+
+    private void Shoot()
+    {
+        if (player.stats.currentBatteryLevel >= player.stats.currentBatteryDrain)
+        {
+            player.stats.currentBatteryLevel -= player.stats.currentBatteryDrain;
+
+            GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
+            if (parentGo)
+            {
+                // Get parent particle system and set the location
+                Transform parentObject = parentGo.GetComponentInParent<Transform>();
+                parentGo.transform.position = parentObject.position;
+
+                // Get the children particle systems
+                ParticleSystem[] children = parentGo.GetComponentsInChildren<ParticleSystem>(true);
+
+                // Find the particle system responsible for the projectile
+                for (int i = 0; i < children.Length; i++)
+                {
+                    if (children[i].CompareTag("Projectile"))
+                    {
+                        ParticleSystem projectileParticle = children[i];
+
+                        parentGo.SetActive(true);
+                        ParticleSystem.MainModule main = projectileParticle.main;
+                        main.startSpeed = player.stats.currentProjectileSpeed + rb.velocity.z;
+
+                        IEnumerator coroutine = ObjectPooler.instance.ReturnParticleToPool(parentGo, projectileParticle.main.startLifetimeMultiplier);
+                        StartCoroutine(coroutine);
+                        EventManager.TriggerEvent("ProjectileShot");
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            EventManager.TriggerEvent("BatteryIsEmpty");
+        }
     }
 
     #endregion

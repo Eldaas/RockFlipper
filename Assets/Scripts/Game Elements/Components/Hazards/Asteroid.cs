@@ -34,6 +34,7 @@ public class Asteroid : Hazard
     {
         mainObject.SetActive(false);
         explosionParticles.SetActive(true);
+        healthBar.Deactivate();
         // TO DO: differentiate between large and medium explosions, play different sound for each
         EventManager.TriggerEvent("LargeAsteroidExplosion");
 
@@ -48,7 +49,7 @@ public class Asteroid : Hazard
     /// </summary>
     public void CollideWithAsteroid()
     {
-        
+        // Functionality temporarily removed - to implement in a later polish pass
     }
 
     public void SetAsteroidHealth()
@@ -110,11 +111,12 @@ public class Asteroid : Hazard
         if(SceneController.instance.player.StruckLucky())
         {
            numToSpawn = dropYieldMax * 2;
-            EventManager.TriggerEvent("StruckLucky");
+           EventManager.TriggerEvent("StruckLucky");
         }
         else
         {
             numToSpawn = Utility.GenerateRandomInt(dropYieldMin, dropYieldMax);
+            EventManager.TriggerEvent("ResourcesDropped");
         }
         
         for (int i = 0; i < numToSpawn; i++)
@@ -173,8 +175,7 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                healthBar.Deactivate();
-                ExplodeAsteroid(5000f * transform.localScale.magnitude, 100f);
+                ExplodeAsteroid(3000f * transform.localScale.magnitude, 100f);
             }
 
         }

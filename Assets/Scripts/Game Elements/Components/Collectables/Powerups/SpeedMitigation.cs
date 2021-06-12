@@ -13,8 +13,8 @@ public class SpeedMitigation : Powerup, IPowerup
         base.ExecutePowerup(player);
         Debug.Log("Player collected a speed reduction powerup.");
 
-        player.stats.forwardThrustPowerup += Mathf.Abs(thrustReductionPercentage);
-        player.stats.maximumVelocityPowerup += Mathf.Abs(maxVelocityReductionPercentage);
+        player.stats.forwardThrustPowerup -= Mathf.Abs(thrustReductionPercentage);
+        player.stats.maximumVelocityPowerup -= Mathf.Abs(maxVelocityReductionPercentage);
 
         // Reset velocity incrementor back to base value, so it starts counting from 0 again (permanent effect)
         player.stats.maximumVelocityIncrementor = 0f;
@@ -27,8 +27,8 @@ public class SpeedMitigation : Powerup, IPowerup
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
-        player.stats.forwardThrustPowerup -= Mathf.Abs(thrustReductionPercentage);
-        player.stats.maximumVelocityPowerup -= Mathf.Abs(maxVelocityReductionPercentage);
+        player.stats.forwardThrustPowerup += Mathf.Abs(thrustReductionPercentage);
+        player.stats.maximumVelocityPowerup += Mathf.Abs(maxVelocityReductionPercentage);
 
         player.activeEnginesFx.SetActive(true);
         player.inactiveEnginesFx.SetActive(false);

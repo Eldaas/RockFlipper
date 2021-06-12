@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   managersPrefab: {fileID: 2261875415385475869, guid: 4bb33c36afea4434ebda5474aa604991,
     type: 3}
-  startingState: 3
+  startingState: 7
+  playerProfileToUse: TestProfile

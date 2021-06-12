@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &284605671851782160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2178322410212184318}
+  m_Layer: 0
+  m_Name: Powerups
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2178322410212184318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284605671851782160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6053544331975411554}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2344879991963761604
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +60,7 @@ Transform:
   - {fileID: 1003611521390363582}
   - {fileID: 5937160238649089238}
   - {fileID: 2347951555387364973}
+  - {fileID: 2178322410212184318}
   m_Father: {fileID: 2349310940686075342}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -833,7 +864,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 4717faf89fd4b204dac498c891eff097, type: 2}
   shieldObject: {fileID: 2349310940658917943}
   shipVisual: {fileID: 3196152809014733443}
-  vfxParent: {fileID: 2344879991963761604}
+  vfxParent: {fileID: 284605671851782160}
   activeEnginesFx: {fileID: 7539312131535729061}
   inactiveEnginesFx: {fileID: 498689986292496399}
   explosionFX: {fileID: 2349859952136176779}
@@ -2037,6 +2068,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2e453751e3cff974abf5d3e0b5f2741c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df56503c3d562bd42ab4e51b7afe6c7b, type: 3}
+--- !u!1 &3196152809014733443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: df56503c3d562bd42ab4e51b7afe6c7b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2349310940194641874}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2814983581493948473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: df56503c3d562bd42ab4e51b7afe6c7b,
@@ -2046,12 +2083,6 @@ Transform:
 --- !u!1 &6362493756983924674 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: df56503c3d562bd42ab4e51b7afe6c7b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2349310940194641874}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3196152809014733443 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: df56503c3d562bd42ab4e51b7afe6c7b,
     type: 3}
   m_PrefabInstance: {fileID: 2349310940194641874}
   m_PrefabAsset: {fileID: 0}

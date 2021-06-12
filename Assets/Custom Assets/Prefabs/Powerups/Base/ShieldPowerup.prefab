@@ -93,7 +93,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5644022283112225451
 MonoBehaviour:
@@ -107,14 +107,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0375848255ee57c44a80504021a159e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDuration: 15
+  baseDuration: 10
   objectParticle: {fileID: 6237859187897019697}
   playerParticleFxPrefab: {fileID: 2719622899003654772, guid: e30efacdbc715344aae279887093d0d3,
     type: 3}
   playerParticleFxOffset: {x: 0, y: -5, z: 0}
+  uiIconPrefab: {fileID: 6574723562930407878, guid: 9e0d089d850df1e4e92a7446ea77f473,
+    type: 3}
   isActive: 0
   chanceToSpawn: 50
-  shieldRegenPercentage: 150
+  shieldRegenPercentage: 500
   shieldCooldownPercentage: 200
   shieldCapacityPercentage: 150
 --- !u!1001 &4864684722754962432

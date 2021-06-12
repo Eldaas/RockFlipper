@@ -60,11 +60,6 @@ public class HangarController : MonoBehaviour
             SetToNavigation();
         }
 
-        if(hangarUi.devModeEnabled)
-        {
-            hangarUi.devModePanel.SetActive(true);
-        }
-
         PlayerProfile profile = ProfileManager.instance.currentProfile;
 
         if (profile.isDead)

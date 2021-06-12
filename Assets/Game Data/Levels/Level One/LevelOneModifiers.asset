@@ -15,6 +15,6 @@ MonoBehaviour:
   asteroidHealthMultiplier: 1
   asteroidDensityMultiplier: 1
   resourcesDroppedMultiplier: 1
-  ironChance: 50
-  silverChance: 1
-  goldChance: 0.01
+  ironChance: 60
+  silverChance: 5
+  goldChance: 0.5
