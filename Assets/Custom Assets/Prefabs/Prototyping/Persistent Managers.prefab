@@ -1218,6 +1218,7 @@ MonoBehaviour:
   powerupActivated: {fileID: 8300000, guid: 7a4effd1b1ab01c4ba0e79569bd9824f, type: 3}
   powerupDeactivated: {fileID: 8300000, guid: ccea385b0755bbf428823000d6431b9f, type: 3}
   resourcesDropped: {fileID: 8300000, guid: 22a008f9f58e7c744bffa9a34d263b9d, type: 3}
+  noEnergy: {fileID: 8300000, guid: 84bfd6cec6066e3439908c2d86707935, type: 3}
   uiClick: {fileID: 8300000, guid: a9854703f9d0ec040a47cdbc5b35a8ba, type: 3}
   uiRelease: {fileID: 8300000, guid: f8758fb214eaaa2468a47289b70fd43b, type: 3}
   uiSelect: {fileID: 8300000, guid: a9854703f9d0ec040a47cdbc5b35a8ba, type: 3}

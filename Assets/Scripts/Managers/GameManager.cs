@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("HealthLow"); // TO DO: Add audio cue
         EventManager.AddEvent("PlayerDeath"); // TO DO: Add audio cue
         EventManager.AddEvent("PowerupCollected"); // TO DO: Add audio cue
+        EventManager.AddEvent("PowerupDeactivated");
         EventManager.AddEvent("ShieldOvercharge"); // TO DO: Add audio cue
         EventManager.AddEvent("ManeuveringBoost"); // TO DO: Add audio cue
         EventManager.AddEvent("HullRepair"); // TO DO: Add audio cue
@@ -213,6 +214,7 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("ProjectileShot");
         EventManager.AddEvent("SpaceSceneLoaded");
         EventManager.AddEvent("ReturningToBase"); // TO DO: Add audio cue
+        EventManager.AddEvent("EnergyLow");
         EventManager.AddEvent("BatteryIsEmpty"); // TO DO: Add audio cue
         EventManager.AddEvent("StruckLucky"); // TO DO: Add audio cue
 

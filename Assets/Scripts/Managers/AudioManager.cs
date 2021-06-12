@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip powerupActivated;
     public AudioClip powerupDeactivated;
     public AudioClip resourcesDropped;
+    public AudioClip noEnergy;
 
     [Header("Audio Clips (UI Sounds)")]
     public AudioClip uiClick;
@@ -101,6 +102,7 @@ public class AudioManager : MonoBehaviour
     private UnityAction powerupActivatedDelegate;
     private UnityAction powerupDeactivatedDelegate;
     private UnityAction resourcesDroppedDelegate;
+    private UnityAction noEnergyDelegate;
 
     #endregion
 
@@ -195,6 +197,15 @@ public class AudioManager : MonoBehaviour
 
         returningToBaseDelegate = PlayReturningToBase;
         EventManager.StartListening("ReturningToBase", returningToBaseDelegate);
+
+        powerupActivatedDelegate = delegate { PlayOneShot(collectionPops, powerupActivated); };
+        EventManager.StartListening("PowerupCollected", powerupActivatedDelegate);
+
+        powerupDeactivatedDelegate = delegate { PlayOneShot(collectionPops, powerupDeactivated); };
+        EventManager.StartListening("PowerupDeactivated", powerupDeactivatedDelegate);
+
+        noEnergyDelegate = delegate { PlayOneShot(collectionPops, noEnergy); };
+        EventManager.StartListening("BatteryIsEmpty", noEnergyDelegate);
         #endregion
 
         #region UI Events
@@ -243,6 +254,9 @@ public class AudioManager : MonoBehaviour
 
         shieldsDestroyedDelegate = delegate { PlayOneShot(shipSounds, shieldsDestroyed); };
         EventManager.StartListening("ShieldsDestroyed", shieldsDestroyedDelegate);
+
+        shieldsOnlineDelegate = delegate { PlayOneShot(shipSounds, shieldsOnline); };
+        EventManager.StartListening("ShieldsOnline", shieldsOnlineDelegate);
 
         armourHitDelegate = delegate { PlayOneShot(shipSounds, armourHit); };
         EventManager.StartListening("ArmourHit", armourHitDelegate);

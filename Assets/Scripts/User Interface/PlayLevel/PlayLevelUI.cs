@@ -74,6 +74,30 @@ public class PlayLevelUI : UIController
     [SerializeField]
     private Button androidMenuButton;
 
+    [Header("Top Notification Panel")]
+    [SerializeField]
+    private float tnpTime;
+    [SerializeField]
+    private Transform tnpParent;
+    [SerializeField]
+    private GameObject tnpPrefab;
+
+    [Header("Screen Space Notification Panel")]
+    [SerializeField]
+    private Transform ssnpParent;
+    [SerializeField]
+    private GameObject ssnpPrefab;
+
+    [Header("Notification Colours")]
+    [SerializeField]
+    private Color red;
+    [SerializeField]
+    private Color green;
+    [SerializeField]
+    private Color yellow;
+    [SerializeField]
+    private Color blue;
+
     [Header("Misc")]
     private Player player;
     private PlayerStats stats;
@@ -81,6 +105,11 @@ public class PlayLevelUI : UIController
     [Header("Events")]
     private UnityAction updateResourceDelegate;
     private UnityAction playerDeathDelegate;
+    private UnityAction shieldOfflineDelegate;
+    private UnityAction armourDestroyedDelegate;
+    private UnityAction hullLowDelegate;
+    private UnityAction lowEnergyDelegate;
+    private UnityAction noEnergyDelegate;
 
     private void Awake()
     {
@@ -107,15 +136,32 @@ public class PlayLevelUI : UIController
     #region Protected & Private Methods
     protected override void RegisterListeners()
     {
+        // Buttons
         androidHomeButton.onClick.AddListener(ReturnToBase);
         androidShootButton.onClick.AddListener(Shoot);
         androidMenuButton.onClick.AddListener(PauseMenu);
 
+        // Custom events
         updateResourceDelegate = UpdateResourcesCount;
         EventManager.StartListening("ResourceCollected", updateResourceDelegate);
 
         playerDeathDelegate = PlayerDeath;
         EventManager.StartListening("PlayerDeath", playerDeathDelegate);
+
+        shieldOfflineDelegate = delegate { NewNotification("SHIELD OFFLINE", blue); };
+        EventManager.StartListening("ShieldDestroyed", shieldOfflineDelegate);
+
+        armourDestroyedDelegate = delegate { NewNotification("ARMOUR DESTROYED", yellow); };
+        EventManager.StartListening("ArmourDestroyed", armourDestroyedDelegate);
+
+        hullLowDelegate = delegate { NewNotification("HULL LOW!", red); };
+        EventManager.StartListening("HealthLow", hullLowDelegate);
+
+        lowEnergyDelegate = delegate { NewNotification("LOW ENERGY", green); };
+        EventManager.StartListening("EnergyLow", lowEnergyDelegate);
+
+        noEnergyDelegate = delegate { NewNotification("NO ENERGY LEFT", red); };
+        EventManager.StartListening("BatteryIsEmpty", noEnergyDelegate);
     }
 
     private void Initialise()
@@ -228,6 +274,50 @@ public class PlayLevelUI : UIController
         universalUi.SetActive(false);
         windowsUi.SetActive(false);
         androidUi.SetActive(false);
+    }
+
+    /// <summary>
+    /// Pass a message to the notification system to be displayed on the top panel.
+    /// </summary>
+    /// <param name="message">The message to be printed within the panel.</param>
+    private void NewNotification(string message, Color color)
+    {
+        GameObject newUiElement = Instantiate(tnpPrefab, tnpParent);
+        TextMeshProUGUI elementText = newUiElement.GetComponentInChildren<TextMeshProUGUI>();
+        elementText.text = message;
+        elementText.color = color;
+
+        StartCoroutine(ElementTimer(tnpTime, newUiElement));
+    }
+
+    private IEnumerator ElementTimer(float time, GameObject element)
+    {
+        float timeRemaining = time;
+        CanvasGroup cg = element.GetComponent<CanvasGroup>();
+        float fadeTime = 1f;
+        float fadeInRemaining = fadeTime;
+        float fadeOutRemaining = fadeTime;
+
+        while (timeRemaining > Mathf.Epsilon)
+        {
+            timeRemaining -= Time.deltaTime;
+
+            if (fadeInRemaining > Mathf.Epsilon)
+            {
+                fadeInRemaining -= Time.deltaTime;
+                cg.alpha = Mathf.SmoothStep(0f, 1f, 1f - (fadeInRemaining / fadeTime));
+            }
+
+            if (timeRemaining < fadeTime)
+            {
+                fadeOutRemaining -= Time.deltaTime;
+                cg.alpha = Mathf.SmoothStep(1f, 0f, 1f - (fadeOutRemaining / fadeTime));
+            }
+
+            yield return null;
+        }
+
+        Destroy(element);
     }
 
 #endregion
