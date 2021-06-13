@@ -78,7 +78,7 @@ public class PlayLevelUI : UIController
     [SerializeField]
     private int maxNotifications;
     [SerializeField]
-    private List<TopPanelNotification> activeNotifications = new List<TopPanelNotification>();
+    public List<TopPanelNotification> activeNotifications = new List<TopPanelNotification>();
     [SerializeField]
     private Transform tnpParent;
     [SerializeField]
@@ -132,7 +132,7 @@ public class PlayLevelUI : UIController
     }
 
     #region Public Methods
-    
+
     #endregion
 
     #region Protected & Private Methods
@@ -192,7 +192,7 @@ public class PlayLevelUI : UIController
 
     private IEnumerator EndScene()
     {
-        while(UIManager.instance.LoadScreenAlpha > Mathf.Epsilon)
+        while (UIManager.instance.LoadScreenAlpha > Mathf.Epsilon)
         {
             yield return new WaitForEndOfFrame();
         }
@@ -211,7 +211,7 @@ public class PlayLevelUI : UIController
     private void UpdateStat(RadialSegmentedHealthBar bar, TextMeshProUGUI percentageText, TextMeshProUGUI valueText, float currValue, float maxValue)
     {
         float percentage = currValue / maxValue;
-        
+
         float currentRadialValue = 1 - bar.RemovedSegments.Value;
         float uiPercentage = Mathf.SmoothStep(currentRadialValue, percentage, 0.1f);
         bar.SetPercent(uiPercentage);
@@ -235,17 +235,17 @@ public class PlayLevelUI : UIController
         silverText.text = silverCollected.ToString();
         goldText.text = goldCollected.ToString();
 
-        if(ironCollected > 0)
+        if (ironCollected > 0)
         {
             ironPanel.SetActive(true);
         }
 
-        if(silverCollected > 0)
+        if (silverCollected > 0)
         {
             silverPanel.SetActive(true);
         }
 
-        if(goldCollected > 0)
+        if (goldCollected > 0)
         {
             goldPanel.SetActive(true);
         }
@@ -292,48 +292,16 @@ public class PlayLevelUI : UIController
         if (activeNotifications.Count >= maxNotifications)
         {
             for (int i = 0; i < activeNotifications.Count; i++)
-            
-                if(activeNotifications[i].isActive)
+
+                if (activeNotifications[i].isActive)
                 {
                     activeNotifications[i].DeactivateImmediate();
                     break;
                 }
-            }
         }
+
         notification.Activate();
     }
 
-    // Deprecated
-    private IEnumerator ElementTimer(float time, GameObject element)
-    {
-        float timeRemaining = time;
-        CanvasGroup cg = element.GetComponent<CanvasGroup>();
-        float fadeTime = 1f;
-        float fadeInRemaining = fadeTime;
-        float fadeOutRemaining = fadeTime;
-
-        while (timeRemaining > Mathf.Epsilon)
-        {
-            timeRemaining -= Time.deltaTime;
-
-            if (fadeInRemaining > Mathf.Epsilon)
-            {
-                fadeInRemaining -= Time.deltaTime;
-                cg.alpha = Mathf.SmoothStep(0f, 1f, 1f - (fadeInRemaining / fadeTime));
-            }
-
-            if (timeRemaining < fadeTime)
-            {
-                fadeOutRemaining -= Time.deltaTime;
-                cg.alpha = Mathf.SmoothStep(1f, 0f, 1f - (fadeOutRemaining / fadeTime));
-            }
-
-            yield return null;
-        }
-
-        Destroy(element);
-    }
-
-#endregion
-
+    #endregion
 }

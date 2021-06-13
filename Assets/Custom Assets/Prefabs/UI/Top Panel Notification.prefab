@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7682c70b46398134c947b099c4b5dfcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeTime: 8
-  fadeTime: 1
+  activeTime: 4
+  fadeTime: 0.5
   isActive: 0
   elementText: {fileID: 2227350988141890110}

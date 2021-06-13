@@ -27,11 +27,14 @@ public class TopPanelNotification : MonoBehaviour
     public void Deactivate()
     {
         isActive = false;
+        SceneController.instance.sceneUi.activeNotifications.Remove(this);
         StartCoroutine(FadeOut());
     }
 
     public void DeactivateImmediate()
     {
+        isActive = false;
+        SceneController.instance.sceneUi.activeNotifications.Remove(this);
         StopAllCoroutines();
         Destroy(gameObject);
     }
