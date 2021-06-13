@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BatteryCap
   m_EditorClassIdentifier: 
   effectType: 14
-  minStrength: 10
-  maxStrength: 100
-  chanceOfBeingAdded: 10
+  minStrength: 50
+  maxStrength: 500
+  chanceOfBeingAdded: 50
   description: Battery Capacity
   unitOfMeasurement: '%'

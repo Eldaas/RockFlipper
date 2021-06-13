@@ -16,7 +16,6 @@ public class ResourceCollector : MonoBehaviour
         {
             case "Iron":
                 GameManager.instance.levelRecord.ironCollected += numEvents;
-                Debug.Log("Iron collected");
                 break;
             case "Silver":
                 GameManager.instance.levelRecord.silverCollected += numEvents;

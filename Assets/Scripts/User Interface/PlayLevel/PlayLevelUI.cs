@@ -78,7 +78,7 @@ public class PlayLevelUI : UIController
     [SerializeField]
     private int maxNotifications;
     [SerializeField]
-    public List<TopPanelNotification> activeNotifications = new List<TopPanelNotification>();
+    public List<TopPanelNotification> tnpList = new List<TopPanelNotification>();
     [SerializeField]
     private Transform tnpParent;
     [SerializeField]
@@ -89,6 +89,8 @@ public class PlayLevelUI : UIController
     private Transform ssnpParent;
     [SerializeField]
     private GameObject ssnpPrefab;
+    [SerializeField]
+    public List<ScreenSpaceNotification> ssnList = new List<ScreenSpaceNotification>();
 
     [Header("Notification Colours")]
     [SerializeField]
@@ -132,7 +134,32 @@ public class PlayLevelUI : UIController
     }
 
     #region Public Methods
+    public void NewScreenNotification(string message, Colors color, Transform tracked)
+    {
+        GameObject newUiElement = Instantiate(ssnpPrefab, ssnpParent);
+        ScreenSpaceNotification notification = newUiElement.GetComponent<ScreenSpaceNotification>();
+        notification.trackedTransform = tracked;
+        Color thisColor = new Color(0, 0, 0, 0);
 
+        switch(color)
+        {
+            case Colors.Red:
+                thisColor = red;
+                break;
+            case Colors.Green:
+                thisColor = green;
+                break;
+            case Colors.Blue:
+                thisColor = blue;
+                break;
+            case Colors.Yellow:
+                thisColor = yellow;
+                break;
+        }
+
+        notification.SetMessage(message, thisColor);
+        notification.Activate();
+    }
     #endregion
 
     #region Protected & Private Methods
@@ -150,19 +177,19 @@ public class PlayLevelUI : UIController
         playerDeathDelegate = PlayerDeath;
         EventManager.StartListening("PlayerDeath", playerDeathDelegate);
 
-        shieldOfflineDelegate = delegate { NewNotification("SHIELD OFFLINE", blue); };
+        shieldOfflineDelegate = delegate { NewTopNotification("SHIELD OFFLINE", blue); };
         EventManager.StartListening("ShieldDestroyed", shieldOfflineDelegate);
 
-        armourDestroyedDelegate = delegate { NewNotification("ARMOUR DESTROYED", yellow); };
+        armourDestroyedDelegate = delegate { NewTopNotification("ARMOUR DESTROYED", yellow); };
         EventManager.StartListening("ArmourDestroyed", armourDestroyedDelegate);
 
-        hullLowDelegate = delegate { NewNotification("HULL LOW!", red); };
+        hullLowDelegate = delegate { NewTopNotification("HULL LOW!", red); };
         EventManager.StartListening("HealthLow", hullLowDelegate);
 
-        lowEnergyDelegate = delegate { NewNotification("LOW ENERGY", green); };
+        lowEnergyDelegate = delegate { NewTopNotification("LOW ENERGY", green); };
         EventManager.StartListening("EnergyLow", lowEnergyDelegate);
 
-        noEnergyDelegate = delegate { NewNotification("NO ENERGY LEFT", red); };
+        noEnergyDelegate = delegate { NewTopNotification("NO ENERGY LEFT", red); };
         EventManager.StartListening("BatteryIsEmpty", noEnergyDelegate);
     }
 
@@ -282,20 +309,20 @@ public class PlayLevelUI : UIController
     /// Pass a message to the notification system to be displayed on the top panel.
     /// </summary>
     /// <param name="message">The message to be printed within the panel.</param>
-    private void NewNotification(string message, Color color)
+    private void NewTopNotification(string message, Color color)
     {
         GameObject newUiElement = Instantiate(tnpPrefab, tnpParent);
         TopPanelNotification notification = newUiElement.GetComponent<TopPanelNotification>();
         notification.SetMessage(message, color);
 
-        activeNotifications.Add(notification);
-        if (activeNotifications.Count >= maxNotifications)
+        tnpList.Add(notification);
+        if (tnpList.Count >= maxNotifications)
         {
-            for (int i = 0; i < activeNotifications.Count; i++)
+            for (int i = 0; i < tnpList.Count; i++)
 
-                if (activeNotifications[i].isActive)
+                if (tnpList[i].isActive)
                 {
-                    activeNotifications[i].DeactivateImmediate();
+                    tnpList[i].DeactivateImmediate();
                     break;
                 }
         }
@@ -305,3 +332,5 @@ public class PlayLevelUI : UIController
 
     #endregion
 }
+
+public enum Colors { Red, Green, Blue, Yellow }

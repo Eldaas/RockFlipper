@@ -533,6 +533,125 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128079692}
   m_CullTransparentMesh: 0
+--- !u!21 &151745332
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 875496776}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 1871121221}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.035
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 0, g: 1, b: 0.0323627, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &169989228
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,140 +727,167 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169989228}
   m_CullTransparentMesh: 0
---- !u!1 &208809724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+--- !u!21 &192903721
+Material:
   serializedVersion: 6
-  m_Component:
-  - component: {fileID: 208809725}
-  - component: {fileID: 208809727}
-  - component: {fileID: 208809726}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &208809725
-RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208809724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1524748207}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50.095, y: -18.205}
-  m_SizeDelta: {x: 100.19, y: 36.41}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &208809726
-MonoBehaviour:
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 600862950}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 1754080851}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.035
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 1, g: 0.38500333, b: 0, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+--- !u!28 &198973282
+Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208809724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: BONUS!
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6fcacf7a44027a14aa4eff1fe0d4ff95, type: 2}
-  m_sharedMaterial: {fileID: 6537191040048533995, guid: 6fcacf7a44027a14aa4eff1fe0d4ff95,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
+  m_ImageContentsHash:
     serializedVersion: 2
-    rgba: 2939280858
-  m_fontColor: {r: 0.8535475, g: 0.8666667, b: 0.19215685, a: 0.6862745}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 16
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 1
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &208809727
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208809724}
-  m_CullTransparentMesh: 0
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &222218845
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,48 +983,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222218845}
   m_CullTransparentMesh: 0
---- !u!28 &222337643
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!28 &222974559
 Texture2D:
   m_ObjectHideFlags: 0
@@ -921,7 +1025,91 @@ Texture2D:
     offset: 0
     size: 0
     path: 
+--- !u!28 &226657838
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!28 &233585449
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
+--- !u!28 &241474087
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1390,48 +1578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b872877891a7cf342803ea9745a0be0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!28 &269731020
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &277517746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,6 +1652,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277517746}
   m_CullTransparentMesh: 0
+--- !u!28 &314919941
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &316212507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,126 +1727,7 @@ Transform:
   m_Father: {fileID: 399461730}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &329060068
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 269731020}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 222337643}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.035
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 1, g: 0, b: 0.55760765, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
---- !u!28 &335071373
+--- !u!28 &333976906
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2055,125 +2124,48 @@ MonoBehaviour:
   goldParent: {fileID: 1800237045}
   resourcesCount: 100
   notificationsParent: {fileID: 0}
---- !u!21 &403783389
-Material:
-  serializedVersion: 6
+--- !u!28 &415680514
+Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 1098113580}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 1374718160}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.03
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 1, g: 0.9696859, b: 0, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &428422384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,48 +2498,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442511637}
   m_CullTransparentMesh: 0
---- !u!28 &458523414
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!222 &466368810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2760,125 +2710,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522832000}
   m_CullTransparentMesh: 0
---- !u!21 &608719398
-Material:
-  serializedVersion: 6
+--- !u!28 &600862950
+Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA _ALIGNBORDERTEXTURE_ON _ALIGNEMPTYTEXTURE_ON
-    _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 987191690}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 1637666256}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.465
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.03
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.52
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 0.02666688, g: 1, b: 0, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &613029452
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,48 +3196,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670881759}
   m_CullTransparentMesh: 0
---- !u!28 &695638836
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &695886958
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,125 +3519,48 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!21 &848249150
-Material:
-  serializedVersion: 6
+--- !u!28 &827897251
+Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 695638836}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 1897113836}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.035
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 0, g: 1, b: 0.0323627, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &858714598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,6 +3591,48 @@ Transform:
   m_Father: {fileID: 399461730}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!28 &875496776
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &912657869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3961,125 +3757,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2044930890}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &938273709
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 1630834031}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 458523414}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.03
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 1, g: 0.030630242, b: 0, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &969885389
 GameObject:
   m_ObjectHideFlags: 0
@@ -4205,48 +3882,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973604535}
   m_CullTransparentMesh: 0
---- !u!28 &987191690
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &997306332
 GameObject:
   m_ObjectHideFlags: 0
@@ -4321,6 +3956,125 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997306332}
   m_CullTransparentMesh: 0
+--- !u!21 &997644708
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 1568650804}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 827897251}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.03
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 1, g: 0.9696859, b: 0, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &998732342
 GameObject:
   m_ObjectHideFlags: 0
@@ -4632,8 +4386,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1524748207}
+  m_Children: []
   m_Father: {fileID: 169989229}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4759,48 +4512,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085032580}
   m_CullTransparentMesh: 0
---- !u!28 &1098113580
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1109218367
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,125 +4858,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120650694}
   m_CullTransparentMesh: 0
---- !u!21 &1129228738
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 335071373}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 1182839627}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.035
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 1, g: 0.38500333, b: 0, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &1147684913 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2349310939977073010, guid: 2fddc4c8b71f41e46bc96011ac645d13,
@@ -5460,7 +5052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 337.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1157349372
@@ -5716,48 +5308,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170359292}
   m_CullTransparentMesh: 0
---- !u!28 &1182839627
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1189300153
 GameObject:
   m_ObjectHideFlags: 0
@@ -6776,48 +6326,6 @@ Texture2D:
     offset: 0
     size: 0
     path: 
---- !u!28 &1374718160
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1001 &1377998477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7396,48 +6904,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409885354}
   m_CullTransparentMesh: 0
---- !u!28 &1430158053
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1430586938
 GameObject:
   m_ObjectHideFlags: 0
@@ -7797,6 +7263,125 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+--- !u!21 &1435971918
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 415680514}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 314919941}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.03
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 1, g: 0.030630242, b: 0, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1001 &1454449225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8245,6 +7830,48 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!28 &1490696547
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1510355773
 GameObject:
   m_ObjectHideFlags: 0
@@ -8498,241 +8125,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512188038}
   m_CullTransparentMesh: 0
---- !u!1 &1524748206
-GameObject:
+--- !u!28 &1539518956
+Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1524748207}
-  - component: {fileID: 1524748211}
-  - component: {fileID: 1524748210}
-  - component: {fileID: 1524748209}
-  - component: {fileID: 1524748208}
-  m_Layer: 5
-  m_Name: Screen Space Notification
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1524748207
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524748206}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 208809725}
-  m_Father: {fileID: 1050951391}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 630.17926, y: -209.23001}
-  m_SizeDelta: {x: 100.19, y: 36.41}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1524748208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524748206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
---- !u!114 &1524748209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524748206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
---- !u!114 &1524748210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524748206}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1524748211
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524748206}
-  m_CullTransparentMesh: 0
---- !u!21 &1528748948
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 1651251849}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 1806763657}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.035
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 0, g: 1, b: 0.92158204, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!28 &1540983838
 Texture2D:
   m_ObjectHideFlags: 0
@@ -8988,7 +8422,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558400714}
   m_CullTransparentMesh: 0
---- !u!28 &1630834031
+--- !u!28 &1568650804
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9030,6 +8464,244 @@ Texture2D:
     offset: 0
     size: 0
     path: 
+--- !u!21 &1570818730
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 226657838}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 198973282}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.035
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 0, g: 1, b: 0.92158204, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+--- !u!21 &1623387427
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 1692421270}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 2096251968}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.035
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 1, g: 0, b: 0.55760765, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1001 &1634794136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9332,48 +9004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b872877891a7cf342803ea9745a0be0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!28 &1637666256
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!21 &1645661370
 Material:
   serializedVersion: 6
@@ -9493,48 +9123,6 @@ Material:
     - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
     - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
     - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
---- !u!28 &1651251849
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1653517484
 GameObject:
   m_ObjectHideFlags: 0
@@ -9905,6 +9493,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677549003}
   m_CullTransparentMesh: 0
+--- !u!28 &1692421270
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1722080809
 GameObject:
   m_ObjectHideFlags: 0
@@ -10007,6 +9637,167 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722080809}
   m_CullTransparentMesh: 0
+--- !u!21 &1736273298
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
+    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 1490696547}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 241474087}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.78
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.03
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.692
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 0, g: 1, b: 0.9237678, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+--- !u!28 &1754080851
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1754291708
 GameObject:
   m_ObjectHideFlags: 0
@@ -10163,90 +9954,6 @@ Transform:
   m_Father: {fileID: 399461730}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!28 &1806763657
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
---- !u!28 &1821735953
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1829076453
 GameObject:
   m_ObjectHideFlags: 0
@@ -10560,6 +10267,48 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7949081001943575663}
   m_PrefabAsset: {fileID: 0}
+--- !u!28 &1871121221
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1884451084
 GameObject:
   m_ObjectHideFlags: 0
@@ -10599,7 +10348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 202.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884451086
@@ -10758,48 +10507,125 @@ Transform:
   m_Father: {fileID: 316212508}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!28 &1897113836
-Texture2D:
+--- !u!21 &1895242806
+Material:
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 2
-  m_Width: 100
-  m_Height: 1
-  m_CompleteImageSize: 400
-  m_TextureFormat: 4
-  m_MipCount: 1
-  m_IsReadable: 1
-  m_IgnoreMasterTextureLimit: 0
-  m_IsPreProcessed: 0
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  image data: 400
-  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  m_StreamData:
-    offset: 0
-    size: 0
-    path: 
+  m_Name: radialSegmentedHealthBarInstance
+  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
+  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA _ALIGNBORDERTEXTURE_ON _ALIGNEMPTYTEXTURE_ON
+    _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
+    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
+    _INNERTEXTURESCALEWITHSEGMENTS_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BorderTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyGradient:
+        m_Texture: {fileID: 333976906}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmptyTexture:
+        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerGradient:
+        m_Texture: {fileID: 1539518956}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _InnerTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OverlayTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpaceTexture:
+        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlignBorderTexture: 1
+    - _AlignEmptyTexture: 1
+    - _AlignInnerTexture: 1
+    - _AlignSpaceTexture: 1
+    - _Arc: 0.25
+    - _BorderSpacing: 0.02
+    - _BorderTextureEnabled: 1
+    - _BorderTextureOpacity: 0.465
+    - _BorderTextureScaleWithSegments: 0
+    - _BorderWidth: 0
+    - _ContentNoiseEnabled: 0
+    - _ContentNoiseScale: 100
+    - _ContentNoiseStrength: 0.5
+    - _EmptyGradientEnabled: 1
+    - _EmptyNoiseEnabled: 0
+    - _EmptyNoiseScale: 100
+    - _EmptyNoiseStrength: 0.5
+    - _EmptyTextureEnabled: 1
+    - _EmptyTextureOpacity: 0.459
+    - _EmptyTextureScaleWithSegments: 1
+    - _InnerGradientEnabled: 1
+    - _InnerTextureEnabled: 1
+    - _InnerTextureOpacity: 1
+    - _InnerTextureScaleWithSegments: 1
+    - _LineWidth: 0.03
+    - _OverlayNoiseEnabled: 0
+    - _OverlayNoiseScale: 100
+    - _OverlayNoiseStrength: 0.5
+    - _OverlayTextureEnabled: 0
+    - _OverlayTextureOpacity: 0.745
+    - _PulsateWhenLow: 1
+    - _PulseActivationThreshold: 0.25
+    - _PulseSpeed: 10
+    - _Radius: 0.318
+    - _RemoveBorder: 0.78
+    - _RemoveSegments: 0
+    - _Rotation: 0
+    - _SegmentCount: 1
+    - _SegmentSpacing: 0.039
+    - _SpaceTextureEnabled: 1
+    - _SpaceTextureOpacity: 0.52
+    - _TestVar: -5.71
+    - _ValueAsGradientTimeEmpty: 0
+    - _ValueAsGradientTimeInner: 0
+    m_Colors:
+    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
+    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _InnerColor: {r: 0.02666688, g: 1, b: 0, a: 0.49019608}
+    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
+    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
+    - _SpaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &1897148924
 GameObject:
   m_ObjectHideFlags: 0
@@ -10839,7 +10665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 67.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1897148926
@@ -11170,125 +10996,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970826450}
   m_CullTransparentMesh: 0
---- !u!21 &1973431088
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: radialSegmentedHealthBarInstance
-  m_Shader: {fileID: 4800000, guid: a0c626cc29f579e4ca34155fb0b90929, type: 3}
-  m_ShaderKeywords: EMPTY_TEXTURE_ON ETC1_EXTERNAL_ALPHA SPACE_TEXTURE_ON _ALIGNBORDERTEXTURE_ON
-    _ALIGNEMPTYTEXTURE_ON _ALIGNINNERTEXTURE_ON _ALIGNSPACETEXTURE_ON _BORDERTEXTURESCALEWITHSEGMENTS_ON
-    _EMPTYGRADIENTENABLED_ON _EMPTYTEXTURESCALEWITHSEGMENTS_ON _INNERGRADIENTENABLED_ON
-    _INNERTEXTURESCALEWITHSEGMENTS_ON
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BorderTexture:
-        m_Texture: {fileID: 2800000, guid: 691817112414d7e48acdf76e60628515, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyGradient:
-        m_Texture: {fileID: 1430158053}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmptyTexture:
-        m_Texture: {fileID: 2800000, guid: 95a8a9f662387ae47b85333199c4d4b7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerGradient:
-        m_Texture: {fileID: 1821735953}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _InnerTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OverlayTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpaceTexture:
-        m_Texture: {fileID: 2800000, guid: cd4dc589ca3a6784fb9328789fa1d40a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _AlignBorderTexture: 1
-    - _AlignEmptyTexture: 1
-    - _AlignInnerTexture: 1
-    - _AlignSpaceTexture: 1
-    - _Arc: 0.25
-    - _BorderSpacing: 0.02
-    - _BorderTextureEnabled: 1
-    - _BorderTextureOpacity: 0.78
-    - _BorderTextureScaleWithSegments: 0
-    - _BorderWidth: 0
-    - _ContentNoiseEnabled: 0
-    - _ContentNoiseScale: 100
-    - _ContentNoiseStrength: 0.5
-    - _EmptyGradientEnabled: 1
-    - _EmptyNoiseEnabled: 0
-    - _EmptyNoiseScale: 100
-    - _EmptyNoiseStrength: 0.5
-    - _EmptyTextureEnabled: 1
-    - _EmptyTextureOpacity: 0.459
-    - _EmptyTextureScaleWithSegments: 1
-    - _InnerGradientEnabled: 1
-    - _InnerTextureEnabled: 1
-    - _InnerTextureOpacity: 1
-    - _InnerTextureScaleWithSegments: 1
-    - _LineWidth: 0.03
-    - _OverlayNoiseEnabled: 0
-    - _OverlayNoiseScale: 100
-    - _OverlayNoiseStrength: 0.5
-    - _OverlayTextureEnabled: 0
-    - _OverlayTextureOpacity: 0.745
-    - _PulsateWhenLow: 1
-    - _PulseActivationThreshold: 0.25
-    - _PulseSpeed: 10
-    - _Radius: 0.318
-    - _RemoveBorder: 0.78
-    - _RemoveSegments: 0
-    - _Rotation: 0
-    - _SegmentCount: 1
-    - _SegmentSpacing: 0.039
-    - _SpaceTextureEnabled: 1
-    - _SpaceTextureOpacity: 0.692
-    - _TestVar: -5.71
-    - _ValueAsGradientTimeEmpty: 0
-    - _ValueAsGradientTimeInner: 0
-    m_Colors:
-    - _BorderColor: {r: 0, g: 0, b: 0, a: 1}
-    - _BorderTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _BorderTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _ContentNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
-    - _EmptyNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _EmptyTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _InnerColor: {r: 0, g: 1, b: 0.9237678, a: 0.49019608}
-    - _InnerTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _InnerTextureTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OverlayNoiseOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _OverlayTextureOffset: {r: 7.02, g: 0, b: 0, a: 0}
-    - _OverlayTextureTiling: {r: 0.5, g: 1, b: 0, a: 0}
-    - _SpaceColor: {r: 0.6415094, g: 0.18831055, b: 0, a: 1}
-    - _SpaceTextureOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpaceTextureTiling: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &1984255098
 GameObject:
   m_ObjectHideFlags: 0
@@ -11646,6 +11353,48 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!28 &2096251968
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 100
+  m_Height: 1
+  m_CompleteImageSize: 400
+  m_TextureFormat: 4
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_IsPreProcessed: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  image data: 400
+  _typelessdata: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &2101467028
 GameObject:
   m_ObjectHideFlags: 0
@@ -13392,12 +13141,14 @@ MonoBehaviour:
   androidShootButton: {fileID: 8738922952859976186}
   androidMenuButton: {fileID: 1233570900}
   maxNotifications: 5
-  activeNotifications: []
+  tnpList: []
   tnpParent: {fileID: 1109218368}
   tnpPrefab: {fileID: 2227350988326541576, guid: 01180ec3f0efdac48ab6abc663657eed,
     type: 3}
-  ssnpParent: {fileID: 0}
-  ssnpPrefab: {fileID: 0}
+  ssnpParent: {fileID: 1050951391}
+  ssnpPrefab: {fileID: 6348210364231102224, guid: 0879d2526920b054ab3128d863497fe4,
+    type: 3}
+  ssnList: []
   red: {r: 1, g: 0.24056602, b: 0.24056602, a: 0.6862745}
   green: {r: 0.48455092, g: 1, b: 0.23921567, a: 0.6862745}
   yellow: {r: 1, g: 0.9644341, b: 0.23921567, a: 0.6862745}

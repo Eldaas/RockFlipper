@@ -13,71 +13,71 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   baseMaxHull: 150
-  maxHullEquipment: 0
+  maxHullEquipment: 277.11475
   maxHullPowerup: 0
-  currentHull: 150
-  currentMaxHull: 150
+  currentHull: 565.6721
+  currentMaxHull: 565.6721
   baseMaxArmour: 150
-  maxArmourEquipment: 0
+  maxArmourEquipment: 31.994638
   maxArmourPowerup: 0
-  currentArmour: 150
-  currentMaxArmour: 150
-  baseMaxShields: 100
-  maxShieldsEquipment: 0
-  maxShieldsPowerup: 0
-  currentShields: 12
-  currentMaxShields: 100
+  currentArmour: 119.3846
+  currentMaxArmour: 197.99196
+  baseMaxShields: 150
+  maxShieldsEquipment: 187.36952
+  maxShieldsPowerup: 150
+  currentShields: 351.04428
+  currentMaxShields: 656.05426
   baseShieldRegen: 3
-  shieldRegenEquipment: 0
-  shieldRegenPowerup: 0
-  currentShieldRegen: 3
+  shieldRegenEquipment: 92.647194
+  shieldRegenPowerup: 500
+  currentShieldRegen: 20.779415
   baseShieldCooldownTime: 5
-  shieldCooldownTimeEquipment: 0
-  shieldCooldownTimePowerup: 0
-  currentShieldCooldownTime: 5
-  baseForwardThrust: 200000
-  forwardThrustEquipment: 0
+  shieldCooldownTimeEquipment: -85.39416
+  shieldCooldownTimePowerup: 200
+  currentShieldCooldownTime: 10.730292
+  baseForwardThrust: 300000
+  forwardThrustEquipment: 39.955467
   forwardThrustPowerup: -50
-  currentForwardThrust: 100000
+  currentForwardThrust: 269866.4
   hardVelocityCap: 250
   baseMaximumVelocity: 150
-  maximumVelocityEquipment: 0
+  maximumVelocityEquipment: -5.746349
   maximumVelocityPowerup: -30
-  maximumVelocityIncrementor: 2
-  currentMaximumVelocity: 107
+  maximumVelocityIncrementor: 1
+  currentMaximumVelocity: 97.38048
   baseManeuveringSpeed: 1
-  maneuveringSpeedEquipment: 0
+  maneuveringSpeedEquipment: 15.687538
   maneuveringSpeedPowerup: 0
-  currentManeuveringSpeed: 1
-  baseBatteryCapacity: 100
+  currentManeuveringSpeed: 1.1568754
+  baseBatteryCapacity: 150
   batteryCapacityEquipment: 0
   batteryCapacityPowerup: 0
-  currentBatteryLevel: 100
-  currentBatteryCapacity: 100
-  baseBatteryRecharge: 7
+  currentBatteryLevel: 150
+  currentBatteryCapacity: 150
+  baseBatteryRecharge: 8
   batteryRechargeEquipment: 0
   batteryRechargePowerup: 0
-  currentBatteryRecharge: 7
-  baseBatteryDrain: 7
+  currentBatteryRecharge: 8
+  baseBatteryDrain: 5
   batteryDrainEquipment: 0
   batteryDrainPowerup: 0
-  currentBatteryDrain: 7
+  currentBatteryDrain: 5
   baseProjectileSpeed: 350
-  projectileSpeedEquipment: 0
+  projectileSpeedEquipment: 67.04585
   projectileSpeedPowerup: 0
-  currentProjectileSpeed: 350
+  currentProjectileSpeed: 584.66046
   baseProjectileDamage: 25
-  projectileDamageEquipment: 0
+  projectileDamageEquipment: 364.07608
   projectileDamagePowerup: 0
-  currentProjectileDamage: 25
+  currentProjectileDamage: 116.01902
   baseCollectionRange: 50
   collectionRangeEquipment: 0
   collectionRangePowerup: 0
   currentCollectionRange: 50
-  baseLuck: 1
-  luckEquipment: 0
+  baseLuck: 5
+  luckEquipment: 276.35327
   luckPowerup: 0
-  currentLuck: 1
+  currentLuck: 18.817663
   baseProfitBoost: 1
   profitBoostEquipment: 0
   currentProfitBoost: 1

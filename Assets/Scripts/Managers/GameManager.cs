@@ -264,10 +264,18 @@ public class GameManager : MonoBehaviour
     #region Miscellaneous Methods
     public float CalcDeathCost()
     {
-        float baseCost = 1000f;
-        int numOfDeaths = Mathf.Clamp(ProfileManager.instance.currentProfile.numOfDeaths, 0, progMap.deathIndexRate);
-        float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths);
-        return (1 + deathScale) * baseCost;
+        float numOfDeaths = ProfileManager.instance.currentProfile.numOfDeaths;
+        float maxDeaths = progMap.deathIndexRate;
+
+        if (numOfDeaths > maxDeaths)
+        {
+            numOfDeaths = maxDeaths;
+        }
+
+        float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths / maxDeaths);
+        float deathCost = deathScale * progMap.maxCost;
+        Debug.Log($"NumOfDeaths is: {numOfDeaths}, DeathScale is {deathScale}, Cost is: {deathCost}, Index Rate: {deathCost / progMap.deathIndexRate}");
+        return deathCost;
     }
     #endregion
 }

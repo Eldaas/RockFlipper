@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EngineThrust
   m_EditorClassIdentifier: 
   effectType: 7
-  minStrength: -10
-  maxStrength: -50
+  minStrength: 10
+  maxStrength: 200
   chanceOfBeingAdded: 25
   description: Engine Thrust
   unitOfMeasurement: '%'

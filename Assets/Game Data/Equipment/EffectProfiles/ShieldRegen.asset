@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ShieldRegen
   m_EditorClassIdentifier: 
   effectType: 2
-  minStrength: 5
-  maxStrength: 200
+  minStrength: 50
+  maxStrength: 500
   chanceOfBeingAdded: 25
   description: Shield Regen
   unitOfMeasurement: '%'

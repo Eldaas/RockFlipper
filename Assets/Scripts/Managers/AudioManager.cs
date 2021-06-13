@@ -204,7 +204,7 @@ public class AudioManager : MonoBehaviour
         powerupDeactivatedDelegate = delegate { PlayOneShot(collectionPops, powerupDeactivated); };
         EventManager.StartListening("PowerupDeactivated", powerupDeactivatedDelegate);
 
-        noEnergyDelegate = delegate { PlayOneShot(collectionPops, noEnergy); };
+        noEnergyDelegate = delegate { PlayOneShot(uiSounds, noEnergy); };
         EventManager.StartListening("BatteryIsEmpty", noEnergyDelegate);
         #endregion
 

@@ -110,7 +110,8 @@ public class Asteroid : Hazard
 
         if(SceneController.instance.player.StruckLucky())
         {
-           numToSpawn = dropYieldMax * 2;
+           numToSpawn = dropYieldMax * 10;
+           SceneController.instance.sceneUi.NewScreenNotification("BONUS! x10", Colors.Yellow, transform);
            EventManager.TriggerEvent("StruckLucky");
         }
         else

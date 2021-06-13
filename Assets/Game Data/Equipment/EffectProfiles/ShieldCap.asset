@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectType: 1
   minStrength: 5
-  maxStrength: 200
+  maxStrength: 500
   chanceOfBeingAdded: 25
   description: Shield Capacity
   unitOfMeasurement: '%'

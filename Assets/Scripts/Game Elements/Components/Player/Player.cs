@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject shipVisual;
     private ResourceCollector resourceCollector;
+    private ParticleSystemForceField forceField;
 
     [Header("VFX")]
     public GameObject vfxParent;
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         InvokeRepeating("RegenShield", 1f, 1f);
         InvokeRepeating("RechargeBattery", 1f, 1f);
         InvokeRepeating("UpdateStats", 0.5f, 0.1f);
+        forceField.endRange = stats.currentCollectionRange;
     }
 
     private void Update()
@@ -174,7 +176,7 @@ public class Player : MonoBehaviour
     {
         int randomInt = Utility.GenerateRandomInt(0, 100);
 
-        if (randomInt <= 1 * (stats.currentLuck / 100))
+        if (randomInt <= 1 * stats.currentLuck)
         {
             return true;
         }
@@ -273,6 +275,7 @@ public class Player : MonoBehaviour
     private void UpdateStats()
     {
         stats.UpdateStats();
+        
     }
 
     private void DeathSequence()
