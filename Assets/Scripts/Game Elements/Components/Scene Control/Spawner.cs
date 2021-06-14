@@ -308,8 +308,6 @@ public class Spawner : MonoBehaviour
                     Rigidbody rb = blackHole.GetComponent<Rigidbody>();
                     // TO DO: Add black hole class
                     activeBlackHoles.Remove(blackHole);
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
                     // TO DO: Add black hole class
                     blackHole.SetActive(false);
                 }

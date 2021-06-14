@@ -32,5 +32,6 @@ public class SpeedMitigation : Powerup, IPowerup
 
         player.activeEnginesFx.SetActive(true);
         player.inactiveEnginesFx.SetActive(false);
+        EventManager.TriggerEvent("SpeedMitigationExpired");
     }
 }

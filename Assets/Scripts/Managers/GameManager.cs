@@ -194,27 +194,33 @@ public class GameManager : MonoBehaviour
         EventManager.AddEvent("MediumAsteroidExplosion");
         EventManager.AddEvent("TakeHit");
         EventManager.AddEvent("ShieldsRecharged");
-        EventManager.AddEvent("ShieldsHit"); // TO DO: Add audio cue
-        EventManager.AddEvent("ShieldsDestroyed"); // TO DO: Add audio cue
-        EventManager.AddEvent("ShieldsOnline"); // TO DO: Add audio cue
-        EventManager.AddEvent("ArmourDestroyed"); // TO DO: Add audio cue
-        EventManager.AddEvent("ArmourHullHit"); // TO DO: Add audio cue
-        EventManager.AddEvent("HealthLow"); // TO DO: Add audio cue
-        EventManager.AddEvent("PlayerDeath"); // TO DO: Add audio cue
-        EventManager.AddEvent("PowerupCollected"); // TO DO: Add audio cue
-        EventManager.AddEvent("ShieldOvercharge"); // TO DO: Add audio cue
-        EventManager.AddEvent("ManeuveringBoost"); // TO DO: Add audio cue
-        EventManager.AddEvent("HullRepair"); // TO DO: Add audio cue
-        EventManager.AddEvent("ArmourRepair"); // TO DO: Add audio cue
-        EventManager.AddEvent("SpeedMitigation"); // TO DO: Add audio cue
-        EventManager.AddEvent("BatteryRecharge"); // TO DO: Add audio cue
+        EventManager.AddEvent("ShieldsHit");
+        EventManager.AddEvent("ShieldsDestroyed");
+        EventManager.AddEvent("ShieldsOnline");
+        EventManager.AddEvent("ArmourDestroyed");
+        EventManager.AddEvent("ArmourHullHit");
+        EventManager.AddEvent("HealthLow");
+        EventManager.AddEvent("PlayerDeath");
+        EventManager.AddEvent("PowerupCollected");
+        EventManager.AddEvent("PowerupExpired");
+        EventManager.AddEvent("ShieldOvercharge");
+        EventManager.AddEvent("ManeuveringBoost");
+        EventManager.AddEvent("HullRepair");
+        EventManager.AddEvent("ArmourRepair");
+        EventManager.AddEvent("SpeedMitigation");
+        EventManager.AddEvent("BatteryRecharge");
+        EventManager.AddEvent("BatteryRechargeExpired");
+        EventManager.AddEvent("ManeuveringBoostExpired");
+        EventManager.AddEvent("ShieldOverchargeExpired");
+        EventManager.AddEvent("SpeedMitigationExpired");
         EventManager.AddEvent("ResourceCollected"); 
         EventManager.AddEvent("ProjectileHit");
         EventManager.AddEvent("ProjectileShot");
         EventManager.AddEvent("SpaceSceneLoaded");
-        EventManager.AddEvent("ReturningToBase"); // TO DO: Add audio cue
-        EventManager.AddEvent("BatteryIsEmpty"); // TO DO: Add audio cue
-        EventManager.AddEvent("StruckLucky"); // TO DO: Add audio cue
+        EventManager.AddEvent("ReturningToBase");
+        EventManager.AddEvent("EnergyLow");
+        EventManager.AddEvent("BatteryIsEmpty");
+        EventManager.AddEvent("StruckLucky");
 
         // Scene load events
         EventManager.AddEvent("IntroSceneLoaded");
@@ -248,24 +254,32 @@ public class GameManager : MonoBehaviour
         // Hangar Scene Events
         EventManager.AddEvent("SellResources");
         EventManager.AddEvent("UpdateBalance");
-        EventManager.AddEvent("ItemPurchased"); // TO DO: Add audio cue
+        EventManager.AddEvent("ItemPurchased");
         EventManager.AddEvent("UpdateInventory");
         EventManager.AddEvent("UpdateStats");
         EventManager.AddEvent("UpdateEquipmentSlots");
         EventManager.AddEvent("UpdateModulePrices");
-        EventManager.AddEvent("ItemEquipped"); // TO DO: Add audio cue & tie in logic
+        EventManager.AddEvent("ItemEquipped");
         EventManager.AddEvent("ItemUnequipped");
-        EventManager.AddEvent("ItemDestroyed"); // TO DO: Add audio cue
+        EventManager.AddEvent("ItemDestroyed");
     }
     #endregion
 
     #region Miscellaneous Methods
     public float CalcDeathCost()
     {
-        float baseCost = 1000f;
-        int numOfDeaths = Mathf.Clamp(ProfileManager.instance.currentProfile.numOfDeaths, 0, progMap.deathIndexRate);
-        float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths);
-        return (1 + deathScale) * baseCost;
+        float numOfDeaths = ProfileManager.instance.currentProfile.numOfDeaths;
+        float maxDeaths = progMap.deathIndexRate;
+
+        if (numOfDeaths > maxDeaths)
+        {
+            numOfDeaths = maxDeaths;
+        }
+
+        float deathScale = progMap.deathCostScale.Evaluate(numOfDeaths / maxDeaths);
+        float deathCost = deathScale * progMap.maxCost;
+        Debug.Log($"NumOfDeaths is: {numOfDeaths}, DeathScale is {deathScale}, Cost is: {deathCost}, Index Rate: {deathCost / progMap.deathIndexRate}");
+        return deathCost;
     }
     #endregion
 }

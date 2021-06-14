@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Powerup Type/BatteryRecharge")]
 public class BatteryRecharge : Powerup, IPowerup
 {
 	// Define custom fields here
@@ -29,6 +28,8 @@ public class BatteryRecharge : Powerup, IPowerup
 	// Set stats back to normal values
 	public override void EndPowerup(Player player)
     {
+        base.EndPowerup(player);
         player.stats.batteryRechargePowerup -= rechargePerSecondPercentage;
+        EventManager.TriggerEvent("BatteryRechargeExpired");
     }
 }

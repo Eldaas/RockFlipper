@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HullCap
   m_EditorClassIdentifier: 
   effectType: 5
-  minStrength: 5
+  minStrength: 20
   maxStrength: 200
   chanceOfBeingAdded: 25
   description: Hull Capacity

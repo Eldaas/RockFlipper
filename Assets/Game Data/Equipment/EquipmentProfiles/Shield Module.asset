@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shield Module
   m_EditorClassIdentifier: 
   equipmentType: 1
-  equipmentIcon: {fileID: 21300000, guid: e4efd9774ffc5a64899d96ef3da1e23a, type: 3}
+  equipmentIcon: {fileID: 21300000, guid: 947190967720d8b4bb2d71c56d50b10e, type: 3}
   guaranteedEffects:
   - {fileID: 11400000, guid: 6eff92459f81e61408cb77b3679842f5, type: 2}
   - {fileID: 11400000, guid: d2b564b709841af49bcb1bf3138f1cca, type: 2}
@@ -22,3 +22,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a997a8fc605af3b4196e5149508f4da1, type: 2}
   - {fileID: 11400000, guid: f526bfc82d8eb1947b1b6d966f8543ea, type: 2}
   - {fileID: 11400000, guid: 113143c8095c2194e9aad0067d90ecb4, type: 2}
+  - {fileID: 11400000, guid: 30b9470fee23396438cb31065bd8a4fb, type: 2}
+  - {fileID: 11400000, guid: 80795b9555be3d54c9459d08fb7c4767, type: 2}

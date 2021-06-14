@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Maneuvering Thruster Module
   m_EditorClassIdentifier: 
   equipmentType: 5
-  equipmentIcon: {fileID: 21300000, guid: 69b852f3b9953144c83c67f852c22c8c, type: 3}
+  equipmentIcon: {fileID: 21300000, guid: c3e33a77b99653e47823adaed96f946b, type: 3}
   guaranteedEffects:
   - {fileID: 11400000, guid: 5fdef22324517eb43854f83bd22dfb6e, type: 2}
   possibleSecondaryEffects:
   - {fileID: 11400000, guid: 113143c8095c2194e9aad0067d90ecb4, type: 2}
   - {fileID: 11400000, guid: f526bfc82d8eb1947b1b6d966f8543ea, type: 2}
   - {fileID: 11400000, guid: a997a8fc605af3b4196e5149508f4da1, type: 2}
+  - {fileID: 11400000, guid: 30b9470fee23396438cb31065bd8a4fb, type: 2}
+  - {fileID: 11400000, guid: 80795b9555be3d54c9459d08fb7c4767, type: 2}

@@ -22,6 +22,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private AudioSource uiSounds;
     [SerializeField]
+    private AudioSource notificationSounds;
+    [SerializeField]
     private AudioSource ambientSounds;
     [SerializeField]
     private AudioSource bgMusic;
@@ -45,8 +47,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip healthLow;
     public AudioClip struckLucky;
     public AudioClip powerupActivated;
-    public AudioClip powerupDeactivated;
+    public AudioClip powerupExpired;
     public AudioClip resourcesDropped;
+    public AudioClip noEnergy;
 
     [Header("Audio Clips (UI Sounds)")]
     public AudioClip uiClick;
@@ -99,8 +102,9 @@ public class AudioManager : MonoBehaviour
     private UnityAction hullHitDelegate;
     private UnityAction healthLowDelegate;
     private UnityAction powerupActivatedDelegate;
-    private UnityAction powerupDeactivatedDelegate;
+    private UnityAction powerupExpiredDelegate;
     private UnityAction resourcesDroppedDelegate;
+    private UnityAction noEnergyDelegate;
 
     #endregion
 
@@ -169,16 +173,16 @@ public class AudioManager : MonoBehaviour
         resourceCollectDelegate = PlayResourceCollect;
         EventManager.StartListening("ResourceCollected", resourceCollectDelegate);
 
-        projectileShotDelegate = PlayProjectileShot;
+        projectileShotDelegate = delegate { PlayOneShot(shipSounds, projectileShot); };
         EventManager.StartListening("ProjectileShot", projectileShotDelegate);
 
-        projectileHitDelegate = PlayProjectileHit;
+        projectileHitDelegate = delegate { PlayOneShot(environmentalSounds, projectileHit); };
         EventManager.StartListening("ProjectileHit", projectileHitDelegate);
 
-        largeAsteroidExplosionDelegate = PlayLargeAsteroidExplosion;
+        largeAsteroidExplosionDelegate = delegate { PlayOneShot(environmentalSounds, largeAsteroidExplosion); };
         EventManager.StartListening("LargeAsteroidExplosion", largeAsteroidExplosionDelegate);
 
-        mediumAsteroidExplosionDelegate = PlayMediumAsteroidExplosion;
+        mediumAsteroidExplosionDelegate = delegate { PlayOneShot(environmentalSounds, mediumAsteroidExplosion); };
         EventManager.StartListening("MediumAsteroidExplosion", mediumAsteroidExplosionDelegate);
 
         spaceSceneLoadedDelegate = PlaySpaceAmbience;
@@ -193,8 +197,17 @@ public class AudioManager : MonoBehaviour
         hangarSceneLoadedDelegate = PlayHangarSceneMusic;
         EventManager.StartListening("HangarSceneLoaded", hangarSceneLoadedDelegate);
 
-        returningToBaseDelegate = PlayReturningToBase;
+        returningToBaseDelegate = delegate { PlayOneShot(shipSounds, returningToBase); };
         EventManager.StartListening("ReturningToBase", returningToBaseDelegate);
+
+        powerupActivatedDelegate = delegate { PlayOneShot(notificationSounds, powerupActivated); };
+        EventManager.StartListening("PowerupCollected", powerupActivatedDelegate);
+
+        powerupExpiredDelegate = delegate { PlayOneShot(notificationSounds, powerupExpired); };
+        EventManager.StartListening("PowerupExpired", powerupExpiredDelegate);
+
+        noEnergyDelegate = delegate { PlayOneShot(notificationSounds, noEnergy); };
+        EventManager.StartListening("BatteryIsEmpty", noEnergyDelegate);
         #endregion
 
         #region UI Events
@@ -235,28 +248,31 @@ public class AudioManager : MonoBehaviour
         uiItemPurchasedDelegate = delegate { PlayOneShot(uiSounds, uiItemPurchased); };
         EventManager.StartListening("ItemPurchased", uiItemPurchasedDelegate);
 
-        struckLuckyDelegate = delegate { PlayOneShot(uiSounds, struckLucky); };
+        struckLuckyDelegate = delegate { PlayOneShot(environmentalSounds, struckLucky); };
         EventManager.StartListening("StruckLucky", struckLuckyDelegate);
 
-        shieldsHitDelegate = delegate { PlayOneShot(shipSounds, shieldsHit); };
+        shieldsHitDelegate = delegate { PlayOneShot(notificationSounds, shieldsHit); };
         EventManager.StartListening("ShieldsHit", shieldsHitDelegate);
 
-        shieldsDestroyedDelegate = delegate { PlayOneShot(shipSounds, shieldsDestroyed); };
+        shieldsDestroyedDelegate = delegate { PlayOneShot(notificationSounds, shieldsDestroyed); };
         EventManager.StartListening("ShieldsDestroyed", shieldsDestroyedDelegate);
 
-        armourHitDelegate = delegate { PlayOneShot(shipSounds, armourHit); };
+        shieldsOnlineDelegate = delegate { PlayOneShot(notificationSounds, shieldsOnline); };
+        EventManager.StartListening("ShieldsOnline", shieldsOnlineDelegate);
+
+        armourHitDelegate = delegate { PlayOneShot(notificationSounds, armourHit); };
         EventManager.StartListening("ArmourHit", armourHitDelegate);
 
-        armourDestroyedDelegate = delegate { PlayOneShot(shipSounds, armourDestroyed); };
+        armourDestroyedDelegate = delegate { PlayOneShot(notificationSounds, armourDestroyed); };
         EventManager.StartListening("ArmourDestroyed", armourDestroyedDelegate);
 
-        hullHitDelegate = delegate { PlayOneShot(shipSounds, hullHit); };
+        hullHitDelegate = delegate { PlayOneShot(notificationSounds, hullHit); };
         EventManager.StartListening("HullHit", hullHitDelegate);
 
-        healthLowDelegate = delegate { PlayOneShot(shipSounds, healthLow); };
+        healthLowDelegate = delegate { PlayOneShot(notificationSounds, healthLow); };
         EventManager.StartListening("HealthLow", healthLowDelegate);
 
-        resourcesDroppedDelegate = delegate { PlayOneShot(uiSounds, resourcesDropped); };
+        resourcesDroppedDelegate = delegate { PlayOneShot(environmentalSounds, resourcesDropped); };
         EventManager.StartListening("ResourcesDropped", resourcesDroppedDelegate);
 
         #endregion
@@ -289,39 +305,6 @@ public class AudioManager : MonoBehaviour
         {
             PlayOneShot(collectionPops, resourceCollect);
         }
-        
-    }
-
-    /// <summary>
-    ///  Plays the projectile shot sound.
-    /// </summary>
-    private void PlayProjectileShot()
-    {
-        PlayOneShot(shipSounds, projectileShot);
-    }
-
-    /// <summary>
-    /// Plays the projectile hit sound.
-    /// </summary>
-    private void PlayProjectileHit()
-    {
-        PlayOneShot(shipSounds, projectileHit);
-    }
-
-    /// <summary>
-    /// Plays the large asteroid explosion sound.
-    /// </summary>
-    private void PlayLargeAsteroidExplosion()
-    {
-        PlayOneShot(environmentalSounds, largeAsteroidExplosion);
-    }
-
-    /// <summary>
-    /// Plays the medium asteroid explosion sound.
-    /// </summary>
-    private void PlayMediumAsteroidExplosion()
-    {
-        PlayOneShot(environmentalSounds, mediumAsteroidExplosion);
     }
 
     /// <summary>
@@ -331,6 +314,7 @@ public class AudioManager : MonoBehaviour
     {
         ambientSounds.clip = spaceAmbience;
         ambientSounds.Play();
+        ambientSounds.loop = true;
     }
 
     /// <summary>
@@ -341,6 +325,7 @@ public class AudioManager : MonoBehaviour
         // Currently the asteroid scene
         AudioClip clip = SelectRandomClip(asteroidFieldMusicTracks);
         PlayMusicTrack(clip);
+        bgMusic.loop = true;
     }
 
     /// <summary>
@@ -350,6 +335,7 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip clip = SelectRandomClip(introMenuMusicTracks);
         PlayMusicTrack(clip);
+        bgMusic.loop = true;
     }
 
     /// <summary>
@@ -359,14 +345,7 @@ public class AudioManager : MonoBehaviour
     {
         AudioClip clip = SelectRandomClip(hangarMusicTracks);
         PlayMusicTrack(clip);
-    }
-
-    /// <summary>
-    /// Plays an audio clip when the 'returning to base' event is triggered.
-    /// </summary>
-    private void PlayReturningToBase()
-    {
-        PlayOneShot(shipSounds, returningToBase);
+        bgMusic.loop = true;
     }
     #endregion
 

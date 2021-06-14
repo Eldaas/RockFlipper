@@ -74,6 +74,34 @@ public class PlayLevelUI : UIController
     [SerializeField]
     private Button androidMenuButton;
 
+    [Header("Top Notification Panel")]
+    [SerializeField]
+    private int maxNotifications;
+    [SerializeField]
+    public List<TopPanelNotification> tnpList = new List<TopPanelNotification>();
+    [SerializeField]
+    private Transform tnpParent;
+    [SerializeField]
+    private GameObject tnpPrefab;
+
+    [Header("Screen Space Notification Panel")]
+    [SerializeField]
+    private Transform ssnpParent;
+    [SerializeField]
+    private GameObject ssnpPrefab;
+    [SerializeField]
+    public List<ScreenSpaceNotification> ssnList = new List<ScreenSpaceNotification>();
+
+    [Header("Notification Colours")]
+    [SerializeField]
+    private Color red;
+    [SerializeField]
+    private Color green;
+    [SerializeField]
+    private Color yellow;
+    [SerializeField]
+    private Color blue;
+
     [Header("Misc")]
     private Player player;
     private PlayerStats stats;
@@ -81,6 +109,22 @@ public class PlayLevelUI : UIController
     [Header("Events")]
     private UnityAction updateResourceDelegate;
     private UnityAction playerDeathDelegate;
+    private UnityAction shieldOfflineDelegate;
+    private UnityAction shieldOnlineDelegate;
+    private UnityAction armourDestroyedDelegate;
+    private UnityAction hullLowDelegate;
+    private UnityAction lowEnergyDelegate;
+    private UnityAction noEnergyDelegate;
+    private UnityAction armourCollectedDelegate;
+    private UnityAction batteryCollectedDelegate;
+    private UnityAction hullCollectedDelegate;
+    private UnityAction maneuveringCollectedDelegate;
+    private UnityAction shieldCollectedDelegate;
+    private UnityAction speedCollectedDelegate;
+    private UnityAction batteryExpiredDelegate;
+    private UnityAction maneuveringExpiredDelegate;
+    private UnityAction shieldExpiredDelegate;
+    private UnityAction speedExpiredDelegate;
 
     private void Awake()
     {
@@ -101,21 +145,96 @@ public class PlayLevelUI : UIController
     }
 
     #region Public Methods
-    
+    public void NewScreenNotification(string message, Colors color, Transform tracked)
+    {
+        GameObject newUiElement = Instantiate(ssnpPrefab, ssnpParent);
+        ScreenSpaceNotification notification = newUiElement.GetComponent<ScreenSpaceNotification>();
+        notification.trackedTransform = tracked;
+        Color thisColor = new Color(0, 0, 0, 0);
+
+        switch(color)
+        {
+            case Colors.Red:
+                thisColor = red;
+                break;
+            case Colors.Green:
+                thisColor = green;
+                break;
+            case Colors.Blue:
+                thisColor = blue;
+                break;
+            case Colors.Yellow:
+                thisColor = yellow;
+                break;
+        }
+
+        notification.SetMessage(message, thisColor);
+        notification.Activate();
+    }
     #endregion
 
     #region Protected & Private Methods
     protected override void RegisterListeners()
     {
+        // Buttons
         androidHomeButton.onClick.AddListener(ReturnToBase);
         androidShootButton.onClick.AddListener(Shoot);
         androidMenuButton.onClick.AddListener(PauseMenu);
 
+        // Custom events
         updateResourceDelegate = UpdateResourcesCount;
         EventManager.StartListening("ResourceCollected", updateResourceDelegate);
 
         playerDeathDelegate = PlayerDeath;
         EventManager.StartListening("PlayerDeath", playerDeathDelegate);
+
+        shieldOfflineDelegate = delegate { NewTopNotification("SHIELD OFFLINE", red); };
+        EventManager.StartListening("ShieldsDestroyed", shieldOfflineDelegate);
+
+        shieldOnlineDelegate = delegate { NewTopNotification("SHIELD ONLINE", green); };
+        EventManager.StartListening("ShieldsOnline", shieldOnlineDelegate);
+
+        armourDestroyedDelegate = delegate { NewTopNotification("ARMOUR DESTROYED", red); };
+        EventManager.StartListening("ArmourDestroyed", armourDestroyedDelegate);
+
+        hullLowDelegate = delegate { NewTopNotification("HULL LOW!", red); };
+        EventManager.StartListening("HealthLow", hullLowDelegate);
+
+        lowEnergyDelegate = delegate { NewTopNotification("LOW ENERGY", green); };
+        EventManager.StartListening("EnergyLow", lowEnergyDelegate);
+
+        noEnergyDelegate = delegate { NewTopNotification("NO ENERGY LEFT", red); };
+        EventManager.StartListening("BatteryIsEmpty", noEnergyDelegate);
+
+        armourCollectedDelegate = delegate { NewTopNotification("ARMOUR REPAIR COLLECTED - +50", blue); };
+        EventManager.StartListening("ArmourRepair", armourCollectedDelegate);
+
+        batteryCollectedDelegate = delegate { NewTopNotification("BATTERY RECHARGE COLLECTED", blue); };
+        EventManager.StartListening("BatteryRecharge", batteryCollectedDelegate);
+
+        hullCollectedDelegate = delegate { NewTopNotification("HULL REPAIR COLLECTED - +50", blue); };
+        EventManager.StartListening("HullRepair", hullCollectedDelegate);
+
+        maneuveringCollectedDelegate = delegate { NewTopNotification("MANEUVERING POWERUP COLLECTED", blue); };
+        EventManager.StartListening("ManeuveringBoost", maneuveringCollectedDelegate);
+
+        shieldCollectedDelegate = delegate { NewTopNotification("SHIELD POWERUP COLLECTED", blue); };
+        EventManager.StartListening("ShieldOvercharge", shieldCollectedDelegate);
+
+        speedCollectedDelegate = delegate { NewTopNotification("ENGINE POWERDOWN COLLECTED", blue); };
+        EventManager.StartListening("SpeedMitigation", speedCollectedDelegate);
+
+        batteryExpiredDelegate = delegate { NewTopNotification("BATTERY RECHARGE EXPIRED", blue); };
+        EventManager.StartListening("BatteryRechargeExpired", batteryExpiredDelegate);
+
+        maneuveringExpiredDelegate = delegate { NewTopNotification("MANEUVERING POWERUP EXPIRED", blue); };
+        EventManager.StartListening("ManeuveringBoostExpired", maneuveringExpiredDelegate);
+
+        shieldExpiredDelegate = delegate { NewTopNotification("SHIELD POWERUP EXPIRED", blue); };
+        EventManager.StartListening("ShieldOverchargeExpired", shieldExpiredDelegate);
+
+        speedExpiredDelegate = delegate { NewTopNotification("ENGINE POWERDOWN EXPIRED", blue); };
+        EventManager.StartListening("SpeedMitigationExpired", speedExpiredDelegate);
     }
 
     private void Initialise()
@@ -144,7 +263,7 @@ public class PlayLevelUI : UIController
 
     private IEnumerator EndScene()
     {
-        while(UIManager.instance.LoadScreenAlpha > Mathf.Epsilon)
+        while (UIManager.instance.LoadScreenAlpha > Mathf.Epsilon)
         {
             yield return new WaitForEndOfFrame();
         }
@@ -163,7 +282,7 @@ public class PlayLevelUI : UIController
     private void UpdateStat(RadialSegmentedHealthBar bar, TextMeshProUGUI percentageText, TextMeshProUGUI valueText, float currValue, float maxValue)
     {
         float percentage = currValue / maxValue;
-        
+
         float currentRadialValue = 1 - bar.RemovedSegments.Value;
         float uiPercentage = Mathf.SmoothStep(currentRadialValue, percentage, 0.1f);
         bar.SetPercent(uiPercentage);
@@ -187,17 +306,17 @@ public class PlayLevelUI : UIController
         silverText.text = silverCollected.ToString();
         goldText.text = goldCollected.ToString();
 
-        if(ironCollected > 0)
+        if (ironCollected > 0)
         {
             ironPanel.SetActive(true);
         }
 
-        if(silverCollected > 0)
+        if (silverCollected > 0)
         {
             silverPanel.SetActive(true);
         }
 
-        if(goldCollected > 0)
+        if (goldCollected > 0)
         {
             goldPanel.SetActive(true);
         }
@@ -230,6 +349,45 @@ public class PlayLevelUI : UIController
         androidUi.SetActive(false);
     }
 
-#endregion
+    /// <summary>
+    /// Pass a message to the notification system to be displayed on the top panel.
+    /// </summary>
+    /// <param name="message">The message to be printed within the panel.</param>
+    private void NewTopNotification(string message, Color color)
+    {
+        bool notificationExists = false;
 
+        foreach(TopPanelNotification n in tnpList.ToArray())
+        {
+            if (n.CompareMessage(message))
+            {
+                notificationExists = true;
+            }
+        }
+
+        if(!notificationExists)
+        {
+            GameObject newUiElement = Instantiate(tnpPrefab, tnpParent);
+            TopPanelNotification notification = newUiElement.GetComponent<TopPanelNotification>();
+            notification.SetMessage(message, color);
+            tnpList.Add(notification);
+
+            if (tnpList.Count >= maxNotifications)
+            {
+                for (int i = 0; i < tnpList.Count; i++)
+
+                    if (tnpList[i].isActive)
+                    {
+                        tnpList[i].DeactivateImmediate();
+                        break;
+                    }
+            }
+
+            notification.Activate();
+        } 
+    }
+
+    #endregion
 }
+
+public enum Colors { Red, Green, Blue, Yellow }

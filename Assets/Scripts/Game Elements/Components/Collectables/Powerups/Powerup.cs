@@ -27,11 +27,9 @@ public abstract class Powerup : MonoBehaviour
 
     public virtual void ExecutePowerup(Player player)
     {
-        Debug.Log("ExecutePowerup triggered.");
         EventManager.TriggerEvent("PowerupCollected");
         playerParticleFx = Instantiate(playerParticleFxPrefab, player.vfxParent.transform);
         playerParticleFx.transform.localPosition = playerParticleFxOffset;
-        Debug.Log("Instantiated player particles: " + playerParticleFx.name);
         playerParticleFx.SetActive(true);
         objectParticle.SetActive(false);
         isActive = true;
@@ -40,7 +38,7 @@ public abstract class Powerup : MonoBehaviour
 
     public virtual void EndPowerup(Player player)
     {
-        Debug.Log("Ending the powerup.");
+        EventManager.TriggerEvent("PowerupExpired");
         Debug.Log("Setting gameobject to inactive: " + playerParticleFx.name);
         playerParticleFx.SetActive(false);
         objectParticle.SetActive(true);

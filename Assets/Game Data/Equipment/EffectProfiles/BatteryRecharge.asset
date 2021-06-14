@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BatteryRecharge
   m_EditorClassIdentifier: 
   effectType: 15
-  minStrength: 5
+  minStrength: 20
   maxStrength: 100
   chanceOfBeingAdded: 10
   description: Battery Recharge

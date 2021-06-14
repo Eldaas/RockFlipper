@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "Equipment/Equipment Profile")]
+[CreateAssetMenu(menuName = "Equipment/Equipment Profile"), System.Serializable]
 public class EquipmentProfile : ScriptableObject
 {
     public EquipmentType equipmentType;
