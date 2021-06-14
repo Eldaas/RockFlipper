@@ -206,6 +206,11 @@ public class PlayerController : MonoBehaviour
         {
             player.stats.currentBatteryLevel -= player.stats.currentBatteryDrain;
 
+            if (player.stats.currentBatteryLevel / player.stats.currentBatteryCapacity <= 0.25f)
+            {
+                EventManager.TriggerEvent("EnergyLow");
+            }
+
             GameObject parentGo = ObjectPooler.instance.GetPooledProjectile();
             if (parentGo)
             {

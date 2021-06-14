@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject shipVisual;
     private ResourceCollector resourceCollector;
+    [SerializeField]
     private ParticleSystemForceField forceField;
 
     [Header("VFX")]
@@ -247,20 +248,26 @@ public class Player : MonoBehaviour
         float endTime = Time.time + powerup.EffectDuration;
         powerup.ExecutePowerup(this);
         GameObject icon = null;
+        PowerupUI pui = null;
 
-        if(powerup.UiIconPrefab != null)
+        if (powerup.UiIconPrefab != null)
         {
             icon = Instantiate(powerup.UiIconPrefab, SceneController.instance.sceneUi.powerupsParent.transform);
+            pui = icon.GetComponent<PowerupUI>();
         }
 
-        PowerupUI pui = icon.GetComponent<PowerupUI>();
         float timeRemaining = endTime - Time.time;
 
         while (timeRemaining > Mathf.Epsilon)
         {
             timeRemaining -= Time.deltaTime;
-            pui.text.text = $"{Math.Truncate(timeRemaining)}s";
-            pui.bar.SetPercent(timeRemaining / powerup.EffectDuration);
+
+            if(pui != null)
+            {
+                pui.text.text = $"{Math.Truncate(timeRemaining)}s";
+                pui.bar.SetPercent(timeRemaining / powerup.EffectDuration);
+            }
+            
             yield return new WaitForEndOfFrame();
         }
 

@@ -82,7 +82,7 @@ public class HighScores : MonoBehaviour
     /// <returns></returns>
     IEnumerator UpdateData()
     {
-        AddScore(profile.profileName, profile.balance.ToString(), profile.totalPlayTime.ToString());
+        AddScore(profile.profileName, Math.Truncate(profile.balance).ToString(), Math.Truncate(profile.totalPlayTime).ToString());
 
         while (!dataSent)
         {
@@ -100,6 +100,7 @@ public class HighScores : MonoBehaviour
     /// <param name="totalTime">The player's total time spent in a game level, therefore the player's total time spent playing.</param>
     private void AddScore(string name, string balance, string totalTime)
     {
+        Debug.Log($"Request: http://dreamlo.com/lb/REyGVjWkkkqwY5J0ITSyWA4CP2veOrbU-1yqU3OD6r4A/add/{name}/{balance}/{totalTime}");
         StartCoroutine(GetRequest($"http://dreamlo.com/lb/REyGVjWkkkqwY5J0ITSyWA4CP2veOrbU-1yqU3OD6r4A/add/{name}/{balance}/{totalTime}", RequestType.Send));
     }
 

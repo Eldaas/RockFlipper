@@ -18,5 +18,6 @@ public class ManeuveringBoost : Powerup, IPowerup
     {
         base.EndPowerup(player);
         player.stats.maneuveringSpeedPowerup -= Mathf.Abs(percentage);
+        EventManager.TriggerEvent("ManeuveringBoostExpired");
     }
 }

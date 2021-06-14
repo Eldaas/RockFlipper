@@ -130,7 +130,7 @@ public class Asteroid : Hazard
                 go.SetActive(true);
 
                 Rigidbody rb = go.GetComponent<Rigidbody>();
-                rb.AddExplosionForce(force * transform.localScale.magnitude, transform.position, explosionRadius);
+                rb.AddExplosionForce(force, transform.position, explosionRadius);
             }
         }
     }
@@ -176,7 +176,7 @@ public class Asteroid : Hazard
             // If health is lower than zero, trigger the asteroid explosion chain
             if(currentHealth <= 0f)
             {
-                ExplodeAsteroid(3000f * transform.localScale.magnitude, 100f);
+                ExplodeAsteroid(5000f, 1000000f);
             }
 
         }

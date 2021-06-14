@@ -129,6 +129,8 @@ public class ProfileManager : MonoBehaviour
         if(found)
         {
             currentProfile = loadedProfile;
+            EquipmentManager.instance.playerEquipment = loadedProfile.currentEquipment;
+            EquipmentManager.instance.playerInventory = loadedProfile.currentInventory;
             EventManager.TriggerEvent("UISuccess");
             EventManager.TriggerEvent("ProfileLoaded");
 

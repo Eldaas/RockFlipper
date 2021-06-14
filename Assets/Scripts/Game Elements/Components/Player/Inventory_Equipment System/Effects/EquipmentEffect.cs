@@ -84,6 +84,12 @@ public class EquipmentEffect
             case EffectType.ProjectileSpeed:
                 stats.projectileSpeedEquipment += effectStrength;
                 break;
+            case EffectType.BatteryCapacity:
+                stats.batteryCapacityEquipment += effectStrength;
+                break;
+            case EffectType.BatteryRecharge:
+                stats.batteryRechargeEquipment += effectStrength;
+                break;
         }
     }
     #endregion

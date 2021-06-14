@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Equipment/Equipment Effect Profile")]
+[CreateAssetMenu(menuName = "Equipment/Equipment Effect Profile"), System.Serializable]
 public class EquipmentEffectProfile : ScriptableObject
 {
     public EffectType effectType;

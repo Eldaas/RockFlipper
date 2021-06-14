@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ArmourCap
   m_EditorClassIdentifier: 
   effectType: 4
-  minStrength: 5
-  maxStrength: 100
+  minStrength: 20
+  maxStrength: 200
   chanceOfBeingAdded: 25
   description: Armour Capacity
   unitOfMeasurement: '%'
-

@@ -132,12 +132,12 @@ PrefabInstance:
     - target: {fileID: 5893443279181252542, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.35686275
+      value: 0.96846926
       objectReference: {fileID: 0}
     - target: {fileID: 5893443279181252542, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.67058825
+      value: 0.35686278
       objectReference: {fileID: 0}
     - target: {fileID: 5893443279181252542, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
@@ -147,22 +147,22 @@ PrefabInstance:
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime1
-      value: 56283
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime2
-      value: 56283
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.b
-      value: 0.35686275
+      value: 0.9614179
       objectReference: {fileID: 0}
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.g
-      value: 0.67058825
+      value: 0.35686278
       objectReference: {fileID: 0}
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key2.b
-      value: 0.35686275
+      value: 0.35686278
       objectReference: {fileID: 0}
     - target: {fileID: 5893553614674840416, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
@@ -193,12 +193,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c033090f277397a4389ef0b17894adb3, type: 2}
+      objectReference: {fileID: 2100000, guid: 47916e67bc02f0246ba919c230395498, type: 2}
     - target: {fileID: 5894641077395632954, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: c033090f277397a4389ef0b17894adb3, type: 2}
+      objectReference: {fileID: 2100000, guid: 47916e67bc02f0246ba919c230395498, type: 2}
     - target: {fileID: 5982742361107730784, guid: 84671be148b3d904382bffd93ca7c4a0,
         type: 3}
       propertyPath: m_RootOrder

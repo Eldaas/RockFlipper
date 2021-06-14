@@ -23,9 +23,9 @@ public class ShieldOvercharge : Powerup, IPowerup
     public override void EndPowerup(Player player)
     {
         base.EndPowerup(player);
-
         player.stats.shieldRegenPowerup -= shieldRegenPercentage;
         player.stats.shieldCooldownTimePowerup -= shieldCooldownPercentage;
         player.stats.maxShieldsPowerup -= shieldCapacityPercentage;
+        EventManager.TriggerEvent("ShieldOverchargeExpired");
     }
 }

@@ -15,6 +15,6 @@ MonoBehaviour:
   effectType: 11
   minStrength: 5
   maxStrength: 100
-  chanceOfBeingAdded: 1
+  chanceOfBeingAdded: 5
   description: Collector Radius
   unitOfMeasurement: '%'

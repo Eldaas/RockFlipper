@@ -34,6 +34,16 @@ public class Notification : MonoBehaviour
         elementText.color = color;
     }
 
+    public bool CompareMessage(string message)
+    {
+        if(string.Compare(elementText.text, message) == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     protected virtual void BeginActiveCountdown()
     {
         StartCoroutine(Countdown());
