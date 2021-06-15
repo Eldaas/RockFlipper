@@ -136,7 +136,7 @@ public class HighScores : MonoBehaviour
         }
         Debug.Log(inputTimes);
 
-        BubbleSort(times, times.Length);
+        QuickSort(times, 0, times.Length - 1);
 
         string timesOutput = "Sorted times: ";
         foreach(int time in times)
